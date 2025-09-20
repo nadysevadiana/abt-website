@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Правовое ведение для дизайнеров и визуализаторов</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <style>
+  html {
+    scroll-behavior: smooth;
+  }
+  .course-card-gradient { }
+  .footer-divider { border-color: #3f3f46; }
+  .site-bg {
+    background:
+      radial-gradient(1200px 600px at 10% 0%, rgba(16,185,129,0.15), rgba(255,255,255,0) 60%),
+      radial-gradient(900px 500px at 90% 10%, rgba(56,189,248,0.15), rgba(255,255,255,0) 60%),
+      radial-gradient(1200px 600px at 50% 100%, rgba(251,191,36,0.12), rgba(255,255,255,0) 60%);
+    background-attachment: fixed;
+  }
+  .btn-primary { background-color: #10B981; color: #ffffff; }
+  .btn-primary:hover { background-color: #059669; }
+  .btn-primary:focus { outline: none; box-shadow: 0 0 0 3px rgba(16,185,129,0.35); }
+  .carousel { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; gap:2rem; padding-bottom:1.5rem; -webkit-overflow-scrolling:touch; }
+  .carousel::-webkit-scrollbar { display:none; }
+  .carousel-item { scroll-snap-align:center; flex:0 0 auto; transition: transform .5s; }
+  .carousel-item:hover { transform: scale(1.05); }
+  .btn-fixed-ig { background-color:#059669; color:#fff; border:1px solid rgba(0,0,0,0.08); }
+  .btn-fixed-ig:hover { background-color:#047857; }
+  .nav-link{ position:relative; }
+  .nav-link::after{ content:""; position:absolute; left:0; bottom:-6px; width:0; height:2px; background:#10B981; transition: width .3s ease; }
+  .nav-link:hover::after{ width:100%; }
+  .full-bleed{ position:relative; left:50%; right:50%; margin-left:-50vw; margin-right:-50vw; width:100vw; }
+  .carousel-nav-btn{ backdrop-filter:blur(8px); background:rgba(255,255,255,0.9); border:1px solid rgba(16,185,129,0.25); box-shadow:0 10px 20px rgba(2,6,23,0.1); }
+  .carousel-nav-btn:hover{ box-shadow:0 14px 24px rgba(2,6,23,0.16); }
+  .course-card{ min-height:460px; display:flex; flex-direction:column; }
+  .course-card .card-actions{ margin-top:auto; }
+  .pill-badge{ padding:.25rem .6rem; line-height:1; border-radius:9999px; font-size:.75rem; font-weight:700; color:#fff; box-shadow:0 8px 18px rgba(2,6,23,0.12); border:1px solid rgba(255,255,255,0.55); }
+  .triptych-featured{ background:linear-gradient(180deg, rgba(16,185,129,0.06), #fff); border-color:rgba(16,185,129,0.35)!important; box-shadow:0 16px 40px rgba(16,185,129,0.15), 0 6px 20px rgba(2,6,23,0.08); }
+  .triptych-featured:hover{ transform: translateY(-2px); }
+  .pill-emerald{ background-color:#10B981; }
+  .pill-sky{ background-color:#0EA5E9; }
+  .pill-amber{ background-color:#F59E0B; }
+  </style>
+</head>
+<body class="site-bg text-gray-900">
+
+  <!-- Header -->
+<header class="max-w-7xl mx-auto bg-gradient-to-r from-emerald-50 via-white to-sky-50 bg-opacity-80 backdrop-blur-md py-3 px-6 md:px-10 flex items-center justify-between rounded-2xl shadow-lg border border-emerald-100">
+  <a href="index.html" class="text-2xl font-bold text-slate-900">Art by Twins</a>
+  <nav class="space-x-6 text-sm font-medium hidden md:flex items-center">
+    <a href="about.html" class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300">О нас</a>
+    <div class="relative inline-block" data-dd>
+      <a href="kurs.html" class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300" data-trigger>Курсы</a>
+      <div data-menu class="absolute left-0 mt-0 pt-2 w-64 bg-white border border-emerald-100 rounded-xl shadow-lg invisible opacity-0 pointer-events-none transform scale-95 transition duration-150 ease-out z-40">
+        <div class="py-2">
+          <a href="kurs.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50">Дизайнер своей квартиры</a>
+        </div>
+      </div>
+    </div>
+    <div class="relative inline-block" data-dd>
+      <a href="legal.html" class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300" data-trigger>Модули</a>
+      <div data-menu class="absolute left-0 mt-0 pt-2 w-64 bg-white border border-emerald-100 rounded-xl shadow-lg invisible opacity-0 pointer-events-none transform scale-95 transition duration-150 ease-out z-40">
+        <div class="py-2">
+          <a href="legal.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50">Правовое ведение</a>
+          <a href="ai-tools.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50">ИИ‑комбо для дизайнеров</a>
+          <a href="psychology.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50">Психология пространства</a>
+        </div>
+      </div>
+    </div>
+    <div class="relative inline-block" data-dd>
+      <a href="works.html" class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300" data-trigger>Портфолио</a>
+      <div data-menu class="absolute left-0 mt-0 pt-2 w-64 bg-white border border-emerald-100 rounded-xl shadow-lg invisible opacity-0 pointer-events-none transform scale-95 transition duration-150 ease-out z-40">
+        <div class="py-2">
+          <a href="works.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50">Работы</a>
+          <a href="reviews.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50">Отзывы</a>
+        </div>
+      </div>
+    </div>
+    <a href="challenge.html" class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300">Челлендж</a>
+    <a href="blog.html" class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300">Блог</a>
+    <a href="contacts.html" class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300">Контакты</a>
+    <a href="kurs.html" class="inline-flex items-center px-4 py-2 rounded-full text-white btn-primary shadow-sm"><i class="fa-solid fa-arrow-right mr-2"></i>К курсу</a>
+  </nav>
+</header>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-emerald-50 via-white to-sky-50 py-14 px-6 md:px-16">
+  <div class="max-w-6xl mx-auto">
+    <!-- breadcrumb -->
+    <nav class="text-xs text-gray-600 mb-4" aria-label="Хлебные крошки">
+      <a href="index.html" class="hover:underline">Главная</a> <span class="mx-1">/</span>
+      <a href="programs.html" class="hover:underline">Программы</a> <span class="mx-1">/</span>
+      <span class="text-gray-500">Правовое ведение</span>
+    </nav>
+    <div class="grid lg:grid-cols-2 gap-8 items-center">
+      <div>
+        <h1 class="text-3xl md:text-5xl font-bold tracking-tight">Правовое ведение: сделки и договоры</h1>
+        <p class="mt-4 text-lg text-gray-700">Юридическая база для <span class="font-semibold">дизайнеров и визуализаторов</span>: договоры, авторские права, акты, переписка и скачиваемые шаблоны. Понятно, без «юриспруда».</p>
+        <div class="mt-4 flex flex-wrap gap-2">
+          <span class="badge"><i class="fa-solid fa-shield-halved text-emerald-600"></i> Авторское право</span>
+          <span class="badge"><i class="fa-solid fa-file-contract text-emerald-600"></i> Договоры/акты</span>
+          <span class="badge"><i class="fa-solid fa-scale-balanced text-emerald-600"></i> Претензии</span>
+          <span class="badge"><i class="fa-solid fa-download text-emerald-600"></i> Шаблоны</span>
+        </div>
+        <div class="mt-6 flex flex-col sm:flex-row gap-3">
+          <a href="#pricing" class="inline-flex items-center px-6 py-3 rounded-xl text-base font-semibold shadow btn-primary"><i class="fa-solid fa-file-signature mr-2"></i>Записаться на модуль</a>
+          <a href="#toc" class="inline-flex items-center px-6 py-3 rounded-xl border border-emerald-600 text-emerald-700 font-semibold hover:bg-emerald-50"><i class="fa-solid fa-list-ul mr-2"></i>Содержание</a>
+        </div>
+        <p class="mt-3 text-xs text-gray-500">Материалы регулярно обновляются. Доступ сохраняется.</p>
+      </div>
+      <div class="card p-5">
+        <div class="aspect-w-16 aspect-h-9">
+          <img src="images/legal-cover.jpg" loading="lazy" alt="Правовой модуль для дизайнеров" class="w-full h-full object-cover rounded-lg">
+        </div>
+        <p class="mt-3 text-sm text-gray-600">Краткий обзор модуля, его структуры и примеров документов.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="toc" class="py-4 px-6 md:px-16 sticky top-16 z-30">
+  <div class="max-w-6xl mx-auto flex flex-wrap gap-2 justify-center">
+    <a href="#audience" class="badge">Для кого</a>
+    <a href="#program" class="badge">Программа</a>
+    <a href="#outcomes" class="badge">Что получите</a>
+    <a href="#templates" class="badge">Шаблоны</a>
+    <a href="#process" class="badge">Как проходит</a>
+    <a href="#pricing" class="badge">Тарифы</a>
+    <a href="#faq" class="badge">FAQ</a>
+  </div>
+</section>
+
+  <!-- Кому подходит -->
+  <section id="audience" class="py-12 px-6 md:px-16 bg-gradient-to-b from-white to-emerald-50 scroll-mt-24">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-2xl md:text-3xl font-bold mb-8">Кому подходит</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-white p-6 rounded-xl shadow border border-gray-200">
+          <p class="text-2xl mb-2">🎨</p>
+          <p class="font-semibold">Дизайнерам интерьера</p>
+          <p class="text-gray-700 text-sm mt-2">Работа с клиентами, студиями и подрядчиками.</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow border border-gray-200">
+          <p class="text-2xl mb-2">🖥</p>
+          <p class="font-semibold">Визуализаторам и 3D-художникам</p>
+          <p class="text-gray-700 text-sm mt-2">Договоры, акты, передача исходников, защита авторства.</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow border border-gray-200">
+          <p class="text-2xl mb-2">🏗</p>
+          <p class="font-semibold">Фрилансерам и студиям</p>
+          <p class="text-gray-700 text-sm mt-2">Юридическая защита на всех этапах сотрудничества.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Программа -->
+  <section id="program" class="py-12 px-6 md:px-16 bg-gradient-to-br from-sky-50 via-white to-emerald-50 scroll-mt-24">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-2xl md:text-3xl font-bold mb-6">Программа модуля</h2>
+      <p class="text-gray-700 mb-4">Структура модуля охватывает ключевые юридические ситуации, с которыми сталкиваются дизайнеры интерьера и визуализаторы.</p>
+      <div class="accordion divide-y divide-gray-200 card">
+        <details open>
+          <summary class="flex items-center justify-between p-5 cursor-pointer">
+            <span class="font-semibold">Договоры для дизайнеров и визуализаторов</span>
+            <i class="fa-solid fa-chevron-down text-gray-500"></i>
+          </summary>
+          <div class="px-5 pb-5 text-gray-700 text-sm space-y-2">
+            <p>Авторство и лицензии, ТЗ и критерии качества, сроки и этапы, оплата и авансы, ответственность сторон, форс-мажор.</p>
+            <p><span class="font-semibold">Практикум:</span> разберём ваш действующий договор и предложим формулировки.</p>
+          </div>
+        </details>
+        <details>
+          <summary class="flex items-center justify-between p-5 cursor-pointer">
+            <span class="font-semibold">Акты, спецификации, переписка</span>
+            <i class="fa-solid fa-chevron-down text-gray-500"></i>
+          </summary>
+          <div class="px-5 pb-5 text-gray-700 text-sm space-y-2">
+            <p>Как оформлять результаты работ: акт, спецификация, TOR/Scope. Что обязательно фиксировать письменно. Переписка как доказательство.</p>
+            <p><span class="font-semibold">Практикум:</span> шаблон акта сдачи-приёмки + чек-лист «что приложить».</p>
+          </div>
+        </details>
+        <details>
+          <summary class="flex items-center justify-between p-5 cursor-pointer">
+            <span class="font-semibold">Покупка/продажа, аренда, сдача и субаренда</span>
+            <i class="fa-solid fa-chevron-down text-gray-500"></i>
+          </summary>
+          <div class="px-5 pb-5 text-gray-700 text-sm space-y-2">
+            <p>Как дизайнер участвует в сделке клиента: зоны ответственности, согласования, типовые риски, как обезопасить себя и клиента.</p>
+          </div>
+        </details>
+        <details>
+          <summary class="flex items-center justify-between p-5 cursor-pointer">
+            <span class="font-semibold">Наследство, дарение, передача прав пользования</span>
+            <i class="fa-solid fa-chevron-down text-gray-500"></i>
+          </summary>
+          <div class="px-5 pb-5 text-gray-700 text-sm space-y-2">
+            <p>Что важно знать дизайнеру: проверка статуса объекта, ограничения, согласия пользователей, риски перепланировок.</p>
+          </div>
+        </details>
+        <details>
+          <summary class="flex items-center justify-between p-5 cursor-pointer">
+            <span class="font-semibold">Претензии и возвраты</span>
+            <i class="fa-solid fa-chevron-down text-gray-500"></i>
+          </summary>
+          <div class="px-5 pb-5 text-gray-700 text-sm space-y-2">
+            <p>Досудебная переписка, претензия, сроки ответа, как правильно формулировать требования. Варианты мирного урегулирования.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+<section id="outcomes" class="py-12 px-6 md:px-16 bg-gradient-to-b from-white to-emerald-50 scroll-mt-24">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-2xl md:text-3xl font-bold mb-6">Что вы получите</h2>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="card p-6">
+        <p class="font-semibold">Готовые документы</p>
+        <p class="text-gray-700 text-sm mt-2">Шаблоны договоров, актов, чек-листов и образцы переписки.</p>
+      </div>
+      <div class="card p-6">
+        <p class="font-semibold">Юр-минимум понятным языком</p>
+        <p class="text-gray-700 text-sm mt-2">Только то, что нужно в практике дизайнера/визуализатора.</p>
+      </div>
+      <div class="card p-6">
+        <p class="font-semibold">Разбор ваших кейсов</p>
+        <p class="text-gray-700 text-sm mt-2">В тарифах Pro/Expert — персональные комментарии по документам.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="templates" class="py-12 px-6 md:px-16 bg-gradient-to-br from-sky-50 via-white to-emerald-50 scroll-mt-24">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-2xl md:text-3xl font-bold mb-6">Шаблоны для скачивания</h2>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="card p-5 flex items-center justify-between">
+        <div>
+          <p class="font-semibold">Договор на дизайн/визуализацию</p>
+          <p class="text-sm text-gray-600">.DOCX · редактируемый</p>
+        </div>
+        <a href="#" class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-semibold border border-emerald-600 text-emerald-700 hover:bg-emerald-50"><i class="fa-solid fa-download mr-2"></i>Скачать</a>
+      </div>
+      <div class="card p-5 flex items-center justify-between">
+        <div>
+          <p class="font-semibold">Акт сдачи-приёмки</p>
+          <p class="text-sm text-gray-600">.DOCX · шаблон</p>
+        </div>
+        <a href="#" class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-semibold border border-emerald-600 text-emerald-700 hover:bg-emerald-50"><i class="fa-solid fa-download mr-2"></i>Скачать</a>
+      </div>
+      <div class="card p-5 flex items-center justify-between">
+        <div>
+          <p class="font-semibold">Спецификация материалов/этапов</p>
+          <p class="text-sm text-gray-600">.XLSX · таблица</p>
+        </div>
+        <a href="#" class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-semibold border border-emerald-600 text-emerald-700 hover:bg-emerald-50"><i class="fa-solid fa-download mr-2"></i>Скачать</a>
+      </div>
+      <div class="card p-5 flex items-center justify-between">
+        <div>
+          <p class="font-semibold">Чек-лист переписки и претензий</p>
+          <p class="text-sm text-gray-600">.PDF · памятка</p>
+        </div>
+        <a href="#" class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-semibold border border-emerald-600 text-emerald-700 hover:bg-emerald-50"><i class="fa-solid fa-download mr-2"></i>Скачать</a>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="process" class="py-12 px-6 md:px-16 bg-gradient-to-b from-white to-emerald-50 scroll-mt-24">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-2xl md:text-3xl font-bold mb-6">Как проходит обучение</h2>
+    <ol class="grid md:grid-cols-4 gap-6 text-sm">
+      <li class="card p-5"><p class="font-semibold">1. Доступ</p><p class="text-gray-700 mt-1">Сразу после оплаты открывается модуль и файлы.</p></li>
+      <li class="card p-5"><p class="font-semibold">2. Просмотр</p><p class="text-gray-700 mt-1">Смотрите уроки в удобное время, темп свободный.</p></li>
+      <li class="card p-5"><p class="font-semibold">3. Практика</p><p class="text-gray-700 mt-1">Применяете шаблоны к своим проектам.</p></li>
+      <li class="card p-5"><p class="font-semibold">4. Обратная связь</p><p class="text-gray-700 mt-1">В Pro/Expert получаете разбор документов.</p></li>
+    </ol>
+  </div>
+</section>
+
+  <!-- Тарифы -->
+  <section id="pricing" class="py-12 px-6 md:px-16 bg-gradient-to-br from-sky-50 via-white to-emerald-50">
+    <div class="max-w-5xl mx-auto text-center space-y-8">
+      <h2 class="text-2xl md:text-3xl font-bold">Тарифы</h2>
+      <div class="grid md:grid-cols-3 gap-6 text-left">
+  <div class="card p-6 flex flex-col">
+    <p class="font-semibold text-lg">Light</p>
+    <p class="mt-1 text-gray-700 text-sm">Материалы и шаблоны</p>
+    <div class="mt-3 text-3xl font-bold">6&nbsp;900 ₽</div>
+    <ul class="mt-4 text-sm text-gray-700 space-y-2">
+      <li>• Доступ к видеоматериалам</li>
+      <li>• Шаблоны договоров/актов</li>
+      <li>• Чек-листы и памятки</li>
+    </ul>
+    <a href="checkout.html?product=legal&plan=light" class="mt-5 inline-flex justify-center items-center px-4 py-2 rounded-lg text-sm font-semibold btn-primary"><i class="fa-solid fa-credit-card mr-2"></i>Выбрать Light</a>
+  </div>
+  <div class="card p-6 flex flex-col reco">
+    <div class="text-xs uppercase tracking-wider text-gray-600">Рекомендуем</div>
+    <p class="mt-1 font-semibold text-lg">Pro</p>
+    <p class="mt-1 text-gray-700 text-sm">Материалы + разбор документов</p>
+    <div class="mt-3 text-3xl font-bold">12&nbsp;900 ₽</div>
+    <ul class="mt-4 text-sm text-gray-700 space-y-2">
+      <li>• Всё из Light</li>
+      <li>• Персональные комментарии по договору</li>
+      <li>• 1 правка по результатам разбора</li>
+    </ul>
+    <a href="checkout.html?product=legal&plan=pro" class="mt-5 inline-flex justify-center items-center px-4 py-2 rounded-lg text-sm font-semibold btn-primary"><i class="fa-solid fa-credit-card mr-2"></i>Выбрать Pro</a>
+  </div>
+  <div class="card p-6 flex flex-col">
+    <p class="font-semibold text-lg">Expert</p>
+    <p class="mt-1 text-gray-700 text-sm">+ индивидуальная консультация</p>
+    <div class="mt-3 text-3xl font-bold">19&nbsp;900 ₽</div>
+    <ul class="mt-4 text-sm text-gray-700 space-y-2">
+      <li>• Всё из Pro</li>
+      <li>• Онлайн-консультация 45 мин</li>
+      <li>• Разбор сложного кейса/претензии</li>
+    </ul>
+    <a href="checkout.html?product=legal&plan=expert" class="mt-5 inline-flex justify-center items-center px-4 py-2 rounded-lg text-sm font-semibold btn-primary"><i class="fa-solid fa-credit-card mr-2"></i>Выбрать Expert</a>
+  </div>
+</div>
+<p class="mt-3 text-xs text-gray-500">Рассрочка 3× без переплат доступна — уточняйте на этапе оплаты. Гарантия возврата 7 дней.</p>
+    </div>
+  </section>
+
+  <section id="faq" class="py-12 px-6 md:px-16 bg-gradient-to-b from-white to-emerald-50 scroll-mt-24">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-2xl md:text-3xl font-bold mb-6">FAQ</h2>
+    <div class="accordion card divide-y divide-gray-200">
+      <details>
+        <summary class="flex items-center justify-between p-5 cursor-pointer"><span class="font-medium">Как быстро открывается доступ?</span><i class="fa-solid fa-chevron-down text-gray-500"></i></summary>
+        <div class="px-5 pb-5 text-sm text-gray-700">Сразу после оплаты на указанную почту приходят инструкции и ссылка на материалы.</div>
+      </details>
+      <details>
+        <summary class="flex items-center justify-between p-5 cursor-pointer"><span class="font-medium">Есть ли ограничения по времени?</span><i class="fa-solid fa-chevron-down text-gray-500"></i></summary>
+        <div class="px-5 pb-5 text-sm text-gray-700">Доступ бессрочный. Обновления добавляются автоматически.</div>
+      </details>
+      <details>
+        <summary class="flex items-center justify-between p-5 cursor-pointer"><span class="font-medium">Можно ли получить разбор моего договора?</span><i class="fa-solid fa-chevron-down text-gray-500"></i></summary>
+        <div class="px-5 pb-5 text-sm text-gray-700">Да, в тарифах Pro и Expert — один разбор включён. Дополнительные разборы можно докупить.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+  <!-- Footer -->
+<footer class="bg-slate-100 text-slate-700 mt-10">
+  <div class="max-w-7xl mx-auto px-6 md:px-16 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
+    <div>
+      <a href="index.html" class="text-2xl font-bold text-slate-900">Art by Twins</a>
+      <p class="mt-4 text-slate-600 text-sm leading-relaxed">Art by Twins — продукт и обучение по интерьерному дизайну.</p>
+      <p class="mt-2 text-sm text-emerald-700">Создано с ❤️ в Москве</p>
+      <div class="mt-4 flex space-x-4 text-lg">
+        <a href="https://t.me/artbytwins" target="_blank" class="hover:text-emerald-700"><i class="fa-brands fa-telegram"></i></a>
+        <a href="https://instagram.com/art.by.twins" target="_blank" class="hover:text-emerald-700"><i class="fa-brands fa-instagram"></i></a>
+        <a href="mailto:info@artbytwins.pro" class="hover:text-emerald-700"><i class="fa-solid fa-envelope"></i></a>
+      </div>
+    </div>
+    <div>
+      <h3 class="text-lg font-semibold text-slate-900 mb-6">Курсы</h3>
+      <ul class="space-y-3 text-slate-600 text-sm">
+        <li><a href="kurs.html" class="hover:text-emerald-700 transition">Дизайнер своей квартиры</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="text-lg font-semibold text-slate-900 mb-6">Модули</h3>
+      <ul class="space-y-3 text-slate-600 text-sm">
+        <li><a href="legal.html" class="hover:text-emerald-700 transition">Правовое ведение</a></li>
+        <li><a href="ai-tools.html" class="hover:text-emerald-700 transition">ИИ‑комбо для дизайнеров</a></li>
+        <li><a href="psychology.html" class="hover:text-emerald-700 transition">Психология пространства</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="text-lg font-semibold text-slate-900 mb-6">Навигация</h3>
+      <ul class="space-y-3 text-slate-600 text-sm">
+        <li><a href="programs.html" class="hover:text-emerald-700 transition">Программы</a></li>
+        <li><a href="works.html" class="hover:text-emerald-700 transition">Работы</a></li>
+        <li><a href="challenge.html" class="hover:text-emerald-700 transition">Челлендж</a></li>
+        <li><a href="blog.html" class="hover:text-emerald-700 transition">Блог</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="text-lg font-semibold text-slate-900 mb-6">О проекте</h3>
+      <ul class="space-y-3 text-slate-600 text-sm">
+        <li><a href="about.html" class="hover:text-emerald-700 transition">О Art by Twins</a></li>
+        <li><a href="contacts.html" class="hover:text-emerald-700 transition">Контакты</a></li>
+        <li><a href="reviews.html" class="hover:text-emerald-700 transition">Отзывы</a></li>
+        <li><span class="text-xs">Москва, Россия</span></li>
+        <li><span class="text-xs">info@artbytwins.pro</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-slate-300">
+    <div class="max-w-7xl mx-auto px-6 md:px-16 py-6 text-center text-slate-500 text-xs">
+      <div class="text-center">
+        <span>© Art by Twins, 2025. Все права защищены.</span>
+        <div class="mt-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+          <a href="offer.html" class="hover:text-emerald-700 transition">Публичная оферта</a>
+          <a href="policy.html" class="hover:text-emerald-700 transition">Политика конфиденциальности</a>
+          <a href="terms.html" class="hover:text-emerald-700 transition">Пользовательское соглашение</a>
+          <a href="cookies.html" class="hover:text-emerald-700 transition">Политика Cookie</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var dds = document.querySelectorAll('[data-dd]');
+    dds.forEach(function(dd){
+      var menu = dd.querySelector('[data-menu]');
+      if(!menu) return;
+      dd.addEventListener('mouseenter', function(){
+        menu.classList.remove('invisible','pointer-events-none','opacity-0','scale-95');
+      });
+      dd.addEventListener('mouseleave', function(){
+        menu.classList.add('invisible','pointer-events-none','opacity-0','scale-95');
+      });
+    });
+  })();
+</script>
+<a href="https://instagram.com/art.by.twins" target="_blank" rel="noopener" class="fixed bottom-6 right-6 z-50 btn-fixed-ig px-5 py-3 rounded-full shadow-lg text-sm font-semibold flex items-center space-x-2 transition">
+  <i class="fa-brands fa-instagram"></i>
+  <span>Написать в Instagram</span>
+</a>
+</body>
+</html>

@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Курс — Стань дизайнером своей квартиры | Art by Twins</title>
+  <meta name="description" content="Практический курс из 6 модулей: планировка, стиль, свет, материалы, бюджет и реализация. Примеры работ, тарифы, FAQ, поддержка." />
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+  <!-- OG / соцсети -->
+  <meta property="og:title" content="Стань дизайнером своей квартиры — курс Art by Twins">
+  <meta property="og:description" content="6 модулей + поддержка + шаблоны. Сделай дизайн своей квартиры с нуля.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/og-image.jpg">
+
+  <style>
+    /* Скрытый класс для видимости только для скринридеров */
+    .sr-only-focusable:active,.sr-only-focusable:focus{position:static;width:auto;height:auto;margin:0;overflow:visible;clip:auto}
+    /* Подсветка активного пункта TOC */
+    .toc-active { font-weight: 700; }
+    /* == Imported from index.html for cross-page consistency == */
+    html { scroll-behavior: smooth; }
+    /* Subtle multi-radial site background for a modern, bright feel */
+    .site-bg {
+      background:
+        radial-gradient(1200px 600px at 10% 0%, rgba(16,185,129,0.15), rgba(255,255,255,0) 60%), /* emerald glow */
+        radial-gradient(900px 500px at 90% 10%, rgba(56,189,248,0.15), rgba(255,255,255,0) 60%),  /* sky glow */
+        radial-gradient(1200px 600px at 50% 100%, rgba(251,191,36,0.12), rgba(255,255,255,0) 60%); /* amber base */
+      background-attachment: fixed;
+    }
+    /* Solid primary button */
+    .btn-primary { background-color: #10B981; color: #ffffff; }
+    .btn-primary:hover { background-color: #059669; }
+    .btn-primary:focus { outline: none; box-shadow: 0 0 0 3px rgba(16,185,129,0.35); }
+    /* Carousel helpers (for consistency, not used heavily on this page) */
+    .carousel { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 2rem; padding-bottom: 1.5rem; -webkit-overflow-scrolling: touch; }
+    .carousel::-webkit-scrollbar { display: none; }
+    .carousel-item { scroll-snap-align: center; flex: 0 0 auto; transition: transform 0.5s; }
+    .carousel-item:hover { transform: scale(1.05); }
+    /* Fancy glassy nav buttons for carousel */
+    .carousel-nav-btn { backdrop-filter: blur(8px); background: rgba(255,255,255,0.9); border: 1px solid rgba(16,185,129,0.25); box-shadow: 0 10px 20px rgba(2, 6, 23, 0.1); }
+    .carousel-nav-btn:hover { box-shadow: 0 14px 24px rgba(2, 6, 23, 0.16); }
+    /* Equal-height course cards */
+    .course-card { min-height: 460px; display: flex; flex-direction: column; }
+    .course-card .card-actions { margin-top: auto; }
+    /* Pills on cards */
+    .pill-badge { padding: 0.25rem 0.6rem; line-height: 1; border-radius: 9999px; font-size: 0.75rem; font-weight: 700; color: #ffffff; box-shadow: 0 8px 18px rgba(2,6,23,0.12); border: 1px solid rgba(255,255,255,0.55); }
+    .pill-emerald { background-color: #10B981; }
+    .pill-sky { background-color: #0EA5E9; }
+    .pill-amber { background-color: #F59E0B; }
+    /* Featured middle course panel */
+    .triptych-featured { background: linear-gradient(180deg, rgba(16,185,129,0.06), rgba(255,255,255,1)); border-color: rgba(16,185,129,0.35) !important; box-shadow: 0 16px 40px rgba(16,185,129,0.15), 0 6px 20px rgba(2,6,23,0.08); }
+    .triptych-featured:hover { transform: translateY(-2px); }
+    /* Animated underline for nav links */
+    .nav-link { position: relative; }
+    .nav-link::after { content: ""; position: absolute; left: 0; bottom: -6px; width: 0; height: 2px; background: #10B981; transition: width .3s ease; }
+    .nav-link:hover::after { width: 100%; }
+    /* High-contrast fixed button */
+    .btn-fixed-ig { background-color: #059669; color: #ffffff; border: 1px solid rgba(0,0,0,0.08); }
+    .btn-fixed-ig:hover { background-color: #047857; }
+    /* Full-bleed container */
+    .full-bleed { position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; width: 100vw; }
+  </style>
+
+  <!-- JSON-LD: Course -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Course",
+    "name":"Стань дизайнером своей квартиры",
+    "description":"Практический курс из 6 модулей: планировка, стиль, свет, материалы, бюджет и реализация.",
+    "provider":{"@type":"Organization","name":"Art by Twins","url":"https://artbytwins.pro"}
+  }
+  </script>
+</head>
+<body class="site-bg text-gray-900 selection:bg-neutral-900 selection:text-white">
+  <!-- Шапка -->
+  <header class="max-w-7xl mx-auto bg-gradient-to-r from-emerald-50 via-white to-sky-50 bg-opacity-80 backdrop-blur-md py-3 px-6 md:px-10 flex items-center justify-between rounded-2xl shadow-lg border border-emerald-100">
+    <a href="index.html" class="text-2xl font-bold text-slate-900">Art by Twins</a>
+    <nav class="space-x-6 text-sm font-medium hidden md:flex items-center">
+      <a href="about.html" class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300">О нас</a>
+      <div class="relative inline-block" data-dd>
+        <a href="kurs.html" class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300" data-trigger>Курсы</a>
+        <div data-menu class="absolute left-0 mt-0 pt-2 w-64 bg-white border border-emerald-100 rounded-xl shadow-lg invisible opacity-0 pointer-events-none transform scale-95 transition duration-150 ease-out z-40">
+          <div class="py-2">
+            <a href="kurs.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50">Дизайнер своей квартиры</a>
+          </div>
+        </div>
+      </div>
+      <div class="relative inline-block" data-dd>
+        <a href="legal.html" class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300" data-trigger>Модули</a>
+        <div data-menu class="absolute left-0 mt-0 pt-2 w-64 bg-white border border-emerald-100 rounded-xl shadow-lg invisible opacity-0 pointer-events-none transform scale-95 transition duration-150 ease-out z-40">
+          <div class="py-2">
+            <a href="legal.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50">Правовое ведение</a>
+            <a href="ai-tools.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50">ИИ‑комбо для дизайнеров</a>
+            <a href="psychology.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50">Психология пространства</a>
+          </div>
+        </div>
+      </div>
+      <div class="relative inline-block" data-dd>
+        <a href="works.html" class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300" data-trigger>Портфолио</a>
+        <div data-menu class="absolute left-0 mt-0 pt-2 w-64 bg-white border border-emerald-100 rounded-xl shadow-lg invisible opacity-0 pointer-events-none transform scale-95 transition duration-150 ease-out z-40">
+          <div class="py-2">
+            <a href="works.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50">Работы</a>
+            <a href="reviews.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50">Отзывы</a>
+          </div>
+        </div>
+      </div>
+      <a href="challenge.html" class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300">Челлендж</a>
+      <a href="blog.html" class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300">Блог</a>
+      <a href="contacts.html" class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300">Контакты</a>
+      <a href="kurs.html" class="inline-flex items-center px-4 py-2 rounded-full text-white btn-primary shadow-sm"><i class="fa-solid fa-arrow-right mr-2"></i>К курсу</a>
+    </nav>
+  </header>
+
+  <!-- Герой -->
+  <section class="bg-gradient-to-br from-neutral-100 to-white border-b border-neutral-200">
+    <div class="mx-auto max-w-7xl px-4 py-14 grid md:grid-cols-2 gap-8">
+      <div>
+        <h1 class="text-3xl md:text-5xl font-semibold leading-tight tracking-tight">Стань дизайнером своей квартиры</h1>
+        <p class="mt-4 text-neutral-700">6 модулей, реальные шаблоны, сопровождение и правовой модуль для сделок. Сделаешь проект под свой бюджет и вкус.</p>
+        <div class="mt-6 flex gap-3">
+          <a href="#program" class="inline-flex items-center px-4 py-2 rounded-lg font-semibold shadow btn-primary">Смотреть программу</a>
+          <a href="#pricing" class="inline-flex items-center rounded-lg border border-emerald-600 text-emerald-700 px-4 py-2 font-semibold shadow-sm hover:bg-emerald-50">Выбрать тариф</a>
+        </div>
+        <ul class="mt-6 text-sm text-neutral-600 space-y-1">
+          <li>• Доступ навсегда • Шаблоны и чек-листы • Сертификат</li>
+          <li>• Поддержка в TG (в тарифах Pro/Pro+)</li>
+        </ul>
+      </div>
+      <div class="relative rounded-xl overflow-hidden border border-neutral-200">
+        <!-- Видео-превью (можно заменить src на свой) -->
+        <video class="w-full h-full aspect-video" src="" poster="./images/course-poster.jpg" controls playsinline></video>
+      </div>
+    </div>
+  </section>
+
+  <main class="mx-auto max-w-7xl px-4">
+    <div class="grid grid-cols-1 lg:grid-cols-[250px,1fr] gap-8 py-12">
+      <!-- Боковое меню (TOC) -->
+      <aside class="hidden lg:block">
+        <nav class="sticky top-24" aria-label="Оглавление">
+          <ul class="space-y-2 text-sm">
+            <li><a class="toc-link block px-3 py-2 rounded hover:bg-neutral-100" href="#program">Программа</a></li>
+            <li><a class="toc-link block px-3 py-2 rounded hover:bg-neutral-100" href="#outcomes">Результаты</a></li>
+            <li><a class="toc-link block px-3 py-2 rounded hover:bg-neutral-100" href="#cases">Кейсы</a></li>
+            <li><a class="toc-link block px-3 py-2 rounded hover:bg-neutral-100" href="#pricing">Тарифы</a></li>
+            <li><a class="toc-link block px-3 py-2 rounded hover:bg-neutral-100" href="#faq">FAQ</a></li>
+            <li><a class="toc-link block px-3 py-2 rounded hover:bg-neutral-100" href="#contact">Задать вопрос</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Контент -->
+      <div class="space-y-16">
+        <!-- Программа -->
+        <section id="program" class="scroll-mt-28">
+          <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">Программа курса (6 модулей)</h2>
+          <p class="mt-2 text-neutral-700">Каждый модуль — видеоуроки, шаблоны, проверка задания (в тарифах Pro/Pro+).</p>
+
+          <div class="mt-6 divide-y divide-neutral-200 border border-neutral-200 rounded-xl overflow-hidden">
+            <!-- Модуль (аккордеон) -->
+            <details class="group open:bg-white">
+              <summary class="flex cursor-pointer items-center justify-between gap-4 px-4 py-4 marker:content-none">
+                <div class="font-medium">Модуль 1 — Бриф, замеры, планировки</div>
+                <span class="transition group-open:rotate-180">⌄</span>
+              </summary>
+              <div class="px-4 pb-5 text-sm text-neutral-700 space-y-2">
+                <p>Соберём бриф, научимся снимать замеры, составим 2–3 варианта планировки.</p>
+                <p><strong>Сделаете:</strong> техническое задание и базовый план.</p>
+                <p><strong>В портфолио:</strong> PDF-план с размерами.</p>
+              </div>
+            </details>
+
+            <details class="group">
+              <summary class="flex cursor-pointer items-center justify-between gap-4 px-4 py-4 marker:content-none">
+                <div class="font-medium">Модуль 2 — Стиль, референсы, moodboard</div>
+                <span class="transition group-open:rotate-180">⌄</span>
+              </summary>
+              <div class="px-4 pb-5 text-sm text-neutral-700 space-y-2">
+                <p>Определите стиль, соберёте moodboard, согласуете палитру и материалы.</p>
+                <p><strong>Сделаете:</strong> коллаж + палитра.</p>
+                <p><strong>В портфолио:</strong> moodboard с пояснениями.</p>
+              </div>
+            </details>
+
+            <details class="group">
+              <summary class="flex cursor-pointer items-center justify-between gap-4 px-4 py-4 marker:content-none">
+                <div class="font-medium">Модуль 3 — Свет, сценарии освещения</div>
+                <span class="transition group-open:rotate-180">⌄</span>
+              </summary>
+              <div class="px-4 pb-5 text-sm text-neutral-700 space-y-2">
+                <p>Точки света, сценарии, базовый расчёт освещённости.</p>
+                <p><strong>Сделаете:</strong> схему освещения.</p>
+                <p><strong>В портфолио:</strong> план освещения с легендой.</p>
+              </div>
+            </details>
+
+            <details class="group">
+              <summary class="flex cursor-pointer items-center justify-between gap-4 px-4 py-4 marker:content-none">
+                <div class="font-medium">Модуль 4 — Материалы и смета</div>
+                <span class="transition group-open:rotate-180">⌄</span>
+              </summary>
+              <div class="px-4 pb-5 text-sm text-neutral-700 space-y-2">
+                <p>Подбор материалов, ведомость, смета с альтернативами по бюджету.</p>
+                <p><strong>Сделаете:</strong> таблицу материалов + бюджет v1.</p>
+                <p><strong>В портфолио:</strong> ведомость материалов.</p>
+              </div>
+            </details>
+
+            <details class="group">
+              <summary class="flex cursor-pointer items-center justify-between gap-4 px-4 py-4 marker:content-none">
+                <div class="font-medium">Модуль 5 — Чертежи и визуал</div>
+                <span class="transition group-open:rotate-180">⌄</span>
+              </summary>
+              <div class="px-4 pb-5 text-sm text-neutral-700 space-y-2">
+                <p>Чертежи под подряд (раскладки, мебель), базовые визуализации или коллажи.</p>
+                <p><strong>Сделаете:</strong> комплект чертежей v1.</p>
+                <p><strong>В портфолио:</strong> 3–5 листов чертежей/визуалов.</p>
+              </div>
+            </details>
+
+            <details class="group">
+              <summary class="flex cursor-pointer items-center justify-between gap-4 px-4 py-4 marker:content-none">
+                <div class="font-medium">Модуль 6 — Реализация, договоры, контроль</div>
+                <span class="transition group-open:rotate-180">⌄</span>
+              </summary>
+              <div class="px-4 pb-5 text-sm text-neutral-700 space-y-2">
+                <p>План-график работ, взаимодействие с подрядом, правовые риски и шаблоны.</p>
+                <p><strong>Сделаете:</strong> чек-лист реализации.</p>
+                <p><strong>В портфолио:</strong> финальный альбом проекта.</p>
+              </div>
+            </details>
+          </div>
+        </section>
+
+        <!-- Результаты -->
+        <section id="outcomes" class="scroll-mt-28">
+          <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">Что у вас будет к финалу</h2>
+          <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="rounded-xl border border-neutral-200 p-5 bg-white">
+              <h3 class="font-medium">Полный проект вашей квартиры</h3>
+              <p class="mt-2 text-neutral-700 text-sm">Планы, свет, ведомость материалов, визуалы, смета.</p>
+            </div>
+            <div class="rounded-xl border border-neutral-200 p-5 bg-white">
+              <h3 class="font-medium">Шаблоны и чек-листы</h3>
+              <p class="mt-2 text-neutral-700 text-sm">Бриф, moodboard, ведомость, договорные формулировки.</p>
+            </div>
+            <div class="rounded-xl border border-neutral-200 p-5 bg-white">
+              <h3 class="font-medium">Поддержка</h3>
+              <p class="mt-2 text-neutral-700 text-sm">Ответы в TG (Pro/Pro+), созвоны, разбор ошибок.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Кейсы -->
+        <section id="cases" class="scroll-mt-28">
+<h2 class="text-2xl md:text-3xl font-semibold tracking-tight">Работы наших учеников</h2>
+<p class="mt-2 text-neutral-700">Реальные проекты студентов: пролистайте карусель и посмотрите крупные фото</p>
+<p class="mt-1 text-sm"><a href="works.html" class="inline-flex items-center gap-1 text-emerald-700 hover:underline">Смотреть ещё <i class="fa-solid fa-arrow-right text-xs"></i></a></p>
+<div class="full-bleed">
+  <div class="relative">
+    <!-- Left Arrow -->
+    <button type="button" aria-label="Назад"
+            class="carousel-nav-btn absolute left-2 md:left-6 top-1/2 -translate-y-1/2 w-11 h-11 md:w-12 md:h-12 rounded-full flex items-center justify-center text-slate-700 hover:text-emerald-700 z-10"
+            onclick="(function(c){c.scrollBy({left:-c.clientWidth*0.85,behavior:'smooth'});})(document.getElementById('worksCarousel'))">
+      <i class="fa-solid fa-chevron-left"></i>
+    </button>
+    <!-- Right Arrow -->
+    <button type="button" aria-label="Вперёд"
+            class="carousel-nav-btn absolute right-2 md:right-6 top-1/2 -translate-y-1/2 w-11 h-11 md:w-12 md:h-12 rounded-full flex items-center justify-center text-slate-700 hover:text-emerald-700 z-10"
+            onclick="(function(c){c.scrollBy({left:c.clientWidth*0.85,behavior:'smooth'});})(document.getElementById('worksCarousel'))">
+      <i class="fa-solid fa-chevron-right"></i>
+    </button>
+
+    <!-- Carousel -->
+    <div id="worksCarousel" class="carousel px-4 md:px-6 lg:px-8 max-w-6xl mx-auto" style="gap:1rem">
+      <!-- Slide 1 -->
+      <article class="carousel-item w-[68vw] md:w-[42vw] lg:w-[28vw] mx-auto bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden transform transition-transform duration-500 hover:scale-105">
+        <img src="./images/work_1.png" loading="lazy" alt="Современный минимализм — проект студента" class="w-full h-44 md:h-52 lg:h-56 object-cover">
+        <div class="p-6 text-left space-y-2 max-w-2xl mx-auto">
+          <p class="font-semibold text-slate-900">Анна, студентка курса</p>
+          <p class="text-gray-700">«До курса я не знала, с чего начать, а теперь я сделала проект для своей спальни!»</p>
+          <div class="text-sm text-gray-700 pt-2 border-t border-gray-100">
+            <p><span class="font-semibold">Стиль:</span> Современный минимализм (Москва)</p>
+            <p><span class="font-semibold">Для кого:</span> молодые специалисты и семьи, ценящие свет и порядок</p>
+            <p><span class="font-semibold">Ключевые приёмы:</span> фасады без ручек, светлое дерево, нейтральные стены, акцент на свет</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Slide 2 -->
+      <article class="carousel-item w-[68vw] md:w-[42vw] lg:w-[28vw] mx-auto bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden transform transition-transform duration-500 hover:scale-105">
+        <img src="./images/work_2.png" loading="lazy" alt="Современная классика — проект студента" class="w-full h-44 md:h-52 lg:h-56 object-cover">
+        <div class="p-6 text-left space-y-2 max-w-2xl mx-auto">
+          <p class="font-semibold text-slate-900">Виктория, студентка курса</p>
+          <p class="text-gray-700">«Не думала, что смогу сделать классику, а теперь это моя гордость!»</p>
+          <div class="text-sm text-gray-700 pt-2 border-t border-gray-100">
+            <p><span class="font-semibold">Стиль:</span> Современная классика (Москва)</p>
+            <p><span class="font-semibold">Для кого:</span> ценители элегантности и комфорта</p>
+            <p><span class="font-semibold">Ключевые приёмы:</span> лепнина, молдинги, нейтральная палитра, акцентное освещение</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Slide 3 -->
+      <article class="carousel-item w-[68vw] md:w-[42vw] lg:w-[28vw] mx-auto bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden transform transition-transform duration-500 hover:scale-105">
+        <img src="./images/work_3.png" loading="lazy" alt="Лофт — проект студента" class="w-full h-44 md:h-52 lg:h-56 object-cover">
+        <div class="p-6 text-left space-y-2 max-w-2xl mx-auto">
+          <p class="font-semibold text-slate-900">Алексей, студент курса</p>
+          <p class="text-gray-700">«Я мечтал о стиле лофт, и наконец-то создал свой проект квартиры в этом стиле!»</p>
+          <div class="text-sm text-gray-700 pt-2 border-t border-gray-100">
+            <p><span class="font-semibold">Стиль:</span> Лофт (Москва)</p>
+            <p><span class="font-semibold">Для кого:</span> активные, творческие люди, ценящие простор и индустриальную эстетику</p>
+            <p><span class="font-semibold">Ключевые приёмы:</span> кирпичная стена, металл, открытые коммуникации, большие окна, минимализм в мебели</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Slide 4 -->
+      <article class="carousel-item w-[68vw] md:w-[42vw] lg:w-[28vw] mx-auto bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden transform transition-transform duration-500 hover:scale-105">
+        <img src="./images/work_4.png" loading="lazy" alt="Скандинавский уют — проект студента" class="w-full h-44 md:h-52 lg:h-56 object-cover">
+        <div class="p-6 text-left space-y-2 max-w-2xl mx-auto">
+          <p class="font-semibold text-slate-900">Мария, студентка курса</p>
+          <p class="text-gray-700">«Я хотела создать уютное и светлое пространство, и у меня получилось скандинавское вдохновение для моей квартиры!»</p>
+          <div class="text-sm text-gray-700 pt-2 border-t border-gray-100">
+            <p><span class="font-semibold">Стиль:</span> Скандинавский уют (Москва)</p>
+            <p><span class="font-semibold">Для кого:</span> семьи и молодые люди, ценящие свет, простоту и домашний комфорт</p>
+            <p><span class="font-semibold">Ключевые приёмы:</span> белые стены, светлый паркет, текстиль, живые растения, минималистичный декор</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Slide 5 -->
+      <article class="carousel-item w-[68vw] md:w-[42vw] lg:w-[28vw] mx-auto bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden transform transition-transform duration-500 hover:scale-105">
+        <img src="./images/work_5.png" loading="lazy" alt="Яркий современный микс — проект студента" class="w-full h-44 md:h-52 lg:h-56 object-cover">
+        <div class="p-6 text-left space-y-2 max-w-2xl mx-auto">
+          <p class="font-semibold text-slate-900">Дмитрий, студент курса</p>
+          <p class="text-gray-700">«Я всегда хотел яркий и стильный интерьер, теперь моя гостиная выглядит современно и необычно!»</p>
+          <div class="text-sm text-gray-700 pt-2 border-t border-gray-100">
+            <p><span class="font-semibold">Стиль:</span> Яркий современный микс (Москва)</p>
+            <p><span class="font-semibold">Для кого:</span> молодые и креативные, кто хочет выразить себя через интерьер</p>
+            <p><span class="font-semibold">Ключевые приёмы:</span> смелые акценты в цвете, мебель необычных форм, постеры, зеркало в арке, сочетание дерева и ярких деталей</p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</div>
+        </section>
+
+        <!-- Тарифы -->
+        <section id="pricing" class="scroll-mt-28">
+          <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">Тарифы</h2>
+          <div class="mt-6 grid md:grid-cols-3 gap-4">
+            <!-- Self -->
+            <div class="rounded-2xl border border-neutral-200 bg-white p-6 flex flex-col">
+              <h3 class="text-lg font-semibold">Self</h3>
+              <p class="mt-1 text-sm text-neutral-600">Самостоятельное прохождение</p>
+              <div class="mt-4 text-3xl font-semibold">9&nbsp;900 ₽</div>
+              <ul class="mt-4 text-sm text-neutral-700 space-y-2">
+                <li>• 6 модулей, доступ навсегда</li>
+                <li>• Шаблоны и чек-листы</li>
+                <li>• Сертификат</li>
+                <li class="line-through text-neutral-400">Обратная связь</li>
+              </ul>
+              <a href="checkout.html?product=course&plan=self" class="mt-auto inline-flex justify-center rounded-md bg-neutral-900 text-white px-4 py-2 hover:opacity-90">Выбрать</a>
+            </div>
+            <!-- Pro -->
+            <div class="rounded-2xl border-2 border-neutral-900 bg-white p-6 shadow-sm flex flex-col">
+              <div class="text-xs uppercase tracking-wider text-neutral-600">Рекомендуем</div>
+              <h3 class="mt-1 text-lg font-semibold">Pro</h3>
+              <p class="mt-1 text-sm text-neutral-600">С кураторами и проверками</p>
+              <div class="mt-4 text-3xl font-semibold">17&nbsp;900 ₽</div>
+              <ul class="mt-4 text-sm text-neutral-700 space-y-2">
+                <li>• Всё из Self</li>
+                <li>• Проверка заданий (6 шт.)</li>
+                <li>• Ответы в TG + созвон</li>
+              </ul>
+              <a href="checkout.html?product=course&plan=pro" class="mt-auto inline-flex justify-center rounded-md bg-neutral-900 text-white px-4 py-2 hover:opacity-90">Выбрать</a>
+            </div>
+            <!-- Pro+ Право -->
+            <div class="rounded-2xl border border-neutral-200 bg-white p-6 flex flex-col">
+              <h3 class="text-lg font-semibold">Pro+ Право</h3>
+              <p class="mt-1 text-sm text-neutral-600">С правовым модулем</p>
+              <div class="mt-4 text-3xl font-semibold">27&nbsp;900 ₽</div>
+              <ul class="mt-4 text-sm text-neutral-700 space-y-2">
+                <li>• Всё из Pro</li>
+                <li>• Правовые шаблоны и чек-лист</li>
+                <li>• 1 разбор договора (до 10 стр.)</li>
+              </ul>
+              <a href="checkout.html?product=course&plan=proplus" class="mt-auto inline-flex justify-center rounded-md bg-neutral-900 text-white px-4 py-2 hover:opacity-90">Выбрать</a>
+            </div>
+          </div>
+          <p class="mt-3 text-xs text-neutral-500">Есть вопросы по тарифам? Напишите нам в <a class="underline" href="https://t.me/">Telegram</a>.</p>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq" class="scroll-mt-28">
+          <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">FAQ</h2>
+          <div class="mt-6 divide-y divide-neutral-200 border border-neutral-200 rounded-xl overflow-hidden bg-white">
+            <details class="group">
+              <summary class="flex cursor-pointer items-center justify-between gap-4 px-4 py-4 marker:content-none">
+                <div class="font-medium">Сколько длится курс и есть ли доступ навсегда?</div>
+                <span class="transition group-open:rotate-180">⌄</span>
+              </summary>
+              <div class="px-4 pb-5 text-sm text-neutral-700">
+                Курс проходится в своём темпе. Доступ не ограничен по времени.
+              </div>
+            </details>
+            <details class="group">
+              <summary class="flex cursor-pointer items-center justify-between gap-4 px-4 py-4 marker:content-none">
+                <div class="font-medium">Что входит в проверку заданий?</div>
+                <span class="transition group-open:rotate-180">⌄</span>
+              </summary>
+              <div class="px-4 pb-5 text-sm text-neutral-700">
+                Комментарии по каждому модулю: планировка, стиль, свет, материалы, чертежи, реализация.
+              </div>
+            </details>
+            <details class="group">
+              <summary class="flex cursor-pointer items-center justify-between gap-4 px-4 py-4 marker:content-none">
+                <div class="font-medium">Можно ли оплатить в рассрочку?</div>
+                <span class="transition group-open:rotate-180">⌄</span>
+              </summary>
+              <div class="px-4 pb-5 text-sm text-neutral-700">
+                Да, доступна рассрочка — свяжитесь с нами в Telegram для условий.
+              </div>
+            </details>
+          </div>
+        </section>
+
+        <!-- Контакты / вопрос -->
+        <section id="contact" class="scroll-mt-28">
+          <div class="rounded-2xl border border-neutral-200 bg-white p-6">
+            <h2 class="text-2xl font-semibold tracking-tight">Задать вопрос перед покупкой</h2>
+            <form class="mt-4 grid sm:grid-cols-2 gap-4">
+              <input type="text" required placeholder="Имя" class="w-full rounded-md border border-neutral-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-neutral-900">
+              <input type="email" required placeholder="Email" class="w-full rounded-md border border-neutral-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-neutral-900">
+              <textarea placeholder="Ваш вопрос" class="sm:col-span-2 w-full rounded-md border border-neutral-300 px-3 py-2 h-28 focus:outline-none focus:ring-2 focus:ring-neutral-900"></textarea>
+              <button type="submit" class="sm:col-span-2 inline-flex justify-center rounded-md bg-neutral-900 text-white px-4 py-2 hover:opacity-90">Отправить</button>
+            </form>
+            <p class="mt-3 text-sm text-neutral-600">Или напишите в <a class="underline" href="https://t.me/">Telegram</a>.</p>
+          </div>
+        </section>
+
+        <!-- Финальный CTA -->
+        <section class="scroll-mt-28">
+          <div class="rounded-2xl border border-neutral-200 bg-gradient-to-br from-white to-neutral-100 p-8 text-center">
+            <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">Готовы сделать дизайн своей квартиры?</h2>
+            <p class="mt-2 text-neutral-700">Выберите тариф и начните сегодня.</p>
+            <div class="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
+              <a href="checkout.html?product=course&plan=pro" class="inline-flex justify-center rounded-md bg-neutral-900 text-white px-5 py-3 hover:opacity-90">Выбрать тариф Pro</a>
+              <a href="#program" class="inline-flex justify-center rounded-md border border-neutral-300 px-5 py-3 hover:bg-neutral-100">Посмотреть программу</a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <!-- Футер -->
+  <footer class="bg-slate-100 text-slate-700 mt-10">
+    <div class="max-w-7xl mx-auto px-6 md:px-16 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
+      <div>
+        <a href="index.html" class="text-2xl font-bold text-slate-900">Art by Twins</a>
+        <p class="mt-4 text-slate-600 text-sm leading-relaxed">Art by Twins — продукт и обучение по интерьерному дизайну.</p>
+        <p class="mt-2 text-sm text-emerald-700">Создано с ❤️ в Москве</p>
+        <div class="mt-4 flex space-x-4 text-lg">
+          <a href="https://t.me/artbytwins" target="_blank" class="hover:text-emerald-700"><i class="fa-brands fa-telegram"></i></a>
+          <a href="https://instagram.com/art.by.twins" target="_blank" class="hover:text-emerald-700"><i class="fa-brands fa-instagram"></i></a>
+          <a href="mailto:info@artbytwins.pro" class="hover:text-emerald-700"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold text-slate-900 mb-6">Курсы</h3>
+        <ul class="space-y-3 text-slate-600 text-sm">
+          <li><a href="kurs.html" class="hover:text-emerald-700 transition">Дизайнер своей квартиры</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold text-slate-900 mb-6">Модули</h3>
+        <ul class="space-y-3 text-slate-600 text-sm">
+          <li><a href="legal.html" class="hover:text-emerald-700 transition">Правовое ведение</a></li>
+          <li><a href="ai-tools.html" class="hover:text-emerald-700 transition">ИИ‑комбо для дизайнеров</a></li>
+          <li><a href="psychology.html" class="hover:text-emerald-700 transition">Психология пространства</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold text-slate-900 mb-6">Навигация</h3>
+        <ul class="space-y-3 text-slate-600 text-sm">
+          <li><a href="programs.html" class="hover:text-emerald-700 transition">Программы</a></li>
+          <li><a href="works.html" class="hover:text-emerald-700 transition">Работы</a></li>
+          <li><a href="challenge.html" class="hover:text-emerald-700 transition">Челлендж</a></li>
+          <li><a href="blog.html" class="hover:text-emerald-700 transition">Блог</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold text-slate-900 mb-6">О проекте</h3>
+        <ul class="space-y-3 text-slate-600 text-sm">
+          <li><a href="about.html" class="hover:text-emerald-700 transition">О Art by Twins</a></li>
+          <li><a href="contacts.html" class="hover:text-emerald-700 transition">Контакты</a></li>
+          <li><a href="reviews.html" class="hover:text-emerald-700 transition">Отзывы</a></li>
+          <li><span class="text-xs">Москва, Россия</span></li>
+          <li><span class="text-xs">info@artbytwins.pro</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-slate-300">
+      <div class="max-w-7xl mx-auto px-6 md:px-16 py-6 text-center text-slate-500 text-xs">
+        <div class="text-center">
+          <span>© Art by Twins, 2025. Все права защищены.</span>
+          <div class="mt-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+            <a href="offer.html" class="hover:text-emerald-700 transition">Публичная оферта</a>
+            <a href="policy.html" class="hover:text-emerald-700 transition">Политика конфиденциальности</a>
+            <a href="terms.html" class="hover:text-emerald-700 transition">Пользовательское соглашение</a>
+            <a href="cookies.html" class="hover:text-emerald-700 transition">Политика Cookie</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scrollspy / улучшения доступности -->
+  <script>
+    // Подсветка активного пункта TOC
+    const sections = [...document.querySelectorAll('section[id]')];
+    const links = new Map([...document.querySelectorAll('.toc-link')].map(a => [a.getAttribute('href').slice(1), a]));
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const id = entry.target.getAttribute('id');
+        const link = links.get(id);
+        if (!link) return;
+        if (entry.isIntersecting) {
+          document.querySelectorAll('.toc-link').forEach(l => l.classList.remove('toc-active','bg-neutral-100'));
+          link.classList.add('toc-active','bg-neutral-100');
+        }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px', threshold: 0.01 });
+    sections.forEach(sec => observer.observe(sec));
+
+    // Плавный скролл
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const id = a.getAttribute('href').slice(1);
+        const el = document.getElementById(id);
+        if (el) {
+          e.preventDefault();
+          el.scrollIntoView({behavior:'smooth', block:'start'});
+          history.replaceState(null, '', '#'+id);
+        }
+      });
+    });
+  </script>
+</body>
+  <script>
+    (function(){
+      var dds = document.querySelectorAll('[data-dd]');
+      dds.forEach(function(dd){
+        var menu = dd.querySelector('[data-menu]');
+        if(!menu) return;
+        dd.addEventListener('mouseenter', function(){
+          menu.classList.remove('invisible','pointer-events-none','opacity-0','scale-95');
+        });
+        dd.addEventListener('mouseleave', function(){
+          menu.classList.add('invisible','pointer-events-none','opacity-0','scale-95');
+        });
+      });
+    })();
+  </script>
+  <!-- Fixed Instagram Button -->
+  <a href="https://instagram.com/art.by.twins" target="_blank" rel="noopener" class="fixed bottom-6 right-6 z-50 btn-fixed-ig px-5 py-3 rounded-full shadow-lg text-sm font-semibold flex items-center space-x-2 transition">
+    <i class="fa-brands fa-instagram"></i>
+    <span>Написать в Instagram</span>
+  </a>
+</html>
