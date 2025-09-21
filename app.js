@@ -73,28 +73,23 @@
   });
 
   // ===== Мобильное меню (off-canvas) =====
-  function openMobile(){
-    var menu = document.getElementById('mobile-menu');
-    if(!menu) return;
-    var panel = menu.querySelector('[data-mobile-panel]');
-    menu.classList.remove('invisible','pointer-events-none','opacity-0');
-    requestAnimationFrame(function(){ panel.classList.remove('translate-x-full'); });
-    var btn = document.querySelector('[data-mobile-toggle]');
-    if(btn) btn.setAttribute('aria-expanded','true');
-    document.documentElement.style.overflow = 'hidden';
-  }
-  function closeMobile(){
-    var menu = document.getElementById('mobile-menu');
-    if(!menu) return;
-    var panel = menu.querySelector('[data-mobile-panel]');
-    panel.classList.add('translate-x-full');
-    setTimeout(function(){
-      menu.classList.add('invisible','pointer-events-none','opacity-0');
-      document.documentElement.style.overflow = '';
-    }, 200);
-    var btn = document.querySelector('[data-mobile-toggle]');
-    if(btn) btn.setAttribute('aria-expanded','false');
-  }
+function openMobile(){
+  var menu = document.getElementById('mobile-menu');
+  if(!menu) return;
+  menu.classList.add('is-open');
+  var btn = document.querySelector('[data-mobile-toggle]');
+  if(btn) btn.setAttribute('aria-expanded','true');
+  document.documentElement.style.overflow = 'hidden';
+}
+
+function closeMobile(){
+  var menu = document.getElementById('mobile-menu');
+  if(!menu) return;
+  menu.classList.remove('is-open');
+  document.documentElement.style.overflow = '';
+  var btn = document.querySelector('[data-mobile-toggle]');
+  if(btn) btn.setAttribute('aria-expanded','false');
+}
   // Делегируем клики (после подгрузки хедера тоже будет работать)
   document.addEventListener('click', function(e){
     if(e.target.closest && e.target.closest('[data-mobile-toggle]')){ openMobile(); }
