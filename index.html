@@ -555,73 +555,7 @@
     </section>
 
     <div id="site-footer"></div>
-    <script>
-      (function loadPart(id, file){
-        fetch(file)
-          .then(function(res){ return res.text(); })
-          .then(function(html){ var el = document.getElementById(id); if(el) el.innerHTML = html; })
-          .catch(function(){ /* silent */ });
-      })('site-header','header.html');
-      (function loadPart(id, file){
-        fetch(file)
-          .then(function(res){ return res.text(); })
-          .then(function(html){ var el = document.getElementById(id); if(el) el.innerHTML = html; })
-          .catch(function(){ /* silent */ });
-      })('site-footer','footer.html');
-    </script>
 
-    <!-- Fixed Instagram Button -->
-    <script>
-      (function(){
-        function findMenu(root){ return root && root.querySelector('[data-menu]'); }
-        document.addEventListener('mouseover', function(e){
-          var dd = e.target.closest('[data-dd]');
-          if(!dd) return;
-          var menu = findMenu(dd); if(!menu) return;
-          menu.classList.remove('invisible','pointer-events-none','opacity-0','scale-95');
-        });
-        document.addEventListener('mouseout', function(e){
-          var dd = e.target.closest('[data-dd]');
-          if(!dd) return;
-          // close when pointer leaves the dropdown container entirely
-          if(!dd.contains(e.relatedTarget)){
-            var menu = findMenu(dd); if(!menu) return;
-            menu.classList.add('invisible','pointer-events-none','opacity-0','scale-95');
-          }
-        });
-        // Close all menus on ESC
-        document.addEventListener('keydown', function(e){
-          if(e.key === 'Escape'){
-            document.querySelectorAll('[data-menu]').forEach(function(menu){
-              menu.classList.add('invisible','pointer-events-none','opacity-0','scale-95');
-            });
-          }
-        });
-      })();
-      // Tabs: beginner/pro for program cards
-      (function(){
-        function handleClick(e){
-          var btn = e.target.closest('[data-tab-target]');
-          if(!btn) return;
-          var targetId = btn.getAttribute('data-tab-target');
-          var card = btn.closest('[data-program]');
-          if(!card) return;
-          // toggle buttons state
-          card.querySelectorAll('[data-tab-target]').forEach(function(b){
-            b.setAttribute('aria-selected', b===btn ? 'true' : 'false');
-            b.classList.toggle('border-emerald-300', b===btn);
-            b.classList.toggle('text-emerald-800', b===btn);
-            b.classList.toggle('border-slate-300', b!==btn);
-            b.classList.toggle('text-slate-700', b!==btn);
-          });
-          // toggle panes
-          card.querySelectorAll('[data-tab-pane]').forEach(function(p){
-            p.classList.toggle('hidden', p.getAttribute('data-tab-pane') !== targetId);
-          });
-        }
-        document.addEventListener('click', handleClick);
-      })();
-    </script>
     <!-- Sticky Mobile CTA -->
     <div class="md:hidden fixed bottom-20 left-0 right-0 z-40 px-4">
       <div class="bg-white border border-emerald-200 rounded-2xl shadow-xl p-3 flex items-center justify-between gap-3">
@@ -631,13 +565,6 @@
     </div>
 
     <div id="site-telegram-btn"></div>
-    <script>
-      (function loadPart(id, file){
-        fetch(file)
-          .then(function(res){ return res.text(); })
-          .then(function(html){ var el = document.getElementById(id); if(el) el.innerHTML = html; })
-          .catch(function(){ /* silent */ });
-      })('site-telegram-btn','tg-btn.html');
-    </script>
+    <script src="app.js" defer></script>
   </body>
 </html>

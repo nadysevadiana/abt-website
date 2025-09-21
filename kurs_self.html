@@ -414,60 +414,11 @@
     });
   </script>
 
-  <!-- Header/Footer loader -->
-  <script>
-    (function(){
-      function inject(id, html){
-        var el = document.getElementById(id);
-        if(!el){ console.warn('[partials] container not found:', id); return; }
-        el.innerHTML = html;
-      }
-      function loadPart(id, file){
-        var url = new URL(file, window.location.href).toString();
-        fetch(url, { credentials: 'same-origin' })
-          .then(function(res){ if(!res.ok) throw new Error('HTTP '+res.status); return res.text(); })
-          .then(function(html){ inject(id, html); })
-          .catch(function(err){ console.error('[partials] failed to load', file, err); });
-      }
-      loadPart('site-header', 'header.html');
-      loadPart('site-footer', 'footer.html');
-    })();
-  </script>
 
   <div id="site-footer"></div>
 
   <div id="site-telegram-btn"></div>
-  <script>
-    (function(){
-      function inject(id, html){
-        var el = document.getElementById(id);
-        if(!el){ console.warn('[partials] container not found:', id); return; }
-        el.innerHTML = html;
-      }
-      function loadPart(id, file){
-        var url = new URL(file, window.location.href).toString();
-        fetch(url, { credentials: 'same-origin' })
-          .then(function(res){ if(!res.ok) throw new Error('HTTP '+res.status); return res.text(); })
-          .then(function(html){ inject(id, html); })
-          .catch(function(err){ console.error('[partials] failed to load', file, err); });
-      }
-      loadPart('site-telegram-btn', 'tg-btn.html');
-    })();
-  </script>
 
-  <script>
-    (function(){
-      var dds = document.querySelectorAll('[data-dd]');
-      dds.forEach(function(dd){
-        var menu = dd.querySelector('[data-menu]');
-        if(!menu) return;
-        dd.addEventListener('mouseenter', function(){
-          menu.classList.remove('invisible','pointer-events-none','opacity-0','scale-95');
-        });
-        dd.addEventListener('mouseleave', function(){
-          menu.classList.add('invisible','pointer-events-none','opacity-0','scale-95');
-        });
-      });
-    })();
-  </script>
+</body>
+<script src="app.js" defer></script>
 </html>
