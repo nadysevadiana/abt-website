@@ -1,3 +1,41 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Курс — Стань дизайнером своей квартиры | Art by Twins</title>
+  <meta name="description" content="Практический курс из 6 модулей: планировка, стиль, свет, материалы, бюджет и реализация. Примеры работ, тарифы, FAQ, поддержка." />
+
+  <!-- Tailwind CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="icon" href="./favicon.ico" type="image/x-icon" />
+
+  <!-- OG / соцсети -->
+  <meta property="og:title" content="Стань дизайнером своей квартиры — курс Art by Twins">
+  <meta property="og:description" content="6 модулей + поддержка + шаблоны. Сделай дизайн своей квартиры с нуля.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="./og-image.jpg">
+
+  <link rel="stylesheet" href="styles.css">
+  <link rel="prefetch" href="header.html" as="fetch" crossorigin>
+  <link rel="prefetch" href="footer.html" as="fetch" crossorigin>
+  <link rel="prefetch" href="tg-btn.html" as="fetch" crossorigin>
+
+
+  <!-- JSON-LD: Course -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Course",
+    "name":"Стань дизайнером своей квартиры",
+    "description":"Практический курс из 6 модулей: планировка, стиль, свет, материалы, бюджет и реализация.",
+    "provider":{"@type":"Organization","name":"Art by Twins","url":"https://artbytwins.pro"}
+  }
+  </script>
+</head>
+<body class="site-bg text-gray-900 selection:bg-neutral-900 selection:text-white">
+
 <section class="bg-gradient-to-br from-white via-emerald-50 to-sky-50 py-16 px-6 md:px-16 text-center" id="whats-inside">
       <div class="max-w-7xl mx-auto space-y-10">
         <h2 class="text-2xl md:text-3xl font-bold">Что входит внутри</h2>
@@ -113,3 +151,10 @@
         </div>
       </div>
     </section>
+
+      <div id="site-footer"></div>
+
+  <div id="site-telegram-btn"></div>
+  <script src="app.js" defer></script>
+</body>
+</html>
