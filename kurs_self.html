@@ -9,13 +9,13 @@
   <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="icon" href="./favicon.ico" type="image/x-icon" />
 
   <!-- OG / соцсети -->
   <meta property="og:title" content="Стань дизайнером своей квартиры — курс Art by Twins">
   <meta property="og:description" content="6 модулей + поддержка + шаблоны. Сделай дизайн своей квартиры с нуля.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="/og-image.jpg">
+  <meta property="og:image" content="./og-image.jpg">
 
   <link rel="stylesheet" href="styles.css">
   <link rel="prefetch" href="header.html" as="fetch" crossorigin>
@@ -36,6 +36,8 @@
 
 <body class="site-bg text-gray-900 selection:bg-neutral-900 selection:text-white">
   <!-- Герой -->
+  <div id="site-header"></div>
+  <noscript><div style="padding:8px;background:#fee2e2;color:#7f1d1d;text-align:center">Для загрузки шапки/футера требуется JavaScript.</div></noscript>
   <section class="bg-gradient-to-br from-neutral-100 to-white border-b border-neutral-200">
     <div class="mx-auto max-w-7xl px-4 py-14 grid md:grid-cols-2 gap-8">
       <div>
@@ -411,7 +413,48 @@
       });
     });
   </script>
-</body>
+
+  <!-- Header/Footer loader -->
+  <script>
+    (function(){
+      function inject(id, html){
+        var el = document.getElementById(id);
+        if(!el){ console.warn('[partials] container not found:', id); return; }
+        el.innerHTML = html;
+      }
+      function loadPart(id, file){
+        var url = new URL(file, window.location.href).toString();
+        fetch(url, { credentials: 'same-origin' })
+          .then(function(res){ if(!res.ok) throw new Error('HTTP '+res.status); return res.text(); })
+          .then(function(html){ inject(id, html); })
+          .catch(function(err){ console.error('[partials] failed to load', file, err); });
+      }
+      loadPart('site-header', 'header.html');
+      loadPart('site-footer', 'footer.html');
+    })();
+  </script>
+
+  <div id="site-footer"></div>
+
+  <div id="site-telegram-btn"></div>
+  <script>
+    (function(){
+      function inject(id, html){
+        var el = document.getElementById(id);
+        if(!el){ console.warn('[partials] container not found:', id); return; }
+        el.innerHTML = html;
+      }
+      function loadPart(id, file){
+        var url = new URL(file, window.location.href).toString();
+        fetch(url, { credentials: 'same-origin' })
+          .then(function(res){ if(!res.ok) throw new Error('HTTP '+res.status); return res.text(); })
+          .then(function(html){ inject(id, html); })
+          .catch(function(err){ console.error('[partials] failed to load', file, err); });
+      }
+      loadPart('site-telegram-btn', 'tg-btn.html');
+    })();
+  </script>
+
   <script>
     (function(){
       var dds = document.querySelectorAll('[data-dd]');
