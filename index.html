@@ -14,6 +14,7 @@
     <meta name="description" content="Art by Twins — онлайн‑продукт по дизайну интерьера: уроки, модули, 3D‑программы, право и коучинг для себя и для профессионалов." />
     <link rel="prefetch" href="header.html" as="fetch" crossorigin>
     <link rel="prefetch" href="footer.html" as="fetch" crossorigin>
+    <link rel="prefetch" href="tg-btn.html" as="fetch" crossorigin>
  </head>
   <body class="site-bg text-gray-900">
     <div id="site-header"></div>
@@ -783,12 +784,14 @@
       </div>
     </div>
 
-    <a href="https://instagram.com/art.by.twins"
-       target="_blank" rel="noopener"
-       class="fixed bottom-6 right-6 z-50 btn-fixed-ig px-5 py-3 rounded-full shadow-lg text-sm font-semibold flex items-center space-x-2 transition"
-       aria-label="Написать в Instagram">
-      <i class="fa-brands fa-instagram"></i>
-      <span>Написать в Instagram</span>
-    </a>
+    <div id="site-telegram-btn"></div>
+    <script>
+      (function loadPart(id, file){
+        fetch(file)
+          .then(function(res){ return res.text(); })
+          .then(function(html){ var el = document.getElementById(id); if(el) el.innerHTML = html; })
+          .catch(function(){ /* silent */ });
+      })('site-telegram-btn','tg-btn.html');
+    </script>
   </body>
 </html>
