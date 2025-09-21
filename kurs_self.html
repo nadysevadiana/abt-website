@@ -17,54 +17,10 @@
   <meta property="og:type" content="website">
   <meta property="og:image" content="/og-image.jpg">
 
-  <style>
-    /* Скрытый класс для видимости только для скринридеров */
-    .sr-only-focusable:active,.sr-only-focusable:focus{position:static;width:auto;height:auto;margin:0;overflow:visible;clip:auto}
-    /* Подсветка активного пункта TOC */
-    .toc-active { font-weight: 700; }
-    /* == Imported from index.html for cross-page consistency == */
-    html { scroll-behavior: smooth; }
-    /* Subtle multi-radial site background for a modern, bright feel */
-    .site-bg {
-      background:
-        radial-gradient(1200px 600px at 10% 0%, rgba(16,185,129,0.15), rgba(255,255,255,0) 60%), /* emerald glow */
-        radial-gradient(900px 500px at 90% 10%, rgba(56,189,248,0.15), rgba(255,255,255,0) 60%),  /* sky glow */
-        radial-gradient(1200px 600px at 50% 100%, rgba(251,191,36,0.12), rgba(255,255,255,0) 60%); /* amber base */
-      background-attachment: fixed;
-    }
-    /* Solid primary button */
-    .btn-primary { background-color: #10B981; color: #ffffff; }
-    .btn-primary:hover { background-color: #059669; }
-    .btn-primary:focus { outline: none; box-shadow: 0 0 0 3px rgba(16,185,129,0.35); }
-    /* Carousel helpers (for consistency, not used heavily on this page) */
-    .carousel { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 2rem; padding-bottom: 1.5rem; -webkit-overflow-scrolling: touch; }
-    .carousel::-webkit-scrollbar { display: none; }
-    .carousel-item { scroll-snap-align: center; flex: 0 0 auto; transition: transform 0.5s; }
-    .carousel-item:hover { transform: scale(1.05); }
-    /* Fancy glassy nav buttons for carousel */
-    .carousel-nav-btn { backdrop-filter: blur(8px); background: rgba(255,255,255,0.9); border: 1px solid rgba(16,185,129,0.25); box-shadow: 0 10px 20px rgba(2, 6, 23, 0.1); }
-    .carousel-nav-btn:hover { box-shadow: 0 14px 24px rgba(2, 6, 23, 0.16); }
-    /* Equal-height course cards */
-    .course-card { min-height: 460px; display: flex; flex-direction: column; }
-    .course-card .card-actions { margin-top: auto; }
-    /* Pills on cards */
-    .pill-badge { padding: 0.25rem 0.6rem; line-height: 1; border-radius: 9999px; font-size: 0.75rem; font-weight: 700; color: #ffffff; box-shadow: 0 8px 18px rgba(2,6,23,0.12); border: 1px solid rgba(255,255,255,0.55); }
-    .pill-emerald { background-color: #10B981; }
-    .pill-sky { background-color: #0EA5E9; }
-    .pill-amber { background-color: #F59E0B; }
-    /* Featured middle course panel */
-    .triptych-featured { background: linear-gradient(180deg, rgba(16,185,129,0.06), rgba(255,255,255,1)); border-color: rgba(16,185,129,0.35) !important; box-shadow: 0 16px 40px rgba(16,185,129,0.15), 0 6px 20px rgba(2,6,23,0.08); }
-    .triptych-featured:hover { transform: translateY(-2px); }
-    /* Animated underline for nav links */
-    .nav-link { position: relative; }
-    .nav-link::after { content: ""; position: absolute; left: 0; bottom: -6px; width: 0; height: 2px; background: #10B981; transition: width .3s ease; }
-    .nav-link:hover::after { width: 100%; }
-    /* High-contrast fixed button */
-    .btn-fixed-ig { background-color: #059669; color: #ffffff; border: 1px solid rgba(0,0,0,0.08); }
-    .btn-fixed-ig:hover { background-color: #047857; }
-    /* Full-bleed container */
-    .full-bleed { position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; width: 100vw; }
-  </style>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="prefetch" href="header.html" as="fetch" crossorigin>
+  <link rel="prefetch" href="footer.html" as="fetch" crossorigin>
+  <link rel="prefetch" href="tg-btn.html" as="fetch" crossorigin>
 
   <!-- JSON-LD: Course -->
   <script type="application/ld+json">
@@ -77,46 +33,8 @@
   }
   </script>
 </head>
-<body class="site-bg text-gray-900 selection:bg-neutral-900 selection:text-white">
-  <!-- Шапка -->
-  <header class="max-w-7xl mx-auto bg-gradient-to-r from-emerald-50 via-white to-sky-50 bg-opacity-80 backdrop-blur-md py-3 px-6 md:px-10 flex items-center justify-between rounded-2xl shadow-lg border border-emerald-100">
-    <a href="index.html" class="text-2xl font-bold text-slate-900">Art by Twins</a>
-    <nav class="space-x-6 text-sm font-medium hidden md:flex items-center">
-      <a href="about.html" class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300">О нас</a>
-      <div class="relative inline-block" data-dd>
-        <a href="kurs.html" class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300" data-trigger>Курсы</a>
-        <div data-menu class="absolute left-0 mt-0 pt-2 w-64 bg-white border border-emerald-100 rounded-xl shadow-lg invisible opacity-0 pointer-events-none transform scale-95 transition duration-150 ease-out z-40">
-          <div class="py-2">
-            <a href="kurs.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50">Дизайнер своей квартиры</a>
-          </div>
-        </div>
-      </div>
-      <div class="relative inline-block" data-dd>
-        <a href="legal.html" class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300" data-trigger>Модули</a>
-        <div data-menu class="absolute left-0 mt-0 pt-2 w-64 bg-white border border-emerald-100 rounded-xl shadow-lg invisible opacity-0 pointer-events-none transform scale-95 transition duration-150 ease-out z-40">
-          <div class="py-2">
-            <a href="legal.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50">Правовое ведение</a>
-            <a href="ai-tools.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50">ИИ‑комбо для дизайнеров</a>
-            <a href="psychology.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50">Психология пространства</a>
-          </div>
-        </div>
-      </div>
-      <div class="relative inline-block" data-dd>
-        <a href="works.html" class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300" data-trigger>Портфолио</a>
-        <div data-menu class="absolute left-0 mt-0 pt-2 w-64 bg-white border border-emerald-100 rounded-xl shadow-lg invisible opacity-0 pointer-events-none transform scale-95 transition duration-150 ease-out z-40">
-          <div class="py-2">
-            <a href="works.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50">Работы</a>
-            <a href="reviews.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50">Отзывы</a>
-          </div>
-        </div>
-      </div>
-      <a href="challenge.html" class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300">Челлендж</a>
-      <a href="blog.html" class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300">Блог</a>
-      <a href="contacts.html" class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300">Контакты</a>
-      <a href="kurs.html" class="inline-flex items-center px-4 py-2 rounded-full text-white btn-primary shadow-sm"><i class="fa-solid fa-arrow-right mr-2"></i>К курсу</a>
-    </nav>
-  </header>
 
+<body class="site-bg text-gray-900 selection:bg-neutral-900 selection:text-white">
   <!-- Герой -->
   <section class="bg-gradient-to-br from-neutral-100 to-white border-b border-neutral-200">
     <div class="mx-auto max-w-7xl px-4 py-14 grid md:grid-cols-2 gap-8">
@@ -462,68 +380,6 @@
     </div>
   </main>
 
-  <!-- Футер -->
-  <footer class="bg-slate-100 text-slate-700 mt-10">
-    <div class="max-w-7xl mx-auto px-6 md:px-16 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
-      <div>
-        <a href="index.html" class="text-2xl font-bold text-slate-900">Art by Twins</a>
-        <p class="mt-4 text-slate-600 text-sm leading-relaxed">Art by Twins — продукт и обучение по интерьерному дизайну.</p>
-        <p class="mt-2 text-sm text-emerald-700">Создано с ❤️ в Москве</p>
-        <div class="mt-4 flex space-x-4 text-lg">
-          <a href="https://t.me/artbytwins" target="_blank" class="hover:text-emerald-700"><i class="fa-brands fa-telegram"></i></a>
-          <a href="https://instagram.com/art.by.twins" target="_blank" class="hover:text-emerald-700"><i class="fa-brands fa-instagram"></i></a>
-          <a href="mailto:info@artbytwins.pro" class="hover:text-emerald-700"><i class="fa-solid fa-envelope"></i></a>
-        </div>
-      </div>
-      <div>
-        <h3 class="text-lg font-semibold text-slate-900 mb-6">Курсы</h3>
-        <ul class="space-y-3 text-slate-600 text-sm">
-          <li><a href="kurs.html" class="hover:text-emerald-700 transition">Дизайнер своей квартиры</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3 class="text-lg font-semibold text-slate-900 mb-6">Модули</h3>
-        <ul class="space-y-3 text-slate-600 text-sm">
-          <li><a href="legal.html" class="hover:text-emerald-700 transition">Правовое ведение</a></li>
-          <li><a href="ai-tools.html" class="hover:text-emerald-700 transition">ИИ‑комбо для дизайнеров</a></li>
-          <li><a href="psychology.html" class="hover:text-emerald-700 transition">Психология пространства</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3 class="text-lg font-semibold text-slate-900 mb-6">Навигация</h3>
-        <ul class="space-y-3 text-slate-600 text-sm">
-          <li><a href="programs.html" class="hover:text-emerald-700 transition">Программы</a></li>
-          <li><a href="works.html" class="hover:text-emerald-700 transition">Работы</a></li>
-          <li><a href="challenge.html" class="hover:text-emerald-700 transition">Челлендж</a></li>
-          <li><a href="blog.html" class="hover:text-emerald-700 transition">Блог</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3 class="text-lg font-semibold text-slate-900 mb-6">О проекте</h3>
-        <ul class="space-y-3 text-slate-600 text-sm">
-          <li><a href="about.html" class="hover:text-emerald-700 transition">О Art by Twins</a></li>
-          <li><a href="contacts.html" class="hover:text-emerald-700 transition">Контакты</a></li>
-          <li><a href="reviews.html" class="hover:text-emerald-700 transition">Отзывы</a></li>
-          <li><span class="text-xs">Москва, Россия</span></li>
-          <li><span class="text-xs">info@artbytwins.pro</span></li>
-        </ul>
-      </div>
-    </div>
-    <div class="border-t border-slate-300">
-      <div class="max-w-7xl mx-auto px-6 md:px-16 py-6 text-center text-slate-500 text-xs">
-        <div class="text-center">
-          <span>© Art by Twins, 2025. Все права защищены.</span>
-          <div class="mt-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
-            <a href="offer.html" class="hover:text-emerald-700 transition">Публичная оферта</a>
-            <a href="policy.html" class="hover:text-emerald-700 transition">Политика конфиденциальности</a>
-            <a href="terms.html" class="hover:text-emerald-700 transition">Пользовательское соглашение</a>
-            <a href="cookies.html" class="hover:text-emerald-700 transition">Политика Cookie</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
-
   <!-- Scrollspy / улучшения доступности -->
   <script>
     // Подсветка активного пункта TOC
@@ -571,9 +427,4 @@
       });
     })();
   </script>
-  <!-- Fixed Instagram Button -->
-  <a href="https://instagram.com/art.by.twins" target="_blank" rel="noopener" class="fixed bottom-6 right-6 z-50 btn-fixed-ig px-5 py-3 rounded-full shadow-lg text-sm font-semibold flex items-center space-x-2 transition">
-    <i class="fa-brands fa-instagram"></i>
-    <span>Написать в Instagram</span>
-  </a>
 </html>
