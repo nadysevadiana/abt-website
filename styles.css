@@ -1,0 +1,118 @@
+/* Global styles for Art by Twins. This is a plain CSS file (no <style> tags). */
+      html {
+        scroll-behavior: smooth;
+      }
+      .course-card-gradient {
+        /* background removed for Tailwind utility classes */
+      }
+      .footer-divider {
+        border-color: #3f3f46;
+      }
+      /* Subtle multi-radial site background for a modern, bright feel */
+      .site-bg {
+        background:
+          radial-gradient(1200px 600px at 10% 0%, rgba(16,185,129,0.15), rgba(255,255,255,0) 60%), /* emerald glow */
+          radial-gradient(900px 500px at 90% 10%, rgba(56,189,248,0.15), rgba(255,255,255,0) 60%),  /* sky glow */
+          radial-gradient(1200px 600px at 50% 100%, rgba(251,191,36,0.12), rgba(255,255,255,0) 60%); /* amber base */
+        background-attachment: fixed;
+      }
+      /* Solid primary button (works even if Tailwind colors are missing) */
+      .btn-primary {
+        background-color: #10B981; /* emerald-500 */
+        color: #ffffff;
+      }
+      .btn-primary:hover {
+        background-color: #059669; /* emerald-600 */
+      }
+      .btn-primary:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.35);
+      }
+      .carousel {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 2rem;
+        padding-bottom: 1.5rem;
+        -webkit-overflow-scrolling: touch;
+      }
+      .carousel::-webkit-scrollbar {
+        display: none;
+      }
+      .carousel-item {
+        scroll-snap-align: center;
+        flex: 0 0 auto;
+      }
+      .carousel-item {
+        transition: transform 0.5s;
+      }
+      .carousel-item:hover {
+        transform: scale(1.05);
+      }
+
+      /* High-contrast fixed button to avoid white-on-white */
+      .btn-fixed-ig {
+        background-color: #059669; /* emerald-600 */
+        color: #ffffff;
+        border: 1px solid rgba(0,0,0,0.08);
+      }
+      .btn-fixed-ig:hover {
+        background-color: #047857; /* emerald-700 */
+      }
+      /* Animated underline for nav links */
+      .nav-link { position: relative; }
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -6px;
+        width: 0;
+        height: 2px;
+        background: #10B981; /* emerald-500 */
+        transition: width .3s ease;
+      }
+      .nav-link:hover::after { width: 100%; }
+
+      /* Full-bleed container that spans the viewport width */
+      .full-bleed {
+        position: relative;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
+        width: 100vw;
+      }
+      /* Fancy glassy nav buttons for carousel */
+      .carousel-nav-btn {
+        backdrop-filter: blur(8px);
+        background: rgba(255,255,255,0.9);
+        border: 1px solid rgba(16,185,129,0.25); /* emerald */
+        box-shadow: 0 10px 20px rgba(2, 6, 23, 0.1);
+      }
+      .carousel-nav-btn:hover { box-shadow: 0 14px 24px rgba(2, 6, 23, 0.16); }
+      /* Equal-height course cards */
+      .course-card { min-height: 460px; display: flex; flex-direction: column; }
+      .course-card .card-actions { margin-top: auto; }
+
+      /* Pills on cards: always visible over any background */
+      .pill-badge {
+        padding: 0.25rem 0.6rem;
+        line-height: 1;
+        border-radius: 9999px;
+        font-size: 0.75rem; /* text-xs */
+        font-weight: 700;
+        color: #ffffff;
+        box-shadow: 0 8px 18px rgba(2,6,23,0.12);
+        border: 1px solid rgba(255,255,255,0.55);
+      }
+      /* Featured middle course panel */
+      .triptych-featured {
+        background: linear-gradient(180deg, rgba(16,185,129,0.06), rgba(255,255,255,1)); /* emerald tint */
+        border-color: rgba(16,185,129,0.35) !important;
+        box-shadow: 0 16px 40px rgba(16,185,129,0.15), 0 6px 20px rgba(2,6,23,0.08);
+      }
+      .triptych-featured:hover { transform: translateY(-2px); }
+      /* Explicit badge backgrounds (fallback-safe) */
+      .pill-emerald { background-color: #10B981; } /* emerald-500 */
+      .pill-sky { background-color: #0EA5E9; }     /* sky-500 */
+      .pill-amber { background-color: #F59E0B; }   /* amber-500 */
