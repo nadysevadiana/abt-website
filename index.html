@@ -14,6 +14,8 @@
     <meta name="description" content="Art by Twins — онлайн‑продукт по дизайну интерьера: уроки, модули, 3D‑программы, право и коучинг для себя и для профессионалов." />
     <link rel="prefetch" href="header.html" as="fetch" crossorigin>
     <link rel="prefetch" href="footer.html" as="fetch" crossorigin>
+    <link rel="prefetch" href="instagram-button.html" as="fetch" crossorigin>
+    <link rel="prefetch" href="tg-btn.html" as="fetch" crossorigin>
  </head>
   <body class="site-bg text-gray-900">
     <div id="site-header"></div>
@@ -722,73 +724,21 @@
           .catch(function(){ /* silent */ });
       })('site-footer','footer.html');
     </script>
-
-    <!-- Fixed Instagram Button -->
+    <div id="site-instagram-btn"></div>
+    <div id="site-telegram-btn"></div>
     <script>
-      (function(){
-        function findMenu(root){ return root && root.querySelector('[data-menu]'); }
-        document.addEventListener('mouseover', function(e){
-          var dd = e.target.closest('[data-dd]');
-          if(!dd) return;
-          var menu = findMenu(dd); if(!menu) return;
-          menu.classList.remove('invisible','pointer-events-none','opacity-0','scale-95');
-        });
-        document.addEventListener('mouseout', function(e){
-          var dd = e.target.closest('[data-dd]');
-          if(!dd) return;
-          // close when pointer leaves the dropdown container entirely
-          if(!dd.contains(e.relatedTarget)){
-            var menu = findMenu(dd); if(!menu) return;
-            menu.classList.add('invisible','pointer-events-none','opacity-0','scale-95');
-          }
-        });
-        // Close all menus on ESC
-        document.addEventListener('keydown', function(e){
-          if(e.key === 'Escape'){
-            document.querySelectorAll('[data-menu]').forEach(function(menu){
-              menu.classList.add('invisible','pointer-events-none','opacity-0','scale-95');
-            });
-          }
-        });
-      })();
-      // Tabs: beginner/pro for program cards
-      (function(){
-        function handleClick(e){
-          var btn = e.target.closest('[data-tab-target]');
-          if(!btn) return;
-          var targetId = btn.getAttribute('data-tab-target');
-          var card = btn.closest('[data-program]');
-          if(!card) return;
-          // toggle buttons state
-          card.querySelectorAll('[data-tab-target]').forEach(function(b){
-            b.setAttribute('aria-selected', b===btn ? 'true' : 'false');
-            b.classList.toggle('border-emerald-300', b===btn);
-            b.classList.toggle('text-emerald-800', b===btn);
-            b.classList.toggle('border-slate-300', b!==btn);
-            b.classList.toggle('text-slate-700', b!==btn);
-          });
-          // toggle panes
-          card.querySelectorAll('[data-tab-pane]').forEach(function(p){
-            p.classList.toggle('hidden', p.getAttribute('data-tab-pane') !== targetId);
-          });
-        }
-        document.addEventListener('click', handleClick);
-      })();
+      (function loadPart(id, file){
+        fetch(file)
+          .then(function(res){ return res.text(); })
+          .then(function(html){ var el = document.getElementById(id); if(el) el.innerHTML = html; })
+          .catch(function(){ /* silent */ });
+      })('site-instagram-btn','instagram-button.html');
+      (function loadPart(id, file){
+        fetch(file)
+          .then(function(res){ return res.text(); })
+          .then(function(html){ var el = document.getElementById(id); if(el) el.innerHTML = html; })
+          .catch(function(){ /* silent */ });
+      })('site-telegram-btn','tg-btn.html');
     </script>
-    <!-- Sticky Mobile CTA -->
-    <div class="md:hidden fixed bottom-20 left-0 right-0 z-40 px-4">
-      <div class="bg-white border border-emerald-200 rounded-2xl shadow-xl p-3 flex items-center justify-between gap-3">
-        <a href="#packages-for-you" class="flex-1 inline-flex items-center justify-center px-4 py-3 rounded-xl font-semibold btn-primary"><i class="fa-solid fa-house mr-2"></i>Для себя</a>
-        <a href="#packages-for-pro" class="flex-1 inline-flex items-center justify-center px-4 py-3 rounded-xl font-semibold btn-primary"><i class="fa-solid fa-briefcase mr-2"></i>Для дизайнеров</a>
-      </div>
-    </div>
-
-    <a href="https://instagram.com/art.by.twins"
-       target="_blank" rel="noopener"
-       class="fixed bottom-6 right-6 z-50 btn-fixed-ig px-5 py-3 rounded-full shadow-lg text-sm font-semibold flex items-center space-x-2 transition"
-       aria-label="Написать в Instagram">
-      <i class="fa-brands fa-instagram"></i>
-      <span>Написать в Instagram</span>
-    </a>
   </body>
 </html>
