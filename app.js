@@ -6,6 +6,9 @@
 */
 
 (function(){
+  // Версия для пробития кеша статических partials
+  var VERSION = '20250922';
+  function withV(path){ return path + (path.indexOf('?') === -1 ? ('?v=' + VERSION) : ('&v=' + VERSION)); }
   // Подключение HTML-вставок (partials)
   function inject(id, html){
     var el = document.getElementById(id);
@@ -22,9 +25,9 @@
 
   // Загружаем шапку/футер/кнопку TG как только DOM готов
   document.addEventListener('DOMContentLoaded', function(){
-    loadPart('site-header','header.html');
-    loadPart('site-footer','footer.html');
-    loadPart('site-telegram-btn','tg-btn.html');
+    loadPart('site-header', withV('header.html'));
+    loadPart('site-footer', withV('footer.html'));
+    loadPart('site-telegram-btn', withV('tg-btn.html'));
   });
 
   // ===== Hover-дропдауны из хедера (работает делегированно) =====
