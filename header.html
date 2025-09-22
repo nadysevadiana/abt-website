@@ -11,36 +11,17 @@
         <i class="fa-solid fa-bars"></i>
       </button>
       <nav class="space-x-6 text-sm font-medium hidden md:flex items-center">
-        <a href="about.html" class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300">О нас</a>
-        <!-- Dropdown: Курсы -->
+        <a href="kurs.html" class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300" data-trigger>Курсы</a>
+        <!-- Dropdown: Магазин -->
         <div class="relative inline-block" data-dd>
-          <a href="kurs.html" class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300" data-trigger>Курсы</a>
-          <div data-menu class="absolute left-0 mt-0 pt-2 w-64 bg-white border border-emerald-100 rounded-xl shadow-lg invisible opacity-0 pointer-events-none transform scale-95 transition duration-150 ease-out z-40">
-            <div class="py-2">
-              <a href="kurs_profi.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50">Карьера дизайнера</a>
-              <a href="kurs_self.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50">Дизайн своей квартиры</a>
-            </div>
-          </div>
-        </div>
-        <!-- Dropdown: Модули -->
-        <div class="relative inline-block" data-dd>
-          <a href="legal.html" class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300" data-trigger>Модули</a>
-          <div data-menu class="absolute left-0 mt-0 pt-2 w-64 bg-white border border-emerald-100 rounded-xl shadow-lg invisible opacity-0 pointer-events-none transform scale-95 transition duration-150 ease-out z-40">
-            <div class="py-2">
-              <a href="legal.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50">Правовое ведение</a>
-              <a href="ai-tools.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50">ИИ‑комбо для дизайнеров</a>
-              <a href="psychology.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50">Психология пространства</a>
-            </div>
-          </div>
-        </div>
-        <!-- Dropdown: Программы 3D -->
-        <div class="relative inline-block" data-dd>
-          <a href="#programs3d" class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300" data-trigger>Программы 3D</a>
+          <a href="shop.html" class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300" data-trigger>Магазин дизайнера</a>
           <div data-menu class="absolute left-0 mt-0 pt-2 w-64 bg-white border border-emerald-100 rounded-xl shadow-lg invisible opacity-0 pointer-events-none transform scale-95 transition duration-150 ease-out z-40">
             <div class="py-2">
               <a href="3dsmax.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50">3ds Max</a>
               <a href="sketchup.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50">SketchUp</a>
-              <a href="#programs3d" class="block px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50">Сравнить программы</a>
+              <a href="legal.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50">Правовое ведение</a>
+              <a href="ai-tools.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50">ИИ‑комбо </a>
+              <a href="psychology.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50">Психология пространства</a>
             </div>
           </div>
         </div>
@@ -56,7 +37,7 @@
         </div>
         <a href="challenge.html" class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300">Челлендж</a>
         <a href="blog.html" class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300">Блог</a>
-        <a href="contacts.html" class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300">Контакты</a>
+        <a href="about.html" class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300">О нас</a>
         <a href="#choose-path" class="inline-flex items-center px-4 py-2 rounded-full text-white btn-primary shadow-sm"><i class="fa-solid fa-arrow-right mr-2"></i>Выбрать пакет</a>
       </nav>
       <!-- Mobile menu (off-canvas) -->
@@ -72,53 +53,34 @@
             </button>
           </div>
           <nav class="p-4 text-sm space-y-1">
-            <a href="about.html" class="block px-3 py-2 rounded-lg hover:bg-emerald-50">О нас</a>
-            <details class="group">
-              <summary class="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-emerald-50 cursor-pointer">
-                <span>Курсы</span>
-                <i class="fa-solid fa-chevron-down transition group-open:rotate-180"></i>
-              </summary>
-              <div class="pl-3 pb-2 space-y-1">
-                <a href="kurs_profi.html" class="block px-3 py-2 rounded hover:bg-emerald-50">Карьера дизайнера</a>
-                <a href="kurs_self.html" class="block px-3 py-2 rounded hover:bg-emerald-50">Дизайн своей квартиры</a>
-              </div>
-            </details>
-            <details class="group">
-              <summary class="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-emerald-50 cursor-pointer">
-                <span>Модули</span>
-                <i class="fa-solid fa-chevron-down transition group-open:rotate-180"></i>
-              </summary>
-              <div class="pl-3 pb-2 space-y-1">
-                <a href="legal.html" class="block px-3 py-2 rounded hover:bg-emerald-50">Правовое ведение</a>
-                <a href="ai-tools.html" class="block px-3 py-2 rounded hover:bg-emerald-50">ИИ‑комбо для дизайнеров</a>
-                <a href="psychology.html" class="block px-3 py-2 rounded hover:bg-emerald-50">Психология пространства</a>
-              </div>
-            </details>
-            <details class="group">
-              <summary class="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-emerald-50 cursor-pointer">
-                <span>Программы 3D</span>
-                <i class="fa-solid fa-chevron-down transition group-open:rotate-180"></i>
-              </summary>
-              <div class="pl-3 pb-2 space-y-1">
-                <a href="3dsmax.html" class="block px-3 py-2 rounded hover:bg-emerald-50">3ds Max</a>
-                <a href="sketchup.html" class="block px-3 py-2 rounded hover:bg-emerald-50">SketchUp</a>
-                <a href="#programs3d" class="block px-3 py-2 rounded hover:bg-emerald-50">Сравнить программы</a>
-              </div>
-            </details>
-            <details class="group">
-              <summary class="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-emerald-50 cursor-pointer">
-                <span>Портфолио</span>
-                <i class="fa-solid fa-chevron-down transition group-open:rotate-180"></i>
-              </summary>
-              <div class="pl-3 pb-2 space-y-1">
-                <a href="works.html" class="block px-3 py-2 rounded hover:bg-emerald-50">Работы</a>
-                <a href="reviews.html" class="block px-3 py-2 rounded hover:bg-emerald-50">Отзывы</a>
-              </div>
-            </details>
-            <a href="challenge.html" class="block px-3 py-2 rounded-lg hover:bg-emerald-50">Челлендж</a>
-            <a href="blog.html" class="block px-3 py-2 rounded-lg hover:bg-emerald-50">Блог</a>
-            <a href="contacts.html" class="block px-3 py-2 rounded-lg hover:bg-emerald-50">Контакты</a>
-            <a href="#choose-path" class="mt-2 inline-flex items-center px-4 py-2 rounded-xl text-white btn-primary w-full justify-center"><i class="fa-solid fa-arrow-right mr-2"></i>Выбрать пакет</a>
+<a href="about.html" class="block px-3 py-2 rounded-lg hover:bg-emerald-50">О нас</a>
+<a href="kurs.html" class="block px-3 py-2 rounded-lg hover:bg-emerald-50">Курсы</a>
+<details class="group">
+  <summary class="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-emerald-50 cursor-pointer">
+    <span>Магазин дизайнера</span>
+    <i class="fa-solid fa-chevron-down transition group-open:rotate-180"></i>
+  </summary>
+  <div class="pl-3 pb-2 space-y-1">
+    <a href="3dsmax.html" class="block px-3 py-2 rounded hover:bg-emerald-50">3ds Max</a>
+    <a href="sketchup.html" class="block px-3 py-2 rounded hover:bg-emerald-50">SketchUp</a>
+    <a href="legal.html" class="block px-3 py-2 rounded hover:bg-emerald-50">Правовое ведение</a>
+    <a href="ai-tools.html" class="block px-3 py-2 rounded hover:bg-emerald-50">ИИ‑комбо</a>
+    <a href="psychology.html" class="block px-3 py-2 rounded hover:bg-emerald-50">Психология пространства</a>
+  </div>
+</details>
+<details class="group">
+  <summary class="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-emerald-50 cursor-pointer">
+    <span>Портфолио</span>
+    <i class="fa-solid fa-chevron-down transition group-open:rotate-180"></i>
+  </summary>
+  <div class="pl-3 pb-2 space-y-1">
+    <a href="works.html" class="block px-3 py-2 rounded hover:bg-emerald-50">Работы</a>
+    <a href="reviews.html" class="block px-3 py-2 rounded hover:bg-emerald-50">Отзывы</a>
+  </div>
+</details>
+<a href="challenge.html" class="block px-3 py-2 rounded-lg hover:bg-emerald-50">Челлендж</a>
+<a href="blog.html" class="block px-3 py-2 rounded-lg hover:bg-emerald-50">Блог</a>
+<a href="#choose-path" class="mt-2 inline-flex items-center px-4 py-2 rounded-xl text-white btn-primary w-full justify-center"><i class="fa-solid fa-arrow-right mr-2"></i>Выбрать пакет</a>
           </nav>
         </div>
       </div>
