@@ -201,69 +201,87 @@
     <!-- Packages: Для дизайнеров -->
     <section class="bg-gradient-to-b from-white to-sky-50 py-16 px-6 md:px-16 text-center" id="packages-for-pro">
       <div class="max-w-6xl mx-auto space-y-8">
-        <h2 class="text-2xl md:text-3xl font-bold">Магазин для дизайнеров</h2>
-        <p class="text-slate-600 text-base md:text-lg -mt-2">Инструменты, документы и тренинги для практикующих дизайнеров — покупайте отдельно то, что нужно именно вам.</p>
-        <!-- Подборки по направлениям -->
-        <div class="text-left bg-white rounded-2xl shadow-lg border border-gray-200 p-6">
-          <h3 class="text-xl font-semibold mb-3">Подборки по направлениям</h3>
-          <p class="text-sm text-slate-600 mb-4">Быстрый доступ к ключевым продуктам и модулям.</p>
-          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-2">
-            <a href="3dsmax.html" class="block px-4 py-2 rounded-lg text-sm text-slate-700 hover:bg-emerald-50"><i class="fa-solid fa-cube mr-2"></i>3ds Max</a>
-            <a href="sketchup.html" class="block px-4 py-2 rounded-lg text-sm text-slate-700 hover:bg-emerald-50"><i class="fa-solid fa-cubes mr-2"></i>SketchUp</a>
-            <a href="legal.html" class="block px-4 py-2 rounded-lg text-sm text-slate-700 hover:bg-emerald-50"><i class="fa-solid fa-scale-balanced mr-2"></i>Правовое ведение</a>
-            <a href="ai-tools.html" class="block px-4 py-2 rounded-lg text-sm text-slate-700 hover:bg-emerald-50"><i class="fa-solid fa-robot mr-2"></i>ИИ‑комбо</a>
-            <a href="psychology.html" class="block px-4 py-2 rounded-lg text-sm text-slate-700 hover:bg-emerald-50"><i class="fa-solid fa-brain mr-2"></i>Психология пространства</a>
-            <a href="budget.html" class="block px-4 py-2 rounded-lg text-sm text-slate-700 hover:bg-emerald-50"><i class="fa-solid fa-calculator mr-2"></i>Бюджетирование</a>
+        <!-- Витрина магазина (компакт для главной) -->
+        <div class="relative overflow-hidden rounded-3xl border border-emerald-100 shadow-xl bg-gradient-to-br from-white via-emerald-50 to-sky-50">
+          <!-- декоративные элементы -->
+          <div class="pointer-events-none absolute -top-24 -right-24 w-80 h-80 rounded-full bg-emerald-200/30 blur-3xl"></div>
+          <div class="pointer-events-none absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-sky-200/30 blur-3xl"></div>
+
+          <div class="relative z-10 grid md:grid-cols-2 gap-0">
+            <!-- Левая колонка: текст и быстрые фильтры -->
+            <div class="p-8 md:p-12">
+              <h2 class="text-2xl md:text-3xl font-bold">Магазин для дизайнеров</h2>
+              <p class="mt-2 text-slate-700 text-base md:text-lg">Инструменты, документы и мини‑тренинги — покупайте отдельно то, что нужно именно вам.</p>
+
+              <!-- Быстрые подборки -->
+              <div class="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-2">
+                <a href="3dsmax.html" class="inline-flex items-center px-3 py-2 rounded-lg border border-emerald-200 bg-white hover:bg-emerald-50 text-sm font-medium text-slate-800">
+                  <i class="fa-solid fa-cube mr-2 text-emerald-600"></i> 3ds Max
+                </a>
+                <a href="sketchup.html" class="inline-flex items-center px-3 py-2 rounded-lg border border-emerald-200 bg-white hover:bg-emerald-50 text-sm font-medium text-slate-800">
+                  <i class="fa-solid fa-cubes mr-2 text-emerald-600"></i> SketchUp
+                </a>
+                <a href="legal.html" class="inline-flex items-center px-3 py-2 rounded-lg border border-emerald-200 bg-white hover:bg-emerald-50 text-sm font-medium text-slate-800">
+                  <i class="fa-solid fa-scale-balanced mr-2 text-emerald-600"></i> Право
+                </a>
+                <a href="ai-tools.html" class="inline-flex items-center px-3 py-2 rounded-lg border border-emerald-200 bg-white hover:bg-emerald-50 text-sm font-medium text-slate-800">
+                  <i class="fa-solid fa-robot mr-2 text-emerald-600"></i> ИИ‑комбо
+                </a>
+                <a href="psychology.html" class="inline-flex items-center px-3 py-2 rounded-lg border border-emerald-200 bg-white hover:bg-emerald-50 text-sm font-medium text-slate-800">
+                  <i class="fa-solid fa-brain mr-2 text-emerald-600"></i> Психология
+                </a>
+                <a href="budget.html" class="inline-flex items-center px-3 py-2 rounded-lg border border-emerald-200 bg-white hover:bg-emerald-50 text-sm font-medium text-slate-800">
+                  <i class="fa-solid fa-calculator mr-2 text-emerald-600"></i> Бюджетирование
+                </a>
+                <a href="coaching.html" class="inline-flex items-center px-3 py-2 rounded-lg border border-emerald-200 bg-white hover:bg-emerald-50 text-sm font-medium text-slate-800 col-span-2 sm:col-span-1">
+                  <i class="fa-solid fa-user-tie mr-2 text-emerald-600"></i> Коучинг
+                </a>
+              </div>
+
+              <!-- CTA -->
+              <div class="mt-8 flex flex-wrap items-center gap-3">
+                <a href="shop.html" class="inline-flex items-center px-6 py-3 rounded-xl font-semibold shadow btn-primary">
+                  <i class="fa-solid fa-store mr-2"></i> Перейти в магазин
+                </a>
+                <span class="text-sm text-slate-600">Материалы подходят и начинающим, и практикующим.</span>
+              </div>
+            </div>
+
+            <!-- Правая колонка: топ-категории превью -->
+            <div class="p-6 md:p-8 bg-white/70 backdrop-blur-sm">
+              <div class="grid sm:grid-cols-2 gap-4">
+                <!-- Карточка 1 -->
+                <article class="bg-white rounded-2xl shadow-sm border border-gray-200 p-5 flex flex-col">
+                  <div class="text-xs uppercase tracking-wide text-slate-500 mb-1">Документы</div>
+                  <h3 class="font-semibold">Договоры и шаблоны</h3>
+                  <p class="text-sm text-slate-700 mt-2">Готовые шаблоны договоров, ТЗ, оферты, допсоглашения.</p>
+                  <a href="shop.html?cat=contracts" class="mt-auto inline-flex items-center px-4 py-2 rounded-lg text-sm font-semibold btn-primary">
+                    <i class="fa-solid fa-folder-open mr-2"></i> Перейти
+                  </a>
+                </article>
+
+                <!-- Карточка 2 -->
+                <article class="bg-white rounded-2xl shadow-sm border border-gray-200 p-5 flex flex-col">
+                  <div class="text-xs uppercase tracking-wide text-slate-500 mb-1">Квалификация</div>
+                  <h3 class="font-semibold">Мини‑тренинги</h3>
+                  <p class="text-sm text-slate-700 mt-2">Короткие интенсивы: подача, свет, ТЗ, ведение клиента.</p>
+                  <a href="shop.html?cat=minicourses" class="mt-auto inline-flex items-center px-4 py-2 rounded-lg text-sm font-semibold btn-primary">
+                    <i class="fa-solid fa-graduation-cap mr-2"></i> Перейти
+                  </a>
+                </article>
+
+                <!-- Карточка 3 -->
+                <article class="bg-white rounded-2xl shadow-sm border border-gray-200 p-5 flex flex-col sm:col-span-2">
+                  <div class="text-xs uppercase tracking-wide text-slate-500 mb-1">Комплекты</div>
+                  <h3 class="font-semibold">Наборы «Студийный старт»</h3>
+                  <p class="text-sm text-slate-700 mt-2">Готовые наборы документов и чек‑листов для быстрого запуска.</p>
+                  <a href="shop.html?cat=bundles" class="mt-3 inline-flex items-center px-4 py-2 rounded-lg text-sm font-semibold btn-primary">
+                    <i class="fa-solid fa-box mr-2"></i> Перейти
+                  </a>
+                </article>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="grid md:grid-cols-3 gap-6 text-left">
-          <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 flex flex-col">
-            <h3 class="text-lg font-semibold mb-2">Договоры и шаблоны</h3>
-            <p class="text-sm text-gray-700 mb-4">Готовые шаблоны договоров для дизайнеров и студий.</p>
-            <a href="shop.html" class="mt-auto inline-flex items-center px-5 py-2 rounded-lg text-sm font-semibold shadow btn-primary">
-              <i class="fa-solid fa-arrow-right mr-2"></i>Перейти
-            </a>
-          </div>
-          <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 flex flex-col">
-            <h3 class="text-lg font-semibold mb-2">Брифы и чек-листы</h3>
-            <p class="text-sm text-gray-700 mb-4">Брифы для клиентов, чек-листы для контроля этапов работы.</p>
-            <a href="shop.html" class="mt-auto inline-flex items-center px-5 py-2 rounded-lg text-sm font-semibold shadow btn-primary">
-              <i class="fa-solid fa-arrow-right mr-2"></i>Перейти
-            </a>
-          </div>
-          <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 flex flex-col">
-            <h3 class="text-lg font-semibold mb-2">Акты и спецификации</h3>
-            <p class="text-sm text-gray-700 mb-4">Акты сдачи, спецификации материалов и оборудования.</p>
-            <a href="shop.html" class="mt-auto inline-flex items-center px-5 py-2 rounded-lg text-sm font-semibold shadow btn-primary">
-              <i class="fa-solid fa-arrow-right mr-2"></i>Перейти
-            </a>
-          </div>
-          <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 flex flex-col">
-            <h3 class="text-lg font-semibold mb-2">ИИ-комбо для дизайнеров</h3>
-            <p class="text-sm text-gray-700 mb-4">Подборка инструментов и гайдов по использованию ИИ в дизайне.</p>
-            <a href="shop.html" class="mt-auto inline-flex items-center px-5 py-2 rounded-lg text-sm font-semibold shadow btn-primary">
-              <i class="fa-solid fa-arrow-right mr-2"></i>Перейти
-            </a>
-          </div>
-          <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 flex flex-col">
-            <h3 class="text-lg font-semibold mb-2">Мини-тренинги</h3>
-            <p class="text-sm text-gray-700 mb-4">Краткие онлайн-тренинги по ключевым темам для дизайнеров.</p>
-            <a href="shop.html" class="mt-auto inline-flex items-center px-5 py-2 rounded-lg text-sm font-semibold shadow btn-primary">
-              <i class="fa-solid fa-arrow-right mr-2"></i>Перейти
-            </a>
-          </div>
-          <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 flex flex-col">
-            <h3 class="text-lg font-semibold mb-2">Наборы «Студийный старт»</h3>
-            <p class="text-sm text-gray-700 mb-4">Комплексные наборы для запуска студии или фриланса.</p>
-            <a href="shop.html" class="mt-auto inline-flex items-center px-5 py-2 rounded-lg text-sm font-semibold shadow btn-primary">
-              <i class="fa-solid fa-arrow-right mr-2"></i>Перейти
-            </a>
-          </div>
-        </div>
-        <div class="mt-8 flex justify-center">
-          <a href="shop.html" class="inline-flex items-center px-6 py-3 rounded-lg font-semibold shadow btn-primary">
-            <i class="fa-solid fa-store mr-2"></i>Перейти в магазин
-          </a>
         </div>
       </div>
     </section>
