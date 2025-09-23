@@ -564,30 +564,77 @@
   <!-- replaced by lightweight lazy GC loader above -->
   <script>
     (function(){
-      function unlockScroll(){
-        try {
-          var docEl = document.documentElement;
-          var body = document.body;
-          if (getComputedStyle(docEl).overflowY === 'hidden') docEl.style.overflowY = 'auto';
-          if (getComputedStyle(body).overflowY === 'hidden') body.style.overflowY = 'auto';
-        } catch(_){}
+      var PLAN_IDS = { basic:'1487237', extended:'1487247', max:'1487966' };
+
+      function openWidget(wid){
+        if(!wid) return;
+        var overlay = document.getElementById('gc-overlay');
+        var box = document.getElementById('gc-overlay__box');
+        var loader = document.getElementById('gc-overlay__loader');
+        if(!overlay || !box) return;
+
+        // show modal
+        overlay.setAttribute('aria-hidden','false');
+        document.body.classList.add('gc-overlay-open');
+
+        // cleanup previous
+        Array.prototype.slice.call(
+          box.querySelectorAll('[data-gc-mount], .gcw_lite_widget_container, .gcw_lw_container, .gc-lw-container, iframe')
+        ).forEach(function(n){ n.remove(); });
+
+        if (loader) loader.style.display = 'block';
+
+        // host + iframe
+        var host = document.createElement('div');
+        host.setAttribute('data-gc-mount','');
+        host.style.cssText = 'padding:0;min-height:60vh;display:block;';
+        box.appendChild(host);
+
+        var iframe = document.createElement('iframe');
+        var direct = 'https://artbytwins.getcourse.ru/pl/lite/widget/widget'
+          + '?' + window.location.search.substring(1)
+          + '&id=' + encodeURIComponent(wid)
+          + '&ref=' + encodeURIComponent(document.referrer)
+          + '&loc=' + encodeURIComponent(document.location.href);
+        iframe.src = direct;
+        iframe.style.width = '100%';
+        iframe.style.height = '80vh';
+        iframe.style.border = '0';
+        host.appendChild(iframe);
+
+        // hide loader next tick
+        setTimeout(function(){ if (loader) loader.style.display = 'none'; }, 0);
       }
-      // On load & DOM ready
-      window.addEventListener('load', unlockScroll);
-      document.addEventListener('DOMContentLoaded', unlockScroll);
-      // Watch for 3rd‑party mutations that flip overflow
-      new MutationObserver(unlockScroll).observe(document.documentElement, {
-        attributes: true,
-        subtree: true,
-        attributeFilter: ['class','style']
-      });
-      // Also unlock after any GetCourse widget open/close attempt
+
+      // open on click (plans)
       document.addEventListener('click', function(e){
-        if (e.target.closest('[data-gc-open]')) {
-          setTimeout(unlockScroll, 800);
-          setTimeout(unlockScroll, 1600);
-        }
+        var t = e.target.closest && e.target.closest('[data-gc-open][data-plan], [data-plan]');
+        if(!t) return;
+        var plan = t.getAttribute('data-plan');
+        var wid = PLAN_IDS[plan];
+        if(!wid) return;
+        e.preventDefault();
+        openWidget(wid);
       }, true);
+
+      // close button
+      var closeBtn = document.getElementById('gc-overlay__close');
+      if (closeBtn && !closeBtn.__gcBound){
+        closeBtn.addEventListener('click', function(){
+          var overlay = document.getElementById('gc-overlay');
+          var box = document.getElementById('gc-overlay__box');
+          var loader = document.getElementById('gc-overlay__loader');
+          if(overlay){ overlay.setAttribute('aria-hidden','true'); }
+          document.body.classList.remove('gc-overlay-open');
+          if(box){
+            Array.prototype.slice.call(
+              box.querySelectorAll('[data-gc-mount], .gcw_lite_widget_container, .gcw_lw_container, .gc-lw-container, iframe')
+            ).forEach(function(n){ n.remove(); });
+          }
+          if (loader) loader.style.display = 'none';
+        });
+        closeBtn.__gcBound = true;
+      }
     })();
   </script>
   <script src="app.js" defer></script>
