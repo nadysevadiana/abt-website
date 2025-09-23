@@ -593,85 +593,135 @@
   <div id="site-telegram-btn"></div>
   <!-- GetCourse modal lazy loader -->
   <script>
-  (function(){
-    // Widgets map (id + src), provided by GetCourse
-    var PLAN_META = {
-      basic:    { id: 'b73adea3f4bc63ba9c20549a467cb5c6a5281198', src: 'https://artbytwins.getcourse.ru/pl/lite/widget/script?id=1487237' },
-      extended: { id: 'a1f77cfdd8d68db241fdf3d14e7a0265edf0c50f', src: 'https://artbytwins.getcourse.ru/pl/lite/widget/script?id=1487247' },
-      max:      { id: '6adf32f0796b1ee7c8f002657e5566a0fe5b6d4b', src: 'https://artbytwins.getcourse.ru/pl/lite/widget/script?id=1487966' }
+(function(){
+  // Widgets map (id + src), provided by GetCourse
+  var PLAN_META = {
+    basic:    { id: 'b73adea3f4bc63ba9c20549a467cb5c6a5281198', src: 'https://artbytwins.getcourse.ru/pl/lite/widget/script?id=1487237' },
+    extended: { id: 'a1f77cfdd8d68db241fdf3d14e7a0265edf0c50f', src: 'https://artbytwins.getcourse.ru/pl/lite/widget/script?id=1487247' },
+    max:      { id: '6adf32f0796b1ee7c8f002657e5566a0fe5b6d4b', src: 'https://artbytwins.getcourse.ru/pl/lite/widget/script?id=1487966' }
+  };
+
+  var overlay = document.getElementById('gc-overlay');
+  var box     = document.getElementById('gc-overlay__box');
+  var closeBtn= document.getElementById('gc-overlay__close');
+  var loader  = document.getElementById('gc-overlay__loader');
+
+  function showOverlay(){
+    overlay.setAttribute('aria-hidden','false');
+    document.body.classList.add('gc-overlay-open');
+    if (loader) loader.style.display = 'block';
+  }
+  function hideOverlay(){
+    overlay.setAttribute('aria-hidden','true');
+    document.body.classList.remove('gc-overlay-open');
+    if (loader) loader.style.display = 'none';
+    // подчистим модалку
+    box.querySelectorAll('[data-gc-mount], .gcw_lite_widget_container, .gcw_lw_container, .gc-lw-container, iframe, script[id^="b73a"], script[id^="a1f7"], script[id^="6adf"]').forEach(function(n){ n.remove(); });
+  }
+
+  closeBtn.addEventListener('click', hideOverlay);
+  overlay.addEventListener('click', function(e){ if(e.target === overlay) hideOverlay(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') hideOverlay(); });
+
+  // универсальный селектор контейнеров GetCourse
+  var GC_SEL = '.gcw_lite_widget_container, .gcw_lw_container, .gc-lw-container, .gcw-inline, .gc-lw-inline, iframe[src*="getcourse"]';
+
+  function moveIntoMount(mount){
+    // найдём САМИЕ «свежие» контейнеры в body
+    var nodes = Array.from(document.querySelectorAll(GC_SEL))
+      .filter(function(n){ return !mount.contains(n); });
+    if (!nodes.length) return false;
+
+    // берём последний (обычно он от текущего клика)
+    var root = nodes[nodes.length - 1];
+
+    // переносим внутрь модалки
+    root.style.display = 'block';
+    if (root.tagName === 'IFRAME') {
+      root.style.width = '100%';
+      root.style.height = '80vh';
+    } else {
+      root.style.setProperty('height','80vh','important');
+      var ifr = root.querySelector('iframe');
+      if (ifr){ ifr.style.width='100%'; ifr.style.height='80vh'; }
+    }
+    mount.appendChild(root);
+    if (loader) loader.style.display = 'none';
+    return true;
+  }
+
+  // Inject the GetCourse script and ensure result lands inside modal
+  function openGC(plan){
+    var meta = PLAN_META[plan] || PLAN_META.basic;
+
+    // удалить прошлые контейнеры/скрипты (в модалке и в body)
+    document.querySelectorAll(GC_SEL+', script#'+meta.id).forEach(function(n){
+      // не трогаем наш mount, почистим ниже
+      if (!document.getElementById('gc-overlay__box').contains(n)) n.remove();
+    });
+    box.querySelectorAll('[data-gc-mount], '+GC_SEL+', script#'+meta.id).forEach(function(n){ n.remove(); });
+
+    showOverlay();
+
+    // mount внутри модалки
+    var mount = document.createElement('div');
+    mount.setAttribute('data-gc-mount','');
+    mount.style.minHeight = '60vh';
+    box.appendChild(mount);
+
+    // вставляем официальный скрипт внутрь mount
+    var s = document.createElement('script');
+    s.id  = meta.id;       // важен для GetCourse
+    s.src = meta.src;      // внешний загрузчик
+    s.async = true;
+
+    // обработчик ошибок подключения
+    s.onerror = function(){
+      if (loader) loader.style.display = 'none';
+      var err = document.createElement('div');
+      err.style.padding = '24px';
+      err.innerHTML = '<div class="text-center text-sm text-red-700">Не удалось загрузить виджет. Проверьте соединение или попробуйте ещё раз.</div>';
+      mount.appendChild(err);
     };
 
-    var overlay = document.getElementById('gc-overlay');
-    var box     = document.getElementById('gc-overlay__box');
-    var closeBtn= document.getElementById('gc-overlay__close');
-    var loader  = document.getElementById('gc-overlay__loader');
+    mount.appendChild(s);
 
-    function showOverlay(){
-      overlay.setAttribute('aria-hidden','false');
-      document.body.classList.add('gc-overlay-open');
-      if (loader) loader.style.display = 'block';
-    }
-    function hideOverlay(){
-      overlay.setAttribute('aria-hidden','true');
-      document.body.classList.remove('gc-overlay-open');
-      if (loader) loader.style.display = 'none';
-    }
-
-    closeBtn.addEventListener('click', hideOverlay);
-    overlay.addEventListener('click', function(e){ if(e.target === overlay) hideOverlay(); });
-    document.addEventListener('keydown', function(e){ if (e.key === 'Escape') hideOverlay(); });
-
-    // Inject the GetCourse script INSIDE the modal container, so it renders directly there
-    function openGC(plan){
-      var meta = PLAN_META[plan] || PLAN_META.basic;
-
-      // Clean previous content in the modal (iframes/containers/scripts we injected earlier)
-      box.querySelectorAll('[data-gc-mount], .gcw_lite_widget_container, .gcw_lw_container, .gc-lw-container, iframe').forEach(function(n){ n.remove(); });
-
-      showOverlay();
-
-      // Create a dedicated mount inside the modal
-      var mount = document.createElement('div');
-      mount.setAttribute('data-gc-mount','');
-      mount.style.minHeight = '60vh';
-      box.appendChild(mount);
-
-      // Create the exact script tag with the official id, INSIDE the mount
-      var s = document.createElement('script');
-      s.id  = meta.id;         // GetCourse relies on its own id
-      s.src = meta.src;        // External loader
-      s.async = true;
-      mount.appendChild(s);
-
-      // Wait until the widget injects its iframe/container under our script, then style it
-      var obs = new MutationObserver(function(){
-        var root = mount.querySelector('.gcw_lite_widget_container, .gcw_lw_container, .gc-lw-container, iframe');
-        if (!root) return;
-        // Stop observing once we found it
-        obs.disconnect();
-        // Ensure proper sizing inside the modal
-        if (root.tagName === 'IFRAME') {
-          root.style.width = '100%';
-          root.style.height = '80vh';
-        } else {
-          root.style.setProperty('display','block','important');
-          root.style.setProperty('height','80vh','important');
-          var ifr = root.querySelector('iframe');
-          if (ifr){ ifr.style.width='100%'; ifr.style.height='80vh'; }
-        }
-        if (loader) loader.style.display = 'none';
-      });
-      obs.observe(mount, { childList:true, subtree:true });
-    }
-
-    // Delegate clicks on any link/button with data-gc-open
-    document.addEventListener('click', function(e){
-      var a = e.target.closest('[data-gc-open="true"][data-plan]');
-      if(!a) return;
-      e.preventDefault();
-      openGC(a.getAttribute('data-plan'));
+    // План А: ждём, что GC вставит рядом с нашим скриптом
+    var obsLocal = new MutationObserver(function(){
+      var found = mount.querySelector(GC_SEL);
+      if (found){
+        obsLocal.disconnect();
+        moveIntoMount(mount); // приведём к нужным размерам и скроем лоадер
+      }
     });
-  })();
+    obsLocal.observe(mount, { childList:true, subtree:true });
+
+    // План Б: если GC вставил в body, перетащим оттуда
+    var attempts = 0;
+    var timer = setInterval(function(){
+      attempts++;
+      if (moveIntoMount(mount)){ clearInterval(timer); obsDoc && obsDoc.disconnect && obsDoc.disconnect(); return; }
+      if (attempts > 30){ // ~9 сек
+        clearInterval(timer);
+        if (loader) loader.style.display = 'none';
+      }
+    }, 300);
+
+    // на всякий случай следим за document.body
+    var obsDoc = new MutationObserver(function(){
+      if (moveIntoMount(mount)){ clearInterval(timer); obsDoc.disconnect(); }
+    });
+    obsDoc.observe(document.body, { childList:true, subtree:true });
+  }
+
+  // Делегируем клики на любые элементы с data-gc-open
+  document.addEventListener('click', function(e){
+    var a = e.target.closest('[data-gc-open="true"][data-plan]');
+    if(!a) return;
+    e.preventDefault();
+    openGC(a.getAttribute('data-plan'));
+  });
+})();
   </script>
 
   <!-- replaced by lightweight lazy GC loader above -->
