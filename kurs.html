@@ -44,6 +44,12 @@
     #gc-overlay{position:fixed;inset:0;z-index:2147483647;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;padding:2vh}
     #gc-overlay[aria-hidden="false"]{display:flex}
     #gc-overlay__box{position:relative;width:100%;max-width:920px;min-height:60vh;background:#fff;border-radius:14px;box-shadow:0 20px 60px rgba(2,6,23,.35);overflow:hidden}
+    #gc-overlay__loader{ position:relative; z-index:1; }
+    #gc-overlay__box [data-gc-mount],
+    #gc-overlay__box .gcw_lite_widget_container,
+    #gc-overlay__box .gcw_lw_container,
+    #gc-overlay__box .gc-lw-container,
+    #gc-overlay__box iframe{ position:relative; z-index:2; }
     #gc-overlay__close{position:absolute;top:8px;right:10px;z-index:2;display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:9999px;background:rgba(0,0,0,.06)}
     #gc-overlay__close:hover{background:rgba(0,0,0,.12)}
     .gc-iframe-full, #gc-overlay iframe{width:100%!important;height:80vh!important;display:block!important;border:0}
@@ -616,7 +622,7 @@
     document.body.classList.remove('gc-overlay-open');
     if (loader) loader.style.display = 'none';
     // подчистим модалку
-    box.querySelectorAll('[data-gc-mount], .gcw_lite_widget_container, .gcw_lw_container, .gc-lw-container, iframe, script[id^="b73a"], script[id^="a1f7"], script[id^="6adf"]').forEach(function(n){ n.remove(); });
+    box.querySelectorAll('[data-gc-mount], .gcw-inline, .gc-lw-inline, .gcw_lite_widget_container, .gcw_lw_container, .gc-lw-container, iframe, script[id^="b73a"], script[id^="a1f7"], script[id^="6adf"]').forEach(function(n){ n.remove(); });
   }
 
   closeBtn.addEventListener('click', hideOverlay);
@@ -659,7 +665,7 @@
       // не трогаем наш mount, почистим ниже
       if (!document.getElementById('gc-overlay__box').contains(n)) n.remove();
     });
-    box.querySelectorAll('[data-gc-mount], '+GC_SEL+', script#'+meta.id).forEach(function(n){ n.remove(); });
+    box.querySelectorAll('[data-gc-mount], .gcw-inline, .gc-lw-inline, '+GC_SEL+', script#'+meta.id).forEach(function(n){ n.remove(); });
 
     showOverlay();
 
@@ -684,14 +690,23 @@
       mount.appendChild(err);
     };
 
-    mount.appendChild(s);
+    setTimeout(function(){ mount.appendChild(s); }, 0);
 
-    // План А: ждём, что GC вставит рядом с нашим скриптом
+    // План А: ждём, что GC вставит виджет РЯДОМ С НАШИМ СКРИПТОМ в пределах mount
     var obsLocal = new MutationObserver(function(){
       var found = mount.querySelector(GC_SEL);
       if (found){
         obsLocal.disconnect();
-        moveIntoMount(mount); // приведём к нужным размерам и скроем лоадер
+        // Виджет уже внутри mount — просто показать его и скрыть лоадер
+        if (found.tagName === 'IFRAME') {
+          found.style.width = '100%';
+          found.style.height = '80vh';
+        } else {
+          found.style.setProperty('height','80vh','important');
+          var ifr = found.querySelector('iframe');
+          if (ifr){ ifr.style.width='100%'; ifr.style.height='80vh'; }
+        }
+        if (loader) loader.style.display = 'none';
       }
     });
     obsLocal.observe(mount, { childList:true, subtree:true });
@@ -700,7 +715,10 @@
     var attempts = 0;
     var timer = setInterval(function(){
       attempts++;
-      if (moveIntoMount(mount)){ clearInterval(timer); obsDoc && obsDoc.disconnect && obsDoc.disconnect(); return; }
+      if (moveIntoMount(mount)){
+        if (loader) loader.style.display = 'none';
+        clearInterval(timer); obsDoc && obsDoc.disconnect && obsDoc.disconnect(); return;
+      }
       if (attempts > 30){ // ~9 сек
         clearInterval(timer);
         if (loader) loader.style.display = 'none';
@@ -709,7 +727,10 @@
 
     // на всякий случай следим за document.body
     var obsDoc = new MutationObserver(function(){
-      if (moveIntoMount(mount)){ clearInterval(timer); obsDoc.disconnect(); }
+      if (moveIntoMount(mount)){
+        if (loader) loader.style.display = 'none';
+        clearInterval(timer); obsDoc.disconnect();
+      }
     });
     obsDoc.observe(document.body, { childList:true, subtree:true });
   }
