@@ -66,27 +66,50 @@
         <p class="text-gray-700 text-lg">Два маршрута — для тех, кто хочет создать интерьер своей квартиры, и для тех, кто строит карьеру дизайнера.</p>
 
         <div class="grid md:grid-cols-2 gap-8 text-left">
-          <!-- Path: Для себя -->
-          <article class="bg-white rounded-2xl shadow-xl border border-gray-200 p-8">
-            <h3 class="text-2xl font-bold mb-4">Для себя</h3>
-            <p class="text-gray-700 mb-6">Освойте 3ds Max или SketchUp, разберитесь с договорами, психологией пространства и создайте дизайн своей квартиры.</p>
-            <ul class="text-sm text-gray-700 list-disc pl-5 space-y-2 mb-6">
-              <li><strong>Базовый:</strong> курс (Max/SketchUp) + поддержка</li>
-              <li><strong>Расширенный:</strong> + Психология + коучинг (2 сессии)</li>
-              <li><strong>Максимум:</strong> + Право (для себя) + ИИ-комбо + коучинг (маршрутная карта)</li>
-            </ul>
-            <a href="#packages-for-you" class="inline-flex items-center px-6 py-3 rounded-lg font-semibold shadow btn-primary">
-              <i class="fa-solid fa-arrow-right mr-2"></i>Перейти к пакетам
-            </a>
+          <!-- Path: Для себя — обновлённый блок -->
+          <article class="bg-white rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition border border-gray-200 ring-1 ring-emerald-100 p-8 relative overflow-hidden flex flex-col min-h-64">
+            <div class="absolute -top-12 -right-16 w-56 h-56 bg-emerald-100/60 rounded-full blur-3xl pointer-events-none"></div>
+            <h3 class="text-2xl font-bold mb-2 flex items-center gap-2">
+              <i class="fa-solid fa-house-chimney text-emerald-600"></i>
+              Для себя — «Дизайнер своей квартиры»
+            </h3>
+            <p class="text-gray-700">Пошаговая программа: от идеи до готового проекта квартиры.</p>
+
+            <!-- компактные чипы вместо длинных списков -->
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">3ds Max / SketchUp</span>
+              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">Психология</span>
+              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">Право + ИИ</span>
+            </div>
+
+            <div class="mt-auto pt-5">
+              <a href="./kurs.html" class="inline-flex items-center px-6 py-3 rounded-xl font-semibold shadow btn-primary">
+                <i class="fa-solid fa-list-check mr-2"></i> Перейти к пакетам
+              </a>
+            </div>
           </article>
 
-          <!-- Path: Для дизайнеров -->
-          <article class="bg-white rounded-2xl shadow-xl border border-gray-200 p-8">
-            <h3 class="text-2xl font-bold mb-4">Для дизайнеров — магазин</h3>
-            <p class="text-gray-700 mb-6">Подходит для начинающих и практикующих. Наши материалы сэкономят вам время в работе. Переходите в магазин и выбирайте то, что вам подходит! 😉</p>
-            <a href="shop.html" class="inline-flex items-center px-6 py-3 rounded-lg font-semibold shadow btn-primary">
-              <i class="fa-solid fa-arrow-right mr-2"></i>Перейти в магазин
-            </a>
+          <!-- Path: Для дизайнеров — обновлённый блок -->
+          <article class="bg-white rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition border border-gray-200 ring-1 ring-sky-100 p-8 relative overflow-hidden flex flex-col min-h-64">
+            <div class="absolute -bottom-14 -left-16 w-72 h-72 bg-sky-200/50 rounded-full blur-3xl pointer-events-none"></div>
+            <h3 class="text-2xl font-bold mb-2 flex items-center gap-2">
+              <i class="fa-solid fa-store text-sky-600"></i>
+              Для дизайнеров — магазин
+            </h3>
+            <p class="text-gray-700">Инструменты, документы и мини‑тренинги для работы дизайнеров.</p>
+
+            <!-- компактные чипы вместо витрины -->
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-sky-50 text-sky-800 border border-sky-200">3ds Max</span>
+              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-sky-50 text-sky-800 border border-sky-200">Документы</span>
+              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-sky-50 text-sky-800 border border-sky-200">ИИ‑комбо</span>
+            </div>
+
+            <div class="mt-auto pt-5">
+              <a href="shop.html" class="inline-flex items-center px-6 py-3 rounded-xl font-semibold shadow btn-primary">
+                <i class="fa-solid fa-arrow-right mr-2"></i> Перейти в магазин
+              </a>
+            </div>
           </article>
         </div>
       </div>
@@ -123,174 +146,13 @@
     </section>
 
 
-    <!-- Programs 3D: 3ds Max & SketchUp -->
-    <!-- Packages: Для себя -->
-    <section class="bg-gradient-to-b from-white to-emerald-50 py-16 px-6 md:px-16 text-center" id="packages-for-you">
-      <div class="max-w-6xl mx-auto space-y-8">
-        <h2 class="text-2xl md:text-3xl font-bold">Дизайнер своей квартиры — уровни участия</h2>
-        <p class="text-slate-600 text-base md:text-lg -mt-2">Один продукт — три ценовых уровня участия. Выберите комплект под вашу задачу.</p>
-        <div class="flex flex-wrap items-center justify-between gap-3">
-          <div class="flex items-center gap-3">
-            <span class="pill-badge pill-emerald">Хит</span>
-            <p class="text-slate-900 font-semibold">Продукт: «Дизайнер своей квартиры» — видеоуроки, шаблоны и экспертная помощь.</p>
-          </div>
-          <div class="flex flex-wrap gap-2 text-left">
-            <span class="bg-emerald-50 text-emerald-800 text-xs font-semibold px-2 py-1 rounded">Онлайн</span>
-            <span class="bg-emerald-50 text-emerald-800 text-xs font-semibold px-2 py-1 rounded">Самостоятельная работа</span>
-            <span class="bg-emerald-50 text-emerald-800 text-xs font-semibold px-2 py-1 rounded">Консультации</span>
-          </div>
-        </div>
-        <div class="grid md:grid-cols-3 gap-6 text-left">
-          <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 flex flex-col relative">
-            <h3 class="text-xl font-semibold mb-3">Базовый</h3>
-            <p class="text-xs uppercase tracking-wide text-slate-500 mb-2">Уровень продукта «Дизайнер своей квартиры»</p>
-            <span class="absolute top-3 right-3 pill-badge pill-sky">от 7 900 ₽</span>
-            <ul class="text-sm text-gray-700 list-disc pl-5 space-y-1 mb-4">
-              <li>Курс 3ds Max или SketchUp (для себя)</li>
-              <li>Поддержка в чате</li>
-              <li>Мини‑гайд PDF</li>
-            </ul>
-            <p class="text-gray-700 mb-4">Курс (3ds Max или SketchUp) + поддержка в чате</p>
-            <div class="mt-auto">
-              <a href="3dsmax.html" class="inline-flex items-center px-5 py-2 rounded-lg text-sm font-semibold shadow btn-primary">
-                <i class="fa-solid fa-cart-shopping mr-2"></i>Выбрать уровень
-              </a>
-            </div>
-            <p class="mt-3 text-xs text-slate-500">Безопасно: связь через Telegram, поддержка кураторов.</p>
-          </div>
-          <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 flex flex-col triptych-featured relative">
-            <h3 class="text-xl font-semibold mb-3">Расширенный</h3>
-            <p class="text-xs uppercase tracking-wide text-slate-500 mb-2">Уровень продукта «Дизайнер своей квартиры»</p>
-            <span class="absolute top-3 right-3 pill-badge pill-emerald">от 9 900 ₽</span>
-            <ul class="text-sm text-gray-700 list-disc pl-5 space-y-1 mb-4">
-              <li>Всё из «Базового»</li>
-              <li>Коучинг (2 сессии)</li>
-              <li>Психология пространства</li>
-            </ul>
-            <p class="text-gray-700 mb-4">Базовый + Психология пространства + коучинг (2 сессии)</p>
-            <div class="mt-auto">
-              <a href="legal.html" class="inline-flex items-center px-5 py-2 rounded-lg text-sm font-semibold shadow btn-primary">
-                <i class="fa-solid fa-cart-shopping mr-2"></i>Выбрать уровень
-              </a>
-            </div>
-            <p class="mt-3 text-xs text-slate-500">Безопасно: связь через Telegram, поддержка кураторов.</p>
-          </div>
-          <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 flex flex-col relative">
-            <h3 class="text-xl font-semibold mb-3">Максимум</h3>
-            <p class="text-xs uppercase tracking-wide text-slate-500 mb-2">Уровень продукта «Дизайнер своей квартиры»</p>
-            <span class="absolute top-3 right-3 pill-badge pill-amber">от 14 900 ₽</span>
-            <ul class="text-sm text-gray-700 list-disc pl-5 space-y-1 mb-4">
-              <li>Правовое ведение (для себя)</li>
-              <li>Всё из «Расширенного»</li>
-              <li>ИИ‑комбо</li>
-              <li>Коучинг + маршрут‑30</li>
-            </ul>
-            <p class="text-gray-700 mb-4">Расширенный + Право (для себя) + ИИ-комбо + коучинг (маршрутная карта)</p>
-            <div class="mt-auto">
-              <a href="ai-tools.html" class="inline-flex items-center px-5 py-2 rounded-lg text-sm font-semibold shadow btn-primary">
-                <i class="fa-solid fa-cart-shopping mr-2"></i>Выбрать уровень
-              </a>
-            </div>
-            <p class="mt-3 text-xs text-slate-500">Безопасно: связь через Telegram, поддержка кураторов.</p>
-          </div>
-        </div>
-        <p class="text-sm text-slate-600 mt-4">Не уверены, что выбрать? <a href="https://t.me/artbytwins" target="_blank" rel="noopener" class="text-emerald-700 font-semibold hover:underline">Бесплатная консультация перед покупкой</a></p>
-      </div>
-    </section>
 
-    <!-- Packages: Для дизайнеров -->
-    <section class="bg-gradient-to-b from-white to-sky-50 py-16 px-6 md:px-16 text-center" id="packages-for-pro">
-      <div class="max-w-6xl mx-auto space-y-8">
-        <!-- Витрина магазина (компакт для главной) -->
-        <div class="relative overflow-hidden rounded-3xl border border-emerald-100 shadow-xl bg-gradient-to-br from-white via-emerald-50 to-sky-50">
-          <!-- декоративные элементы -->
-          <div class="pointer-events-none absolute -top-24 -right-24 w-80 h-80 rounded-full bg-emerald-200/30 blur-3xl"></div>
-          <div class="pointer-events-none absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-sky-200/30 blur-3xl"></div>
-
-          <div class="relative z-10 grid md:grid-cols-2 gap-0">
-            <!-- Левая колонка: текст и быстрые фильтры -->
-            <div class="p-8 md:p-12">
-              <h2 class="text-2xl md:text-3xl font-bold">Магазин для дизайнеров</h2>
-              <p class="mt-2 text-slate-700 text-base md:text-lg">Инструменты, документы и мини‑тренинги — покупайте отдельно то, что нужно именно вам.</p>
-
-              <!-- Быстрые подборки -->
-              <div class="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-2">
-                <a href="3dsmax.html" class="inline-flex items-center px-3 py-2 rounded-lg border border-emerald-200 bg-white hover:bg-emerald-50 text-sm font-medium text-slate-800">
-                  <i class="fa-solid fa-cube mr-2 text-emerald-600"></i> 3ds Max
-                </a>
-                <a href="sketchup.html" class="inline-flex items-center px-3 py-2 rounded-lg border border-emerald-200 bg-white hover:bg-emerald-50 text-sm font-medium text-slate-800">
-                  <i class="fa-solid fa-cubes mr-2 text-emerald-600"></i> SketchUp
-                </a>
-                <a href="legal.html" class="inline-flex items-center px-3 py-2 rounded-lg border border-emerald-200 bg-white hover:bg-emerald-50 text-sm font-medium text-slate-800">
-                  <i class="fa-solid fa-scale-balanced mr-2 text-emerald-600"></i> Право
-                </a>
-                <a href="ai-tools.html" class="inline-flex items-center px-3 py-2 rounded-lg border border-emerald-200 bg-white hover:bg-emerald-50 text-sm font-medium text-slate-800">
-                  <i class="fa-solid fa-robot mr-2 text-emerald-600"></i> ИИ‑комбо
-                </a>
-                <a href="psychology.html" class="inline-flex items-center px-3 py-2 rounded-lg border border-emerald-200 bg-white hover:bg-emerald-50 text-sm font-medium text-slate-800">
-                  <i class="fa-solid fa-brain mr-2 text-emerald-600"></i> Психология
-                </a>
-                <a href="budget.html" class="inline-flex items-center px-3 py-2 rounded-lg border border-emerald-200 bg-white hover:bg-emerald-50 text-sm font-medium text-slate-800">
-                  <i class="fa-solid fa-calculator mr-2 text-emerald-600"></i> Бюджетирование
-                </a>
-                <a href="coaching.html" class="inline-flex items-center px-3 py-2 rounded-lg border border-emerald-200 bg-white hover:bg-emerald-50 text-sm font-medium text-slate-800 col-span-2 sm:col-span-1">
-                  <i class="fa-solid fa-user-tie mr-2 text-emerald-600"></i> Коучинг
-                </a>
-              </div>
-
-              <!-- CTA -->
-              <div class="mt-8 flex flex-wrap items-center gap-3">
-                <a href="shop.html" class="inline-flex items-center px-6 py-3 rounded-xl font-semibold shadow btn-primary">
-                  <i class="fa-solid fa-store mr-2"></i> Перейти в магазин
-                </a>
-                <span class="text-sm text-slate-600">Материалы подходят и начинающим, и практикующим.</span>
-              </div>
-            </div>
-
-            <!-- Правая колонка: топ-категории превью -->
-            <div class="p-6 md:p-8 bg-white/70 backdrop-blur-sm">
-              <div class="grid sm:grid-cols-2 gap-4">
-                <!-- Карточка 1 -->
-                <article class="bg-white rounded-2xl shadow-sm border border-gray-200 p-5 flex flex-col">
-                  <div class="text-xs uppercase tracking-wide text-slate-500 mb-1">Документы</div>
-                  <h3 class="font-semibold">Договоры и шаблоны</h3>
-                  <p class="text-sm text-slate-700 mt-2">Готовые шаблоны договоров, ТЗ, оферты, допсоглашения.</p>
-                  <a href="shop.html?cat=contracts" class="mt-auto inline-flex items-center px-4 py-2 rounded-lg text-sm font-semibold btn-primary">
-                    <i class="fa-solid fa-folder-open mr-2"></i> Перейти
-                  </a>
-                </article>
-
-                <!-- Карточка 2 -->
-                <article class="bg-white rounded-2xl shadow-sm border border-gray-200 p-5 flex flex-col">
-                  <div class="text-xs uppercase tracking-wide text-slate-500 mb-1">Квалификация</div>
-                  <h3 class="font-semibold">Мини‑тренинги</h3>
-                  <p class="text-sm text-slate-700 mt-2">Короткие интенсивы: подача, свет, ТЗ, ведение клиента.</p>
-                  <a href="shop.html?cat=minicourses" class="mt-auto inline-flex items-center px-4 py-2 rounded-lg text-sm font-semibold btn-primary">
-                    <i class="fa-solid fa-graduation-cap mr-2"></i> Перейти
-                  </a>
-                </article>
-
-                <!-- Карточка 3 -->
-                <article class="bg-white rounded-2xl shadow-sm border border-gray-200 p-5 flex flex-col sm:col-span-2">
-                  <div class="text-xs uppercase tracking-wide text-slate-500 mb-1">Комплекты</div>
-                  <h3 class="font-semibold">Наборы «Студийный старт»</h3>
-                  <p class="text-sm text-slate-700 mt-2">Готовые наборы документов и чек‑листов для быстрого запуска.</p>
-                  <a href="shop.html?cat=bundles" class="mt-3 inline-flex items-center px-4 py-2 rounded-lg text-sm font-semibold btn-primary">
-                    <i class="fa-solid fa-box mr-2"></i> Перейти
-                  </a>
-                </article>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <!-- Student Works (moved out of Courses) -->
     <section class="bg-gradient-to-b from-white to-sky-50 py-12 px-6 md:px-16 text-center" id="works">
       <div class="max-w-7xl mx-auto space-y-8">
         <h2 class="text-2xl md:text-3xl font-bold">Работы наших учеников</h2>
-        <p class="text-gray-700 text-lg">Реальные проекты студентов: пролистайте карусель и посмотрите крупные фото</p>
+        <p class="text-gray-700 text-lg">Реальные проекты студентов — <span class="hidden md:inline">пролистайте карусель</span><span class="md:hidden">свайпайте как сторис</span></p>
         <p class="text-sm"><a href="works.html" class="inline-flex items-center gap-1 text-emerald-700 hover:underline">Смотреть ещё <i class="fa-solid fa-arrow-right text-xs"></i></a></p>
         <div class="full-bleed">
           <div class="relative">
@@ -307,8 +169,14 @@
               <i class="fa-solid fa-chevron-right"></i>
             </button>
 
+            <!-- Mobile tap zones for story-like navigation -->
+            <div class="md:hidden" aria-hidden="true">
+              <div class="absolute inset-y-0 left-0 w-1/2 z-10" style="touch-action: manipulation;" onclick="(function(c){c.scrollBy({left:-window.innerWidth*0.9,behavior:'smooth'});})(document.getElementById('worksCarousel'))"></div>
+              <div class="absolute inset-y-0 right-0 w-1/2 z-10" style="touch-action: manipulation;" onclick="(function(c){c.scrollBy({left:window.innerWidth*0.9,behavior:'smooth'});})(document.getElementById('worksCarousel'))"></div>
+            </div>
+
             <!-- Carousel -->
-            <div id="worksCarousel" class="carousel px-4 md:px-8 lg:px-16">
+            <div id="worksCarousel" class="carousel carousel--story px-4 md:px-8 lg:px-16">
               <!-- Slide 1 -->
               <article class="carousel-item w-[75vw] md:w-[60vw] lg:w-[48vw] mx-auto bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden transform transition-transform duration-500 hover:scale-105">
                 <img src="./images/work_1.png" alt="Современный минимализм — проект студента" class="w-full h-80 md:h-[24rem] object-cover">
@@ -435,7 +303,7 @@
             <p class="text-gray-700 mt-2">Подготовка сметы и план внедрения</p>
           </div>
         </div>
-        <a href="#packages-for-you" class="inline-flex items-center px-6 py-3 rounded-lg font-semibold shadow btn-primary"><i class="fa-solid fa-list-check mr-2"></i>Перейти к выбору пакета</a>
+        <a href="./kurs.html" class="inline-flex items-center px-6 py-3 rounded-lg font-semibold shadow btn-primary"><i class="fa-solid fa-list-check mr-2"></i>Перейти к выбору пакета</a>
       </div>
     </section>
 
@@ -533,15 +401,6 @@
     </section>
 
     <div id="site-footer"></div>
-
-    <!-- Sticky Mobile CTA -->
-    <div class="md:hidden fixed bottom-20 left-0 right-0 z-40 px-4">
-      <div class="bg-white border border-emerald-200 rounded-2xl shadow-xl p-3 flex items-center justify-between gap-3">
-        <a href="#packages-for-you" class="flex-1 inline-flex items-center justify-center px-4 py-3 rounded-xl font-semibold btn-primary"><i class="fa-solid fa-house mr-2"></i>Для себя</a>
-        <a href="#packages-for-pro" class="flex-1 inline-flex items-center justify-center px-4 py-3 rounded-xl font-semibold btn-primary"><i class="fa-solid fa-briefcase mr-2"></i>Для дизайнеров</a>
-      </div>
-    </div>
-
     <div id="site-telegram-btn"></div>
     <script src="app.js" defer></script>
   </body>

@@ -7,7 +7,7 @@
 
 (function(){
   // Версия для пробития кеша статических partials
-  var VERSION = '20250922';
+  var VERSION = '20250923b';
   function withV(path){ return path + (path.indexOf('?') === -1 ? ('?v=' + VERSION) : ('&v=' + VERSION)); }
   // Preconnect/DNS-hint helper (idempotent)
   function preconnectOnce(href){
@@ -190,6 +190,8 @@ function closeMobile(){
     el.style.display = 'block';
     document.documentElement.style.overflow = 'hidden';
     el.setAttribute('aria-hidden','false');
+    document.body.style.overscrollBehavior = 'none';
+    document.body.style.touchAction = 'none';
   }
 
   function closeModal(){
@@ -197,6 +199,8 @@ function closeMobile(){
     modalState.el.style.display = 'none';
     document.documentElement.style.overflow = '';
     modalState.el.setAttribute('aria-hidden','true');
+    document.body.style.overscrollBehavior = '';
+    document.body.style.touchAction = '';
     // Clear body to avoid duplicating widgets between openings
     if(modalState.body) modalState.body.innerHTML = '';
   }
@@ -208,6 +212,21 @@ function closeMobile(){
     }
   });
   document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeModal(); });
+
+  // ===== Works carousel (story mode) — ensure first slide fits on mobile =====
+  function alignStoryCarousel(){
+    try{
+      var c = document.getElementById('worksCarousel');
+      if(!c || !c.classList || !c.classList.contains('carousel--story')) return;
+      var isMobile = window.matchMedia('(max-width:640px)').matches;
+      if(!isMobile) return;
+      // reset scroll to exact boundary (some devices keep fractional scrollLeft)
+      c.scrollLeft = 0;
+      requestAnimationFrame(function(){ c.scrollLeft = 0; });
+    }catch(e){}
+  }
+  document.addEventListener('DOMContentLoaded', alignStoryCarousel);
+  window.addEventListener('resize', alignStoryCarousel, { passive:true });
 
   // Map plan slugs used on kurs.html to GetCourse widget ids
   var PLAN_IDS = {
