@@ -41,37 +41,6 @@
     /* Safety: if any lib adds a lock class, ignore it */
     body.modal-open, body.gc-modal-open, body.lock-scroll { overflow-y: auto !important; }
   </style>
-  <style id="gc-overlay-css">
-    #gc-overlay{position:fixed;inset:0;z-index:2147483647;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;padding:2vh}
-    #gc-overlay[aria-hidden="false"]{display:flex}
-    #gc-overlay__box{position:relative;width:100%;max-width:920px;min-height:60vh;background:#fff;border-radius:14px;box-shadow:0 20px 60px rgba(2,6,23,.35);overflow:hidden}
-    #gc-overlay__loader{ position:relative; z-index:1; }
-    #gc-overlay__box [data-gc-mount],
-    #gc-overlay__box .gcw_lite_widget_container,
-    #gc-overlay__box .gcw_lw_container,
-    #gc-overlay__box .gc-lw-container,
-    #gc-overlay__box iframe{ position:relative; z-index:2; }
-    #gc-overlay__close{position:absolute;top:8px;right:10px;z-index:2;display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:9999px;background:rgba(0,0,0,.06)}
-    #gc-overlay__close:hover{background:rgba(0,0,0,.12)}
-    .gc-iframe-full, #gc-overlay iframe{width:100%!important;height:80vh!important;display:block!important;border:0}
-    #gc-overlay{ z-index: 2147483647 !important; }
-    /* Hide auto-injected containers on the page until modal is opened.
-       But do NOT hide elements that live inside the modal box (marked by [data-gc-mount]). */
-    body:not(.gc-overlay-open) .gcw_lite_widget_container:not(#gc-overlay__box *),
-    body:not(.gc-overlay-open) .gcw_lite_widget:not(#gc-overlay__box *),
-    body:not(.gc-overlay-open) .gcw_lw_container:not(#gc-overlay__box *),
-    body:not(.gc-overlay-open) .gc-lw-container:not(#gc-overlay__box *),
-    body:not(.gc-overlay-open) .gcw-inline:not(#gc-overlay__box *),
-    body:not(.gc-overlay-open) .gc-lw-inline:not(#gc-overlay__box *){
-      display:none !important;
-      height:0 !important;
-      overflow:hidden !important;
-      visibility:hidden !important;
-      pointer-events:none !important;
-      position: static !important;
-    }
-    body.gc-overlay-open{overflow:hidden}
-  </style>
   <style id="btn-buy-styles">
     /* Visible CTA buttons for plans */
     .btn-buy{
@@ -114,15 +83,6 @@
 </head>
 
 <body class="site-bg text-gray-900 selection:bg-neutral-900 selection:text-white">
-  <div id="gc-overlay" aria-hidden="true" role="dialog" aria-modal="true">
-    <div id="gc-overlay__box">
-      <button id="gc-overlay__close" aria-label="Закрыть" type="button">✕</button>
-      <div id="gc-overlay__loader" style="display:none;padding:24px;text-align:center">
-        <span style="display:inline-block;padding:10px 14px;border-radius:9999px;background:#f3f4f6;border:1px solid #e5e7eb;">Загрузка…</span>
-      </div>
-      <!-- Here we will mount the GetCourse inline container / iframe -->
-    </div>
-  </div>
   <!-- Герой -->
   <div id="site-header"></div>
   <noscript><div style="padding:8px;background:#fee2e2;color:#7f1d1d;text-align:center">Для загрузки шапки/футера требуется JavaScript.</div></noscript>
@@ -561,82 +521,6 @@
 
   <div id="site-telegram-btn"></div>
   
-  <!-- replaced by lightweight lazy GC loader above -->
-  <script>
-    (function(){
-      var PLAN_IDS = { basic:'1487237', extended:'1487247', max:'1487966' };
-
-      function openWidget(wid){
-        if(!wid) return;
-        var overlay = document.getElementById('gc-overlay');
-        var box = document.getElementById('gc-overlay__box');
-        var loader = document.getElementById('gc-overlay__loader');
-        if(!overlay || !box) return;
-
-        // show modal
-        overlay.setAttribute('aria-hidden','false');
-        document.body.classList.add('gc-overlay-open');
-
-        // cleanup previous
-        Array.prototype.slice.call(
-          box.querySelectorAll('[data-gc-mount], .gcw_lite_widget_container, .gcw_lw_container, .gc-lw-container, iframe')
-        ).forEach(function(n){ n.remove(); });
-
-        if (loader) loader.style.display = 'block';
-
-        // host + iframe
-        var host = document.createElement('div');
-        host.setAttribute('data-gc-mount','');
-        host.style.cssText = 'padding:0;min-height:60vh;display:block;';
-        box.appendChild(host);
-
-        var iframe = document.createElement('iframe');
-        var direct = 'https://artbytwins.getcourse.ru/pl/lite/widget/widget'
-          + '?' + window.location.search.substring(1)
-          + '&id=' + encodeURIComponent(wid)
-          + '&ref=' + encodeURIComponent(document.referrer)
-          + '&loc=' + encodeURIComponent(document.location.href);
-        iframe.src = direct;
-        iframe.style.width = '100%';
-        iframe.style.height = '80vh';
-        iframe.style.border = '0';
-        host.appendChild(iframe);
-
-        // hide loader next tick
-        setTimeout(function(){ if (loader) loader.style.display = 'none'; }, 0);
-      }
-
-      // open on click (plans)
-      document.addEventListener('click', function(e){
-        var t = e.target.closest && e.target.closest('[data-gc-open][data-plan], [data-plan]');
-        if(!t) return;
-        var plan = t.getAttribute('data-plan');
-        var wid = PLAN_IDS[plan];
-        if(!wid) return;
-        e.preventDefault();
-        openWidget(wid);
-      }, true);
-
-      // close button
-      var closeBtn = document.getElementById('gc-overlay__close');
-      if (closeBtn && !closeBtn.__gcBound){
-        closeBtn.addEventListener('click', function(){
-          var overlay = document.getElementById('gc-overlay');
-          var box = document.getElementById('gc-overlay__box');
-          var loader = document.getElementById('gc-overlay__loader');
-          if(overlay){ overlay.setAttribute('aria-hidden','true'); }
-          document.body.classList.remove('gc-overlay-open');
-          if(box){
-            Array.prototype.slice.call(
-              box.querySelectorAll('[data-gc-mount], .gcw_lite_widget_container, .gcw_lw_container, .gc-lw-container, iframe')
-            ).forEach(function(n){ n.remove(); });
-          }
-          if (loader) loader.style.display = 'none';
-        });
-        closeBtn.__gcBound = true;
-      }
-    })();
-  </script>
   <script src="app.js" defer></script>
 </body>
 </html>
