@@ -309,6 +309,13 @@
   transform:translateY(0);
   box-shadow:0 3px 8px rgba(0,0,0,.18);
 }
-.btn-telegram { background:#0088cc; }
-.btn-whatsapp { background:#25D366; }
-.btn-email { background:#f59e0b; }
+/* Variants scoped to round buttons only to avoid conflicts with legacy btn-telegram on rectangular buttons */
+.btn-circle.btn-telegram { background:#0088cc; }
+.btn-circle.btn-whatsapp { background:#25D366; }
+.btn-circle.btn-email { background:#f59e0b; }
+/* Accessibility & hover polish */
+.btn-circle { cursor:pointer; }
+.btn-circle:focus { outline:none; box-shadow:0 0 0 3px rgba(16,185,129,.25), 0 4px 12px rgba(0,0,0,.15); }
+.btn-circle.btn-telegram:hover,
+.btn-circle.btn-whatsapp:hover,
+.btn-circle.btn-email:hover { filter:brightness(0.95); }
