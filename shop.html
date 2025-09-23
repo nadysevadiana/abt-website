@@ -8,6 +8,35 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="prefetch" href="header.html" as="fetch" crossorigin>
   <link rel="prefetch" href="footer.html" as="fetch" crossorigin>
+  <!-- Icons (needed for templates with <i class="fa-...">) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+  <!-- In‑place product view: compact layout and no extra empty space -->
+  <style>
+    /* Make product view compact only inside #product-view */
+    #product-view { padding-top: 8px; }
+    #product-view .card { min-height: auto !important; display: flex; flex-direction: column; justify-content: center; }
+    #product-view .card p { margin-bottom: 0; }
+    #product-view .grid .card { padding: 14px; }
+    #product-view .card > *:last-child { margin-bottom: 0; }
+
+    /* Tighter sections and headings */
+    #product-view section { margin-bottom: 16px; }
+    #product-view h2 { margin-top: 4px; margin-bottom: 10px; }
+    #product-view h3 { margin-top: 2px; margin-bottom: 10px; }
+
+    /* Tighter grids used inside the inline product pages */
+    #product-view .tight-grid .card { min-height: auto !important; padding-top: 10px; padding-bottom: 10px; }
+    #product-view .tight-grid { gap: 12px; }
+
+    /* Accordion paddings (shrink summary/content) */
+    #product-view .accordion summary { padding: 14px 16px !important; }
+    #product-view .accordion details > div { padding: 0 16px 14px 16px !important; }
+
+    /* Back button stays visible and not transparent */
+    #back-to-shop { background-color: #10B981; color: #fff; }
+    #back-to-shop:hover { background-color: #059669; }
+  </style>
 </head>
 <body class="site-bg text-gray-900">
   <div id="site-header"></div>
@@ -38,7 +67,7 @@
       <!-- Витрина -->
 
       <!-- Просмотр продукта -->
-      <div id="product-view" class="hidden mt-4 bg-white rounded-xl shadow-lg border border-gray-200 p-5 pt-12 relative">
+      <div id="product-view" class="hidden mt-4 bg-gradient-to-br from-white to-emerald-50 rounded-xl shadow-lg border border-gray-200 p-4 pt-4 md:pt-6 relative">
         <button id="back-to-shop" class="absolute top-3 left-3 inline-flex items-center px-3 py-1.5 rounded-md bg-emerald-600 text-white hover:bg-emerald-700 text-sm shadow">
           ← Назад
         </button>
@@ -213,23 +242,6 @@
         </div>
       </template>
 
-      <template id="tpl-legal">
-        <h2 class="text-2xl md:text-3xl font-bold mb-2 text-center">Правовое ведение</h2>
-        <p class="text-slate-700 mb-4">Шаблоны договоров, памятки и кейсы от брифа до актов. Подходит фрилансу и студиям.</p>
-        <ul class="list-disc pl-5 text-slate-700 space-y-1 mb-5">
-          <li>Шаблоны договоров (редактируемые)</li>
-          <li>Пошаговые чек‑листы по этапам проекта</li>
-          <li>Примеры формулировок и рисков</li>
-        </ul>
-        <div class="flex flex-wrap items-end gap-4">
-          <div>
-            <div class="text-sm uppercase tracking-wide text-slate-500">Цена</div>
-            <div class="text-3xl font-bold">3 500 ₽</div>
-          </div>
-          <a href="checkout.html?product=legal" class="btn-primary inline-flex items-center px-5 py-3 rounded-lg font-semibold shadow"><i class="fa-solid fa-cart-shopping mr-2"></i>Купить модуль</a>
-          <a href="legal.html" class="inline-flex items-center px-4 py-2 rounded-lg border border-emerald-600 text-emerald-700 hover:bg-emerald-50">Подробнее</a>
-        </div>
-      </template>
 
       <template id="tpl-psychology">
         <h2 class="text-2xl md:text-3xl font-bold mb-2 text-center">Психология пространства</h2>
@@ -397,23 +409,46 @@
       const view = document.getElementById('product-view');
       const content = document.getElementById('product-content');
       const backBtn = document.getElementById('back-to-shop');
+      const partials = {
+        'legal': 'shop/legal.html'
+      };
 
       function tplId(key){ return 'tpl-' + key; }
       function getTpl(key){ return document.getElementById(tplId(key)); }
 
-      function openProduct(key){
+      async function openProduct(key){
         const tpl = getTpl(key);
-        if(!tpl){
-          content.innerHTML = '<p class="text-slate-700">Контент в разработке. Выберите другой раздел.</p>';
-        } else {
-          content.innerHTML = tpl.innerHTML;
-        }
+        const partial = partials[key];
+
+        // show view first, with a light loading state to avoid layout jumps
         grid.classList.add('hidden');
         view.classList.remove('hidden');
+
+        if (partial) {
+          content.innerHTML = '<div class="py-6 text-center text-slate-500">Загружаем…</div>';
+          try {
+            const res = await fetch(partial, { credentials: 'same-origin' });
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            const html = await res.text();
+            content.innerHTML = html;
+          } catch (err) {
+            console.error('[shop] failed to load partial', partial, err);
+            content.innerHTML = '<p class="text-red-600">Не удалось загрузить раздел. Обновите страницу или попробуйте позже.</p>';
+          }
+        } else {
+          if (!tpl) {
+            content.innerHTML = '<p class="text-slate-700">Контент в разработке. Выберите другой раздел.</p>';
+          } else {
+            content.innerHTML = tpl.innerHTML;
+          }
+        }
+
+        // update URL (?item=)
         const url = new URL(window.location.href);
         url.searchParams.set('item', key);
         history.replaceState(null, '', url.toString());
-        // авто‑скролл к началу просмотра
+
+        // scroll into view
         view.scrollIntoView({behavior:'smooth', block:'start'});
       }
 
@@ -426,10 +461,10 @@
       }
 
       document.querySelectorAll('#shop-grid a[data-product]').forEach(function(link){
-        link.addEventListener('click', function(e){
+        link.addEventListener('click', async function(e){
           e.preventDefault();
           const product = link.getAttribute('data-product');
-          openProduct(product);
+          await openProduct(product);
         });
       });
 
@@ -441,10 +476,10 @@
       });
 
       // Открытие по параметру ?item=
-      (function initFromQuery(){
+      (async function initFromQuery(){
         const params = new URLSearchParams(window.location.search);
         const key = params.get('item');
-        if(key) openProduct(key);
+        if (key) await openProduct(key);
       })();
     })();
   </script>
