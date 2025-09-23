@@ -1,156 +1,71 @@
-<!-- shop/psychology.html (partial для магазина) -->
-<section class="shop-view max-w-5xl mx-auto px-4 md:px-6 py-6">
-  <!-- Назад -->
-  <div class="mb-4">
-    <button type="button" data-back
-      class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-300">
-      <span aria-hidden="true">←</span> Назад к магазину
+<!-- PARTIAL: Psychology (compact for #product-view) -->
+<div class="space-y-4">
+  <h2 class="text-2xl md:text-3xl font-bold mb-2 text-center">Психология пространства</h2>
+  <p class="text-slate-700">Методики согласования вкусов и сценариев с клиентом. Помогают быстрее принимать решения и уменьшать количество переделок.</p>
+
+  <!-- Что внутри -->
+  <div class="grid md:grid-cols-3 gap-3 tight-grid">
+    <div class="card p-4">
+      <p class="font-semibold">Скрипты согласования вкусов</p>
+      <p class="text-sm text-slate-700 mt-1">Готовые формулировки для обсуждения стиля и приоритетов.</p>
+    </div>
+    <div class="card p-4">
+      <p class="font-semibold">Матрица сценариев</p>
+      <p class="text-sm text-slate-700 mt-1">Утро/вечер, работа/отдых, друзья/семья — фокус на ощущениях.</p>
+    </div>
+    <div class="card p-4">
+      <p class="font-semibold">Работа с возражениями</p>
+      <p class="text-sm text-slate-700 mt-1">Чек-лист вопросов и мягких аргументов «за».</p>
+    </div>
+  </div>
+
+  <!-- Программа (аккордеон) -->
+  <div class="accordion divide-y divide-gray-200 card">
+    <details>
+      <summary class="flex items-center justify-between p-4 cursor-pointer">
+        <span class="font-semibold">База: типы клиентов и их мотивация</span>
+        <i class="fa-solid fa-chevron-down text-gray-500"></i>
+      </summary>
+      <div class="px-4 pb-4 text-sm text-slate-700 space-y-2">
+        <p>Как определять ожидания и «сигналы» в брифе. Карта триггеров и табу.</p>
+      </div>
+    </details>
+    <details>
+      <summary class="flex items-center justify-between p-4 cursor-pointer">
+        <span class="font-semibold">Согласование вкусов и палитры</span>
+        <i class="fa-solid fa-chevron-down text-gray-500"></i>
+      </summary>
+      <div class="px-4 pb-4 text-sm text-slate-700 space-y-2">
+        <p>Moodboard-диалог, быстрые техники выбора «из 3» и фиксация решений.</p>
+      </div>
+    </details>
+    <details>
+      <summary class="flex items-center justify-between p-4 cursor-pointer">
+        <span class="font-semibold">Сценарии пространства</span>
+        <i class="fa-solid fa-chevron-down text-gray-500"></i>
+      </summary>
+      <div class="px-4 pb-4 text-sm text-slate-700 space-y-2">
+        <p>Повседневные и редкие сценарии: что важнее, как приоритизировать.</p>
+      </div>
+    </details>
+  </div>
+
+  <!-- CTA / цены -->
+  <div class="flex flex-wrap items-end gap-4">
+    <div>
+      <div class="text-xs uppercase tracking-wide text-slate-500">Цена</div>
+      <div class="text-3xl font-bold">1 900 ₽</div>
+    </div>
+    <a href="checkout.html?product=psychology" class="btn-primary inline-flex items-center px-5 py-3 rounded-lg font-semibold shadow">
+      <i class="fa-solid fa-cart-shopping mr-2"></i>Купить модуль
+    </a>
+    <a href="psychology.html" class="inline-flex items-center px-4 py-2 rounded-lg border border-emerald-600 text-emerald-700 hover:bg-emerald-50">
+      Подробнее
+    </a>
+    <button type="button" data-back class="inline-flex items-center px-4 py-2 rounded-lg border border-slate-300 hover:bg-white/60">
+      ← Назад к магазину
     </button>
   </div>
 
-  <!-- Заголовок -->
-  <header class="text-center">
-    <h1 class="text-2xl md:text-3xl font-bold tracking-tight">Психология пространства</h1>
-    <p class="mt-2 text-sm md:text-base text-gray-700">
-      Как интерьер влияет на эмоции, привычки и продуктивность. Практические протоколы: цвет, свет,
-      планировка, акустика, материалы.
-    </p>
-    <div class="mt-3 flex flex-wrap items-center justify-center gap-2 text-xs">
-      <span class="inline-flex items-center px-2.5 py-1 rounded-full bg-white border border-emerald-200 text-emerald-700 font-semibold shadow-sm">Цвет и свет</span>
-      <span class="inline-flex items-center px-2.5 py-1 rounded-full bg-white border border-emerald-200 text-emerald-700 font-semibold shadow-sm">Планировка</span>
-      <span class="inline-flex items-center px-2.5 py-1 rounded-full bg-white border border-emerald-200 text-emerald-700 font-semibold shadow-sm">Акустика</span>
-      <span class="inline-flex items-center px-2.5 py-1 rounded-full bg-white border border-emerald-200 text-emerald-700 font-semibold shadow-sm">Материалы</span>
-    </div>
-  </header>
-
-  <!-- Что получите -->
-  <section class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-    <div class="shop-card">
-      <p class="font-semibold">3 кейса</p>
-      <p class="text-sm text-gray-700 mt-1">Разбор реальных проектов с акцентом на психологию восприятия.</p>
-    </div>
-    <div class="shop-card">
-      <p class="font-semibold">10+ чек-листов</p>
-      <p class="text-sm text-gray-700 mt-1">Свет, цвет, маршруты, приватность, акустика — готовые протоколы.</p>
-    </div>
-    <div class="shop-card">
-      <p class="font-semibold">Доступ 24/7</p>
-      <p class="text-sm text-gray-700 mt-1">Материалы и обновления доступны в любое время.</p>
-    </div>
-  </section>
-
-  <!-- Программа кратко -->
-  <section class="mt-6 grid md:grid-cols-2 gap-3">
-    <div class="shop-card">
-      <h3 class="font-semibold">1) Психология восприятия</h3>
-      <ul class="list-disc pl-5 text-sm text-gray-700 mt-2 space-y-1">
-        <li>Якоря и маршруты: как мозг «читает» пространство</li>
-        <li>Эмоциональные зоны: фокус, отдых, общение</li>
-        <li>Тактильность и акустика как модуляторы настроения</li>
-      </ul>
-    </div>
-    <div class="shop-card">
-      <h3 class="font-semibold">2) Цвет и свет</h3>
-      <ul class="list-disc pl-5 text-sm text-gray-700 mt-2 space-y-1">
-        <li>Палитры под цели помещения</li>
-        <li>Сценарии освещения и циркадные ритмы</li>
-        <li>Типовые ошибки и быстрые правки</li>
-      </ul>
-    </div>
-    <div class="shop-card">
-      <h3 class="font-semibold">3) Планировка и маршруты</h3>
-      <ul class="list-disc pl-5 text-sm text-gray-700 mt-2 space-y-1">
-        <li>Логика перемещения, «точки притяжения»</li>
-        <li>Приватность vs открытость</li>
-        <li>Микро-пространства и зонирование</li>
-      </ul>
-    </div>
-    <div class="shop-card">
-      <h3 class="font-semibold">4) Практика и кейсы</h3>
-      <ul class="list-disc pl-5 text-sm text-gray-700 mt-2 space-y-1">
-        <li>3 кейса Art by Twins</li>
-        <li>Чек-листы и протоколы внедрения</li>
-        <li>Рабочие шаблоны для команды</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- Тарифы -->
-  <section class="mt-8">
-    <h2 class="text-lg md:text-xl font-semibold text-center">Тарифы</h2>
-    <div class="mt-4 grid md:grid-cols-3 gap-4">
-      <!-- Start -->
-      <article class="shop-card flex flex-col">
-        <p class="text-xs inline-flex w-max px-2 py-0.5 rounded-full border border-sky-300 text-sky-700 font-semibold">Старт</p>
-        <h3 class="mt-1 font-semibold">Start</h3>
-        <p class="text-sm text-gray-700 mt-1">Видеоуроки + демо-шаблоны</p>
-        <ul class="text-sm text-gray-700 list-disc pl-5 mt-3 space-y-1">
-          <li>Доступ 24/7</li>
-          <li>Demo Pack</li>
-          <li>Обновления 3 месяца</li>
-        </ul>
-        <div class="mt-auto pt-3">
-          <div class="text-xl font-extrabold">4 900 ₽</div>
-          <a href="checkout.html?t=psy-start"
-             class="mt-2 inline-flex items-center justify-center px-4 py-2 rounded-lg text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-700">
-            <i class="fa-solid fa-cart-shopping mr-2"></i>Купить
-          </a>
-        </div>
-      </article>
-
-      <!-- Pro (рекомендуем) -->
-      <article class="shop-card flex flex-col ring-1 ring-emerald-300">
-        <p class="text-xs inline-flex w-max px-2 py-0.5 rounded-full border border-emerald-300 text-emerald-700 font-semibold">Топ-выбор</p>
-        <h3 class="mt-1 font-semibold">Pro</h3>
-        <p class="text-sm text-gray-700 mt-1">Полные материалы + разбор кейса</p>
-        <ul class="text-sm text-gray-700 list-disc pl-5 mt-3 space-y-1">
-          <li>Все чек-листы и брифы</li>
-          <li>Разбор одного проекта</li>
-          <li>Обновления 6 месяцев</li>
-        </ul>
-        <div class="mt-auto pt-3">
-          <div class="text-xl font-extrabold">9 900 ₽</div>
-          <a href="checkout.html?t=psy-pro"
-             class="mt-2 inline-flex items-center justify-center px-4 py-2 rounded-lg text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-700">
-            <i class="fa-solid fa-cart-shopping mr-2"></i>Купить
-          </a>
-        </div>
-      </article>
-
-      <!-- Studio -->
-      <article class="shop-card flex flex-col">
-        <p class="text-xs inline-flex w-max px-2 py-0.5 rounded-full border border-amber-300 text-amber-700 font-semibold">Для команд</p>
-        <h3 class="mt-1 font-semibold">Studio</h3>
-        <p class="text-sm text-gray-700 mt-1">Лицензии + внедрение</p>
-        <ul class="text-sm text-gray-700 list-disc pl-5 mt-3 space-y-1">
-          <li>До 5 мест + админ-гайд</li>
-          <li>Воркфлоу и регламенты</li>
-          <li>Обновления 12 месяцев</li>
-        </ul>
-        <div class="mt-auto pt-3">
-          <div class="text-xl font-extrabold">29 000 ₽</div>
-          <a href="checkout.html?t=psy-studio"
-             class="mt-2 inline-flex items-center justify-center px-4 py-2 rounded-lg text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-700">
-            <i class="fa-solid fa-cart-shopping mr-2"></i>Купить
-          </a>
-        </div>
-      </article>
-    </div>
-    <p class="text-[11px] text-gray-500 mt-3 text-center">Цены в рублях. Возможна рассрочка. Гарантия возврата 7 дней.</p>
-  </section>
-</section>
-
-<!-- Локальные стили только для деталей магазина -->
-<style>
-  .shop-view h1 { margin-top: 0; }
-  .shop-card {
-    background:#fff;
-    border:1px solid #e5e7eb;
-    border-radius:0.75rem;
-    padding:14px 16px;
-    box-shadow:0 1px 2px rgba(2,6,23,0.04);
-  }
-  /* компактнее списки и отступы */
-  .shop-card h3 { margin-bottom: 2px; }
-  .shop-card ul { margin-top: 6px; }
-</style>
+  <p class="mt-1 text-xs text-slate-500">Доступ навсегда. Обновления модуля включены.</p>
+</div>
