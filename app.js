@@ -240,7 +240,7 @@ function closeMobile(){
 
     // Clean any previous widget containers just in case
     // (modalState.body is cleared on close, но защищаемся от двойных кликов)
-    modalState.body.querySelectorAll('.gcw_lite_widget_container,.gcw_lw_container,.gc-lw-container').forEach(function(n){
+    host.querySelectorAll('.gcw_lite_widget_container,.gcw_lw_container,.gc-lw-container').forEach(function(n){
       n.style.display = 'none';
     });
 
@@ -256,11 +256,11 @@ function closeMobile(){
         }
       }catch(e){}
     };
-    modalState.body.appendChild(s);
+    host.appendChild(s);
 
     // Fallback A: insert iframe ourselves if GC didn’t mount yet
     setTimeout(function(){
-      var root = modalState.body.querySelector('.gcw_lite_widget_container, .gcw_lw_container, .gc-lw-container, iframe');
+      var root = host.querySelector('.gcw_lite_widget_container, .gcw_lw_container, .gc-lw-container, iframe');
       if(root) return;
       try{
         var idMatch = /[?&]id=(\d+)/.exec(src);
@@ -276,14 +276,14 @@ function closeMobile(){
         iframe.style.width = '100%';
         iframe.style.height = '80vh';
         iframe.style.border = '0';
-        modalState.body.appendChild(iframe);
+        host.appendChild(iframe);
         loader && loader.remove();
       }catch(e){}
     }, 1200);
 
     // Fallback B: open in a new tab after 3s if still nothing
     setTimeout(function(){
-      var root2 = modalState.body.querySelector('.gcw_lite_widget_container, .gcw_lw_container, .gc-lw-container, iframe');
+      var root2 = host.querySelector('.gcw_lite_widget_container, .gcw_lw_container, .gc-lw-container, iframe');
       if(root2) return;
       try{
         var idMatch2 = /[?&]id=(\d+)/.exec(src);
@@ -298,14 +298,14 @@ function closeMobile(){
         var tip = document.createElement('div');
         tip.style.cssText = 'padding:16px 12px;text-align:center;color:#334155;font-size:14px;';
         tip.textContent = 'Мы открыли оплату в новой вкладке, т.к. встроенный виджет грузится медленно или заблокирован.';
-        modalState.body.appendChild(tip);
+        host.appendChild(tip);
         loader && (loader.textContent = 'Если вкладка не открылась — разрешите всплывающие окна и попробуйте снова.');
       }catch(e){}
     }, 3000);
 
     // When widget mounts, adjust sizing (iframe or container)
     var obs = new MutationObserver(function(){
-      var root = modalState.body.querySelector('.gcw_lite_widget_container, .gcw_lw_container, .gc-lw-container, iframe');
+      var root = host.querySelector('.gcw_lite_widget_container, .gcw_lw_container, .gc-lw-container, iframe');
       if(!root) return;
       obs.disconnect();
       loader.remove();
@@ -319,7 +319,7 @@ function closeMobile(){
         if(ifr){ ifr.style.width = '100%'; ifr.style.height = '80vh'; }
       }
     });
-    obs.observe(modalState.body, { childList:true, subtree:true });
+    obs.observe(host, { childList:true, subtree:true });
     __gcOpenedOnce = true;
   }
 
@@ -334,7 +334,7 @@ function closeMobile(){
       var id = 'preload_'+src.replace(/[^a-z0-9]/gi,'_');
       if(document.getElementById(id)) return;
       var link = document.createElement('link');
-      link.id = id; link.rel = 'preload'; link.as = 'script'; link.href = src;
+      link.id = id; link.rel = 'preload'; link.as = 'script'; link.href = src; link.crossOrigin = 'anonymous';
       document.head.appendChild(link);
     }catch(e){}
   });
