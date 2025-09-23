@@ -47,6 +47,7 @@
     #gc-overlay__close{position:absolute;top:8px;right:10px;z-index:2;display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:9999px;background:rgba(0,0,0,.06)}
     #gc-overlay__close:hover{background:rgba(0,0,0,.12)}
     .gc-iframe-full, #gc-overlay iframe{width:100%!important;height:80vh!important;display:block!important;border:0}
+    #gc-overlay{ z-index: 2147483647 !important; }
     /* Hide any auto-injected containers ONLY when modal is closed */
     body:not(.gc-overlay-open) .gcw_lite_widget_container,
     body:not(.gc-overlay-open) .gcw_lite_widget,
@@ -59,6 +60,7 @@
       overflow:hidden !important;
       visibility:hidden !important;
       pointer-events:none !important;
+      position: static !important;
     }
     body.gc-overlay-open{overflow:hidden}
   </style>
@@ -591,16 +593,23 @@
   <!-- GetCourse modal lazy loader -->
   <script>
   (function(){
-    var PLAN_SRC = {
-      basic: 'https://artbytwins.getcourse.ru/pl/lite/widget/script?id=1487237',
-      extended: 'https://artbytwins.getcourse.ru/pl/lite/widget/script?id=1487247',
-      max: 'https://artbytwins.getcourse.ru/pl/lite/widget/script?id=1487966'
+    var PLAN_META = {
+      basic:    { id: 'b73adea3f4bc63ba9c20549a467cb5c6a5281198', src: 'https://artbytwins.getcourse.ru/pl/lite/widget/script?id=1487237' },
+      extended: { id: 'a1f77cfdd8d68db241fdf3d14e7a0265edf0c50f', src: 'https://artbytwins.getcourse.ru/pl/lite/widget/script?id=1487247' },
+      max:      { id: '6adf32f0796b1ee7c8f002657e5566a0fe5b6d4b', src: 'https://artbytwins.getcourse.ru/pl/lite/widget/script?id=1487966' }
     };
 
     var overlay = document.getElementById('gc-overlay');
     var box = document.getElementById('gc-overlay__box');
     var closeBtn = document.getElementById('gc-overlay__close');
     var loader = document.getElementById('gc-overlay__loader');
+
+    // Safety: prevent page scroll locking from any external library
+    document.addEventListener('gc:unlock', function(){
+      document.documentElement.style.overflowY = 'auto';
+      document.body.style.overflowY = 'auto';
+      document.body.classList.remove('lock-scroll','modal-open','gc-modal-open');
+    });
 
     function showOverlay(){
       overlay.setAttribute('aria-hidden','false');
@@ -617,9 +626,17 @@
     overlay.addEventListener('click', function(e){ if(e.target === overlay) hideOverlay(); });
     document.addEventListener('keydown', function(e){ if (e.key === 'Escape') hideOverlay(); });
 
-    function loadWidget(src, cb){
+    function loadWidget(meta, cb){
+      // Remove previous tag with the same id if any (safety on repeat opens)
+      var old = document.getElementById(meta.id);
+      if (old) old.remove();
       var s = document.createElement('script');
-      s.src = src; s.async = true; s.onload = cb; s.onerror = cb;
+      s.src = meta.src;
+      s.id  = meta.id; // IMPORTANT: GetCourse widget relies on this id and injects near it
+      s.async = true;
+      s.onload = cb;
+      s.onerror = cb;
+      // Append where GetCourse expects: to the body end is OK; it will inject near its own script tag
       document.body.appendChild(s);
     }
 
@@ -653,7 +670,9 @@
     }
 
     function openGC(plan){
-      var src = PLAN_SRC[plan] || PLAN_SRC.basic;
+      var meta = PLAN_META[plan] || PLAN_META.basic;
+      // Ensure previous injected containers do not linger
+      box.querySelectorAll('.gcw_lite_widget_container, .gcw_lw_container, .gc-lw-container, iframe').forEach(function(n){ n.remove(); });
       // Show modal with loader immediately
       showOverlay();
       // Observe DOM for the injected container, mount when appears
@@ -663,7 +682,7 @@
         if(root){ obs.disconnect(); stop=true; mountIntoModal(root); }
       });
       obs.observe(document.body, {childList:true, subtree:true});
-      loadWidget(src, function(){ setTimeout(function(){ if(!stop){ var root=findLatestGCContainer(); if(root) mountIntoModal(root); } }, 1600); });
+      loadWidget(meta, function(){ setTimeout(function(){ if(!stop){ var root=findLatestGCContainer(); if(root) mountIntoModal(root); } }, 1600); });
     }
 
     // Delegate clicks on a[data-gc-open]
