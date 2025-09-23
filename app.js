@@ -282,6 +282,6 @@ function closeMobile(){
     openWidgetById(wid);
   });
 
-  // Экспортируем в глобальную область если нужно
+  // Экспортируем глобальные функции (если нужно)
   window.__abt = { loadPart, openMobile, closeMobile, openModal, closeModal };
 })();
