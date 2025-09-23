@@ -7,10 +7,11 @@
   <meta name="description" content="Практический курс из 8 модулей: стиль и планировка, материалы, SketchUp, цвет и освещение, визуализация, правовой блок, бюджетирование и итоговая защита. Примеры работ, тарифы, FAQ, поддержка." />
 
   <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <link rel="icon" href="./favicon.ico" type="image/x-icon" />
   <link rel="preconnect" href="https://artbytwins.getcourse.ru" crossorigin>
+  <link rel="dns-prefetch" href="https://artbytwins.getcourse.ru">
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 
   <!-- OG / соцсети -->
@@ -52,7 +53,7 @@
     #gc-overlay__box iframe{ position:relative; z-index:2; }
     #gc-overlay__close{position:absolute;top:8px;right:10px;z-index:2;display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:9999px;background:rgba(0,0,0,.06)}
     #gc-overlay__close:hover{background:rgba(0,0,0,.12)}
-    #gc-overlay iframe{width:100%!important;height:80vh!important;display:block!important;border:0}
+    .gc-iframe-full, #gc-overlay iframe{width:100%!important;height:80vh!important;display:block!important;border:0}
     #gc-overlay{ z-index: 2147483647 !important; }
     /* Hide auto-injected containers on the page until modal is opened.
        But do NOT hide elements that live inside the modal box (marked by [data-gc-mount]). */
@@ -193,7 +194,7 @@
           <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">Программа курса (8 модулей)</h2>
           <p class="mt-2 text-neutral-700">Каждый модуль — видеоуроки, шаблоны, практика; проверка заданий доступна в тарифах «Расширенный» и «Максимум».</p>
           <div class="mt-6 divide-y divide-neutral-200 border border-neutral-200 rounded-xl overflow-hidden">
-            <details class="group">
+            <details class="group open:bg-white">
               <summary class="flex cursor-pointer items-center justify-between gap-4 px-4 py-4 marker:content-none">
                 <div class="font-medium">Модуль 1 — Введение в дизайн</div>
                 <span class="transition group-open:rotate-180">⌄</span>
@@ -535,7 +536,7 @@
             <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">Готовы сделать дизайн своей квартиры?</h2>
             <p class="mt-2 text-neutral-700">Выберите тариф и начните сегодня.</p>
             <div class="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
-              <a href="#pricing" data-gc-open="true" data-plan="extended" class="btn-buy btn-buy--lg">Выбрать «Расширенный»</a>
+              <a href="#buy" data-gc-open="true" data-plan="extended" class="btn-buy btn-buy--lg">Выбрать «Расширенный»</a>
               <a href="#program" class="inline-flex justify-center rounded-md border border-neutral-300 px-5 py-3 hover:bg-neutral-100">Посмотреть программу</a>
             </div>
           </div>
@@ -633,42 +634,6 @@
           if (loader) loader.style.display = 'none';
         });
         closeBtn.__gcBound = true;
-        // Close on ESC
-        document.addEventListener('keydown', function(ev){
-          if (ev.key === 'Escape') {
-            var overlay = document.getElementById('gc-overlay');
-            var box = document.getElementById('gc-overlay__box');
-            var loader = document.getElementById('gc-overlay__loader');
-            if(overlay){ overlay.setAttribute('aria-hidden','true'); }
-            document.body.classList.remove('gc-overlay-open');
-            if(box){
-              Array.prototype.slice.call(
-                box.querySelectorAll('[data-gc-mount], .gcw_lite_widget_container, .gcw_lw_container, .gc-lw-container, iframe')
-              ).forEach(function(n){ n.remove(); });
-            }
-            if (loader) loader.style.display = 'none';
-          }
-        }, true);
-
-        // Close when clicking on the dimmed backdrop (but not inside the modal box)
-        var overlayEl = document.getElementById('gc-overlay');
-        if (overlayEl && !overlayEl.__gcBackdropBound){
-          overlayEl.addEventListener('click', function(ev){
-            if (ev.target === overlayEl) {
-              var box = document.getElementById('gc-overlay__box');
-              var loader = document.getElementById('gc-overlay__loader');
-              overlayEl.setAttribute('aria-hidden','true');
-              document.body.classList.remove('gc-overlay-open');
-              if(box){
-                Array.prototype.slice.call(
-                  box.querySelectorAll('[data-gc-mount], .gcw_lite_widget_container, .gcw_lw_container, .gc-lw-container, iframe')
-                ).forEach(function(n){ n.remove(); });
-              }
-              if (loader) loader.style.display = 'none';
-            }
-          }, true);
-          overlayEl.__gcBackdropBound = true;
-        }
       }
     })();
   </script>
