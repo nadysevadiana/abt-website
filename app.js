@@ -412,17 +412,39 @@ function closeMobile(){
     }
 
     function bind(){
-      var root = document.getElementById('studentStories');
-      if(!root) return;
-      root.addEventListener('click', function(e){
+      // Delegate on document so it works even if #studentStories is injected later
+      document.addEventListener('click', function(e){
         var it = e.target.closest && e.target.closest('.story-item');
         if(!it) return;
-        var idx = parseInt(it.getAttribute('data-index') || '0', 10);
+        // (Re)collect on first interaction if data is empty or stale
+        if(!data.length){
+          collect();
+        }
+        var idxAttr = it.getAttribute('data-index');
+        var idx = parseInt(idxAttr || '0', 10);
+        if (isNaN(idx)) {
+          // if no explicit data-index, compute from DOM order
+          var all = Array.prototype.slice.call(document.querySelectorAll('.story-item'));
+          idx = Math.max(0, all.indexOf(it));
+        }
         showStory(idx);
-      });
+      }, { passive: true });
     }
 
     document.addEventListener('DOMContentLoaded', function(){ collect(); bind(); });
+    // Re-collect when page is shown from bfcache or after async content
+    window.addEventListener('pageshow', collect, { passive:true });
+    // Minimal MutationObserver to catch late injections of the stories strip
+    try{
+      var mo = new MutationObserver(function(m){
+        for (var i=0;i<m.length;i++){
+          if (m[i].addedNodes && m[i].addedNodes.length){
+            if (document.querySelector('#studentStories .story-item')) { collect(); break; }
+          }
+        }
+      });
+      mo.observe(document.documentElement, { childList:true, subtree:true });
+    }catch(e){}
     window.addEventListener('resize', collect, { passive:true });
   })();
 
