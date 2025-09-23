@@ -267,185 +267,157 @@ function closeMobile(){
   document.addEventListener('DOMContentLoaded', alignStoryCarousel);
   window.addEventListener('resize', alignStoryCarousel, { passive:true });
 
-  // ===== Simple Story Viewer (opens modal, 1 photo = 1 story) =====
+  // ===== Simple Story Viewer (uses #storyModal without white box) =====
   (function initStoryViewer(){
     var data = [];
+    var idx = 0;
     var timer = null;
     var AUTOPLAY_MS = 5000; // 5s per story
-    var paused = false;
-    var touch = { y0: null };
+
+    // Cache modal elements
+    var modal   = null;
+    var elView  = null;
+    var elBars  = null;
+    var elImg   = null;
+    var elAva   = null;
+    var elTitle = null;
+    var elMeta  = null;
+    var elCTitle= null;
+    var elCap   = null;
+    var elPrev  = null;
+    var elNext  = null;
+    var elClose = null;
+
+    function qs(id){ return document.getElementById(id); }
+
+    function mountRefs(){
+      modal   = modal   || qs('storyModal');
+      if(!modal) return false;
+      elView  = elView  || qs('storyView');
+      elBars  = elBars  || qs('storyBars');
+      elImg   = elImg   || qs('storyImage');
+      elAva   = elAva   || qs('storyAvatar');
+      elTitle = elTitle || qs('storyTitle');
+      elMeta  = elMeta  || qs('storyMeta');
+      elCTitle= elCTitle|| qs('storyCaptionTitle');
+      elCap   = elCap   || qs('storyCaption');
+      elPrev  = elPrev  || qs('tapPrev');
+      elNext  = elNext  || qs('tapNext');
+      elClose = elClose || qs('storyClose');
+      return !!(modal && elView && elBars && elImg && elTitle && elCap && elPrev && elNext && elClose);
+    }
 
     function collect(){
       var items = document.querySelectorAll('#studentStories .story-item');
       data = Array.prototype.map.call(items, function(it){
+        var img = it.querySelector('img');
         return {
-          src: it.querySelector('img') && it.querySelector('img').getAttribute('src'),
-          title: it.getAttribute('data-caption-title') || '',
+          src: img ? img.getAttribute('src') : '',
+          title: it.getAttribute('data-caption-title') || it.querySelector('.story-label')?.textContent || '',
           caption: it.getAttribute('data-caption') || '',
           meta: it.getAttribute('data-meta') || ''
         };
       });
     }
 
-    function clearTimer(){ if(timer){ clearTimeout(timer); timer=null; } }
+    function openModalStory(){
+      if(!mountRefs()) return;
+      modal.hidden = false;
+      modal.setAttribute('aria-hidden','false');
+      document.documentElement.style.overflow = 'hidden';
+    }
+    function closeModalStory(){
+      if(!mountRefs()) return;
+      modal.hidden = true;
+      modal.setAttribute('aria-hidden','true');
+      document.documentElement.style.overflow = '';
+      stopTimer();
+    }
 
-    function renderBars(host, activeIdx){
-      var bars = host.querySelector('.story-bars');
-      bars.innerHTML = '';
+    function stopTimer(){ if(timer){ clearTimeout(timer); timer=null; } }
+
+    function renderBars(active){
+      elBars.innerHTML = '';
       for(var i=0;i<data.length;i++){
         var b = document.createElement('div'); b.className='story-bar';
-        var span = document.createElement('span'); if(i < activeIdx) { span.style.width='100%'; }
-        b.appendChild(span); bars.appendChild(b);
+        var s = document.createElement('span');
+        if(i < active) s.style.width='100%';
+        b.appendChild(s); elBars.appendChild(b);
+      }
+      // animate current
+      var span = elBars.querySelectorAll('.story-bar > span')[active];
+      if(span){
+        span.style.transition = 'none'; span.style.width='0%';
+        requestAnimationFrame(function(){
+          span.style.transition = 'width '+(AUTOPLAY_MS/1000)+'s linear';
+          span.style.width='100%';
+        });
       }
     }
 
-    function animateActiveBar(host, activeIdx){
-      var spans = host.querySelectorAll('.story-bar > span');
-      var span = spans[activeIdx]; if(!span) return;
-      // reset to 0 then animate to 100
-      span.style.transition = 'none'; span.style.width = '0%';
-      requestAnimationFrame(function(){
-        span.style.transition = 'width '+(AUTOPLAY_MS/1000)+'s linear';
-        span.style.width = '100%';
-      });
-    }
-
-    function pause(){
-      paused = true; clearTimer();
-      // freeze current bar width by removing transition and keeping computed width
-      try{
-        var active = document.querySelector('#abt-modal .story-bar > span[style*="transition"]');
-        if(active){
-          var w = getComputedStyle(active).width;
-          active.style.transition = 'none';
-          active.style.width = w;
-        }
-      }catch(e){}
-    }
-
-    function resume(nextCb){
-      if(!paused) return; paused = false; clearTimer();
-      if(typeof nextCb === 'function'){ timer = setTimeout(nextCb, AUTOPLAY_MS); }
-    }
-
-    function showStory(idx){
+    function show(i){
       if(!data.length) return;
-      if(idx < 0){ idx = data.length-1; }
-      if(idx >= data.length){ idx = 0; }
-
-      openModal();
-      var body = document.querySelector('#abt-modal [role="dialog"] > div:last-child');
-      if(!body) return;
-      body.innerHTML = '';
-
-      var wrap = document.createElement('div');
-      wrap.style.padding = '12px';
-      wrap.innerHTML = [
-        '<div class="story-view">',
-          '<div class="story-bars"></div>',
-          '<img alt="story" src="'+ data[idx].src +'"/>',
-          '<div class="story-caption">',
-            '<div class="t">'+ (data[idx].title||'') +'</div>',
-            '<div class="c">'+ (data[idx].caption||'') +'</div>',
-            (data[idx].meta ? '<div class="m" style="opacity:.8;margin-top:2px;font-size:.8rem">'+data[idx].meta+'</div>' : ''),
-          '</div>',
-          '<div class="story-tap-left"></div>',
-          '<div class="story-tap-right"></div>',
-        '</div>'
-      ].join('');
-      body.appendChild(wrap);
-
-      // simple header avatar + name (IG-like)
-      var barsHost = wrap.querySelector('.story-bars');
-      var hdr = document.createElement('div');
-      hdr.style.cssText = 'position:absolute;left:8px;top:12px;display:flex;align-items:center;gap:8px;color:#fff;z-index:3';
-      hdr.innerHTML = '<img src="'+data[idx].src+'" alt="avatar" style="width:28px;height:28px;border-radius:9999px;border:2px solid rgba(255,255,255,.65)"><span style="font-weight:700;text-shadow:0 1px 2px rgba(0,0,0,.4)">'+ (data[idx].title||'') +'</span>';
-      barsHost.parentNode.insertBefore(hdr, barsHost.nextSibling);
-
-      renderBars(wrap, idx);
-      animateActiveBar(wrap, idx);
-
-      var next = function(){ clearTimer(); showStory(idx+1); };
-      var prev = function(){ clearTimer(); showStory(idx-1); };
-
-      var view = wrap.querySelector('.story-view');
-      // tap zones
-      view.querySelector('.story-tap-right').addEventListener('click', next);
-      view.querySelector('.story-tap-left').addEventListener('click', prev);
-
-      // pause on hover/hold (desktop + touch)
-      view.addEventListener('mouseenter', function(){ pause(); });
-      view.addEventListener('mouseleave', function(){ resume(next); });
-      view.addEventListener('mousedown', function(){ pause(); });
-      view.addEventListener('mouseup', function(){ resume(next); });
-      view.addEventListener('touchstart', function(ev){ touch.y0 = (ev.touches && ev.touches[0] ? ev.touches[0].clientY : null); pause(); }, { passive:true });
-      view.addEventListener('touchend', function(){ resume(next); touch.y0 = null; }, { passive:true });
-
-      // swipe down to close
-      view.addEventListener('touchmove', function(ev){
-        if(touch.y0 == null) return;
-        var y = ev.touches && ev.touches[0] ? ev.touches[0].clientY : 0;
-        if(y - touch.y0 > 60){ clearTimer(); closeModal(); touch.y0 = null; }
-      }, { passive:true });
-
-      clearTimer();
-      timer = setTimeout(next, AUTOPLAY_MS);
-
-      // arrows / esc
-      var onKey = function(e){
-        if(e.key==='ArrowRight'){ next(); }
-        else if(e.key==='ArrowLeft'){ prev(); }
-      };
-      document.addEventListener('keydown', onKey, { once: true });
-
-      // when modal closes — stop timers and cleanup
-      var stopOnClose = function(){
-        clearTimer();
-        document.removeEventListener('keydown', onKey);
-      };
-      setTimeout(function(){
-        var backdrop = document.querySelector('#abt-modal [data-modal-backdrop]');
-        if(backdrop){ backdrop.addEventListener('click', stopOnClose, { once:true }); }
-        var closeBtn = document.querySelector('#abt-modal [data-modal-close]');
-        if(closeBtn){ closeBtn.addEventListener('click', stopOnClose, { once:true }); }
-      }, 0);
+      idx = (i + data.length) % data.length;
+      openModalStory();
+      var d = data[idx];
+      elImg.src = d.src; elAva.src = d.src;
+      elTitle.textContent = d.title || '';
+      elMeta.textContent  = d.meta || '';
+      elCTitle.textContent= d.title || '';
+      elCap.textContent   = d.caption || '';
+      renderBars(idx);
+      stopTimer();
+      timer = setTimeout(function(){ show(idx+1); }, AUTOPLAY_MS);
     }
 
     function bind(){
-      // Delegate on document so it works even if #studentStories is injected later
+      // Open from strip
       document.addEventListener('click', function(e){
-        var it = e.target.closest && e.target.closest('.story-item');
+        var it = e.target.closest && e.target.closest('#studentStories .story-item');
         if(!it) return;
-        // (Re)collect on first interaction if data is empty or stale
-        if(!data.length){
-          collect();
+        if(!data.length) collect();
+        var all = Array.prototype.slice.call(document.querySelectorAll('#studentStories .story-item'));
+        var i = all.indexOf(it); if(i < 0) i = 0;
+        show(i);
+      });
+
+      // Close interactions
+      if(mountRefs()){
+        elClose.addEventListener('click', closeModalStory);
+        modal.addEventListener('click', function(e){ if(e.target === modal) closeModalStory(); });
+        document.addEventListener('keydown', function(e){
+          if(modal.hidden) return;
+          if(e.key==='Escape') closeModalStory();
+          else if(e.key==='ArrowRight') { stopTimer(); show(idx+1); }
+          else if(e.key==='ArrowLeft') { stopTimer(); show(idx-1); }
+        });
+        // Tap zones
+        elNext.addEventListener('click', function(e){ e.stopPropagation(); stopTimer(); show(idx+1); });
+        elPrev.addEventListener('click', function(e){ e.stopPropagation(); stopTimer(); show(idx-1); });
+        // Click on the media (image/video) also goes to NEXT
+        var mediaEl = elView.querySelector('.story-media');
+        if(mediaEl){
+          mediaEl.style.cursor = 'pointer';
+          mediaEl.addEventListener('click', function(e){
+            e.stopPropagation();
+            stopTimer();
+            show(idx+1);
+          });
         }
-        var idxAttr = it.getAttribute('data-index');
-        var idx = parseInt(idxAttr || '0', 10);
-        if (isNaN(idx)) {
-          // if no explicit data-index, compute from DOM order
-          var all = Array.prototype.slice.call(document.querySelectorAll('.story-item'));
-          idx = Math.max(0, all.indexOf(it));
-        }
-        showStory(idx);
-      }, { passive: true });
+        // Touch swipe down to close
+        var y0=null;
+        elView.addEventListener('touchstart', function(ev){ y0 = ev.touches?.[0]?.clientY || 0; stopTimer(); }, { passive:true });
+        elView.addEventListener('touchend', function(){ timer = setTimeout(function(){ show(idx+1); }, AUTOPLAY_MS); y0=null; }, { passive:true });
+        elView.addEventListener('touchmove', function(ev){ if(!y0) return; var y=ev.touches?.[0]?.clientY||0; if(y - y0 > 60) closeModalStory(); }, { passive:true });
+      }
     }
 
-    document.addEventListener('DOMContentLoaded', function(){ collect(); bind(); });
-    // Re-collect when page is shown from bfcache or after async content
+    document.addEventListener('DOMContentLoaded', function(){ collect(); mountRefs(); bind(); });
     window.addEventListener('pageshow', collect, { passive:true });
-    // Minimal MutationObserver to catch late injections of the stories strip
     try{
-      var mo = new MutationObserver(function(m){
-        for (var i=0;i<m.length;i++){
-          if (m[i].addedNodes && m[i].addedNodes.length){
-            if (document.querySelector('#studentStories .story-item')) { collect(); break; }
-          }
-        }
-      });
+      var mo = new MutationObserver(function(m){ for(var i=0;i<m.length;i++){ if(m[i].addedNodes && m[i].addedNodes.length){ if(document.querySelector('#studentStories .story-item')) { collect(); break; } } } });
       mo.observe(document.documentElement, { childList:true, subtree:true });
     }catch(e){}
-    window.addEventListener('resize', collect, { passive:true });
   })();
 
   // Map plan slugs used on kurs.html to GetCourse widget ids

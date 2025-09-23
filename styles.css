@@ -1,3 +1,4 @@
+[hidden]{ display:none !important; }
 /* Global styles for Art by Twins. This is a plain CSS file (no <style> tags). */
       html {
         scroll-behavior: smooth;
@@ -343,11 +344,79 @@
   @media (min-width:1024px){ .story-bubble{ width:110px; height:110px } }
   /* Viewer essentials */
   .story-view{ position:relative; width:100%; max-width:560px; margin:0 auto; aspect-ratio:9/16; background:#000; border-radius:16px; overflow:hidden; box-shadow:0 18px 50px rgba(2,6,23,.35) }
-  .story-view img{ width:100%; height:100%; object-fit:contain; background:#000 }
+
+/* Media layer fills the viewer; header floats on top */
+.story-media{ position:absolute; inset:0; }
+.story-media > img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+/* Compact IG-like header */
+.story-header{ position:absolute; top:12px; left:12px; display:flex; align-items:center; gap:8px; color:#fff; z-index:3; text-shadow:0 1px 2px rgba(0,0,0,.4) }
+.story-header .avatar{ width:28px; height:28px; border-radius:9999px; object-fit:cover; border:2px solid rgba(255,255,255,.65) }
+.story-header .meta .t{ font-weight:700 }
   .story-bars{ position:absolute; top:8px; left:8px; right:8px; display:flex; gap:4px; z-index:2 }
   .story-bar{ height:3px; background:rgba(255,255,255,.35); border-radius:9999px; overflow:hidden; flex:1 }
   .story-bar > span{ display:block; width:0%; height:100%; background:#fff }
   .story-caption{ position:absolute; left:0; right:0; bottom:0; padding:12px 14px; background:linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.6)); color:#fff; font-size:.9rem }
   .story-caption .t{ font-weight:700; margin-bottom:2px }
-  .story-tap-left, .story-tap-right{ position:absolute; inset-y:0; width:50%; z-index:3; }
+  .story-tap-left, .story-tap-right{ position:absolute; top:0; bottom:0; width:50%; z-index:3; }
   .story-tap-left{ left:0 } .story-tap-right{ right:0 }
+
+/* === STORY VIEWER: full-screen modal overrides to remove white dialog === */
+/* Use on the modal root: <div class="modal is-open" data-storyviewer> ... */
+.modal[data-storyviewer]{
+  position:fixed; inset:0; z-index:70;
+  display:grid; place-items:center;
+  background:rgba(0,0,0,.92); /* dark backdrop, no white screen */
+  padding: max(16px, env(safe-area-inset-top)) 12px max(20px, env(safe-area-inset-bottom));
+}
+/* Make inner box transparent and edge-to-edge around the story */
+.modal[data-storyviewer] .modal-box{
+  background:transparent !important;
+  box-shadow:none !important;
+  border:0 !important;
+  padding:0 !important;
+  width:min(92vw, 560px) !important;
+  max-width:unset !important;
+  overflow:visible !important;
+}
+/* Optional close button in the corner */
+.modal[data-storyviewer] .modal-close{
+  position:absolute; top:12px; right:12px; z-index:5;
+  width:40px; height:40px; border-radius:9999px;
+  display:inline-flex; align-items:center; justify-content:center;
+  background:rgba(255,255,255,.12); color:#fff; border:1px solid rgba(255,255,255,.25);
+  backdrop-filter: blur(6px);
+}
+.modal[data-storyviewer] .modal-close:hover{ background:rgba(255,255,255,.18) }
+
+/* Center the existing .story-view nicely within the dark overlay */
+.modal[data-storyviewer] .story-view{ margin:0 auto; }
+
+/* Strengthen caption readability */
+.story-caption{ 
+  background:linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.72));
+  padding-bottom: max(14px, env(safe-area-inset-bottom));
+  text-shadow:0 1px 2px rgba(0,0,0,.6);
+}
+.story-caption .t{ font-weight:800; letter-spacing:.2px }
+
+/* Progress bars: animate when .is-active is applied to .story-bar > span */
+.story-bar{ background:rgba(255,255,255,.28) }
+.story-bar > span{ transition: width var(--story-dur, 5s) linear }
+.story-bar.is-complete > span{ width:100% }
+.story-bar.is-active > span{ width:100% }
+
+/* Tap zones get proper cursor on desktop */
+.story-tap-left, .story-tap-right{ cursor:pointer }
+
+/* Desktop: keep viewer tall but never overflow screen */
+@media (min-width: 1024px){
+  .modal[data-storyviewer]{ padding-top: 24px; padding-bottom: 24px; }
+  .modal[data-storyviewer] .story-view{ max-height: calc(100vh - 64px); }
+}
+
+/* Mobile tweaks: slightly larger caption and safer bars spacing */
+@media (max-width: 420px){
+  .story-caption{ font-size: .95rem }
+  .story-bars{ top:10px }
+}
