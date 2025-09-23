@@ -155,98 +155,28 @@
         <p class="text-gray-700 text-lg">Реальные проекты студентов — <span class="hidden md:inline">пролистайте карусель</span><span class="md:hidden">свайпайте как сторис</span></p>
         <p class="text-sm"><a href="works.html" class="inline-flex items-center gap-1 text-emerald-700 hover:underline">Смотреть ещё <i class="fa-solid fa-arrow-right text-xs"></i></a></p>
         <div class="full-bleed">
-          <div class="relative">
-            <!-- Left Arrow -->
-            <button type="button" aria-label="Назад"
-                    class="carousel-nav-btn absolute left-2 md:left-6 top-1/2 -translate-y-1/2 w-11 h-11 md:w-12 md:h-12 rounded-full flex items-center justify-center text-slate-700 hover:text-emerald-700 z-10"
-                    onclick="(function(c){c.scrollBy({left:-c.clientWidth*0.85,behavior:'smooth'});})(document.getElementById('worksCarousel'))">
-              <i class="fa-solid fa-chevron-left"></i>
+          <!-- Stories strip (Instagram-like) -->
+          <div id="studentStories" class="stories">
+            <button type="button" class="story-item" data-index="0" data-caption-title="Анна, студентка курса" data-caption="До курса я не знала, с чего начать, а теперь я сделала проект для своей спальни!" data-meta="Современный минимализм · Москва">
+              <img src="./images/work_1.png" alt="Анна — Современный минимализм" class="story-bubble"/>
+              <span class="story-label">Анна</span>
             </button>
-            <!-- Right Arrow -->
-            <button type="button" aria-label="Вперёд"
-                    class="carousel-nav-btn absolute right-2 md:right-6 top-1/2 -translate-y-1/2 w-11 h-11 md:w-12 md:h-12 rounded-full flex items-center justify-center text-slate-700 hover:text-emerald-700 z-10"
-                    onclick="(function(c){c.scrollBy({left:c.clientWidth*0.85,behavior:'smooth'});})(document.getElementById('worksCarousel'))">
-              <i class="fa-solid fa-chevron-right"></i>
+            <button type="button" class="story-item" data-index="1" data-caption-title="Виктория, студентка курса" data-caption="Не думала, что смогу сделать классику, а теперь это моя гордость!" data-meta="Современная классика · Москва">
+              <img src="./images/work_2.png" alt="Виктория — Современная классика" class="story-bubble"/>
+              <span class="story-label">Виктория</span>
             </button>
-
-            <!-- Mobile tap zones for story-like navigation -->
-            <div class="md:hidden" aria-hidden="true">
-              <div class="absolute inset-y-0 left-0 w-1/2 z-10" style="touch-action: manipulation;" onclick="(function(c){c.scrollBy({left:-window.innerWidth*0.9,behavior:'smooth'});})(document.getElementById('worksCarousel'))"></div>
-              <div class="absolute inset-y-0 right-0 w-1/2 z-10" style="touch-action: manipulation;" onclick="(function(c){c.scrollBy({left:window.innerWidth*0.9,behavior:'smooth'});})(document.getElementById('worksCarousel'))"></div>
-            </div>
-
-            <!-- Carousel -->
-            <div id="worksCarousel" class="carousel carousel--story px-4 md:px-8 lg:px-16" data-story-nav="auto">
-              <!-- Slide 1 -->
-              <article class="carousel-item w-[75vw] md:w-[60vw] lg:w-[48vw] mx-auto bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden transform transition-transform duration-500 hover:scale-105 story">
-                <img src="./images/work_1.png" alt="Современный минимализм — проект студента" class="w-full h-full object-contain md:object-cover">
-                <div class="p-6 text-left space-y-2 max-w-2xl mx-auto">
-                  <p class="font-semibold text-slate-900">Анна, студентка курса</p>
-                  <p class="text-gray-700">«До курса я не знала, с чего начать, а теперь я сделала проект для своей спальни!»</p>
-                  <div class="text-sm text-gray-700 pt-2 border-t border-gray-100">
-                    <p><span class="font-semibold">Стиль:</span> Современный минимализм (Москва)</p>
-                    <p><span class="font-semibold">Для кого:</span> молодые специалисты и семьи, ценящие свет и порядок</p>
-                    <p><span class="font-semibold">Ключевые приёмы:</span> фасады без ручек, светлое дерево, нейтральные стены, акцент на свет</p>
-                  </div>
-                </div>
-              </article>
-
-              <!-- Slide 2 -->
-              <article class="carousel-item w-[75vw] md:w-[60vw] lg:w-[48vw] mx-auto bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden transform transition-transform duration-500 hover:scale-105 story">
-                <img src="./images/work_2.png" alt="Современная классика — проект студента" class="w-full h-full object-contain md:object-cover">
-                <div class="p-6 text-left space-y-2 max-w-2xl mx-auto">
-                  <p class="font-semibold text-slate-900">Виктория, студентка курса</p>
-                  <p class="text-gray-700">«Не думала, что смогу сделать классику, а теперь это моя гордость!»</p>
-                  <div class="text-sm text-gray-700 pt-2 border-t border-gray-100">
-                    <p><span class="font-semibold">Стиль:</span> Современная классика (Москва)</p>
-                    <p><span class="font-semibold">Для кого:</span> ценители элегантности и комфорта</p>
-                    <p><span class="font-semibold">Ключевые приёмы:</span> лепнина, молдинги, нейтральная палитра, акцентное освещение</p>
-                  </div>
-                </div>
-              </article>
-
-              <!-- Slide 3 -->
-              <article class="carousel-item w-[75vw] md:w-[60vw] lg:w-[48vw] mx-auto bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden transform transition-transform duration-500 hover:scale-105 story">
-                <img src="./images/work_3.png" alt="Лофт — проект студента" class="w-full h-full object-contain md:object-cover">
-                <div class="p-6 text-left space-y-2 max-w-2xl mx-auto">
-                  <p class="font-semibold text-slate-900">Алексей, студент курса</p>
-                  <p class="text-gray-700">«Я мечтал о стиле лофт, и наконец-то создал свой проект квартиры в этом стиле!»</p>
-                  <div class="text-sm text-gray-700 pt-2 border-t border-gray-100">
-                    <p><span class="font-semibold">Стиль:</span> Лофт (Москва)</p>
-                    <p><span class="font-semibold">Для кого:</span> активные, творческие люди, ценящие простор и индустриальную эстетику</p>
-                    <p><span class="font-semibold">Ключевые приёмы:</span> кирпичная стена, металл, открытые коммуникации, большие окна, минимализм в мебели</p>
-                  </div>
-                </div>
-              </article>
-
-              <!-- Slide 4 -->
-              <article class="carousel-item w-[75vw] md:w-[60vw] lg:w-[48vw] mx-auto bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden transform transition-transform duration-500 hover:scale-105 story">
-                <img src="./images/work_4.png" alt="Скандинавский уют — проект студента" class="w-full h-full object-contain md:object-cover">
-                <div class="p-6 text-left space-y-2 max-w-2xl mx-auto">
-                  <p class="font-semibold text-slate-900">Мария, студентка курса</p>
-                  <p class="text-gray-700">«Я хотела создать уютное и светлое пространство, и у меня получилось скандинавское вдохновение для моей квартиры!»</p>
-                  <div class="text-sm text-gray-700 pt-2 border-t border-gray-100">
-                    <p><span class="font-semibold">Стиль:</span> Скандинавский уют (Москва)</p>
-                    <p><span class="font-semibold">Для кого:</span> семьи и молодые люди, ценящие свет, простоту и домашний комфорт</p>
-                    <p><span class="font-semibold">Ключевые приёмы:</span> белые стены, светлый паркет, текстиль, живые растения, минималистичный декор</p>
-                  </div>
-                </div>
-              </article>
-
-              <!-- Slide 5 -->
-              <article class="carousel-item w-[75vw] md:w-[60vw] lg:w-[48vw] mx-auto bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden transform transition-transform duration-500 hover:scale-105 story">
-                <img src="./images/work_5.png" alt="Яркий современный микс — проект студента" class="w-full h-full object-contain md:object-cover">
-                <div class="p-6 text-left space-y-2 max-w-2xl mx-auto">
-                  <p class="font-semibold text-slate-900">Дмитрий, студент курса</p>
-                  <p class="text-gray-700">«Я всегда хотел яркий и стильный интерьер, теперь моя гостиная выглядит современно и необычно!»</p>
-                  <div class="text-sm text-gray-700 pt-2 border-t border-gray-100">
-                    <p><span class="font-semibold">Стиль:</span> Яркий современный микс (Москва)</p>
-                    <p><span class="font-semibold">Для кого:</span> молодые и креативные, кто хочет выразить себя через интерьер</p>
-                    <p><span class="font-semibold">Ключевые приёмы:</span> смелые акценты в цвете, мебель необычных форм, постеры, зеркало в арке, сочетание дерева и ярких деталей</p>
-                  </div>
-                </div>
-              </article>
-            </div>
+            <button type="button" class="story-item" data-index="2" data-caption-title="Алексей, студент курса" data-caption="Я мечтал о стиле лофт и создал проект квартиры в этом стиле!" data-meta="Лофт · Москва">
+              <img src="./images/work_3.png" alt="Алексей — Лофт" class="story-bubble"/>
+              <span class="story-label">Алексей</span>
+            </button>
+            <button type="button" class="story-item" data-index="3" data-caption-title="Мария, студентка курса" data-caption="Хотела светлое и уютное пространство — получилось скандинавское вдохновение!" data-meta="Скандинавский уют · Москва">
+              <img src="./images/work_4.png" alt="Мария — Скандинавский уют" class="story-bubble"/>
+              <span class="story-label">Мария</span>
+            </button>
+            <button type="button" class="story-item" data-index="4" data-caption-title="Дмитрий, студент курса" data-caption="Хотел яркий и стильный интерьер — теперь гостиная выглядит современно!" data-meta="Яркий современный микс · Москва">
+              <img src="./images/work_5.png" alt="Дмитрий — Яркий современный микс" class="story-bubble"/>
+              <span class="story-label">Дмитрий</span>
+            </button>
           </div>
         </div>
       </div>

@@ -300,6 +300,8 @@
   box-shadow:0 4px 12px rgba(0,0,0,.15);
   transition:transform .15s ease, box-shadow .15s ease, opacity .15s ease;
 }
+.btn-circle i{ line-height:1; pointer-events:none; display:inline-block }
+.btn-circle{ -webkit-tap-highlight-color: transparent }
 .btn-circle:hover {
   transform:translateY(-2px);
   box-shadow:0 6px 16px rgba(0,0,0,.22);
@@ -315,7 +317,14 @@
 .btn-circle.btn-email { background:#f59e0b; }
 /* Accessibility & hover polish */
 .btn-circle { cursor:pointer; }
-.btn-circle:focus { outline:none; box-shadow:0 0 0 3px rgba(16,185,129,.25), 0 4px 12px rgba(0,0,0,.15); }
+.btn-circle:focus-visible { outline:none; box-shadow:0 0 0 3px rgba(16,185,129,.25), 0 4px 12px rgba(0,0,0,.15) }
+.btn-circle:focus { outline:none }
 .btn-circle.btn-telegram:hover,
 .btn-circle.btn-whatsapp:hover,
 .btn-circle.btn-email:hover { filter:brightness(0.95); }
+@media (hover: none), (prefers-reduced-motion: reduce){
+  .btn-circle:hover{ transform:none; box-shadow:0 4px 12px rgba(0,0,0,.15); opacity:1 }
+  .btn-circle.btn-telegram:hover,
+  .btn-circle.btn-whatsapp:hover,
+  .btn-circle.btn-email:hover{ filter:none }
+}

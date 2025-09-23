@@ -7,7 +7,7 @@
 
 (function(){
   // Версия для пробития кеша статических partials
-  var VERSION = '20250923d';
+  var VERSION = '20250923f';
   function withV(path){ return path + (path.indexOf('?') === -1 ? ('?v=' + VERSION) : ('&v=' + VERSION)); }
   // Preconnect/DNS-hint helper (idempotent)
   function preconnectOnce(href){
@@ -39,6 +39,43 @@
     loadPart('site-footer', withV('footer.html'));
     loadPart('site-telegram-btn', withV('btn.html'));
     preconnectOnce('https://artbytwins.getcourse.ru');
+
+    // === Floating quick-contact buttons: mount & UX tweaks ===
+    (function initFloatingContacts(){
+      var state = { lastY: window.scrollY };
+      function links(){
+        var c = (window.__abt_contacts)||{};
+        return {
+          tg: c.tg || 'https://t.me/yourtelegram',
+          wa: c.wa || 'https://wa.me/yourwhatsapp',
+          em: c.em || 'mailto:youremail@example.com'
+        };
+      }
+      function mount(){
+        if (document.querySelector('.abt-floating-contacts')) return;
+        var l = links();
+        var host = document.getElementById('site-telegram-btn') || document.body;
+        var wrap = document.createElement('div');
+        wrap.className = 'abt-floating-contacts';
+        wrap.style.cssText = 'position:fixed;right:24px;bottom:24px;z-index:50;display:flex;flex-direction:column;gap:12px;opacity:1;transform:translateY(0);transition:opacity .22s ease, transform .22s ease';
+        wrap.innerHTML = [
+          '<a href="', l.tg ,'" target="_blank" rel="noopener" aria-label="Telegram" class="btn-circle btn-telegram"><i class="fa-brands fa-telegram"></i></a>',
+          '<a href="', l.wa ,'" target="_blank" rel="noopener" aria-label="WhatsApp" class="btn-circle btn-whatsapp"><i class="fa-brands fa-whatsapp"></i></a>',
+          '<a href="', l.em ,'" aria-label="Email" class="btn-circle btn-email"><i class="fa-solid fa-envelope"></i></a>'
+        ].join('');
+        host.appendChild(wrap);
+      }
+      function show(){ var w=document.querySelector('.abt-floating-contacts'); if(w){ w.style.opacity='1'; w.style.transform='translateY(0)'; } }
+      function hide(){ var w=document.querySelector('.abt-floating-contacts'); if(w){ w.style.opacity='0'; w.style.transform='translateY(6px)'; } }
+      function onScroll(){ var y=window.scrollY||0; if(y>state.lastY+6){ hide(); } else if(y<state.lastY-6){ show(); } state.lastY=y; }
+      mount(); setTimeout(mount, 250);
+      window.addEventListener('scroll', onScroll, { passive:true });
+      // expose helpers
+      window.__abt_contacts = window.__abt_contacts || {};
+      window.__abt_remountContacts = mount;
+      window.__abt_hideContacts = hide;
+      window.__abt_showContacts = show;
+    })();
   });
 
   // ===== Hover-дропдауны из хедера (работает делегированно) =====
@@ -190,6 +227,7 @@ function closeMobile(){
     el.style.display = 'block';
     document.documentElement.style.overflow = 'hidden';
     el.setAttribute('aria-hidden','false');
+    try{ if(window.__abt_hideContacts) window.__abt_hideContacts(); }catch(e){}
     document.body.style.overscrollBehavior = 'none';
     document.body.style.touchAction = 'none';
   }
@@ -201,6 +239,7 @@ function closeMobile(){
     modalState.el.setAttribute('aria-hidden','true');
     document.body.style.overscrollBehavior = '';
     document.body.style.touchAction = '';
+    try{ if(window.__abt_showContacts) window.__abt_showContacts(); }catch(e){}
     // Clear body to avoid duplicating widgets between openings
     if(modalState.body) modalState.body.innerHTML = '';
   }
@@ -252,6 +291,98 @@ function closeMobile(){
   }
   document.addEventListener('DOMContentLoaded', ensureStoryNav);
   window.addEventListener('resize', ensureStoryNav, { passive:true });
+
+  // ===== Simple Story Viewer (opens modal, 1 photo = 1 story) =====
+  (function initStoryViewer(){
+    var data = [];
+    var timer = null;
+    var AUTOPLAY_MS = 5000; // 5s per story
+
+    function collect(){
+      var items = document.querySelectorAll('#studentStories .story-item');
+      data = Array.prototype.map.call(items, function(it){
+        return {
+          src: it.querySelector('img') && it.querySelector('img').getAttribute('src'),
+          title: it.getAttribute('data-caption-title') || '',
+          caption: it.getAttribute('data-caption') || '',
+          meta: it.getAttribute('data-meta') || ''
+        };
+      });
+    }
+    function clearTimer(){ if(timer){ clearTimeout(timer); timer=null; } }
+    function renderBars(host, activeIdx){
+      var bars = host.querySelector('.story-bars');
+      bars.innerHTML = '';
+      for(var i=0;i<data.length;i++){
+        var b = document.createElement('div'); b.className='story-bar';
+        var span = document.createElement('span'); if(i < activeIdx) { span.style.width='100%'; }
+        b.appendChild(span); bars.appendChild(b);
+      }
+    }
+    function animateActiveBar(host, activeIdx){
+      var bars = host.querySelectorAll('.story-bar > span');
+      var span = bars[activeIdx]; if(!span) return;
+      span.style.transition = 'width '+(AUTOPLAY_MS/1000)+'s linear';
+      requestAnimationFrame(function(){ span.style.width='100%'; });
+    }
+    function showStory(idx){
+      if(!data.length) return;
+      if(idx < 0){ idx = data.length-1; }
+      if(idx >= data.length){ idx = 0; }
+      openModal();
+      var body = document.querySelector('#abt-modal [role="dialog"] > div:last-child');
+      if(!body) return;
+      body.innerHTML = '';
+      var wrap = document.createElement('div');
+      wrap.style.padding = '12px';
+      wrap.innerHTML = [
+        '<div class="story-view">',
+          '<div class="story-bars"></div>',
+          '<img alt="story" src="'+ data[idx].src +'"/>',
+          '<div class="story-caption">',
+            '<div class="t">'+ (data[idx].title||'') +'</div>',
+            '<div class="c">'+ (data[idx].caption||'') +'</div>',
+            (data[idx].meta ? '<div class="m" style="opacity:.8;margin-top:2px;font-size:.8rem">'+data[idx].meta+'</div>' : ''),
+          '</div>',
+          '<div class="story-tap-left"></div>',
+          '<div class="story-tap-right"></div>',
+        '</div>'
+      ].join('');
+      body.appendChild(wrap);
+
+      renderBars(wrap, idx);
+      animateActiveBar(wrap, idx);
+
+      var next = function(){ clearTimer(); showStory(idx+1); };
+      var prev = function(){ clearTimer(); showStory(idx-1); };
+      wrap.querySelector('.story-tap-right').addEventListener('click', next);
+      wrap.querySelector('.story-tap-left').addEventListener('click', prev);
+
+      clearTimer();
+      timer = setTimeout(next, AUTOPLAY_MS);
+
+      var onKey = function(e){ if(e.key==='ArrowRight'){ next(); } else if(e.key==='ArrowLeft'){ prev(); } };
+      document.addEventListener('keydown', onKey, { once: true });
+      var stopOnClose = function(){ clearTimer(); document.removeEventListener('keydown', onKey); };
+      setTimeout(function(){
+        var backdrop = document.querySelector('#abt-modal [data-modal-backdrop]');
+        if(backdrop){ backdrop.addEventListener('click', stopOnClose, { once:true }); }
+        var closeBtn = document.querySelector('#abt-modal [data-modal-close]');
+        if(closeBtn){ closeBtn.addEventListener('click', stopOnClose, { once:true }); }
+      }, 0);
+    }
+    function bind(){
+      var root = document.getElementById('studentStories');
+      if(!root) return;
+      root.addEventListener('click', function(e){
+        var it = e.target.closest && e.target.closest('.story-item');
+        if(!it) return;
+        var idx = parseInt(it.getAttribute('data-index') || '0', 10);
+        showStory(idx);
+      });
+    }
+    document.addEventListener('DOMContentLoaded', function(){ collect(); bind(); });
+  })();
 
   // Map plan slugs used on kurs.html to GetCourse widget ids
   var PLAN_IDS = {
@@ -327,5 +458,11 @@ function closeMobile(){
   });
 
   // Экспортируем глобальные функции (если нужно)
-  window.__abt = { loadPart, openMobile, closeMobile, openModal, closeModal };
+  window.__abt = {
+    loadPart, openMobile, closeMobile, openModal, closeModal,
+    setContacts: function(opts){
+      window.__abt_contacts = Object.assign(window.__abt_contacts || {}, opts || {});
+      if (window.__abt_remountContacts) window.__abt_remountContacts();
+    }
+  };
 })();
