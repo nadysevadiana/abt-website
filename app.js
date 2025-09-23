@@ -122,12 +122,17 @@ function closeMobile(){
   document.addEventListener('click', function(e){
     var a = e.target.closest && e.target.closest('a[href^="#"]');
     if(!a) return;
+    // Do NOT handle anchors that are used for GetCourse/opening modals
+    if (a.matches('[data-plan], [data-gc-open], [data-gc-id], [data-gc-src]')) return;
+
     var href = a.getAttribute('href');
     // Ignore just '#' or external-like hashes
     if(!href || href === '#' || href.indexOf('#') !== 0) return;
+
     var id = href.slice(1);
     var el = document.getElementById(id);
     if(!el) return;
+
     e.preventDefault();
     el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     history.replaceState(null, '', href);
@@ -238,8 +243,31 @@ function closeMobile(){
     var plan = t.getAttribute('data-plan');
     if(!plan || !PLAN_IDS[plan]) return;
     e.preventDefault();
-    var src = buildGcSrcById(PLAN_IDS[plan]);
-    openGetCourseWidget(src);
+    // Open like "Максимум": direct iframe for ALL plans (simpler & faster)
+    preconnectOnce('https://artbytwins.getcourse.ru');
+    openModal();
+
+    // Prepare host container
+    var host = document.createElement('div');
+    host.setAttribute('data-gc-mount','');
+    host.style.cssText = 'padding:0;min-height:60vh;display:block;';
+    if (modalState.body) modalState.body.innerHTML = '';
+    modalState.body.appendChild(host);
+
+    try{
+      var iframe = document.createElement('iframe');
+      var direct = 'https://artbytwins.getcourse.ru/pl/lite/widget/widget'
+        + '?' + window.location.search.substring(1)
+        + '&id=' + encodeURIComponent(PLAN_IDS[plan])
+        + '&ref=' + encodeURIComponent(document.referrer)
+        + '&loc=' + encodeURIComponent(document.location.href);
+      iframe.src = direct;
+      iframe.style.width = '100%';
+      iframe.style.height = '80vh';
+      iframe.style.border = '0';
+      host.appendChild(iframe);
+    } catch(e) {}
+
     __gcOpenedOnce = true;
   });
 
