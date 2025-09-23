@@ -194,33 +194,80 @@ function closeMobile(){
   document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeModal(); });
 
   // ===== GetCourse widget opener (use data-gc-id or data-gc-src on button) =====
-  // Usage example on a button:
+  // Usage on a button/link:
   // <a class="btn-tariff" data-gc-id="1487237">Выбрать базовый</a>
   // or <a data-gc-src="https://artbytwins.getcourse.ru/pl/lite/widget/script?id=1487237">Купить</a>
   function buildGcSrcById(id){
     return 'https://artbytwins.getcourse.ru/pl/lite/widget/script?id=' + encodeURIComponent(id);
   }
 
-  function openGetCourseWidget(src){
-    openModal();
-    // Create a fresh container each time
-    var host = document.createElement('div');
-    host.style.cssText = 'padding:0;';
-    modalState.body.appendChild(host);
-
-    // Create script
-    var s = document.createElement('script');
-    s.src = src;
-    s.async = true;
-    // Add a small guard against duplicate script execution caching
-    s.onload = function(){ /* widget loads itself into modal body */ };
-    s.onerror = function(){
-      host.innerHTML = '<div style="padding:1rem;color:#b91c1c">Не удалось загрузить виджет. Попробуйте ещё раз.</div>';
-    };
-    // Append script after host so some widgets can detect previousSibling
-    modalState.body.appendChild(s);
+  function addRand(src){
+    // Ensure unique instance per open as recommended by GetCourse (several same widgets on one page)
+    var sep = src.indexOf('?') === -1 ? '?' : '&';
+    var rand = 'rand=' + encodeURIComponent(Date.now().toString(36) + Math.random().toString(36).slice(2));
+    return src + sep + rand;
   }
 
-  // Экспортируем в глобальную область если нужно (опционально)
+  function openGetCourseWidget(src){
+    openModal();
+
+    // Prepare host and loader
+    var host = document.createElement('div');
+    host.style.cssText = 'padding:0;min-height:60vh;display:block;';
+
+    var loader = document.createElement('div');
+    loader.textContent = 'Загрузка…';
+    loader.style.cssText = 'padding:1rem;text-align:center;color:#0f172a;font-weight:600;';
+
+    modalState.body.appendChild(loader);
+    modalState.body.appendChild(host);
+
+    // Clean any previous widget containers just in case
+    // (modalState.body is cleared on close, но защищаемся от двойных кликов)
+    modalState.body.querySelectorAll('.gcw_lite_widget_container,.gcw_lw_container,.gc-lw-container').forEach(function(n){
+      n.style.display = 'none';
+    });
+
+    // Append GC script with unique rand
+    var s = document.createElement('script');
+    s.src = addRand(src);
+    s.async = true;
+    s.onerror = function(){
+      loader.textContent = 'Не удалось загрузить виджет. Попробуйте ещё раз.';
+    };
+    modalState.body.appendChild(s);
+
+    // When widget mounts, adjust sizing (iframe or container)
+    var obs = new MutationObserver(function(){
+      var root = modalState.body.querySelector('.gcw_lite_widget_container, .gcw_lw_container, .gc-lw-container, iframe');
+      if(!root) return;
+      obs.disconnect();
+      loader.remove();
+      if(root.tagName === 'IFRAME'){
+        root.style.width = '100%';
+        root.style.height = '80vh';
+      } else {
+        root.style.setProperty('display','block','important');
+        root.style.setProperty('height','80vh','important');
+        var ifr = root.querySelector('iframe');
+        if(ifr){ ifr.style.width = '100%'; ifr.style.height = '80vh'; }
+      }
+    });
+    obs.observe(modalState.body, { childList:true, subtree:true });
+  }
+
+  // Delegated click binding for buttons/links with data-gc-id or data-gc-src
+  document.addEventListener('click', function(e){
+    var t = e.target.closest && e.target.closest('[data-gc-id], [data-gc-src]');
+    if(!t) return;
+    e.preventDefault();
+    var src = t.getAttribute('data-gc-src');
+    var id  = t.getAttribute('data-gc-id');
+    if(!src && id) src = buildGcSrcById(id);
+    if(!src) return;
+    openGetCourseWidget(src);
+  });
+
+  // Экспортируем в глобальную область если нужно
   window.__abt = { loadPart, openMobile, closeMobile, openModal, closeModal, openGetCourseWidget };
 })();
