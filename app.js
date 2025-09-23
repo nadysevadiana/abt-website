@@ -7,7 +7,7 @@
 
 (function(){
   // Версия для пробития кеша статических partials
-  var VERSION = '20250923c';
+  var VERSION = '20250923d';
   function withV(path){ return path + (path.indexOf('?') === -1 ? ('?v=' + VERSION) : ('&v=' + VERSION)); }
   // Preconnect/DNS-hint helper (idempotent)
   function preconnectOnce(href){
@@ -37,7 +37,7 @@
   document.addEventListener('DOMContentLoaded', function(){
     loadPart('site-header', withV('header.html'));
     loadPart('site-footer', withV('footer.html'));
-    loadPart('site-telegram-btn', withV('tg-btn.html'));
+    loadPart('site-telegram-btn', withV('btn.html'));
     preconnectOnce('https://artbytwins.getcourse.ru');
   });
 
