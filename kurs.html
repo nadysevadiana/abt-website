@@ -680,6 +680,13 @@
     s.id  = meta.id;       // важен для GetCourse
     s.src = meta.src;      // внешний загрузчик
     s.async = true;
+    s.onload = function(){
+      try {
+        if (document.readyState !== 'loading') {
+          document.dispatchEvent(new Event('DOMContentLoaded', { bubbles: true, cancelable: true }));
+        }
+      } catch(e){}
+    };
 
     // обработчик ошибок подключения
     s.onerror = function(){
@@ -691,6 +698,25 @@
     };
 
     setTimeout(function(){ mount.appendChild(s); }, 0);
+    // Fallback: если GC не инициализировался (из-за поздней регистрации DOMContentLoaded), вставим iframe сами
+    setTimeout(function(){
+      var already = mount.querySelector('iframe, .gcw_lite_widget_container, .gcw_lw_container, .gc-lw-container');
+      if (already) return;
+      try {
+        var iframe = document.createElement('iframe');
+        var src = 'https://artbytwins.getcourse.ru/pl/lite/widget/widget'
+          + '?' + window.location.search.substring(1)
+          + '&id=' + encodeURIComponent(meta.src.split('id=')[1])
+          + '&ref=' + encodeURIComponent(document.referrer)
+          + '&loc=' + encodeURIComponent(document.location.href);
+        iframe.src = src;
+        iframe.style.width = '100%';
+        iframe.style.height = '80vh';
+        iframe.style.border = '0';
+        mount.appendChild(iframe);
+        if (loader) loader.style.display = 'none';
+      } catch(e){}
+    }, 1200);
 
     // План А: ждём, что GC вставит виджет РЯДОМ С НАШИМ СКРИПТОМ в пределах mount
     var obsLocal = new MutationObserver(function(){
