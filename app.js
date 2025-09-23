@@ -212,6 +212,13 @@ function closeMobile(){
   });
   document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeModal(); });
 
+  // Map plan slugs used on kurs.html to GetCourse widget ids
+  var PLAN_IDS = {
+    basic: '1487237',      // Дизайнер своей квартиры — Базовый
+    extended: '1487247',   // Расширенный
+    max: '1487966'         // Максимум
+  };
+
   // ===== GetCourse widget opener (use data-gc-id or data-gc-src on button) =====
   // Usage on a button/link:
   // <a class="btn-tariff" data-gc-id="1487237">Выбрать базовый</a>
@@ -223,6 +230,18 @@ function closeMobile(){
   function addRand(src){
     return addRandIfNeeded(src);
   }
+
+  // Delegated click for plan buttons coming from kurs.html
+  document.addEventListener('click', function(e){
+    var t = e.target.closest && e.target.closest('[data-gc-open][data-plan], [data-plan]');
+    if(!t) return;
+    var plan = t.getAttribute('data-plan');
+    if(!plan || !PLAN_IDS[plan]) return;
+    e.preventDefault();
+    var src = buildGcSrcById(PLAN_IDS[plan]);
+    openGetCourseWidget(src);
+    __gcOpenedOnce = true;
+  });
 
   function openGetCourseWidget(src){
     openModal();
@@ -328,6 +347,10 @@ function closeMobile(){
     var t = e.target.closest && e.target.closest('[data-gc-id], [data-gc-src]');
     if(!t) return;
     var src = t.getAttribute('data-gc-src') || (t.getAttribute('data-gc-id') ? buildGcSrcById(t.getAttribute('data-gc-id')) : '');
+    if(!src && t.hasAttribute('data-plan')){
+      var pid = PLAN_IDS[t.getAttribute('data-plan')];
+      if(pid) src = buildGcSrcById(pid);
+    }
     if(!src) return;
     try{
       preconnectOnce('https://artbytwins.getcourse.ru');
