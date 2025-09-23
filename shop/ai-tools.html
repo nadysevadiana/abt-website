@@ -1,61 +1,216 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>ИИ‑комбо для дизайнеров</title>
-    <link rel="stylesheet" href="/styles/main.css" />
-</head>
-<body>
-    <header>
-        <nav>
-            <a href="/" class="logo">ABT</a>
-            <ul>
-                <li><a href="/shop/">Магазин</a></li>
-                <li><a href="/about/">О нас</a></li>
-                <li><a href="/contact/">Контакты</a></li>
-            </ul>
-        </nav>
-    </header>
-    <section class="hero">
-        <div class="container">
-            <h1>ИИ‑комбо для дизайнеров</h1>
-            <p>Набор мощных инструментов на базе искусственного интеллекта, которые помогут создавать дизайн быстрее и качественнее.</p>
-            <a href="#products" class="btn-primary">Купить сейчас</a>
-        </div>
-    </section>
-    <section id="products" class="products">
-        <div class="container">
-            <article class="product">
-                <h2>AI Sketch Master</h2>
-                <p>Автоматическое создание эскизов по описанию. Экономит время на начальных этапах проектирования.</p>
-                <button class="btn-secondary">Подробнее</button>
-            </article>
-            <article class="product">
-                <h2>Color Palette Genius</h2>
-                <p>Генератор цветовых палитр на основе трендов и настроения проекта.</p>
-                <button class="btn-secondary">Подробнее</button>
-            </article>
-            <article class="product">
-                <h2>Typography Wizard</h2>
-                <p>Подбор шрифтов и их сочетаний с учетом читаемости и стиля.</p>
-                <button class="btn-secondary">Подробнее</button>
-            </article>
-            <article class="product">
-                <h2>Layout Optimizer</h2>
-                <p>Автоматическая оптимизация расположения элементов для лучшей UX.</p>
-                <button class="btn-secondary">Подробнее</button>
-            </article>
-        </div>
-    </section>
-    <footer>
-        <div class="container">
-            <p>© 2024 ABT. Все права защищены.</p>
-            <nav>
-                <a href="/privacy/">Политика конфиденциальности</a>
-                <a href="/terms/">Условия использования</a>
-            </nav>
-        </div>
-    </footer>
-</body>
-</html>
+<!-- AI-TOOLS — контент для in-place просмотра в магазине -->
+<!-- Файл: shop/ai-tools.html -->
+
+<!-- HERO-IN-PLACE (без шапки/футера) -->
+<section class="mb-8">
+  <h2 class="text-2xl md:text-3xl font-bold mb-2 text-center">
+    ИИ-комбо для дизайнеров интерьера
+  </h2>
+  <p class="text-slate-700 text-center max-w-3xl mx-auto">
+    Промпт-паки, быстрые moodboard’ы, генерация палитр, черновики ТЗ/смет и автоматизация рутины — ускоряйте проект от идеи до визуализации.
+  </p>
+  <div class="mt-4 flex flex-wrap gap-2 justify-center">
+    <span class="badge"><i class="fa-solid fa-wand-magic-sparkles text-emerald-600"></i> Промпты</span>
+    <span class="badge"><i class="fa-solid fa-swatchbook text-emerald-600"></i> Палитры</span>
+    <span class="badge"><i class="fa-solid fa-list-check text-emerald-600"></i> ТЗ/сметы</span>
+    <span class="badge"><i class="fa-solid fa-bolt text-emerald-600"></i> Автоматизация</span>
+  </div>
+</section>
+
+<!-- КОМУ ПОДХОДИТ -->
+<section class="mb-6">
+  <h3 class="text-xl md:text-2xl font-bold mb-3 text-center">Кому подходит</h3>
+  <div class="grid md:grid-cols-3 gap-3 tight-grid">
+    <div class="card p-3 text-center">
+      <p class="font-semibold">Практикующим дизайнерам</p>
+      <p class="text-gray-700 text-xs md:text-sm mt-1">Ускорить подготовку концепции, ТЗ и визуалов.</p>
+    </div>
+    <div class="card p-3 text-center">
+      <p class="font-semibold">Новичкам и фрилансерам</p>
+      <p class="text-gray-700 text-xs md:text-sm mt-1">Собрать портфолио и отработать процесс.</p>
+    </div>
+    <div class="card p-3 text-center">
+      <p class="font-semibold">Командам и студиям</p>
+      <p class="text-gray-700 text-xs md:text-sm mt-1">Унифицировать брифы, шаблоны и чек-листы.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ПРОГРАММА -->
+<section class="mb-6">
+  <h3 class="text-xl md:text-2xl font-bold mb-4 text-center">Программа модуля</h3>
+  <p class="text-gray-700 text-sm text-center max-w-3xl mx-auto mb-4">
+    Пошагово: от быстрых референсов к документам, 3D-задачам и рабочим регламентам.
+  </p>
+  <div class="accordion divide-y divide-gray-200 card">
+    <details open>
+      <summary class="flex items-center justify-between p-5 cursor-pointer">
+        <span class="font-semibold">Быстрые референсы и moodboard</span>
+        <i class="fa-solid fa-chevron-down text-gray-500"></i>
+      </summary>
+      <div class="px-5 pb-5 text-gray-700 text-sm space-y-2">
+        <p>Промпт-матрица под 10 стилей, генерация палитр/материалов, свет и акценты.</p>
+      </div>
+    </details>
+    <details>
+      <summary class="flex items-center justify-between p-5 cursor-pointer">
+        <span class="font-semibold">Документы и переписка из промптов</span>
+        <i class="fa-solid fa-chevron-down text-gray-500"></i>
+      </summary>
+      <div class="px-5 pb-5 text-gray-700 text-sm space-y-2">
+        <p>Черновики ТЗ/смет/спецификаций, письма клиенту, правки и согласования.</p>
+      </div>
+    </details>
+    <details>
+      <summary class="flex items-center justify-between p-5 cursor-pointer">
+        <span class="font-semibold">Планировка и освещение</span>
+        <i class="fa-solid fa-chevron-down text-gray-500"></i>
+      </summary>
+      <div class="px-5 pb-5 text-gray-700 text-sm space-y-2">
+        <p>Идеи планировок из брифа, сценарии света под назначение помещений.</p>
+      </div>
+    </details>
+    <details>
+      <summary class="flex items-center justify-between p-5 cursor-pointer">
+        <span class="font-semibold">3D-визуализация (3ds Max / SketchUp)</span>
+        <i class="fa-solid fa-chevron-down text-gray-500"></i>
+      </summary>
+      <div class="px-5 pb-5 text-gray-700 text-sm space-y-2">
+        <p>Готовые промпты под типовые задачи: материалы, камера, экспорт, доработка.</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ЧТО ПОЛУЧИТЕ -->
+<section class="mb-6">
+  <h3 class="text-xl md:text-2xl font-bold mb-4 text-center">Что вы получите</h3>
+  <div class="grid md:grid-cols-3 gap-3 tight-grid">
+    <div class="card p-4 text-center">
+      <p class="font-semibold">×2–3 скорость</p>
+      <p class="text-gray-700 text-sm mt-1">Концепция, документы и согласования.</p>
+    </div>
+    <div class="card p-4 text-center">
+      <p class="font-semibold">50+ заготовок</p>
+      <p class="text-gray-700 text-sm mt-1">Промпты, письма, чек-листы.</p>
+    </div>
+    <div class="card p-4 text-center">
+      <p class="font-semibold">Доступ 24/7</p>
+      <p class="text-gray-700 text-sm mt-1">Материалы и обновления без ограничений.</p>
+    </div>
+  </div>
+</section>
+
+<!-- КАК ПРОХОДИТ -->
+<section class="mb-6">
+  <h3 class="text-xl md:text-2xl font-bold mb-4 text-center">Как проходит обучение</h3>
+  <ol class="grid md:grid-cols-4 gap-3 text-sm tight-grid">
+    <li class="card p-4 text-center">
+      <p class="font-semibold">1. Доступ</p>
+      <p class="text-gray-700 mt-1">Открывается сразу после оплаты.</p>
+    </li>
+    <li class="card p-4 text-center">
+      <p class="font-semibold">2. Практика</p>
+      <p class="text-gray-700 mt-1">Выполняете задания на своём объекте.</p>
+    </li>
+    <li class="card p-4 text-center">
+      <p class="font-semibold">3. Шаблоны</p>
+      <p class="text-gray-700 mt-1">Подставляете данные — получаете документы/рефы.</p>
+    </li>
+    <li class="card p-4 text-center">
+      <p class="font-semibold">4. Поддержка</p>
+      <p class="text-gray-700 mt-1">Ответы куратора в рабочее время.</p>
+    </li>
+  </ol>
+</section>
+
+<!-- ТАРИФЫ -->
+<section class="mb-4">
+  <h3 class="text-xl md:text-2xl font-bold mb-4 text-center">Тарифы</h3>
+  <div class="grid md:grid-cols-3 gap-3">
+    <div class="card p-5 flex flex-col">
+      <p class="font-semibold">Start</p>
+      <p class="mt-1 text-gray-700 text-sm">База промптов и документы</p>
+      <div class="mt-3 text-3xl font-bold">4&nbsp;900 ₽</div>
+      <ul class="mt-4 text-sm text-gray-700 space-y-2">
+        <li>• Demo Prompts Pack (расшир.)</li>
+        <li>• Бриф + чек-листы</li>
+        <li>• Обновления 3 месяца</li>
+      </ul>
+      <a href="checkout.html?product=ai-tools&plan=start"
+         class="mt-5 inline-flex justify-center items-center px-4 py-2 rounded-lg text-sm font-semibold btn-primary">
+        <i class="fa-solid fa-credit-card mr-2"></i>Купить Start
+      </a>
+    </div>
+
+    <div class="card p-5 flex flex-col triptych-featured">
+      <div class="text-xs uppercase tracking-wider text-gray-600">Топ-выбор</div>
+      <p class="mt-1 font-semibold">Pro</p>
+      <p class="mt-1 text-gray-700 text-sm">Полные промпт-паки + кейсы</p>
+      <div class="mt-3 text-3xl font-bold">9&nbsp;900 ₽</div>
+      <ul class="mt-4 text-sm text-gray-700 space-y-2">
+        <li>• 50+ промптов (стили, палитры, свет)</li>
+        <li>• Шаблоны ТЗ/смет/писем</li>
+        <li>• Созвоны-разборы 1×/мес</li>
+        <li>• Обновления 6 месяцев</li>
+      </ul>
+      <a href="checkout.html?product=ai-tools&plan=pro"
+         class="mt-5 inline-flex justify-center items-center px-4 py-2 rounded-lg text-sm font-semibold btn-primary">
+        <i class="fa-solid fa-credit-card mr-2"></i>Купить Pro
+      </a>
+    </div>
+
+    <div class="card p-5 flex flex-col">
+      <p class="font-semibold">Studio</p>
+      <p class="mt-1 text-gray-700 text-sm">Лицензии на команду + внедрение</p>
+      <div class="mt-3 text-3xl font-bold">29&nbsp;000 ₽</div>
+      <ul class="mt-4 text-sm text-gray-700 space-y-2">
+        <li>• До 5 мест + админ-гайд</li>
+        <li>• Воркфлоу и регламенты</li>
+        <li>• Консультация по интеграции</li>
+        <li>• Обновления 12 месяцев</li>
+      </ul>
+      <a href="checkout.html?product=ai-tools&plan=studio"
+         class="mt-5 inline-flex justify-center items-center px-4 py-2 rounded-lg text-sm font-semibold btn-primary">
+        <i class="fa-solid fa-credit-card mr-2"></i>Купить Studio
+      </a>
+    </div>
+  </div>
+  <p class="mt-3 text-xs text-gray-500 text-center">
+    Цены в рублях, возможна рассрочка по запросу.
+  </p>
+</section>
+
+<!-- FAQ -->
+<section>
+  <h3 class="text-xl md:text-2xl font-bold mb-4 text-center">FAQ</h3>
+  <div class="accordion card divide-y divide-gray-200">
+    <details>
+      <summary class="flex items-center justify-between p-5 cursor-pointer">
+        <span class="font-medium">Есть демо-материалы?</span>
+        <i class="fa-solid fa-chevron-down text-gray-500"></i>
+      </summary>
+      <div class="px-5 pb-5 text-sm text-gray-700">
+        Да, демо-пак промптов доступен сразу после оплаты тарифа Start.
+      </div>
+    </details>
+    <details>
+      <summary class="flex items-center justify-between p-5 cursor-pointer">
+        <span class="font-medium">Подойдёт ли новичкам?</span>
+        <i class="fa-solid fa-chevron-down text-gray-500"></i>
+      </summary>
+      <div class="px-5 pb-5 text-sm text-gray-700">
+        Да. Все инструкции пошаговые, с примерами и подсказками.
+      </div>
+    </details>
+    <details>
+      <summary class="flex items-center justify-between p-5 cursor-pointer">
+        <span class="font-medium">Будет поддержка куратора?</span>
+        <i class="fa-solid fa-chevron-down text-gray-500"></i>
+      </summary>
+      <div class="px-5 pb-5 text-sm text-gray-700">
+        В тарифе Pro — ответы в рабочее время, в Studio — консультация по внедрению.
+      </div>
+    </details>
+  </div>
+</section>
