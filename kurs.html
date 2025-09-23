@@ -717,6 +717,26 @@
         if (loader) loader.style.display = 'none';
       } catch(e){}
     }, 1200);
+    // Second-stage fallback: если и через 3 сек нет виджета — откроем в новой вкладке
+    setTimeout(function(){
+      var already2 = mount.querySelector('iframe, .gcw_lite_widget_container, .gcw_lw_container, .gc-lw-container');
+      if (already2) return;
+      try {
+        var direct = 'https://artbytwins.getcourse.ru/pl/lite/widget/widget'
+          + '?' + window.location.search.substring(1)
+          + '&id=' + encodeURIComponent(meta.src.split('id=')[1])
+          + '&ref=' + encodeURIComponent(document.referrer)
+          + '&loc=' + encodeURIComponent(document.location.href);
+        window.open(direct, '_blank', 'noopener');
+        // Покажем маленькую подсказку в модалке
+        var tip = document.createElement('div');
+        tip.style.padding = '20px';
+        tip.className = 'text-center text-sm text-neutral-700';
+        tip.innerHTML = 'Мы открыли оплату в новой вкладке, т.к. встроенный виджет не загрузился. Если вкладка не открылась — разрешите всплывающие окна и попробуйте снова.';
+        mount.appendChild(tip);
+        if (loader) loader.style.display = 'none';
+      } catch(e){}
+    }, 3000);
 
     // План А: ждём, что GC вставит виджет РЯДОМ С НАШИМ СКРИПТОМ в пределах mount
     var obsLocal = new MutationObserver(function(){
@@ -766,7 +786,9 @@
     var a = e.target.closest('[data-gc-open="true"][data-plan]');
     if(!a) return;
     e.preventDefault();
-    openGC(a.getAttribute('data-plan'));
+    var plan = a.getAttribute('data-plan');
+    try { console.log('[GC] open plan:', plan); } catch(_){ }
+    openGC(plan);
   });
 })();
   </script>
