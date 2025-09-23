@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="prefetch" href="header.html" as="fetch" crossorigin>
   <link rel="prefetch" href="footer.html" as="fetch" crossorigin>
+  <link rel="prefetch" href="shop/legal.html" as="fetch" crossorigin>
+  <link rel="prefetch" href="shop/psychology.html" as="fetch" crossorigin>
   <!-- Icons (needed for templates with <i class="fa-...">) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
@@ -410,7 +412,8 @@
       const content = document.getElementById('product-content');
       const backBtn = document.getElementById('back-to-shop');
       const partials = {
-        'legal': 'shop/legal.html'
+        'legal': 'shop/legal.html',
+        'psychology': 'shop/psychology.html'
       };
 
       function tplId(key){ return 'tpl-' + key; }
@@ -469,6 +472,15 @@
       });
 
       backBtn.addEventListener('click', closeProduct);
+
+      // Delegate back action for buttons inside loaded partials
+      content.addEventListener('click', function(e){
+        const back = e.target.closest('[data-back]');
+        if(back){
+          e.preventDefault();
+          closeProduct();
+        }
+      });
 
       // Закрытие по Esc
       document.addEventListener('keydown', function(e){
