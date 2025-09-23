@@ -267,31 +267,6 @@ function closeMobile(){
   document.addEventListener('DOMContentLoaded', alignStoryCarousel);
   window.addEventListener('resize', alignStoryCarousel, { passive:true });
 
-  // ===== Story carousel controls (prev/next + auto-inject on mobile) =====
-  function storyScroll(c, dir){
-    if(!c) return;
-    var gap = 12; // must match CSS gap on mobile
-    var w = c.clientWidth; // slide width ~ viewport width on mobile
-    c.scrollBy({ left: (dir>0? 1 : -1) * (w + gap), behavior: 'smooth' });
-  }
-  function ensureStoryNav(){
-    var c = document.getElementById('worksCarousel');
-    if(!c || !c.classList || !c.classList.contains('carousel--story')) return;
-    if(!c.hasAttribute('data-story-nav')) return;
-    // create nav only once
-    if(document.querySelector('.story-nav')) return;
-    var nav = document.createElement('div');
-    nav.className = 'story-nav';
-    var prev = document.createElement('button'); prev.setAttribute('type','button'); prev.setAttribute('aria-label','Назад'); prev.innerHTML = '&#8592;';
-    var next = document.createElement('button'); next.setAttribute('type','button'); next.setAttribute('aria-label','Вперёд'); next.innerHTML = '&#8594;';
-    nav.appendChild(prev); nav.appendChild(next);
-    c.parentNode.insertBefore(nav, c.nextSibling);
-    prev.addEventListener('click', function(){ storyScroll(c, -1); });
-    next.addEventListener('click', function(){ storyScroll(c, 1); });
-  }
-  document.addEventListener('DOMContentLoaded', ensureStoryNav);
-  window.addEventListener('resize', ensureStoryNav, { passive:true });
-
   // ===== Simple Story Viewer (opens modal, 1 photo = 1 story) =====
   (function initStoryViewer(){
     var data = [];
