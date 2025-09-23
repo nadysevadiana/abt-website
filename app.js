@@ -7,7 +7,7 @@
 
 (function(){
   // Версия для пробития кеша статических partials
-  var VERSION = '20250923f';
+  var VERSION = '20250923h';
   function withV(path){ return path + (path.indexOf('?') === -1 ? ('?v=' + VERSION) : ('&v=' + VERSION)); }
   // Preconnect/DNS-hint helper (idempotent)
   function preconnectOnce(href){
@@ -272,6 +272,8 @@ function closeMobile(){
     var data = [];
     var timer = null;
     var AUTOPLAY_MS = 5000; // 5s per story
+    var paused = false;
+    var touch = { y0: null };
 
     function collect(){
       var items = document.querySelectorAll('#studentStories .story-item');
@@ -284,7 +286,9 @@ function closeMobile(){
         };
       });
     }
+
     function clearTimer(){ if(timer){ clearTimeout(timer); timer=null; } }
+
     function renderBars(host, activeIdx){
       var bars = host.querySelector('.story-bars');
       bars.innerHTML = '';
@@ -294,20 +298,46 @@ function closeMobile(){
         b.appendChild(span); bars.appendChild(b);
       }
     }
+
     function animateActiveBar(host, activeIdx){
-      var bars = host.querySelectorAll('.story-bar > span');
-      var span = bars[activeIdx]; if(!span) return;
-      span.style.transition = 'width '+(AUTOPLAY_MS/1000)+'s linear';
-      requestAnimationFrame(function(){ span.style.width='100%'; });
+      var spans = host.querySelectorAll('.story-bar > span');
+      var span = spans[activeIdx]; if(!span) return;
+      // reset to 0 then animate to 100
+      span.style.transition = 'none'; span.style.width = '0%';
+      requestAnimationFrame(function(){
+        span.style.transition = 'width '+(AUTOPLAY_MS/1000)+'s linear';
+        span.style.width = '100%';
+      });
     }
+
+    function pause(){
+      paused = true; clearTimer();
+      // freeze current bar width by removing transition and keeping computed width
+      try{
+        var active = document.querySelector('#abt-modal .story-bar > span[style*="transition"]');
+        if(active){
+          var w = getComputedStyle(active).width;
+          active.style.transition = 'none';
+          active.style.width = w;
+        }
+      }catch(e){}
+    }
+
+    function resume(nextCb){
+      if(!paused) return; paused = false; clearTimer();
+      if(typeof nextCb === 'function'){ timer = setTimeout(nextCb, AUTOPLAY_MS); }
+    }
+
     function showStory(idx){
       if(!data.length) return;
       if(idx < 0){ idx = data.length-1; }
       if(idx >= data.length){ idx = 0; }
+
       openModal();
       var body = document.querySelector('#abt-modal [role="dialog"] > div:last-child');
       if(!body) return;
       body.innerHTML = '';
+
       var wrap = document.createElement('div');
       wrap.style.padding = '12px';
       wrap.innerHTML = [
@@ -325,20 +355,54 @@ function closeMobile(){
       ].join('');
       body.appendChild(wrap);
 
+      // simple header avatar + name (IG-like)
+      var barsHost = wrap.querySelector('.story-bars');
+      var hdr = document.createElement('div');
+      hdr.style.cssText = 'position:absolute;left:8px;top:12px;display:flex;align-items:center;gap:8px;color:#fff;z-index:3';
+      hdr.innerHTML = '<img src="'+data[idx].src+'" alt="avatar" style="width:28px;height:28px;border-radius:9999px;border:2px solid rgba(255,255,255,.65)"><span style="font-weight:700;text-shadow:0 1px 2px rgba(0,0,0,.4)">'+ (data[idx].title||'') +'</span>';
+      barsHost.parentNode.insertBefore(hdr, barsHost.nextSibling);
+
       renderBars(wrap, idx);
       animateActiveBar(wrap, idx);
 
       var next = function(){ clearTimer(); showStory(idx+1); };
       var prev = function(){ clearTimer(); showStory(idx-1); };
-      wrap.querySelector('.story-tap-right').addEventListener('click', next);
-      wrap.querySelector('.story-tap-left').addEventListener('click', prev);
+
+      var view = wrap.querySelector('.story-view');
+      // tap zones
+      view.querySelector('.story-tap-right').addEventListener('click', next);
+      view.querySelector('.story-tap-left').addEventListener('click', prev);
+
+      // pause on hover/hold (desktop + touch)
+      view.addEventListener('mouseenter', function(){ pause(); });
+      view.addEventListener('mouseleave', function(){ resume(next); });
+      view.addEventListener('mousedown', function(){ pause(); });
+      view.addEventListener('mouseup', function(){ resume(next); });
+      view.addEventListener('touchstart', function(ev){ touch.y0 = (ev.touches && ev.touches[0] ? ev.touches[0].clientY : null); pause(); }, { passive:true });
+      view.addEventListener('touchend', function(){ resume(next); touch.y0 = null; }, { passive:true });
+
+      // swipe down to close
+      view.addEventListener('touchmove', function(ev){
+        if(touch.y0 == null) return;
+        var y = ev.touches && ev.touches[0] ? ev.touches[0].clientY : 0;
+        if(y - touch.y0 > 60){ clearTimer(); closeModal(); touch.y0 = null; }
+      }, { passive:true });
 
       clearTimer();
       timer = setTimeout(next, AUTOPLAY_MS);
 
-      var onKey = function(e){ if(e.key==='ArrowRight'){ next(); } else if(e.key==='ArrowLeft'){ prev(); } };
+      // arrows / esc
+      var onKey = function(e){
+        if(e.key==='ArrowRight'){ next(); }
+        else if(e.key==='ArrowLeft'){ prev(); }
+      };
       document.addEventListener('keydown', onKey, { once: true });
-      var stopOnClose = function(){ clearTimer(); document.removeEventListener('keydown', onKey); };
+
+      // when modal closes — stop timers and cleanup
+      var stopOnClose = function(){
+        clearTimer();
+        document.removeEventListener('keydown', onKey);
+      };
       setTimeout(function(){
         var backdrop = document.querySelector('#abt-modal [data-modal-backdrop]');
         if(backdrop){ backdrop.addEventListener('click', stopOnClose, { once:true }); }
@@ -346,6 +410,7 @@ function closeMobile(){
         if(closeBtn){ closeBtn.addEventListener('click', stopOnClose, { once:true }); }
       }, 0);
     }
+
     function bind(){
       var root = document.getElementById('studentStories');
       if(!root) return;
@@ -356,7 +421,9 @@ function closeMobile(){
         showStory(idx);
       });
     }
+
     document.addEventListener('DOMContentLoaded', function(){ collect(); bind(); });
+    window.addEventListener('resize', collect, { passive:true });
   })();
 
   // Map plan slugs used on kurs.html to GetCourse widget ids
