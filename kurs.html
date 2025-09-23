@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <link rel="icon" href="./favicon.ico" type="image/x-icon" />
   <link rel="preconnect" href="https://artbytwins.getcourse.ru" crossorigin>
+  <link rel="dns-prefetch" href="https://artbytwins.getcourse.ru">
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 
   <!-- OG / соцсети -->
@@ -606,6 +607,46 @@
     extended: { id: 'a1f77cfdd8d68db241fdf3d14e7a0265edf0c50f', src: 'https://artbytwins.getcourse.ru/pl/lite/widget/script?id=1487247' },
     max:      { id: '6adf32f0796b1ee7c8f002657e5566a0fe5b6d4b', src: 'https://artbytwins.getcourse.ru/pl/lite/widget/script?id=1487966' }
   };
+
+  // ---- Performance warm‑up for GetCourse widgets ----
+  // 1) Preload widget scripts on hover over plan buttons
+  document.addEventListener('mouseover', function(e){
+    var t = e.target.closest && e.target.closest('[data-gc-open][data-plan]');
+    if(!t) return;
+    var plan = t.getAttribute('data-plan');
+    var meta = PLAN_META[plan];
+    if(!meta || !meta.src) return;
+    try{
+      var id = 'preload_'+meta.src.replace(/[^a-z0-9]/gi,'_');
+      if(document.getElementById(id)) return;
+      var link = document.createElement('link');
+      link.id = id; link.rel = 'preload'; link.as = 'script'; link.href = meta.src;
+      document.head.appendChild(link);
+    }catch(_){ }
+  });
+
+  // 2) As soon as pricing section comes into view, preload all three widget scripts (extended first)
+  (function(){
+    var pricing = document.getElementById('pricing');
+    if(!pricing || !('IntersectionObserver' in window)) return;
+    var once = false;
+    var io = new IntersectionObserver(function(entries){
+      if(once) return;
+      if(entries.some(function(en){ return en.isIntersecting; })){
+        once = true; io.disconnect();
+        ['extended','max','basic'].forEach(function(p){
+          var m = PLAN_META[p]; if(!m || !m.src) return;
+          var id = 'preload_'+m.src.replace(/[^a-z0-9]/gi,'_');
+          if(document.getElementById(id)) return;
+          var l = document.createElement('link');
+          l.id = id; l.rel = 'preload'; l.as = 'script'; l.href = m.src;
+          document.head.appendChild(l);
+        });
+      }
+    }, { rootMargin: '200px 0px 200px 0px', threshold: 0.01 });
+    io.observe(pricing);
+  })();
+  // ---- /Performance warm‑up ----
 
   var overlay = document.getElementById('gc-overlay');
   var box     = document.getElementById('gc-overlay__box');

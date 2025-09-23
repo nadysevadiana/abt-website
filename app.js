@@ -9,6 +9,24 @@
   // Версия для пробития кеша статических partials
   var VERSION = '20250922';
   function withV(path){ return path + (path.indexOf('?') === -1 ? ('?v=' + VERSION) : ('&v=' + VERSION)); }
+  // Preconnect/DNS-hint helper (idempotent)
+  function preconnectOnce(href){
+    try{
+      var id = 'preconnect_'+href.replace(/[^a-z0-9]/gi,'_');
+      if(document.getElementById(id)) return;
+      var l1 = document.createElement('link'); l1.id=id; l1.rel='preconnect'; l1.href=href; l1.crossOrigin='anonymous';
+      var l2 = document.createElement('link'); l2.rel='dns-prefetch'; l2.href=href;
+      document.head.appendChild(l1); document.head.appendChild(l2);
+    }catch(e){}
+  }
+  // Conditional cache-busting: only after the first open (to avoid cold-load every time)
+  var __gcOpenedOnce = false;
+  function addRandIfNeeded(src){
+    if(!__gcOpenedOnce) return src; // first load should be cacheable
+    var sep = src.indexOf('?') === -1 ? '?' : '&';
+    var rand = 'rand=' + encodeURIComponent(Date.now().toString(36) + Math.random().toString(36).slice(2));
+    return src + sep + rand;
+  }
   // Подключение HTML-вставок (partials)
   function inject(id, html){
     var el = document.getElementById(id);
@@ -28,6 +46,7 @@
     loadPart('site-header', withV('header.html'));
     loadPart('site-footer', withV('footer.html'));
     loadPart('site-telegram-btn', withV('tg-btn.html'));
+    preconnectOnce('https://artbytwins.getcourse.ru');
   });
 
   // ===== Hover-дропдауны из хедера (работает делегированно) =====
@@ -202,10 +221,7 @@ function closeMobile(){
   }
 
   function addRand(src){
-    // Ensure unique instance per open as recommended by GetCourse (several same widgets on one page)
-    var sep = src.indexOf('?') === -1 ? '?' : '&';
-    var rand = 'rand=' + encodeURIComponent(Date.now().toString(36) + Math.random().toString(36).slice(2));
-    return src + sep + rand;
+    return addRandIfNeeded(src);
   }
 
   function openGetCourseWidget(src){
@@ -229,13 +245,63 @@ function closeMobile(){
     });
 
     // Append GC script with unique rand
+    preconnectOnce('https://artbytwins.getcourse.ru');
     var s = document.createElement('script');
     s.src = addRand(src);
     s.async = true;
-    s.onerror = function(){
-      loader.textContent = 'Не удалось загрузить виджет. Попробуйте ещё раз.';
+    s.onload = function(){
+      try{
+        if(document.readyState !== 'loading'){
+          document.dispatchEvent(new Event('DOMContentLoaded', { bubbles:true, cancelable:true }));
+        }
+      }catch(e){}
     };
     modalState.body.appendChild(s);
+
+    // Fallback A: insert iframe ourselves if GC didn’t mount yet
+    setTimeout(function(){
+      var root = modalState.body.querySelector('.gcw_lite_widget_container, .gcw_lw_container, .gc-lw-container, iframe');
+      if(root) return;
+      try{
+        var idMatch = /[?&]id=(\d+)/.exec(src);
+        var wid = idMatch ? idMatch[1] : '';
+        if(!wid) return;
+        var iframe = document.createElement('iframe');
+        var direct = 'https://artbytwins.getcourse.ru/pl/lite/widget/widget'
+          + '?' + window.location.search.substring(1)
+          + '&id=' + encodeURIComponent(wid)
+          + '&ref=' + encodeURIComponent(document.referrer)
+          + '&loc=' + encodeURIComponent(document.location.href);
+        iframe.src = direct;
+        iframe.style.width = '100%';
+        iframe.style.height = '80vh';
+        iframe.style.border = '0';
+        modalState.body.appendChild(iframe);
+        loader && loader.remove();
+      }catch(e){}
+    }, 1200);
+
+    // Fallback B: open in a new tab after 3s if still nothing
+    setTimeout(function(){
+      var root2 = modalState.body.querySelector('.gcw_lite_widget_container, .gcw_lw_container, .gc-lw-container, iframe');
+      if(root2) return;
+      try{
+        var idMatch2 = /[?&]id=(\d+)/.exec(src);
+        var wid2 = idMatch2 ? idMatch2[1] : '';
+        if(!wid2) return;
+        var direct2 = 'https://artbytwins.getcourse.ru/pl/lite/widget/widget'
+          + '?' + window.location.search.substring(1)
+          + '&id=' + encodeURIComponent(wid2)
+          + '&ref=' + encodeURIComponent(document.referrer)
+          + '&loc=' + encodeURIComponent(document.location.href);
+        window.open(direct2, '_blank', 'noopener');
+        var tip = document.createElement('div');
+        tip.style.cssText = 'padding:16px 12px;text-align:center;color:#334155;font-size:14px;';
+        tip.textContent = 'Мы открыли оплату в новой вкладке, т.к. встроенный виджет грузится медленно или заблокирован.';
+        modalState.body.appendChild(tip);
+        loader && (loader.textContent = 'Если вкладка не открылась — разрешите всплывающие окна и попробуйте снова.');
+      }catch(e){}
+    }, 3000);
 
     // When widget mounts, adjust sizing (iframe or container)
     var obs = new MutationObserver(function(){
@@ -254,7 +320,24 @@ function closeMobile(){
       }
     });
     obs.observe(modalState.body, { childList:true, subtree:true });
+    __gcOpenedOnce = true;
   }
+
+  // Preload widget script on hover to warm up connection
+  document.addEventListener('mouseover', function(e){
+    var t = e.target.closest && e.target.closest('[data-gc-id], [data-gc-src]');
+    if(!t) return;
+    var src = t.getAttribute('data-gc-src') || (t.getAttribute('data-gc-id') ? buildGcSrcById(t.getAttribute('data-gc-id')) : '');
+    if(!src) return;
+    try{
+      preconnectOnce('https://artbytwins.getcourse.ru');
+      var id = 'preload_'+src.replace(/[^a-z0-9]/gi,'_');
+      if(document.getElementById(id)) return;
+      var link = document.createElement('link');
+      link.id = id; link.rel = 'preload'; link.as = 'script'; link.href = src;
+      document.head.appendChild(link);
+    }catch(e){}
+  });
 
   // Delegated click binding for buttons/links with data-gc-id or data-gc-src
   document.addEventListener('click', function(e){
@@ -266,6 +349,7 @@ function closeMobile(){
     if(!src && id) src = buildGcSrcById(id);
     if(!src) return;
     openGetCourseWidget(src);
+    __gcOpenedOnce = true;
   });
 
   // Экспортируем в глобальную область если нужно
