@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="styles.css?v=20250923f">
   <link rel="prefetch" href="header.html" as="fetch" crossorigin>
   <link rel="prefetch" href="footer.html" as="fetch" crossorigin>
-  <link rel="prefetch" href="tg-btn.html" as="fetch" crossorigin>
+  <link rel="prefetch" href="btn.html" as="fetch" crossorigin>
 
 
   <!-- JSON-LD: Course -->
@@ -455,7 +455,42 @@
   <div id="site-footer"></div>
 
   <div id="site-telegram-btn"></div>
+
+  <!-- === STORY VIEWER MODAL (edge‑to‑edge, no white box) === -->
+  <div id="storyModal" class="modal" data-storyviewer hidden aria-hidden="true" role="dialog" aria-label="Страница сторис">
+    <div class="modal-box">
+      <div class="story-view" id="storyView">
+        <!-- progress bars -->
+        <div class="story-bars" id="storyBars">
+          <div class="story-bar"><span></span></div>
+          <div class="story-bar"><span></span></div>
+          <div class="story-bar"><span></span></div>
+        </div>
+        <!-- header (avatar + title) -->
+        <div class="story-header">
+          <img id="storyAvatar" class="avatar" src="./images/work_1.png" alt="avatar" />
+          <div class="meta">
+            <div class="t" id="storyTitle">Имя, студент курса</div>
+            <div class="m" id="storyMeta">Стиль · Город</div>
+          </div>
+        </div>
+        <!-- image/content -->
+        <div class="story-media">
+          <img id="storyImage" src="./images/work_1.png" alt="story" />
+        </div>
+        <!-- caption at bottom -->
+        <div class="story-caption">
+          <div class="t" id="storyCaptionTitle">Заголовок</div>
+          <div class="d" id="storyCaption">Текст истории / отзыв</div>
+        </div>
+        <!-- tap zones -->
+        <div class="story-tap-left" id="tapPrev" aria-label="Предыдущая сторис"></div>
+        <div class="story-tap-right" id="tapNext" aria-label="Следующая сторис"></div>
+      </div>
+    </div>
+    <button class="modal-close" id="storyClose" aria-label="Закрыть">✕</button>
+  </div>
   
-  <script src="app.js" defer></script>
+  <script src="app.js?v=20250923h" defer></script>
 </body>
 </html>
