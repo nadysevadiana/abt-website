@@ -269,10 +269,25 @@ function closeMobile(){
 
   // ===== Simple Story Viewer (uses #storyModal without white box) =====
   (function initStoryViewer(){
-    var data = [];
-    var idx = 0;
+    var data = [];           // stories strip (students)
+    var idx = 0;             // current story index in strip
+    var slides = [];         // current slides of active story
+    var slideIdx = 0;        // current slide within story
     var timer = null;
-    var AUTOPLAY_MS = 5000; // 5s per story
+    var AUTOPLAY_MS = 5000; // 5s per slide
+
+    // Optional overrides for richer multi-slide sequences per story item (by zero-based index)
+    var STORY_OVERRIDES = {
+      0: [ // Анна
+        { image: './images/work_1.png', style: 'Современный минимализм', name: 'Анна', city: 'Москва', caption: 'Сделала проект спальни: план, палитра, расстановка и свет.' },
+        { image: './images/work_1.png', style: 'Лофт', name: 'Анна', city: 'Москва', caption: 'Почему лофт? Люблю текстуры дерева и бетона, добавила чёрные акценты.' },
+        { image: './images/work_3.png', style: 'Современный минимализм', name: 'Команда', city: 'Москва', caption: 'Вдохновлялась работами ребят — вместе нашли решения для хранения.' }
+      ],
+      2: [ // Алексей
+        { image: './images/work_3.png', style: 'Лофт', name: 'Алексей', city: 'Москва', caption: 'Проект квартиры в стиле лофт: открытое пространство и брутальные материалы.' },
+        { image: './images/work_4.png', style: 'Скандинавский уют', name: 'Алексей', city: 'Москва', caption: 'Для спальни — мягкие ткани, тёплый свет, светлое дерево.' }
+      ]
+    };
 
     // Cache modal elements
     var modal   = null;
@@ -311,12 +326,29 @@ function closeMobile(){
       var items = document.querySelectorAll('#studentStories .story-item');
       data = Array.prototype.map.call(items, function(it){
         var img = it.querySelector('img');
+        var label = (it.getAttribute('data-caption-title') || it.querySelector('.story-label')?.textContent || '').trim();
+        var meta = (it.getAttribute('data-meta') || '').trim();
+        var style = '', city = '';
+        if(meta){
+          var parts = meta.split('·');
+          if(parts.length >= 2){ style = parts[0].trim(); city = parts[1].trim(); }
+          else { style = meta; }
+        }
+        var name = label.split(',')[0].trim() || label;
         return {
-          src: img ? img.getAttribute('src') : '',
-          title: it.getAttribute('data-caption-title') || it.querySelector('.story-label')?.textContent || '',
-          caption: it.getAttribute('data-caption') || '',
-          meta: it.getAttribute('data-meta') || ''
+          slides: [{
+            image: img ? img.getAttribute('src') : '',
+            style: style || 'Проект',
+            name: name || '',
+            city: city || '',
+            caption: it.getAttribute('data-caption') || ''
+          }]
         };
+      });
+      // Apply manual overrides if defined
+      Object.keys(STORY_OVERRIDES).forEach(function(k){
+        var i = parseInt(k,10);
+        if(!isNaN(i) && data[i]){ data[i].slides = STORY_OVERRIDES[i]; }
       });
     }
 
@@ -336,15 +368,13 @@ function closeMobile(){
 
     function stopTimer(){ if(timer){ clearTimeout(timer); timer=null; } }
 
-    function renderBars(active){
+    function renderBarsForSlides(active){
       elBars.innerHTML = '';
-      for(var i=0;i<data.length;i++){
+      for(var i=0;i<slides.length;i++){
         var b = document.createElement('div'); b.className='story-bar';
-        var s = document.createElement('span');
-        if(i < active) s.style.width='100%';
+        var s = document.createElement('span'); if(i < active) s.style.width='100%';
         b.appendChild(s); elBars.appendChild(b);
       }
-      // animate current
       var span = elBars.querySelectorAll('.story-bar > span')[active];
       if(span){
         span.style.transition = 'none'; span.style.width='0%';
@@ -355,19 +385,44 @@ function closeMobile(){
       }
     }
 
-    function show(i){
+    function openStoryAt(i){
       if(!data.length) return;
       idx = (i + data.length) % data.length;
+      slides = data[idx].slides || [];
+      slideIdx = 0;
       openModalStory();
-      var d = data[idx];
-      elImg.src = d.src; elAva.src = d.src;
-      elTitle.textContent = d.title || '';
-      elMeta.textContent  = d.meta || '';
-      elCTitle.textContent= d.title || '';
+      showSlide(slideIdx);
+    }
+
+    function showSlide(j){
+      if(!slides.length) return;
+      slideIdx = (j + slides.length) % slides.length;
+      var d = slides[slideIdx];
+      elImg.src = d.image || '';
+      elAva.src = d.avatar || d.image || '';
+      // Top line: Name, City
+      elTitle.textContent = (d.name && d.city) ? (d.name + ', ' + d.city) : (d.name || d.city || '');
+      elMeta.textContent  = '';
+      // Bottom caption: style (bold title) + description
+      elCTitle.textContent= d.style || '';
       elCap.textContent   = d.caption || '';
-      renderBars(idx);
+      renderBarsForSlides(slideIdx);
       stopTimer();
-      timer = setTimeout(function(){ show(idx+1); }, AUTOPLAY_MS);
+      timer = setTimeout(function(){ nextSlide(); }, AUTOPLAY_MS);
+    }
+
+    function nextSlide(){
+      if(slideIdx + 1 < slides.length){ showSlide(slideIdx + 1); }
+      else { openStoryAt(idx + 1); }
+    }
+    function prevSlide(){
+      if(slideIdx - 1 >= 0){ showSlide(slideIdx - 1); }
+      else {
+        var prevIdx = (idx - 1 + data.length) % data.length;
+        openStoryAt(prevIdx);
+        slides = data[prevIdx].slides || [];
+        showSlide(slides.length - 1);
+      }
     }
 
     function bind(){
@@ -378,7 +433,7 @@ function closeMobile(){
         if(!data.length) collect();
         var all = Array.prototype.slice.call(document.querySelectorAll('#studentStories .story-item'));
         var i = all.indexOf(it); if(i < 0) i = 0;
-        show(i);
+        openStoryAt(i);
       });
 
       // Close interactions
@@ -388,12 +443,12 @@ function closeMobile(){
         document.addEventListener('keydown', function(e){
           if(modal.hidden) return;
           if(e.key==='Escape') closeModalStory();
-          else if(e.key==='ArrowRight') { stopTimer(); show(idx+1); }
-          else if(e.key==='ArrowLeft') { stopTimer(); show(idx-1); }
+          else if(e.key==='ArrowRight') { stopTimer(); nextSlide(); }
+          else if(e.key==='ArrowLeft') { stopTimer(); prevSlide(); }
         });
         // Tap zones
-        elNext.addEventListener('click', function(e){ e.stopPropagation(); stopTimer(); show(idx+1); });
-        elPrev.addEventListener('click', function(e){ e.stopPropagation(); stopTimer(); show(idx-1); });
+        elNext.addEventListener('click', function(e){ e.stopPropagation(); stopTimer(); nextSlide(); });
+        elPrev.addEventListener('click', function(e){ e.stopPropagation(); stopTimer(); prevSlide(); });
         // Click on the media (image/video) also goes to NEXT
         var mediaEl = elView.querySelector('.story-media');
         if(mediaEl){
@@ -401,13 +456,13 @@ function closeMobile(){
           mediaEl.addEventListener('click', function(e){
             e.stopPropagation();
             stopTimer();
-            show(idx+1);
+            nextSlide();
           });
         }
         // Touch swipe down to close
         var y0=null;
         elView.addEventListener('touchstart', function(ev){ y0 = ev.touches?.[0]?.clientY || 0; stopTimer(); }, { passive:true });
-        elView.addEventListener('touchend', function(){ timer = setTimeout(function(){ show(idx+1); }, AUTOPLAY_MS); y0=null; }, { passive:true });
+        elView.addEventListener('touchend', function(){ timer = setTimeout(function(){ nextSlide(); }, AUTOPLAY_MS); y0=null; }, { passive:true });
         elView.addEventListener('touchmove', function(ev){ if(!y0) return; var y=ev.touches?.[0]?.clientY||0; if(y - y0 > 60) closeModalStory(); }, { passive:true });
       }
     }
