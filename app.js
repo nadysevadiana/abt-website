@@ -7,7 +7,7 @@
 
 (function(){
   // Версия для пробития кеша статических partials
-  var VERSION = '20251011c';
+  var VERSION = '20250923h';
   function withV(path){ return path + (path.indexOf('?') === -1 ? ('?v=' + VERSION) : ('&v=' + VERSION)); }
   // Preconnect/DNS-hint helper (idempotent)
   function preconnectOnce(href){
@@ -556,38 +556,4 @@ function closeMobile(){
       if (window.__abt_remountContacts) window.__abt_remountContacts();
     }
   };
-})();
-
-/* === CTA LABEL CONTROL ===============================================
-   On index: "Выбрать пакет"; on other pages: "На главную".
-   Works even when header.html is injected dynamically by app.js.
-===================================================================== */
-(function(){
-  function applyCtaLabel(){
-    var desktop = document.getElementById('cta-desktop');
-    var mobile  = document.getElementById('cta-mobile');
-    var file    = (window.location.pathname.split('/').pop() || '').toLowerCase();
-    var isIndex = file === '' || file === 'index.html' || file === 'index.htm';
-    var label   = isIndex ? 'Выбрать пакет' : 'На главную';
-    [desktop, mobile].forEach(function(el){
-      if(!el) return;
-      var span = el.querySelector('.cta-text');
-      if(span) span.textContent = label; else el.textContent = label;
-      try{ el.setAttribute('href', 'index.html#choose-path'); }catch(e){}
-    });
-  }
-
-  function run(){
-    applyCtaLabel();
-    // Re-apply when header gets injected or re-rendered
-    try{
-      var mo = new MutationObserver(applyCtaLabel);
-      mo.observe(document.documentElement, { childList:true, subtree:true });
-      window.addEventListener('hashchange', applyCtaLabel);
-    }catch(e){}
-  }
-
-  if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', run);
-  } else { run(); }
 })();
