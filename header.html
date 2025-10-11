@@ -48,10 +48,20 @@
       var mobile = document.getElementById('cta-mobile');
       if(!desktop && !mobile) return;
       var file = window.location.pathname.split('/').pop();
-      if(!file) file = 'index.html';
-      var isIndex = file === 'index.html' || file === 'index.htm' || file === '';
+      var isIndex = file === 'index.html' || file === '' || file === 'index.htm';
       var text = isIndex ? 'Выбрать пакет' : 'На главную';
-      function setText(el){ if(!el) return; var span = el.querySelector('.cta-text'); if(span) span.textContent = text; }
-      setText(desktop); setText(mobile);
+      function setText(el){
+        if(!el) return;
+        var span = el.querySelector('.cta-text');
+        if(span) span.textContent = text;
+      }
+      // Force label "На главную" for all pages except index
+      if(!isIndex) {
+        setText(desktop);
+        setText(mobile);
+      } else {
+        setText(desktop);
+        setText(mobile);
+      }
     })();
   </script>
