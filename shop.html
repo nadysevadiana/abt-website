@@ -139,20 +139,74 @@
       </template>
 
       <template id="tpl-3dsmax">
-        <h2 class="text-2xl md:text-3xl font-bold mb-2 text-center">3ds Max — мини‑модули</h2>
-        <p class="text-slate-700 mb-4">Сфокусированные занятия по освещению, материалам, камерам и ускорению рендера.</p>
-        <ul class="list-disc pl-5 text-slate-700 space-y-1 mb-5">
-          <li>Свет и экспозиция: быстрые приёмы</li>
-          <li>Материалы: дерево, металл, ткань</li>
-          <li>Рендер без шума: чек‑лист настроек</li>
-        </ul>
-        <div class="flex flex-wrap items-end gap-4">
-          <div>
-            <div class="text-sm uppercase tracking-wide text-slate-500">Цена за модуль</div>
-            <div class="text-3xl font-bold">1 200 ₽</div>
+        <h2 class="text-2xl md:text-3xl font-bold mb-2 text-center">3ds Max — библиотеки и документы</h2>
+        <p class="text-slate-700 mb-4 text-center">Готовые ресурсы, которые экономят время и делают визуал реалистичнее: модели, материалы и идеальное ТЗ.</p>
+
+        <div class="flex flex-col gap-6">
+          <!-- 1. Библиотека 3D моделей -->
+          <div class="card border border-gray-200 rounded-xl bg-white p-4">
+            <div class="flex items-center justify-between mb-1">
+              <h3 class="text-lg font-semibold">Библиотека 3D моделей</h3>
+              <span class="inline-flex items-center text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 font-bold">Топ‑набор</span>
+            </div>
+            <p class="text-slate-700 text-sm">Диваны, столы, стулья, шкафы, сантехника и другая мебель — аккуратно собранная ZIP‑папка + <span class="font-medium">бонус</span>: доступ в Telegram‑канал с большой подборкой моделей.</p>
+            <ul class="list-disc pl-5 text-slate-700 text-sm space-y-1 mt-2">
+              <li>Экономит часы на поиске и моделинге</li>
+              <li>Готово к использованию для быстрого и качественного дизайна</li>
+            </ul>
+            <div class="mt-3 flex items-end justify-between">
+              <div>
+                <div class="text-xs uppercase tracking-wide text-slate-500">Цена</div>
+                <div class="text-xl font-bold">9 590 ₽</div>
+              </div>
+              <a href="checkout.html?product=3dsmax-models" class="btn-primary inline-flex items-center px-4 py-2 rounded-lg font-semibold"><i class="fa-solid fa-cart-shopping mr-2"></i>Купить библиотеку</a>
+            </div>
           </div>
-          <a href="checkout.html?product=3dsmax-module" class="btn-primary inline-flex items-center px-5 py-3 rounded-lg font-semibold shadow"><i class="fa-solid fa-cart-shopping mr-2"></i>Купить модуль</a>
-          <a href="3dsmax.html" class="inline-flex items-center px-4 py-2 rounded-lg border border-emerald-600 text-emerald-700 hover:bg-emerald-50">Страница программы</a>
+
+          <!-- 2. Библиотека материалов -->
+          <div class="card border border-gray-200 rounded-xl bg-white p-4">
+            <div class="flex items-center justify-between mb-1">
+              <h3 class="text-lg font-semibold">Библиотека материалов</h3>
+              <span class="inline-flex items-center text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 font-bold">PBR/Шейдеры</span>
+            </div>
+            <p class="text-slate-700 text-sm">Штукатурка, дерево, ткань и многое другое — готовые пресеты/карты, которые быстро дают реалистичный результат.</p>
+            <ul class="list-disc pl-5 text-slate-700 text-sm space-y-1 mt-2">
+              <li>Экономит время и добавляет фотореализма</li>
+              <li>Легко подключить и настроить под сцену</li>
+            </ul>
+            <div class="mt-3 flex items-end justify-between">
+              <div>
+                <div class="text-xs uppercase tracking-wide text-slate-500">Цена</div>
+                <div class="text-xl font-bold">9 590 ₽</div>
+              </div>
+              <a href="checkout.html?product=3dsmax-materials" class="btn-primary inline-flex items-center px-4 py-2 rounded-lg font-semibold"><i class="fa-solid fa-cart-shopping mr-2"></i>Купить библиотеку</a>
+            </div>
+          </div>
+
+          <!-- 3. Правильное техническое задание (Word) -->
+          <div class="card border border-gray-200 rounded-xl bg-white p-4">
+            <div class="flex items-center justify-between mb-1">
+              <h3 class="text-lg font-semibold">Техническое задание (Word)</h3>
+              <span class="inline-flex items-center text-xs px-2 py-0.5 rounded-full bg-sky-100 text-sky-700 font-bold">Шаблон</span>
+            </div>
+            <p class="text-slate-700 text-sm">Полный чек‑лист для дизайнера и визуализатора: всё, что нужно учесть, чтобы не терять время на согласования.</p>
+            <ul class="list-disc pl-5 text-slate-700 text-sm space-y-1 mt-2">
+              <li>Структура разделов и вопросов</li>
+              <li>Готов к редактированию и брендированию</li>
+            </ul>
+            <div class="mt-3 flex items-end justify-between">
+              <div>
+                <div class="text-xs uppercase tracking-wide text-slate-500">Цена</div>
+                <div class="text-xl font-bold">990 ₽</div>
+              </div>
+              <a href="checkout.html?product=3dsmax-brief" class="btn-primary inline-flex items-center px-4 py-2 rounded-lg font-semibold"><i class="fa-solid fa-cart-shopping mr-2"></i>Купить шаблон</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Кнопки навигации -->
+        <div class="mt-5 flex flex-wrap items-center justify-center gap-3">
+          <a href="#" data-back class="inline-flex items-center px-4 py-2 rounded-lg border border-emerald-600 text-emerald-700 hover:bg-emerald-50"><i class="fa-solid fa-arrow-left mr-2"></i>К списку разделов</a>
         </div>
       </template>
 
@@ -236,7 +290,6 @@
         <!-- Кнопки навигации -->
         <div class="mt-5 flex flex-wrap items-center justify-center gap-3">
           <a href="#" data-back class="inline-flex items-center px-4 py-2 rounded-lg border border-emerald-600 text-emerald-700 hover:bg-emerald-50"><i class="fa-solid fa-arrow-left mr-2"></i>К списку разделов</a>
-          <a href="sketchup.html" class="inline-flex items-center px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-50"><i class="fa-solid fa-book-open mr-2"></i>Страница программы</a>
         </div>
       </template>
 
