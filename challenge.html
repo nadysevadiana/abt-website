@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>7‑дневный челлендж — Соберите комнату мечты | Art by Twins</title>
+  <meta name="description" content="Пошаговый челлендж на 5 дней: от хаоса идей к готовому проекту комнаты. Для тех, кто хочет красивый интерьер без найма дизайнера." />
+  <link rel="icon" href="/favicon.ico" />
+  <!-- tailwind likely already compiled in your project; if you use a global CSS, keep it -->
+  <link rel="preload" as="script" href="app.js" />
+</head>
+<body class="bg-white text-slate-900 antialiased">
+  <!-- Header placeholder (loaded by app.js) -->
+  <div id="header"></div>
+
+  <main id="main-content" class="min-h-screen">
+    <!-- Hero -->
+    <section class="relative">
+      <div class="max-w-7xl mx-auto px-6 md:px-10 pt-10 pb-6">
+        <span class="inline-block text-xs uppercase tracking-wider text-emerald-700/80 bg-emerald-50 px-3 py-1 rounded-full">Челлендж</span>
+        <h1 class="mt-4 text-3xl md:text-5xl font-bold leading-tight">Соберите комнату мечты как дизайнер <span class="text-slate-500">(даже если вы никогда этого не делали)</span></h1>
+        <p class="mt-4 text-lg md:text-xl text-slate-700 max-w-3xl">Пошаговый план для тех, кто хочет красивый интерьер, но не готов платить дизайнеру. От хаоса идей — к готовому проекту <strong>за 5 дней</strong>.</p>
+
+        <div class="mt-6 flex flex-wrap items-center gap-3">
+          <a href="#join" class="inline-flex items-center px-5 py-3 rounded-xl text-white btn-primary shadow-lg"><i class="fa-solid fa-bolt mr-2"></i>Вступить в челлендж</a>
+          <a href="#program" class="inline-flex items-center px-5 py-3 rounded-xl border border-slate-200 hover:border-emerald-300">Посмотреть программу</a>
+          <span class="text-sm text-slate-500">Стоимость участия: <strong class="text-slate-900">1 490 ₽</strong></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pain points / What stops you -->
+    <section class="py-10">
+      <div class="max-w-7xl mx-auto px-6 md:px-10 grid md:grid-cols-2 gap-8 items-start">
+        <div>
+          <h2 class="text-2xl md:text-3xl font-semibold">Что вас останавливает?</h2>
+          <ul class="mt-4 space-y-3 text-slate-700">
+            <li class="flex"><i class="fa-regular fa-circle-question mt-1.5 mr-3"></i><span>Боитесь ошибиться с цветом и мебелью?</span></li>
+            <li class="flex"><i class="fa-regular fa-circle-question mt-1.5 mr-3"></i><span>Запутались в сохранённых картинках?</span></li>
+            <li class="flex"><i class="fa-regular fa-circle-question mt-1.5 mr-3"></i><span>Не знаете, как соединить все детали в гармоничную картину?</span></li>
+          </ul>
+        </div>
+        <div class="bg-emerald-50 border border-emerald-100 rounded-2xl p-6">
+          <h3 class="text-xl font-semibold text-emerald-900">У нас есть решение!</h3>
+          <p class="mt-3 text-slate-700">Всего 5 дней — и вы получите готовый проект своей комнаты, который:</p>
+          <ul class="mt-4 space-y-2 text-slate-800">
+            <li>✅ Будет вам действительно нравиться</li>
+            <li>✅ Сэкономит деньги на ненужных покупках</li>
+            <li>✅ Избавит от страха сделать «неправильно»</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Program -->
+    <section id="program" class="py-8">
+      <div class="max-w-7xl mx-auto px-6 md:px-10">
+        <h2 class="text-2xl md:text-3xl font-semibold">Программа (5 дней)</h2>
+        <div class="mt-6 grid md:grid-cols-2 lg:grid-cols-5 gap-4">
+          <article class="card card--compact p-4 border border-slate-200 rounded-xl">
+            <h3 class="font-semibold">День 1 — Планирование. Подготовка.</h3>
+            <p class="mt-2 text-slate-700 text-sm">Замеры, функциональные зоны, быстрый бриф по стилю и задачам.</p>
+          </article>
+          <article class="card card--compact p-4 border border-slate-200 rounded-xl">
+            <h3 class="font-semibold">День 2 — Стиль из ваших сохранёнок.</h3>
+            <p class="mt-2 text-slate-700 text-sm">Разбираем Pinterest/галерею и формируем направление.</p>
+          </article>
+          <article class="card card--compact p-4 border border-slate-200 rounded-xl">
+            <h3 class="font-semibold">День 3 — Композиция и палитра.</h3>
+            <p class="mt-2 text-slate-700 text-sm">Правила композиции, палитра, акценты, материалы.</p>
+          </article>
+          <article class="card card--compact p-4 border border-slate-200 rounded-xl">
+            <h3 class="font-semibold">День 4 — Коллаж в Pinterest.</h3>
+            <p class="mt-2 text-slate-700 text-sm">Собираем понятный визуальный коллаж — всё просто и понятно!</p>
+          </article>
+          <article class="card card--compact p-4 border border-slate-200 rounded-xl">
+            <h3 class="font-semibold">День 5 — Список покупок.</h3>
+            <p class="mt-2 text-slate-700 text-sm">Чёткий список, что покупать и где. Итог: готовый мини‑проект.</p>
+          </article>
+        </div>
+        <p class="mt-4 text-sm text-slate-500">Формат: 4 мини‑видео + текстовые инструкции, задания и обратная связь.</p>
+      </div>
+    </section>
+
+    <!-- Price / CTA -->
+    <section class="py-10">
+      <div class="max-w-7xl mx-auto px-6 md:px-10 grid md:grid-cols-3 gap-6 items-center">
+        <div class="md:col-span-2">
+          <h2 class="text-2xl md:text-3xl font-semibold">Почему это стоит 1 490 ₽?</h2>
+          <ul class="mt-4 space-y-2 text-slate-700">
+            <li>• Экономит часы поисков и сомнений.</li>
+            <li>• Дает уверенность в каждом следующем шаге.</li>
+          </ul>
+          <p class="mt-3 text-slate-700"><strong>Бонус:</strong> первым 15 участникам — гайд «10 ошибок при выборе мебели».</p>
+        </div>
+        <div class="bg-white border border-emerald-200 rounded-2xl p-6 shadow-sm">
+          <div class="text-4xl font-bold">1 490 ₽</div>
+          <p class="text-sm text-slate-500 mt-1">разовый платеж</p>
+          <a id="join" href="#tg" class="mt-4 w-full inline-flex items-center justify-center px-5 py-3 rounded-xl text-white btn-primary"><i class="fa-brands fa-telegram mr-2"></i>Вступить в Telegram‑группу</a>
+          <p class="mt-3 text-xs text-slate-500">Мы создаём закрытую группу в Telegram: туда будут загружаться видео и материалы.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="py-10">
+      <div class="max-w-7xl mx-auto px-6 md:px-10 grid md:grid-cols-3 gap-6">
+        <div class="border border-slate-200 rounded-xl p-6">
+          <h3 class="font-semibold">4 мини‑видео</h3>
+          <p class="mt-2 text-sm text-slate-700">Короткие уроки, которые можно смотреть с телефона и сразу применять.</p>
+        </div>
+        <div class="border border-slate-200 rounded-xl p-6">
+          <h3 class="font-semibold">Пошаговые задания</h3>
+          <p class="mt-2 text-sm text-slate-700">Каждый день — маленький шаг и понятный результат.</p>
+        </div>
+        <div class="border border-slate-200 rounded-xl p-6">
+          <h3 class="font-semibold">Поддержка в чате</h3>
+          <p class="mt-2 text-sm text-slate-700">Ответы на вопросы, разборы и моральная поддержка в Telegram.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ / small notes -->
+    <section class="py-10">
+      <div class="max-w-7xl mx-auto px-6 md:px-10">
+        <h2 class="text-2xl md:text-3xl font-semibold">Частые вопросы</h2>
+        <div class="mt-6 grid md:grid-cols-2 gap-6">
+          <div class="border border-slate-200 rounded-xl p-5">
+            <h3 class="font-semibold">Мне точно хватит 5 дней?</h3>
+            <p class="mt-2 text-sm text-slate-700">Да. Формат — «по 1 шагу в день». Можно идти быстрее или медленнее — материалы остаются у вас.</p>
+          </div>
+          <div class="border border-slate-200 rounded-xl p-5">
+            <h3 class="font-semibold">Нужно ли уметь работать в 3D?</h3>
+            <p class="mt-2 text-sm text-slate-700">Нет. Мы используем простые инструменты: Pinterest/коллажи + понятные чек‑листы и схемы.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer placeholder (loaded by app.js) -->
+  <div id="footer"></div>
+
+  <!-- Floating TG button placeholder, if your app.js injects it -->
+  <div id="tg-btn"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
