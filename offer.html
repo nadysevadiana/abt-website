@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Публичная оферта — Art by Twins</title>
+  <meta name="description" content="Публичная оферта Art by Twins — условия оказания платных образовательных услуг: термины, предмет, оплата и возвраты, персональные данные, ответственность сторон." />
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
@@ -43,6 +44,17 @@
   .pill-emerald{ background-color:#10B981; }
   .pill-sky{ background-color:#0EA5E9; }
   .pill-amber{ background-color:#F59E0B; }
+  .legal-prose :where(h2){font-size:1.125rem;line-height:1.6;margin-top:1.5rem;font-weight:700}
+  .legal-prose :where(h3){font-size:1rem;line-height:1.55;margin-top:1.25rem;font-weight:700}
+  .legal-prose :where(p,ul,ol,table){margin-top:.6rem}
+  .legal-prose a{color:#10B981;text-decoration:underline}
+  .chip-nav{position:sticky;top:68px;z-index:30;background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,0));backdrop-filter:saturate(1.2) blur(6px);padding:.25rem .5rem;border-radius:1rem}
+  .badge-dot{display:inline-flex;align-items:center;gap:.5rem}
+  .badge-dot::before{content:"";width:.5rem;height:.5rem;border-radius:9999px;background:#10B981;box-shadow:0 0 0 3px rgba(16,185,129,.18)}
+  .legal-card{box-shadow:0 20px 60px rgba(2,6,23,.08);}
+  .back-to-top{position:fixed;right:16px;bottom:16px;border:1px solid rgba(2,6,23,.1);background:#0F172A;color:#fff;border-radius:9999px;padding:.6rem .85rem;box-shadow:0 10px 22px rgba(2,6,23,.18);display:none}
+  .back-to-top.show{display:inline-flex}
+  @media print{.chip-nav,.back-to-top,#site-header,#site-footer{display:none!important}}
 </style>
 </head>
 <body class="site-bg text-gray-900">
@@ -60,24 +72,24 @@
       <h1 class="text-3xl md:text-4xl font-bold">Публичная оферта</h1>
       <p class="text-sm text-gray-500 mt-2">Редакция от 05.09.2025 · Проект «Art by Twins», Москва</p>
       <p class="mt-4 text-gray-700">Настоящая оферта является предложением заключить договор возмездного оказания информационно‑образовательных услуг на условиях, изложенных ниже. Оплата услуг означает акцепт оферты (ст. 438 ГК РФ).</p>
-      <div class="mt-4 flex flex-wrap gap-2 text-xs">
-  <a href="#terms" class="inline-flex items-center px-2.5 py-1 rounded-full bg-white border border-emerald-200 text-emerald-700 font-semibold shadow-sm">Термины</a>
-  <a href="#subject" class="inline-flex items-center px-2.5 py-1 rounded-full bg-white border border-emerald-200 text-emerald-700 font-semibold shadow-sm">Предмет</a>
-  <a href="#accept" class="inline-flex items-center px-2.5 py-1 rounded-full bg-white border border-emerald-200 text-emerald-700 font-semibold shadow-sm">Заключение</a>
-  <a href="#payment" class="inline-flex items-center px-2.5 py-1 rounded-full bg-white border border-emerald-200 text-emerald-700 font-semibold shadow-sm">Оплата</a>
-  <a href="#rights" class="inline-flex items-center px-2.5 py-1 rounded-full bg-white border border-emerald-200 text-emerald-700 font-semibold shadow-sm">Права</a>
-  <a href="#refunds" class="inline-flex items-center px-2.5 py-1 rounded-full bg-white border border-emerald-200 text-emerald-700 font-semibold shadow-sm">Возвраты</a>
-  <a href="#liability" class="inline-flex items-center px-2.5 py-1 rounded-full bg-white border border-emerald-200 text-emerald-700 font-semibold shadow-sm">Ответственность</a>
-  <a href="#privacy" class="inline-flex items-center px-2.5 py-1 rounded-full bg-white border border-emerald-200 text-emerald-700 font-semibold shadow-sm">ПДн</a>
-  <a href="#duration" class="inline-flex items-center px-2.5 py-1 rounded-full bg-white border border-emerald-200 text-emerald-700 font-semibold shadow-sm">Срок</a>
-  <a href="#details" class="inline-flex items-center px-2.5 py-1 rounded-full bg-white border border-emerald-200 text-emerald-700 font-semibold shadow-sm">Реквизиты</a>
-</div>
+      <div class="mt-4 chip-nav flex flex-wrap gap-2 text-xs">
+        <a href="#terms" class="inline-flex items-center px-2.5 py-1 rounded-full bg-white border border-emerald-200 text-emerald-700 font-semibold shadow-sm">Термины</a>
+        <a href="#subject" class="inline-flex items-center px-2.5 py-1 rounded-full bg-white border border-emerald-200 text-emerald-700 font-semibold shadow-sm">Предмет</a>
+        <a href="#accept" class="inline-flex items-center px-2.5 py-1 rounded-full bg-white border border-emerald-200 text-emerald-700 font-semibold shadow-sm">Заключение</a>
+        <a href="#payment" class="inline-flex items-center px-2.5 py-1 rounded-full bg-white border border-emerald-200 text-emerald-700 font-semibold shadow-sm">Оплата</a>
+        <a href="#rights" class="inline-flex items-center px-2.5 py-1 rounded-full bg-white border border-emerald-200 text-emerald-700 font-semibold shadow-sm">Права</a>
+        <a href="#refunds" class="inline-flex items-center px-2.5 py-1 rounded-full bg-white border border-emerald-200 text-emerald-700 font-semibold shadow-sm">Возвраты</a>
+        <a href="#liability" class="inline-flex items-center px-2.5 py-1 rounded-full bg-white border border-emerald-200 text-emerald-700 font-semibold shadow-sm">Ответственность</a>
+        <a href="#privacy" class="inline-flex items-center px-2.5 py-1 rounded-full bg-white border border-emerald-200 text-emerald-700 font-semibold shadow-sm">ПДн</a>
+        <a href="#duration" class="inline-flex items-center px-2.5 py-1 rounded-full bg-white border border-emerald-200 text-emerald-700 font-semibold shadow-sm">Срок</a>
+        <a href="#details" class="inline-flex items-center px-2.5 py-1 rounded-full bg-white border border-emerald-200 text-emerald-700 font-semibold shadow-sm">Реквизиты</a>
+      </div>
     </div>
   </section>
 
   <!-- Body -->
   <main class="px-6 md:px-16 pb-16">
-    <div class="max-w-4xl mx-auto bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow prose prose-sm">
+    <div class="max-w-4xl mx-auto bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow prose prose-sm legal-prose legal-card">
       <h2 class="text-xl font-semibold">ПУБЛИЧНАЯ ОФЕРТА</h2>
 
       <p>Общество с ограниченной ответственностью «АРТ.БАЙ.ТВИНС.», именуемая в дальнейшем «Исполнитель», в лице генерального директора Надысевой Эльвиры Ханифовны, действующего на основании Устава, выражает намерение заключить договор об оказании платных образовательных услуг на условиях настоящей оферты (далее — «Договор») с любым юридическим и/или любым дееспособным физическим лицом старше 18 лет, в дальнейшем именуемым «Заказчик», желающим освоить любой Курс, представленный на сайте Исполнителя.</p>
@@ -101,7 +113,7 @@
       <p>1.3. Акцепт оферты – полное и безоговорочное принятие Заказчиком условий настоящей Оферты, осуществлённое в соответствии с положениями настоящего Договора.</p>
       <p>1.4. Образовательная деятельность – деятельность Исполнителя по реализации образовательных программ дополнительного профессионального образования (программ повышения квалификации и/или программ профессиональной переподготовки).</p>
       <p>1.5. Программа дополнительного профессионального образования – дополнительная профессиональная программа (повышения квалификации или профессиональной переподготовки) или дополнительная общеобразовательная общеразвивающая программа, реализуемая с использованием дистанционных образовательных технологий на Платформе на основании лицензии. Программу обучения могут пройти только Заказчики, отвечающие критериям, указанным в п. 3 статьи 76 Федерального закона от 29.12.2012 № 273‑ФЗ «Об образовании в Российской Федерации».</p>
-      <p>1.6. Сайт Исполнителя – веб‑сайт в сети Интернет: <strong>https://artbytwins.pro</strong> (и/или актуальные субдомены), включая его электронные страницы. Сайт является открытым для свободного визуального ознакомления и содержит информацию о Курсе и программах обучения. Сайт используется Исполнителем для описания, предложения и оказания услуг, а также в иных не запрещённых законом целях.</p>
+      <p>1.6. Сайт Исполнителя – веб‑сайт в сети Интернет: <a href="https://artbytwins.pro" target="_blank" rel="noopener">https://artbytwins.pro</a> (и/или актуальные субдомены), включая его электронные страницы. Сайт является открытым для свободного визуального ознакомления и содержит информацию о Курсе и программах обучения. Сайт используется Исполнителем для описания, предложения и оказания услуг, а также в иных не запрещённых законом целях.</p>
       <p>1.7. Платформа GetCourse (Платформа) – размещённая в сети Интернет программа для ЭВМ «Геткурс 2.0», расположенная по адресу <strong>https://getcourse.ru</strong>, зарегистрирована в Едином реестре российских программ для ЭВМ и баз данных (запись № 10031).</p>
       <p>1.8. Личный кабинет Заказчика – персонализированный раздел Платформы GetCourse, доступ к которому осуществляется посредством ввода аутентификационных данных: логина (имени пользователя) и пароля (кода доступа). Ввод аутентификационных данных приравнивается к использованию простой электронной подписи (ст. 5 Федерального закона от 06.04.2011 № 63‑ФЗ «Об электронной подписи»). Доступ осуществляется после регистрации Заказчика на Платформе. В Личном кабинете отображается информация об оплаченных и доступных Курсах.</p>
       <p>1.9. Регистрация – действия Заказчика по заполнению формы заявки на Платформе или сайте Исполнителя и/или предоставление своих персональных данных посредством телефонной связи менеджеру Исполнителя, присвоение логина и пароля для входа в Личный кабинет.</p>
@@ -135,7 +147,7 @@
       <p>2.17. Удостоверение или диплом выдаётся лично либо направляется по почте. Исполнитель не несёт ответственности за недоставку/повреждение отправления по вине почтовых служб или при указании неверных данных.</p>
       <p>2.18. Факт доступа определяется по данным технических средств (логи, истории соединений и т. п.).</p>
       <p>2.19. Исполнитель вправе привлекать третьих лиц (преподавателей/спикеров, ООО «ART.BY.TWINS») в том числе в форме сетевого взаимодействия, без отдельного согласия Заказчика.</p>
-      <p>2.20. В части зачисления/отчисления обучающихся применяется локальная документация ООО «ART.BY.TWINS» (правила приёма/перевода/отчисления, положения об итоговой аттестации), опубликованная на сайте Исполнителя (<em>актуальная ссылка будет размещена на сайте Art by Twins</em>).</p>
+      <p>2.20. В части зачисления/отчисления обучающихся применяется локальная документация ООО «ART.BY.TWINS» (правила приёма/перевода/отчисления, положения об итоговой аттестации), опубликованная на сайте Исполнителя (<a href="terms.html#local-acts">terms.html#local-acts</a>).</p>
       <p>2.21. Отчисление Заказчика по его заявлению автоматически прекращает действие настоящего Договора.</p>
 
       <h3 class="mt-6 font-semibold text-lg">3. Срок действия договора. Изменение и расторжение</h3>
@@ -240,12 +252,12 @@
       <p>9.3. Обмен документами осуществляется по e‑mail сторон и признаётся подписанным простой электронной подписью. Письменная форма соглашения о применении простой электронной подписи считается соблюдённой в связи с акцептом Оферты (п. 3 ст. 438 ГК РФ).</p>
 
       <div class="mt-8 flex flex-wrap gap-3">
-        <a href="checkout.html" class="inline-flex items-center px-5 py-2 rounded-lg text-sm font-semibold btn-primary"><i class="fa-solid fa-check mr-2"></i>Принять оферту</a>
         <a href="policy.html" class="inline-flex items-center px-5 py-2 rounded-lg text-sm font-semibold border border-emerald-600 text-emerald-700 hover:bg-emerald-50"><i class="fa-solid fa-shield-halved mr-2"></i>Политика конфиденциальности</a>
         <a href="terms.html" class="inline-flex items-center px-5 py-2 rounded-lg text-sm font-semibold border border-emerald-600 text-emerald-700 hover:bg-emerald-50"><i class="fa-solid fa-scale-balanced mr-2"></i>Пользовательское соглашение</a>
         <a href="cookies.html" class="inline-flex items-center px-5 py-2 rounded-lg text-sm font-semibold border border-emerald-600 text-emerald-700 hover:bg-emerald-50"><i class="fa-solid fa-cookie-bite mr-2"></i>Политика Cookie</a>
       </div>
     </div>
+    <button id="toTop" class="back-to-top" aria-label="Наверх">▲</button>
   </main>
 
   <div id="site-telegram-btn"></div>
@@ -266,5 +278,15 @@
   })();
 </script>
 </body>
-<script src="app.js?v=20251011c" defer></script>
+<script>
+  // Show/hide back-to-top
+  (function(){
+    var btn=document.getElementById('toTop');
+    function t(){ if(!btn) return; (window.scrollY>400?btn.classList.add('show'):btn.classList.remove('show')); }
+    window.addEventListener('scroll',t,{passive:true});
+    window.addEventListener('load',t);
+    if(btn){ btn.addEventListener('click',function(){ window.scrollTo({top:0,behavior:'smooth'}); }); }
+  })();
+</script>
+<script src="app.js?v=20251011d" defer></script>
 </html>
