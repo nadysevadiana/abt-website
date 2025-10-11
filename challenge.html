@@ -2,39 +2,93 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>7‑дневный челлендж — Соберите комнату мечты | Art by Twins</title>
-  <meta name="description" content="Пошаговый челлендж на 5 дней: от хаоса идей к готовому проекту комнаты. Для тех, кто хочет красивый интерьер без найма дизайнера." />
-  <link rel="icon" href="/favicon.ico" />
-  <!-- tailwind likely already compiled in your project; if you use a global CSS, keep it -->
-  <link rel="preload" as="script" href="app.js" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Соберите комнату мечты — Челлендж | Art by Twins</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <style>
+    html{scroll-behavior:smooth}
+    .site-bg{background:
+      radial-gradient(1200px 600px at 10% 0%, rgba(16,185,129,.12), rgba(255,255,255,0) 60%),
+      radial-gradient(900px 500px at 90% 10%, rgba(56,189,248,.12), rgba(255,255,255,0) 60%),
+      radial-gradient(1200px 600px at 50% 100%, rgba(251,191,36,.1), rgba(255,255,255,0) 60%);
+      background-attachment:fixed
+    }
+    .btn-primary{background:#10B981;color:#fff}
+    .btn-primary:hover{background:#059669}
+    @media print{
+      header, footer { display:none !important; }
+      a[href]:after { content:" (" attr(href) ")"; font-size: 10px; }
+      body { color:#000; background:#fff; }
+    }
+  </style>
 </head>
-<body class="bg-white text-slate-900 antialiased">
-  <!-- Header placeholder (loaded by app.js) -->
-  <div id="header"></div>
-
-  <main id="main-content" class="min-h-screen">
-    <!-- Hero -->
-    <section class="relative">
-      <div class="max-w-7xl mx-auto px-6 md:px-10 pt-10 pb-6">
-        <span class="inline-block text-xs uppercase tracking-wider text-emerald-700/80 bg-emerald-50 px-3 py-1 rounded-full">Челлендж</span>
-        <h1 class="mt-4 text-3xl md:text-5xl font-bold leading-tight">Соберите комнату мечты как дизайнер <span class="text-slate-500">(даже если вы никогда этого не делали)</span></h1>
-        <p class="mt-4 text-lg md:text-xl text-slate-700 max-w-3xl">Пошаговый план для тех, кто хочет красивый интерьер, но не готов платить дизайнеру. От хаоса идей — к готовому проекту <strong>за 5 дней</strong>.</p>
-
-        <div class="mt-6 flex flex-wrap items-center gap-3">
-          <a href="#join" class="inline-flex items-center px-5 py-3 rounded-xl text-white btn-primary shadow-lg"><i class="fa-solid fa-bolt mr-2"></i>Вступить в челлендж</a>
-          <a href="#program" class="inline-flex items-center px-5 py-3 rounded-xl border border-slate-200 hover:border-emerald-300">Посмотреть программу</a>
-          <span class="text-sm text-slate-500">Стоимость участия: <strong class="text-slate-900">1 490 ₽</strong></span>
+<body class="site-bg text-gray-900 antialiased">
+  <!-- Header (inline like cookies.html) -->
+  <header class="max-w-7xl mx-auto bg-gradient-to-r from-emerald-50 via-white to-sky-50 bg-opacity-80 backdrop-blur-md py-3 px-6 md:px-10 flex items-center justify-between rounded-2xl shadow-lg border border-emerald-100">
+    <a href="index.html" class="text-2xl font-bold text-slate-900">Art by Twins</a>
+    <nav class="space-x-6 text-sm font-medium hidden md:flex items-center">
+      <a href="about.html" class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300">О нас</a>
+      <div class="relative inline-block" data-dd>
+        <a href="kurs.html" class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300" data-trigger>Курсы</a>
+        <div data-menu class="absolute left-0 mt-0 pt-2 w-64 bg-white border border-emerald-100 rounded-xl shadow-lg invisible opacity-0 pointer-events-none transform scale-95 transition duration-150 ease-out z-40">
+          <div class="py-2">
+            <a href="kurs.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50">Дизайнер своей квартиры</a>
+          </div>
         </div>
       </div>
-    </section>
+      <div class="relative inline-block" data-dd>
+        <a href="legal.html" class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300" data-trigger>Модули</a>
+        <div data-menu class="absolute left-0 mt-0 pt-2 w-64 bg-white border border-emerald-100 rounded-xl shadow-lg invisible opacity-0 pointer-events-none transform scale-95 transition duration-150 ease-out z-40">
+          <div class="py-2">
+            <a href="legal.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50">Правовое ведение</a>
+            <a href="ai-tools.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50">ИИ‑комбо для дизайнеров</a>
+            <a href="psychology.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50">Психология пространства</a>
+          </div>
+        </div>
+      </div>
+      <div class="relative inline-block" data-dd>
+        <a href="works.html" class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300" data-trigger>Портфолио</a>
+        <div data-menu class="absolute left-0 mt-0 pt-2 w-64 bg-white border border-emerald-100 rounded-xl shadow-lg invisible opacity-0 pointer-events-none transform scale-95 transition duration-150 ease-out z-40">
+          <div class="py-2">
+            <a href="works.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50">Работы</a>
+            <a href="reviews.html" class="block px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50">Отзывы</a>
+          </div>
+        </div>
+      </div>
+      <a href="challenge.html" class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300">Челлендж</a>
+      <a href="blog.html" class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300">Блог</a>
+      <a href="contacts.html" class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300">Контакты</a>
+      <a href="kurs.html" class="inline-flex items-center px-4 py-2 rounded-full text-white btn-primary shadow-sm"><i class="fa-solid fa-arrow-right mr-2"></i>К курсу</a>
+    </nav>
+  </header>
 
-    <!-- Pain points / What stops you -->
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-emerald-50 via-white to-sky-50 py-12 px-6 md:px-16">
+    <div class="max-w-5xl mx-auto">
+      <nav aria-label="Хлебные крошки" class="text-xs text-gray-600 mb-2">
+        <a href="index.html" class="hover:underline">Главная</a>
+        <span class="mx-1">/</span>
+        <span class="text-gray-500">Челлендж</span>
+      </nav>
+      <h1 class="text-3xl md:text-4xl font-bold leading-tight">Соберите комнату мечты как дизайнер <span class="text-gray-500">(даже если вы никогда этого не делали)</span></h1>
+      <p class="mt-4 text-lg md:text-xl text-gray-700 max-w-3xl">Пошаговый план для тех, кто хочет красивый интерьер, но не готов платить дизайнеру. От хаоса идей — к готовому проекту <strong>за 5 дней</strong>.</p>
+      <div class="mt-6 flex flex-wrap items-center gap-3">
+        <a href="#join" class="inline-flex items-center px-5 py-3 rounded-xl text-white btn-primary shadow-lg"><i class="fa-solid fa-bolt mr-2"></i>Вступить в челлендж</a>
+        <a href="#program" class="inline-flex items-center px-5 py-3 rounded-xl border border-emerald-200 hover:border-emerald-400">Посмотреть программу</a>
+        <span class="text-sm text-gray-600">Стоимость участия: <strong class="text-gray-900">1 490 ₽</strong></span>
+      </div>
+    </div>
+  </section>
+
+  <main id="main-content" class="px-6 md:px-16 pb-16">
+    <!-- Pain points / Solution -->
     <section class="py-10">
-      <div class="max-w-7xl mx-auto px-6 md:px-10 grid md:grid-cols-2 gap-8 items-start">
+      <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-8 items-start">
         <div>
           <h2 class="text-2xl md:text-3xl font-semibold">Что вас останавливает?</h2>
-          <ul class="mt-4 space-y-3 text-slate-700">
+          <ul class="mt-4 space-y-3 text-gray-700">
             <li class="flex"><i class="fa-regular fa-circle-question mt-1.5 mr-3"></i><span>Боитесь ошибиться с цветом и мебелью?</span></li>
             <li class="flex"><i class="fa-regular fa-circle-question mt-1.5 mr-3"></i><span>Запутались в сохранённых картинках?</span></li>
             <li class="flex"><i class="fa-regular fa-circle-question mt-1.5 mr-3"></i><span>Не знаете, как соединить все детали в гармоничную картину?</span></li>
@@ -42,108 +96,186 @@
         </div>
         <div class="bg-emerald-50 border border-emerald-100 rounded-2xl p-6">
           <h3 class="text-xl font-semibold text-emerald-900">У нас есть решение!</h3>
-          <p class="mt-3 text-slate-700">Всего 5 дней — и вы получите готовый проект своей комнаты, который:</p>
-          <ul class="mt-4 space-y-2 text-slate-800">
+          <p class="mt-3 text-gray-700">Всего 5 дней — и вы получите готовый проект своей комнаты, который:</p>
+          <ul class="mt-4 space-y-2 text-gray-800">
             <li>✅ Будет вам действительно нравиться</li>
             <li>✅ Сэкономит деньги на ненужных покупках</li>
             <li>✅ Избавит от страха сделать «неправильно»</li>
           </ul>
+          <p class="mt-4 text-sm text-gray-600">P.S. Мечтаете о комнате, в которую приятно возвращаться? Мы даём инструменты, чтобы создать её самостоятельно. <strong>Первые 15 участников</strong> получают гайд «10 ошибок при выборе мебели».</p>
         </div>
       </div>
     </section>
 
     <!-- Program -->
     <section id="program" class="py-8">
-      <div class="max-w-7xl mx-auto px-6 md:px-10">
+      <div class="max-w-7xl mx-auto">
         <h2 class="text-2xl md:text-3xl font-semibold">Программа (5 дней)</h2>
         <div class="mt-6 grid md:grid-cols-2 lg:grid-cols-5 gap-4">
-          <article class="card card--compact p-4 border border-slate-200 rounded-xl">
+          <article class="p-4 border border-gray-200 rounded-xl bg-white">
             <h3 class="font-semibold">День 1 — Планирование. Подготовка.</h3>
-            <p class="mt-2 text-slate-700 text-sm">Замеры, функциональные зоны, быстрый бриф по стилю и задачам.</p>
+            <p class="mt-2 text-gray-700 text-sm">Замеры, функциональные зоны, быстрый бриф по стилю и задачам.</p>
           </article>
-          <article class="card card--compact p-4 border border-slate-200 rounded-xl">
+          <article class="p-4 border border-gray-200 rounded-xl bg-white">
             <h3 class="font-semibold">День 2 — Стиль из ваших сохранёнок.</h3>
-            <p class="mt-2 text-slate-700 text-sm">Разбираем Pinterest/галерею и формируем направление.</p>
+            <p class="mt-2 text-gray-700 text-sm">Разбираем Pinterest/галерею и формируем направление.</p>
           </article>
-          <article class="card card--compact p-4 border border-slate-200 rounded-xl">
+          <article class="p-4 border border-gray-200 rounded-xl bg-white">
             <h3 class="font-semibold">День 3 — Композиция и палитра.</h3>
-            <p class="mt-2 text-slate-700 text-sm">Правила композиции, палитра, акценты, материалы.</p>
+            <p class="mt-2 text-gray-700 text-sm">Правила композиции, палитра, акценты, материалы.</p>
           </article>
-          <article class="card card--compact p-4 border border-slate-200 rounded-xl">
+          <article class="p-4 border border-gray-200 rounded-xl bg-white">
             <h3 class="font-semibold">День 4 — Коллаж в Pinterest.</h3>
-            <p class="mt-2 text-slate-700 text-sm">Собираем понятный визуальный коллаж — всё просто и понятно!</p>
+            <p class="mt-2 text-gray-700 text-sm">Собираем понятный визуальный коллаж — всё просто и понятно!</p>
           </article>
-          <article class="card card--compact p-4 border border-slate-200 rounded-xl">
+          <article class="p-4 border border-gray-200 rounded-xl bg-white">
             <h3 class="font-semibold">День 5 — Список покупок.</h3>
-            <p class="mt-2 text-slate-700 text-sm">Чёткий список, что покупать и где. Итог: готовый мини‑проект.</p>
+            <p class="mt-2 text-gray-700 text-sm">Чёткий список, что покупать и где. Итог: готовый мини‑проект.</p>
           </article>
         </div>
-        <p class="mt-4 text-sm text-slate-500">Формат: 4 мини‑видео + текстовые инструкции, задания и обратная связь.</p>
+        <p class="mt-4 text-sm text-gray-500">Формат: 4 мини‑видео + текстовые инструкции, задания и обратная связь в чате.</p>
       </div>
     </section>
 
     <!-- Price / CTA -->
     <section class="py-10">
-      <div class="max-w-7xl mx-auto px-6 md:px-10 grid md:grid-cols-3 gap-6 items-center">
+      <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-6 items-center">
         <div class="md:col-span-2">
           <h2 class="text-2xl md:text-3xl font-semibold">Почему это стоит 1 490 ₽?</h2>
-          <ul class="mt-4 space-y-2 text-slate-700">
-            <li>• Экономит часы поисков и сомнений.</li>
-            <li>• Дает уверенность в каждом следующем шаге.</li>
+          <ul class="mt-4 space-y-2 text-gray-700">
+            <li>• Экономит часы поисков и сомнений</li>
+            <li>• Даёт уверенность в каждом следующем шаге</li>
           </ul>
-          <p class="mt-3 text-slate-700"><strong>Бонус:</strong> первым 15 участникам — гайд «10 ошибок при выборе мебели».</p>
+          <p class="mt-3 text-gray-700"><strong>Бонус:</strong> первым 15 участникам — гайд «10 ошибок при выборе мебели».</p>
         </div>
         <div class="bg-white border border-emerald-200 rounded-2xl p-6 shadow-sm">
           <div class="text-4xl font-bold">1 490 ₽</div>
-          <p class="text-sm text-slate-500 mt-1">разовый платеж</p>
-          <a id="join" href="#tg" class="mt-4 w-full inline-flex items-center justify-center px-5 py-3 rounded-xl text-white btn-primary"><i class="fa-brands fa-telegram mr-2"></i>Вступить в Telegram‑группу</a>
-          <p class="mt-3 text-xs text-slate-500">Мы создаём закрытую группу в Telegram: туда будут загружаться видео и материалы.</p>
+          <p class="text-sm text-gray-500 mt-1">разовый платеж</p>
+          <a id="join" href="https://t.me/artbytwins" target="_blank" rel="noopener" class="mt-4 w-full inline-flex items-center justify-center px-5 py-3 rounded-xl text-white btn-primary"><i class="fa-brands fa-telegram mr-2"></i>Вступить в Telegram‑группу</a>
+          <p class="mt-3 text-xs text-gray-600">Мы создаём закрытую группу в Telegram: туда будут загружаться видео и материалы (4 мини‑видео, инструкции, ответы на вопросы).</p>
         </div>
       </div>
     </section>
 
     <!-- How it works -->
     <section class="py-10">
-      <div class="max-w-7xl mx-auto px-6 md:px-10 grid md:grid-cols-3 gap-6">
-        <div class="border border-slate-200 rounded-xl p-6">
+      <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-6">
+        <div class="border border-gray-200 rounded-xl p-6 bg-white">
           <h3 class="font-semibold">4 мини‑видео</h3>
-          <p class="mt-2 text-sm text-slate-700">Короткие уроки, которые можно смотреть с телефона и сразу применять.</p>
+          <p class="mt-2 text-sm text-gray-700">Короткие уроки, которые можно смотреть с телефона и сразу применять.</p>
         </div>
-        <div class="border border-slate-200 rounded-xl p-6">
+        <div class="border border-gray-200 rounded-xl p-6 bg-white">
           <h3 class="font-semibold">Пошаговые задания</h3>
-          <p class="mt-2 text-sm text-slate-700">Каждый день — маленький шаг и понятный результат.</p>
+          <p class="mt-2 text-sm text-gray-700">Каждый день — маленький шаг и понятный результат.</p>
         </div>
-        <div class="border border-slate-200 rounded-xl p-6">
+        <div class="border border-gray-200 rounded-xl p-6 bg-white">
           <h3 class="font-semibold">Поддержка в чате</h3>
-          <p class="mt-2 text-sm text-slate-700">Ответы на вопросы, разборы и моральная поддержка в Telegram.</p>
+          <p class="mt-2 text-sm text-gray-700">Ответы на вопросы, разборы и моральная поддержка в Telegram.</p>
         </div>
       </div>
     </section>
 
-    <!-- FAQ / small notes -->
+    <!-- FAQ -->
     <section class="py-10">
-      <div class="max-w-7xl mx-auto px-6 md:px-10">
+      <div class="max-w-7xl mx-auto">
         <h2 class="text-2xl md:text-3xl font-semibold">Частые вопросы</h2>
         <div class="mt-6 grid md:grid-cols-2 gap-6">
-          <div class="border border-slate-200 rounded-xl p-5">
+          <div class="border border-gray-200 rounded-xl p-5 bg-white">
             <h3 class="font-semibold">Мне точно хватит 5 дней?</h3>
-            <p class="mt-2 text-sm text-slate-700">Да. Формат — «по 1 шагу в день». Можно идти быстрее или медленнее — материалы остаются у вас.</p>
+            <p class="mt-2 text-sm text-gray-700">Да. Формат — «по 1 шагу в день». Можно идти быстрее или медленнее — материалы остаются у вас.</p>
           </div>
-          <div class="border border-slate-200 rounded-xl p-5">
+          <div class="border border-gray-200 rounded-xl p-5 bg-white">
             <h3 class="font-semibold">Нужно ли уметь работать в 3D?</h3>
-            <p class="mt-2 text-sm text-slate-700">Нет. Мы используем простые инструменты: Pinterest/коллажи + понятные чек‑листы и схемы.</p>
+            <p class="mt-2 text-sm text-gray-700">Нет. Мы используем простые инструменты: Pinterest/коллажи + понятные чек‑листы и схемы.</p>
           </div>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- Footer placeholder (loaded by app.js) -->
-  <div id="footer"></div>
+  <!-- Footer (inline like cookies.html) -->
+  <footer class="bg-slate-100 text-slate-700 mt-10">
+    <div class="max-w-7xl mx-auto px-6 md:px-16 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
+      <div>
+        <a href="index.html" class="text-2xl font-bold text-slate-900">Art by Twins</a>
+        <p class="mt-4 text-slate-600 text-sm leading-relaxed">Art by Twins — продукт и обучение по интерьерному дизайну.</p>
+        <p class="mt-2 text-sm text-emerald-700">Создано с ❤️ в Москве</p>
+        <div class="mt-4 flex space-x-4 text-lg">
+          <a href="https://t.me/artbytwins" target="_blank" class="hover:text-emerald-700"><i class="fa-brands fa-telegram"></i></a>
+          <a href="https://instagram.com/art.by.twins" target="_blank" class="hover:text-emerald-700"><i class="fa-brands fa-instagram"></i></a>
+          <a href="mailto:info@artbytwins.pro" class="hover:text-emerald-700"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold text-slate-900 mb-6">Курсы</h3>
+        <ul class="space-y-3 text-slate-600 text-sm">
+          <li><a href="kurs.html" class="hover:text-emerald-700 transition">Дизайнер своей квартиры</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold text-slate-900 mb-6">Модули</h3>
+        <ul class="space-y-3 text-slate-600 text-sm">
+          <li><a href="legal.html" class="hover:text-emerald-700 transition">Правовое ведение</a></li>
+          <li><a href="ai-tools.html" class="hover:text-emerald-700 transition">ИИ‑комбо для дизайнеров</a></li>
+          <li><a href="psychology.html" class="hover:text-emerald-700 transition">Психология пространства</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold text-slate-900 mb-6">Навигация</h3>
+        <ul class="space-y-3 text-slate-600 text-sm">
+          <li><a href="programs.html" class="hover:text-emerald-700 transition">Программы</a></li>
+          <li><a href="works.html" class="hover:text-emerald-700 transition">Работы</a></li>
+          <li><a href="challenge.html" class="hover:text-emerald-700 transition">Челлендж</a></li>
+          <li><a href="blog.html" class="hover:text-emerald-700 transition">Блог</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold text-slate-900 mb-6">О проекте</h3>
+        <ul class="space-y-3 text-slate-600 text-sm">
+          <li><a href="about.html" class="hover:text-emerald-700 transition">О Art by Twins</a></li>
+          <li><a href="contacts.html" class="hover:text-emerald-700 transition">Контакты</a></li>
+          <li><a href="reviews.html" class="hover:text-emerald-700 transition">Отзывы</a></li>
+          <li><span class="text-xs">Москва, Россия</span></li>
+          <li><span class="text-xs">info@artbytwins.pro</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-slate-300">
+      <div class="max-w-7xl mx-auto px-6 md:px-16 py-6 text-center text-slate-500 text-xs">
+        <div class="text-center">
+          <span>© Art by Twins, 2025. Все права защищены.</span>
+          <div class="mt-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+            <a href="offer.html" class="hover:text-emerald-700 transition">Публичная оферта</a>
+            <a href="policy.html" class="hover:text-emerald-700 transition">Политика конфиденциальности</a>
+            <a href="terms.html" class="hover:text-emerald-700 transition">Пользовательское соглашение</a>
+            <a href="cookies.html" class="hover:text-emerald-700 transition">Политика Cookie</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
 
-  <!-- Floating TG button placeholder, if your app.js injects it -->
-  <div id="tg-btn"></div>
+  <!-- Dropdown hover helper -->
+  <script>
+    (function(){
+      var dds = document.querySelectorAll('[data-dd]');
+      dds.forEach(function(dd){
+        var menu = dd.querySelector('[data-menu]');
+        if(!menu) return;
+        dd.addEventListener('mouseenter', function(){
+          menu.classList.remove('invisible','pointer-events-none','opacity-0','scale-95');
+        });
+        dd.addEventListener('mouseleave', function(){
+          menu.classList.add('invisible','pointer-events-none','opacity-0','scale-95');
+        });
+      });
+    })();
+  </script>
 
-  <script src="app.js"></script>
+  <!-- Instagram floating button -->
+  <a href="https://instagram.com/art.by.twins" target="_blank" rel="noopener" class="fixed bottom-6 right-6 z-50 btn-fixed-ig px-5 py-3 rounded-full shadow-lg text-sm font-semibold flex items-center space-x-2 transition bg-white border border-emerald-200 hover:bg-emerald-50">
+    <i class="fa-brands fa-instagram"></i>
+    <span>Написать в Instagram</span>
+  </a>
 </body>
 </html>
