@@ -43,25 +43,19 @@
   </div>
 </header>
   <script>
-    (function(){
+    document.addEventListener('DOMContentLoaded', function(){
       var desktop = document.getElementById('cta-desktop');
       var mobile = document.getElementById('cta-mobile');
       if(!desktop && !mobile) return;
-      var file = window.location.pathname.split('/').pop();
-      var isIndex = file === 'index.html' || file === '' || file === 'index.htm';
+      var path = window.location.pathname.split('/').pop() || 'index.html';
+      var isIndex = /^(index\.html?|)$/.test(path);
       var text = isIndex ? 'Выбрать пакет' : 'На главную';
-      function setText(el){
+      [desktop, mobile].forEach(function(el){
         if(!el) return;
         var span = el.querySelector('.cta-text');
         if(span) span.textContent = text;
-      }
-      // Force label "На главную" for all pages except index
-      if(!isIndex) {
-        setText(desktop);
-        setText(mobile);
-      } else {
-        setText(desktop);
-        setText(mobile);
-      }
-    })();
+        // make sure link always points to index anchor
+        el.setAttribute('href', 'index.html#choose-path');
+      });
+    });
   </script>
