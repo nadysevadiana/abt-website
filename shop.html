@@ -56,8 +56,7 @@
         <button type="button" class="chip is-active" data-filter="*">Все</button>
         <button type="button" class="chip" data-filter="3dsmax">3ds Max</button>
         <button type="button" class="chip" data-filter="sketchup">SketchUp</button>
-        <button type="button" class="chip" data-filter="docs">Документы</button>
-        <button type="button" class="chip" data-filter="bundles">Договоры</button>
+        <button type="button" class="chip" data-filter="docs">Документы и договоры</button>
         <button type="button" class="chip" data-filter="coaching">Коучинг</button>
       </div>
 
@@ -74,25 +73,25 @@
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" id="shop-grid">
 
   <!-- Крупные продукты (есть отдельные страницы) -->
-  <article class="card card--compact" data-cats="docs,legal,bundles">
-    <h3 class="card-title">Договоры и шаблоны</h3>
-    <p class="card-text">Готовые шаблоны договоров для фриланса и студий + чек-листы внедрения.</p>
+  <article class="card card--compact" data-cats="docs">
+    <h3 class="card-title">Документы и договоры/h3>
+    <p class="card-text">Готовые шаблоны документов для малого и среднего бизнеса.</p>
     <a href="#" data-product="contracts" class="btn-outline inline-flex items-center justify-center">Смотреть</a>
   </article>
 
-  <article class="card card--compact" data-cats="3dsmax,microtrain">
+  <article class="card card--compact" data-cats="3dsmax">
     <h3 class="card-title">3ds Max</h3>
     <p class="card-text">Короткие апгрейд-модули и практики для ускорения визуализации.</p>
     <a href="#" data-product="3dsmax" class="btn-outline inline-flex items-center justify-center">Смотреть</a>
   </article>
 
-  <article class="card card--compact" data-cats="sketchup,microtrain">
+  <article class="card card--compact" data-cats="sketchup">
     <h3 class="card-title">SketchUp</h3>
     <p class="card-text">Практика по моделингу, сценам, стилям и экспорту.</p>
     <a href="#" data-product="sketchup" class="btn-outline inline-flex items-center justify-center">Смотреть</a>
   </article>
 
-  <article class="card card--compact" data-cats="coaching,bundles">
+  <article class="card card--compact" data-cats="coaching">
     <h3 class="card-title">Коучинг</h3>
     <p class="card-text">Индивидуальная работа: портфолио, процессы студии, ценообразование.</p>
     <a href="#" data-product="coaching" class="btn-outline inline-flex items-center justify-center">Смотреть</a>
@@ -118,27 +117,6 @@
           <a href="checkout.html?product=contracts" class="btn-primary inline-flex items-center px-5 py-3 rounded-lg font-semibold shadow"><i class="fa-solid fa-cart-shopping mr-2"></i>Купить комплект</a>
           <a href="legal.html" class="inline-flex items-center px-4 py-2 rounded-lg border border-emerald-600 text-emerald-700 hover:bg-emerald-50">Подробнее о правовом модуле</a>
         </div>
-        <p class="mt-3 text-xs text-slate-500">Гарантия 14 дней: если не подошло — вернём оплату.</p>
-      </template>
-
-      <template id="tpl-ai-tools">
-        <h2 class="text-2xl md:text-3xl font-bold mb-2 text-center">ИИ‑комбо для дизайнеров</h2>
-        <p class="text-slate-700 mb-4">Подборка промптов, мини‑гайдов и пайплайнов для ускорения мудбордов, палитр, подбора материалов и черновых визуалов.</p>
-        <ul class="list-disc pl-5 text-slate-700 space-y-1 mb-5">
-          <li>Готовые подсказки под 15+ типовых задач</li>
-          <li>Пайплайны: moodboard → палитра → визуал</li>
-          <li>Проверки качества и чек‑листы для клиента</li>
-          <li>Обновления набора включены</li>
-        </ul>
-        <div class="flex flex-wrap items-end gap-4">
-          <div>
-            <div class="text-sm uppercase tracking-wide text-slate-500">Цена</div>
-            <div class="text-3xl font-bold">1 900 ₽</div>
-          </div>
-          <a href="checkout.html?product=ai-tools" class="btn-primary inline-flex items-center px-5 py-3 rounded-lg font-semibold shadow"><i class="fa-solid fa-cart-shopping mr-2"></i>Купить набор</a>
-          <a href="ai-tools.html" class="inline-flex items-center px-4 py-2 rounded-lg border border-emerald-600 text-emerald-700 hover:bg-emerald-50">Смотреть подробности</a>
-        </div>
-        <p class="mt-3 text-xs text-slate-500">Доступ навсегда, обновления по мере выхода.</p>
       </template>
 
       <template id="tpl-coaching">
@@ -194,95 +172,6 @@
           <a href="checkout.html?product=sketchup-module" class="btn-primary inline-flex items-center px-5 py-3 rounded-lg font-semibold shadow"><i class="fa-solid fa-cart-shopping mr-2"></i>Купить модуль</a>
           <a href="sketchup.html" class="inline-flex items-center px-4 py-2 rounded-lg border border-emerald-600 text-emerald-700 hover:bg-emerald-50">Страница программы</a>
         </div>
-      </template>
-
-
-      <template id="tpl-psychology">
-        <h2 class="text-2xl md:text-3xl font-bold mb-2 text-center">Психология пространства</h2>
-        <p class="text-slate-700 mb-4">Методики согласования вкусов и сценариев с клиентом. Ускоряют принятие решений.</p>
-        <ul class="list-disc pl-5 text-slate-700 space-y-1 mb-5">
-          <li>Скрипты согласования вкусов</li>
-          <li>Инструменты работы с возражениями</li>
-          <li>Матрица сценариев и настроений</li>
-        </ul>
-        <div class="flex flex-wrap items-end gap-4">
-          <div>
-            <div class="text-sm uppercase tracking-wide text-slate-500">Цена</div>
-            <div class="text-3xl font-bold">1 900 ₽</div>
-          </div>
-          <a href="checkout.html?product=psychology" class="btn-primary inline-flex items-center px-5 py-3 rounded-lg font-semibold shadow"><i class="fa-solid fa-cart-shopping mr-2"></i>Купить модуль</a>
-          <a href="psychology.html" class="inline-flex items-center px-4 py-2 rounded-lg border border-emerald-600 text-emerald-700 hover:bg-emerald-50">Подробнее</a>
-        </div>
-      </template>
-
-      <template id="tpl-budget">
-        <h2 class="text-2xl md:text-3xl font-bold mb-2 text-center">Бюджетирование</h2>
-        <p class="text-slate-700 mb-4">Шаблоны смет и спецификаций, контрольные точки и отчётность для клиента.</p>
-        <ul class="list-disc pl-5 text-slate-700 space-y-1 mb-5">
-          <li>Формы сметы и спецификаций</li>
-          <li>Чек‑лист контроля бюджета</li>
-          <li>Экспорт в CSV/Excel</li>
-        </ul>
-        <div class="flex flex-wrap items-end gap-4">
-          <div>
-            <div class="text-sm uppercase tracking-wide text-slate-500">Цена</div>
-            <div class="text-3xl font-bold">1 500 ₽</div>
-          </div>
-          <a href="checkout.html?product=budget" class="btn-primary inline-flex items-center px-5 py-3 rounded-lg font-semibold shadow"><i class="fa-solid fa-cart-shopping mr-2"></i>Купить шаблоны</a>
-        </div>
-      </template>
-
-      <template id="tpl-brief">
-        <h2 class="text-2xl md:text-3xl font-bold mb-2 text-center">Бриф клиента (шаблон)</h2>
-        <p class="text-slate-700 mb-4">Готовая структура вопросов для старта проекта. Версия для квартиры и для коммерции.</p>
-        <ul class="list-disc pl-5 text-slate-700 space-y-1 mb-5">
-          <li>Редактируемые формы (DOCX)</li>
-          <li>Версии: квартира / коммерческий объект</li>
-          <li>Пример заполнения</li>
-        </ul>
-        <div class="flex flex-wrap items-end gap-4">
-          <div>
-            <div class="text-sm uppercase tracking-wide text-slate-500">Цена</div>
-            <div class="text-3xl font-bold">490 ₽</div>
-          </div>
-          <a href="checkout.html?product=brief" class="btn-primary inline-flex items-center px-5 py-3 rounded-lg font-semibold shadow"><i class="fa-solid fa-cart-shopping mr-2"></i>Купить бриф</a>
-        </div>
-      </template>
-
-      <template id="tpl-ai-mini">
-        <h2 class="text-2xl md:text-3xl font-bold mb-2 text-center">Мини‑тренинг: ИИ в подборе материалов</h2>
-        <p class="text-slate-700 mb-4">1,5 часа практики + рабочие подсказки, чтобы ускорить подбор и согласование материалов.</p>
-        <ul class="list-disc pl-5 text-slate-700 space-y-1 mb-5">
-          <li>Пошаговый сценарий работы</li>
-          <li>Промпт‑листы для типовых задач</li>
-          <li>Материалы для скачивания</li>
-        </ul>
-        <div class="flex flex-wrap items-end gap-4">
-          <div>
-            <div class="text-sm uppercase tracking-wide text-slate-500">Цена</div>
-            <div class="text-3xl font-bold">990 ₽</div>
-          </div>
-          <a href="checkout.html?product=ai-mini" class="btn-primary inline-flex items-center px-5 py-3 rounded-lg font-semibold shadow"><i class="fa-solid fa-cart-shopping mr-2"></i>Купить тренинг</a>
-        </div>
-      </template>
-
-      <template id="tpl-studio-bundle">
-        <h2 class="text-2xl md:text-3xl font-bold mb-2 text-center">Набор «Студийный старт»</h2>
-        <p class="text-slate-700 mb-4">Экономия времени и денег: договор + бриф + чек‑листы + спецификация в одном комплекте.</p>
-        <ul class="list-disc pl-5 text-slate-700 space-y-1 mb-5">
-          <li>Договор (фриланс/студия) — 2 варианта</li>
-          <li>Бриф клиента (2 версии)</li>
-          <li>Чек‑листы этапов и контрольные формы</li>
-          <li>Спецификация материалов</li>
-        </ul>
-        <div class="flex flex-wrap items-end gap-4">
-          <div>
-            <div class="text-sm uppercase tracking-wide text-slate-500">Цена комплекта</div>
-            <div class="text-3xl font-bold">4 500 ₽</div>
-          </div>
-          <a href="checkout.html?product=studio-bundle" class="btn-primary inline-flex items-center px-5 py-3 rounded-lg font-semibold shadow"><i class="fa-solid fa-cart-shopping mr-2"></i>Купить комплект</a>
-        </div>
-        <p class="mt-3 text-xs text-slate-500">Экономия ~20% в сравнении с покупкой по отдельности.</p>
       </template>
 
       <!-- Общая кнопка -->
