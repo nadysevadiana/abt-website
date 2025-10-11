@@ -157,20 +157,84 @@
       </template>
 
       <template id="tpl-sketchup">
-        <h2 class="text-2xl md:text-3xl font-bold mb-2 text-center">SketchUp — мини‑модули</h2>
-        <p class="text-slate-700 mb-4">Практика по моделингу, сценам, стилям, экспорту и быстрым коллажам.</p>
-        <ul class="list-disc pl-5 text-slate-700 space-y-1 mb-5">
-          <li>Сцены и стили: как добиваться «чистого» вида</li>
-          <li>Лайфхаки по моделингу и библиотекам</li>
-          <li>Экспорт и быстрые коллажи</li>
-        </ul>
-        <div class="flex flex-wrap items-end gap-4">
-          <div>
-            <div class="text-sm uppercase tracking-wide text-slate-500">Цена за модуль</div>
-            <div class="text-3xl font-bold">1 200 ₽</div>
+        <h2 class="text-2xl md:text-3xl font-bold mb-2 text-center">SketchUp — инструменты и библиотеки</h2>
+        <p class="text-slate-700 mb-4 text-center">Три быстрых способа ускорить работу: текстуры, модели и проверенные плагины.</p>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 tight-grid">
+          <!-- 1. Библиотека текстур -->
+          <div class="card border border-gray-200 rounded-xl bg-white p-4">
+            <div class="flex items-center justify-between mb-1">
+              <h3 class="text-lg font-semibold">Библиотека текстур</h3>
+              <span class="inline-flex items-center text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 font-bold">Подписка</span>
+            </div>
+            <p class="text-slate-700 text-sm">Наша библиотека качественных бесшовных текстур экономит часы поиска. Пополняется каждый месяц.</p>
+            <ul class="list-disc pl-5 text-slate-700 text-sm space-y-1 mt-2">
+              <li>Проверенные PBR/бесшовные карты</li>
+              <li>Категории для интерьеров</li>
+              <li>Ежемесячные обновления</li>
+            </ul>
+            <div class="mt-3 flex items-end justify-between">
+              <div>
+                <div class="text-xs uppercase tracking-wide text-slate-500">Вход</div>
+                <div class="text-xl font-bold">5 000 ₽</div>
+              </div>
+              <!-- Ссылку предоставите позже -->
+              <a href="#" aria-disabled="true" title="Ссылка будет добавлена" class="btn-primary inline-flex items-center px-4 py-2 rounded-lg font-semibold opacity-70 cursor-not-allowed">
+                <i class="fa-solid fa-lock mr-2"></i>Оформить подписку
+              </a>
+            </div>
           </div>
-          <a href="checkout.html?product=sketchup-module" class="btn-primary inline-flex items-center px-5 py-3 rounded-lg font-semibold shadow"><i class="fa-solid fa-cart-shopping mr-2"></i>Купить модуль</a>
-          <a href="sketchup.html" class="inline-flex items-center px-4 py-2 rounded-lg border border-emerald-600 text-emerald-700 hover:bg-emerald-50">Страница программы</a>
+
+          <!-- 2. Библиотека моделей -->
+          <div class="card border border-gray-200 rounded-xl bg-white p-4">
+            <div class="flex items-center justify-between mb-1">
+              <h3 class="text-lg font-semibold">Библиотека моделей</h3>
+              <span class="inline-flex items-center text-xs px-2 py-0.5 rounded-full bg-sky-100 text-sky-700 font-bold">Бесплатно</span>
+            </div>
+            <p class="text-slate-700 text-sm">Подборка готовых моделей для SketchUp. Открытый доступ в Telegram.</p>
+            <ul class="list-disc pl-5 text-slate-700 text-sm space-y-1 mt-2">
+              <li>Актуальные подборки</li>
+              <li>Советы по импорту и чистке</li>
+            </ul>
+            <div class="mt-3 flex items-end justify-between">
+              <div>
+                <div class="text-xs uppercase tracking-wide text-slate-500">Стоимость</div>
+                <div class="text-xl font-bold">0 ₽</div>
+              </div>
+              <a href="https://t.me/sketchUptwins" target="_blank" rel="noopener" class="inline-flex items-center px-4 py-2 rounded-lg border border-emerald-600 text-emerald-700 hover:bg-emerald-50">
+                <i class="fa-brands fa-telegram mr-2"></i>Перейти в TG
+              </a>
+            </div>
+          </div>
+
+          <!-- 3. Плагины для SketchUp -->
+          <div class="card border border-gray-200 rounded-xl bg-white p-4">
+            <div class="flex items-center justify-between mb-1">
+              <h3 class="text-lg font-semibold">Плагины для SketchUp</h3>
+              <span class="inline-flex items-center text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 font-bold">Набор</span>
+            </div>
+            <p class="text-slate-700 text-sm">Все нужные плагины с понятными инструкциями — подключите и ускорьте рутину.</p>
+            <ul class="list-disc pl-5 text-slate-700 text-sm space-y-1 mt-2">
+              <li>Подробные гайды по установке</li>
+              <li>Рекомендованные настройки</li>
+              <li>Быстрый старт для новичков</li>
+            </ul>
+            <div class="mt-3 flex items-end justify-between">
+              <div>
+                <div class="text-xs uppercase tracking-wide text-slate-500">Цена</div>
+                <div class="text-xl font-bold">990 ₽</div>
+              </div>
+              <a href="https://t.me/+ktT_ynd8NsUxNjFi" target="_blank" rel="noopener" class="btn-primary inline-flex items-center px-4 py-2 rounded-lg font-semibold">
+                <i class="fa-brands fa-telegram mr-2"></i>Получить доступ
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Кнопки навигации -->
+        <div class="mt-5 flex flex-wrap items-center justify-center gap-3">
+          <a href="#" data-back class="inline-flex items-center px-4 py-2 rounded-lg border border-emerald-600 text-emerald-700 hover:bg-emerald-50"><i class="fa-solid fa-arrow-left mr-2"></i>К списку разделов</a>
+          <a href="sketchup.html" class="inline-flex items-center px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-50"><i class="fa-solid fa-book-open mr-2"></i>Страница программы</a>
         </div>
       </template>
 

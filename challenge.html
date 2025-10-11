@@ -3,10 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Соберите комнату мечты — Челлендж | Art by Twins</title>
+  <title>Соберите комнату мечты за 5 дней — Челлендж | Art by Twins</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <!-- Open Graph / SEO -->
+  <meta name="description" content="Пятидневный челлендж: от хаоса сохранёнок к готовому мини‑проекту комнаты. 4 мини‑видео, задания и поддержка в Telegram. Цена: 1 490 ₽.">
+  <meta property="og:title" content="Соберите комнату мечты за 5 дней — челлендж Art by Twins">
+  <meta property="og:description" content="Пошаговый план, поддержка в чате и готовый список покупок. Цена: 1 490 ₽.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="./images/og-challenge.jpg">
+  <meta property="og:locale" content="ru_RU">
   <style>
     html{scroll-behavior:smooth}
     .site-bg{background:
@@ -22,6 +29,19 @@
       a[href]:after { content:" (" attr(href) ")"; font-size: 10px; }
       body { color:#000; background:#fff; }
     }
+    /* ————— UI Enhancements for Challenge page ————— */
+    .chip{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem .65rem;border-radius:999px;font-size:.8rem;font-weight:600;border:1px solid rgba(16,185,129,.25);background:#fff;box-shadow:0 4px 10px rgba(2,6,23,.06)}
+    .chip b{font-weight:700}
+    .gradient-border{position:relative}
+    .gradient-border:before{content:"";position:absolute;inset:-1px;border-radius:1rem;padding:1px;background:linear-gradient(135deg,rgba(16,185,129,.6),rgba(14,165,233,.6));-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+    .card-soft{background:#fff;border:1px solid rgba(2,6,23,.08);border-radius:1rem;box-shadow:0 10px 24px rgba(2,6,23,.06)}
+    .step{counter-increment: step}
+    .step:before{content: counter(step);display:inline-flex;align-items:center;justify-content:center;width:1.75rem;height:1.75rem;border-radius:999px;background:#10B981;color:#fff;font-weight:700;margin-right:.5rem;box-shadow:0 6px 14px rgba(16,185,129,.3)}
+    .sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:50}
+    .sticky-cta .bar{margin:0 auto;max-width:80rem}
+    .floating-top{position:fixed;right:1rem;bottom:5rem;z-index:40;opacity:0;pointer-events:none;transition:opacity .2s}
+    .floating-top.visible{opacity:1;pointer-events:auto}
+    @media (min-width: 768px){.floating-top{right:1.5rem;bottom:2rem}}
   </style>
 </head>
 <body class="site-bg text-gray-900 antialiased">
@@ -30,18 +50,39 @@
 
   <!-- Hero -->
   <section class="bg-gradient-to-br from-emerald-50 via-white to-sky-50 py-12 px-6 md:px-16">
-    <div class="max-w-5xl mx-auto">
-      <nav aria-label="Хлебные крошки" class="text-xs text-gray-600 mb-2">
-        <a href="index.html" class="hover:underline">Главная</a>
-        <span class="mx-1">/</span>
-        <span class="text-gray-500">Челлендж</span>
-      </nav>
-      <h1 class="text-3xl md:text-4xl font-bold leading-tight">Соберите комнату мечты как дизайнер <span class="text-gray-500">(даже если вы никогда этого не делали)</span></h1>
-      <p class="mt-4 text-lg md:text-xl text-gray-700 max-w-3xl">Пошаговый план для тех, кто хочет красивый интерьер, но не готов платить дизайнеру. От хаоса идей — к готовому проекту <strong>за 5 дней</strong>.</p>
-      <div class="mt-6 flex flex-wrap items-center gap-3">
-        <a href="#join" class="inline-flex items-center px-5 py-3 rounded-xl text-white btn-primary shadow-lg"><i class="fa-solid fa-bolt mr-2"></i>Вступить в челлендж</a>
-        <a href="#program" class="inline-flex items-center px-5 py-3 rounded-xl border border-emerald-200 hover:border-emerald-400">Посмотреть программу</a>
-        <span class="text-sm text-gray-600">Стоимость участия: <strong class="text-gray-900">1 490 ₽</strong></span>
+    <div class="max-w-7xl mx-auto grid md:grid-cols-12 gap-8 items-center">
+      <div class="md:col-span-7">
+        <nav aria-label="Хлебные крошки" class="text-xs text-gray-600 mb-2">
+          <a href="index.html" class="hover:underline">Главная</a>
+          <span class="mx-1">/</span>
+          <span class="text-gray-500">Челлендж</span>
+        </nav>
+        <h1 class="text-3xl md:text-5xl font-bold leading-tight tracking-tight">Соберите комнату мечты как дизайнер <span class="text-gray-500">(даже если вы никогда этого не делали)</span></h1>
+        <p class="mt-4 text-lg md:text-xl text-gray-700">Пошаговый план для тех, кто хочет красивый интерьер, но не готов платить дизайнеру. От хаоса идей — к готовому проекту <b>за 5 дней</b>.</p>
+        <div class="mt-4 flex flex-wrap gap-2">
+          <span class="chip"><i class="fa-regular fa-clock"></i> 5 дней</span>
+          <span class="chip"><i class="fa-solid fa-bolt"></i> 4 мини‑видео</span>
+          <span class="chip"><i class="fa-brands fa-telegram"></i> Поддержка в TG</span>
+          <span class="chip"><i class="fa-solid fa-tag"></i> <b>1 490 ₽</b></span>
+        </div>
+        <div class="mt-6 flex flex-wrap items-center gap-3">
+          <a href="#join" class="inline-flex items-center px-5 py-3 rounded-xl text-white btn-primary shadow-lg"><i class="fa-solid fa-bolt mr-2"></i>Вступить в челлендж</a>
+          <a href="#program" class="inline-flex items-center px-5 py-3 rounded-xl border border-emerald-200 hover:border-emerald-400">Программа 5 дней</a>
+          <span class="text-sm text-gray-600">Места ограничены: <b>первые 15</b> получают гайд</span>
+        </div>
+      </div>
+      <div class="md:col-span-5">
+        <div class="gradient-border rounded-2xl p-1">
+          <div class="rounded-2xl bg-white/70 backdrop-blur card-soft p-5">
+            <h3 class="font-semibold text-lg">Что получится за 5 дней</h3>
+            <ul class="mt-3 space-y-2 text-gray-800 text-sm">
+              <li>✅ Чёткий стиль из ваших сохранёнок</li>
+              <li>✅ Готовый коллаж настроения</li>
+              <li>✅ Список покупок: что и где брать</li>
+            </ul>
+            <a href="#join" class="mt-4 inline-flex items-center px-4 py-2 rounded-lg btn-primary text-white"><i class="fa-brands fa-telegram mr-2"></i>Присоединиться</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -50,23 +91,23 @@
     <!-- Pain points / Solution -->
     <section class="py-10">
       <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-8 items-start">
-        <div>
+        <div class="card-soft p-6">
           <h2 class="text-2xl md:text-3xl font-semibold">Что вас останавливает?</h2>
           <ul class="mt-4 space-y-3 text-gray-700">
             <li class="flex"><i class="fa-regular fa-circle-question mt-1.5 mr-3"></i><span>Боитесь ошибиться с цветом и мебелью?</span></li>
             <li class="flex"><i class="fa-regular fa-circle-question mt-1.5 mr-3"></i><span>Запутались в сохранённых картинках?</span></li>
-            <li class="flex"><i class="fa-regular fa-circle-question mt-1.5 mr-3"></i><span>Не знаете, как соединить все детали в гармоничную картину?</span></li>
+            <li class="flex"><i class="fa-regular fa-circle-question mt-1.5 mr-3"></i><span>Не знаете, как собрать все детали в гармонию?</span></li>
           </ul>
         </div>
         <div class="bg-emerald-50 border border-emerald-100 rounded-2xl p-6">
           <h3 class="text-xl font-semibold text-emerald-900">У нас есть решение!</h3>
-          <p class="mt-3 text-gray-700">Всего 5 дней — и вы получите готовый проект своей комнаты, который:</p>
+          <p class="mt-3 text-gray-700">Всего 5 дней — и у вас на руках мини‑проект комнаты, который:</p>
           <ul class="mt-4 space-y-2 text-gray-800">
             <li>✅ Будет вам действительно нравиться</li>
             <li>✅ Сэкономит деньги на ненужных покупках</li>
             <li>✅ Избавит от страха сделать «неправильно»</li>
           </ul>
-          <p class="mt-4 text-sm text-gray-600">P.S. Мечтаете о комнате, в которую приятно возвращаться? Мы даём инструменты, чтобы создать её самостоятельно. <strong>Первые 15 участников</strong> получают гайд «10 ошибок при выборе мебели».</p>
+          <p class="mt-4 text-sm text-gray-600">Первые <b>15 участников</b> получают гайд «10 ошибок при выборе мебели».</p>
         </div>
       </div>
     </section>
@@ -74,30 +115,30 @@
     <!-- Program -->
     <section id="program" class="py-8">
       <div class="max-w-7xl mx-auto">
-        <h2 class="text-2xl md:text-3xl font-semibold">Программа (5 дней)</h2>
-        <div class="mt-6 grid md:grid-cols-2 lg:grid-cols-5 gap-4">
-          <article class="p-4 border border-gray-200 rounded-xl bg-white">
-            <h3 class="font-semibold">День 1 — Планирование. Подготовка.</h3>
-            <p class="mt-2 text-gray-700 text-sm">Замеры, функциональные зоны, быстрый бриф по стилю и задачам.</p>
-          </article>
-          <article class="p-4 border border-gray-200 rounded-xl bg-white">
-            <h3 class="font-semibold">День 2 — Стиль из ваших сохранёнок.</h3>
-            <p class="mt-2 text-gray-700 text-sm">Разбираем Pinterest/галерею и формируем направление.</p>
-          </article>
-          <article class="p-4 border border-gray-200 rounded-xl bg-white">
-            <h3 class="font-semibold">День 3 — Композиция и палитра.</h3>
-            <p class="mt-2 text-gray-700 text-sm">Правила композиции, палитра, акценты, материалы.</p>
-          </article>
-          <article class="p-4 border border-gray-200 rounded-xl bg-white">
-            <h3 class="font-semibold">День 4 — Коллаж в Pinterest.</h3>
-            <p class="mt-2 text-gray-700 text-sm">Собираем понятный визуальный коллаж — всё просто и понятно!</p>
-          </article>
-          <article class="p-4 border border-gray-200 rounded-xl bg-white">
-            <h3 class="font-semibold">День 5 — Список покупок.</h3>
-            <p class="mt-2 text-gray-700 text-sm">Чёткий список, что покупать и где. Итог: готовый мини‑проект.</p>
-          </article>
-        </div>
-        <p class="mt-4 text-sm text-gray-500">Формат: 4 мини‑видео + текстовые инструкции, задания и обратная связь в чате.</p>
+        <h2 class="text-2xl md:text-3xl font-semibold">Программа — 5 шагов за 5 дней</h2>
+        <ol class="mt-6 grid md:grid-cols-2 lg:grid-cols-5 gap-4 counter-reset">
+          <li class="step card-soft p-4">
+            <h3 class="font-semibold">День 1 — Планирование</h3>
+            <p class="mt-2 text-gray-700 text-sm">Замеры, функциональные зоны, быстрый бриф по задачам.</p>
+          </li>
+          <li class="step card-soft p-4">
+            <h3 class="font-semibold">День 2 — Стиль из сохранёнок</h3>
+            <p class="mt-2 text-gray-700 text-sm">Разбираем Pinterest/галерею, выбираем направление.</p>
+          </li>
+          <li class="step card-soft p-4">
+            <h3 class="font-semibold">День 3 — Композиция и палитра</h3>
+            <p class="mt-2 text-gray-700 text-sm">Правила композиции, акценты, материалы, цвета.</p>
+          </li>
+          <li class="step card-soft p-4">
+            <h3 class="font-semibold">День 4 — Коллаж в Pinterest</h3>
+            <p class="mt-2 text-gray-700 text-sm">Собираем ясный коллаж — всё просто и понятно.</p>
+          </li>
+          <li class="step card-soft p-4">
+            <h3 class="font-semibold">День 5 — Список покупок</h3>
+            <p class="mt-2 text-gray-700 text-sm">Что покупать и где. Итог: готовый мини‑проект.</p>
+          </li>
+        </ol>
+        <p class="mt-4 text-sm text-gray-500">Формат: 4 мини‑видео + инструкции, задания и поддержка в чате.</p>
       </div>
     </section>
 
@@ -112,11 +153,13 @@
           </ul>
           <p class="mt-3 text-gray-700"><strong>Бонус:</strong> первым 15 участникам — гайд «10 ошибок при выборе мебели».</p>
         </div>
-        <div class="bg-white border border-emerald-200 rounded-2xl p-6 shadow-sm">
-          <div class="text-4xl font-bold">1 490 ₽</div>
-          <p class="text-sm text-gray-500 mt-1">разовый платеж</p>
-          <a id="join" href="https://t.me/artbytwins" target="_blank" rel="noopener" class="mt-4 w-full inline-flex items-center justify-center px-5 py-3 rounded-xl text-white btn-primary"><i class="fa-brands fa-telegram mr-2"></i>Вступить в Telegram‑группу</a>
-          <p class="mt-3 text-xs text-gray-600">Мы создаём закрытую группу в Telegram: туда будут загружаться видео и материалы (4 мини‑видео, инструкции, ответы на вопросы).</p>
+        <div class="gradient-border rounded-2xl p-1">
+          <div class="rounded-2xl bg-white p-6 shadow-sm">
+            <div class="text-4xl font-bold">1 490 ₽</div>
+            <p class="text-sm text-gray-500 mt-1">разовый платёж</p>
+            <a id="join" href="https://t.me/artbytwins" target="_blank" rel="noopener" class="mt-4 w-full inline-flex items-center justify-center px-5 py-3 rounded-xl text-white btn-primary"><i class="fa-brands fa-telegram mr-2"></i>Вступить в Telegram‑группу</a>
+            <p class="mt-3 text-xs text-gray-600">Закрытая группа в Telegram: видео, инструкции, ответы на вопросы.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -124,17 +167,17 @@
     <!-- How it works -->
     <section class="py-10">
       <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-6">
-        <div class="border border-gray-200 rounded-xl p-6 bg-white">
+        <div class="card-soft p-6">
           <h3 class="font-semibold">4 мини‑видео</h3>
-          <p class="mt-2 text-sm text-gray-700">Короткие уроки, которые можно смотреть с телефона и сразу применять.</p>
+          <p class="mt-2 text-sm text-gray-700">Смотрите с телефона и сразу применяйте.</p>
         </div>
-        <div class="border border-gray-200 rounded-xl p-6 bg-white">
+        <div class="card-soft p-6">
           <h3 class="font-semibold">Пошаговые задания</h3>
           <p class="mt-2 text-sm text-gray-700">Каждый день — маленький шаг и понятный результат.</p>
         </div>
-        <div class="border border-gray-200 rounded-xl p-6 bg-white">
+        <div class="card-soft p-6">
           <h3 class="font-semibold">Поддержка в чате</h3>
-          <p class="mt-2 text-sm text-gray-700">Ответы на вопросы, разборы и моральная поддержка в Telegram.</p>
+          <p class="mt-2 text-sm text-gray-700">Вопросы, разборы и мотивация в Telegram.</p>
         </div>
       </div>
     </section>
@@ -143,15 +186,21 @@
     <section class="py-10">
       <div class="max-w-7xl mx-auto">
         <h2 class="text-2xl md:text-3xl font-semibold">Частые вопросы</h2>
-        <div class="mt-6 grid md:grid-cols-2 gap-6">
-          <div class="border border-gray-200 rounded-xl p-5 bg-white">
-            <h3 class="font-semibold">Мне точно хватит 5 дней?</h3>
-            <p class="mt-2 text-sm text-gray-700">Да. Формат — «по 1 шагу в день». Можно идти быстрее или медленнее — материалы остаются у вас.</p>
-          </div>
-          <div class="border border-gray-200 rounded-xl p-5 bg-white">
-            <h3 class="font-semibold">Нужно ли уметь работать в 3D?</h3>
-            <p class="mt-2 text-sm text-gray-700">Нет. Мы используем простые инструменты: Pinterest/коллажи + понятные чек‑листы и схемы.</p>
-          </div>
+        <div class="mt-6 divide-y divide-gray-200 border border-gray-200 rounded-xl overflow-hidden bg-white">
+          <details class="group">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 px-4 py-4 marker:content-none">
+              <div class="font-medium">Мне точно хватит 5 дней?</div>
+              <span class="transition group-open:rotate-180">⌄</span>
+            </summary>
+            <div class="px-4 pb-5 text-sm text-gray-700">Да. Формат — «по 1 шагу в день». Можно идти быстрее или медленнее — материалы остаются у вас.</div>
+          </details>
+          <details class="group">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 px-4 py-4 marker:content-none">
+              <div class="font-medium">Нужно ли уметь работать в 3D?</div>
+              <span class="transition group-open:rotate-180">⌄</span>
+            </summary>
+            <div class="px-4 pb-5 text-sm text-gray-700">Нет. Мы используем простые инструменты: Pinterest/коллажи + понятные чек‑листы.</div>
+          </details>
         </div>
       </div>
     </section>
@@ -178,5 +227,33 @@
 
   <!-- Instagram floating button removed -->
   <script src="app.js?v=20251011c" defer></script>
+
+  <!-- Sticky CTA (mobile) -->
+  <div class="sticky-cta md:hidden">
+    <div class="bar px-4 pb-4">
+      <div class="rounded-xl shadow-lg border border-emerald-200 bg-white p-3 flex items-center justify-between">
+        <div>
+          <p class="text-sm font-medium">Челлендж · 5 дней</p>
+          <p class="text-xs text-gray-500">Всего <span class="font-semibold">1 490 ₽</span></p>
+        </div>
+        <a href="#join" class="inline-flex justify-center rounded-md bg-emerald-600 text-white px-4 py-2">Присоединиться</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Back to top -->
+  <button id="toTop" class="floating-top rounded-full bg-white border border-gray-200 shadow-md p-2" aria-label="Наверх">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <script>
+    (function(){
+      var toTop = document.getElementById('toTop');
+      window.addEventListener('scroll', function(){
+        if(window.scrollY > 600){ toTop.classList.add('visible'); } else { toTop.classList.remove('visible'); }
+      });
+      toTop && toTop.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
+    })();
+  </script>
 </body>
 </html>
