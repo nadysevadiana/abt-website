@@ -44,18 +44,29 @@
 </header>
   <script>
     document.addEventListener('DOMContentLoaded', function(){
-      var desktop = document.getElementById('cta-desktop');
-      var mobile = document.getElementById('cta-mobile');
-      if(!desktop && !mobile) return;
-      var path = window.location.pathname.split('/').pop() || 'index.html';
-      var isIndex = /^(index\.html?|)$/.test(path);
-      var text = isIndex ? 'Выбрать пакет' : 'На главную';
-      [desktop, mobile].forEach(function(el){
-        if(!el) return;
-        var span = el.querySelector('.cta-text');
-        if(span) span.textContent = text;
-        // make sure link always points to index anchor
-        el.setAttribute('href', 'index.html#choose-path');
-      });
+      function updateCTALabel(){
+        var desktop = document.getElementById('cta-desktop');
+        var mobile = document.getElementById('cta-mobile');
+        if(!desktop && !mobile) return;
+        var path = window.location.pathname.split('/').pop() || 'index.html';
+        var isIndex = /^(index\.html?|)$/.test(path) || window.location.pathname === '/';
+        var label = isIndex ? 'Выбрать пакет' : 'На главную';
+        [desktop, mobile].forEach(function(el){
+          if(!el) return;
+          var span = el.querySelector('.cta-text');
+          if(span) span.textContent = label;
+          else el.textContent = label;
+          // ensure the link always points to the index anchor
+          try{ el.setAttribute('href', 'index.html#choose-path'); } catch(e){}
+        });
+      }
+
+      // run immediately and a bit later (in case other scripts modify header)
+      updateCTALabel();
+      setTimeout(updateCTALabel, 200);
+
+      // watch for DOM changes that might overwrite the header and re-apply
+      var mo = new MutationObserver(function(){ updateCTALabel(); });
+      mo.observe(document.body, { childList: true, subtree: true });
     });
   </script>
