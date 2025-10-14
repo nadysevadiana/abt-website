@@ -1,0 +1,156 @@
+
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>О нас — Art by Twins</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <!-- Open Graph / SEO -->
+  <meta name="description" content="Art by Twins — дополнительное профессиональное образование и дизайн. Контакты, реквизиты, миссия и команда." />
+  <meta property="og:title" content="О нас — Art by Twins" />
+  <meta property="og:description" content="Дополнительное профессиональное образование и дизайн. Контакты, реквизиты, миссия и команда." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="./images/og-about.jpg" />
+  <meta property="og:locale" content="ru_RU" />
+  <style>
+    html{scroll-behavior:smooth}
+    .site-bg{background:
+      radial-gradient(1200px 600px at 10% 0%, rgba(16,185,129,.12), rgba(255,255,255,0) 60%),
+      radial-gradient(900px 500px at 90% 10%, rgba(56,189,248,.12), rgba(255,255,255,0) 60%),
+      radial-gradient(1200px 600px at 50% 100%, rgba(251,191,36,.1), rgba(255,255,255,0) 60%);
+      background-attachment:fixed
+    }
+    .btn-primary{background:#10B981;color:#fff}
+    .btn-primary:hover{background:#059669}
+    .card-soft{background:#fff;border:1px solid rgba(2,6,23,.08);border-radius:1rem;box-shadow:0 10px 24px rgba(2,6,23,.06)}
+    .gradient-border{position:relative}
+    .gradient-border:before{content:"";position:absolute;inset:-1px;border-radius:1rem;padding:1px;background:linear-gradient(135deg,rgba(16,185,129,.6),rgba(14,165,233,.6));-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+    @media print{header, footer { display:none !important; } body { color:#000; background:#fff; }}
+  </style>
+</head>
+<body class="site-bg text-gray-900 antialiased">
+  <div id="site-header"></div>
+  <noscript><div style="padding:8px;background:#fee2e2;color:#7f1d1d;text-align:center">Для загрузки шапки/футера требуется JavaScript.</div></noscript>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-emerald-50 via-white to-sky-50 py-10 px-6 md:px-16 border-b border-gray-200">
+    <div class="max-w-7xl mx-auto grid md:grid-cols-12 gap-8 items-center">
+      <div class="md:col-span-8">
+        <nav aria-label="Хлебные крошки" class="text-xs text-gray-600 mb-2">
+          <a href="index.html" class="hover:underline">Главная</a>
+          <span class="mx-1">/</span>
+          <span class="text-gray-500">О нас</span>
+        </nav>
+        <h1 class="text-3xl md:text-5xl font-bold leading-tight tracking-tight">Art by Twins — дополнительное профессиональное образование и дизайн</h1>
+        <p class="mt-4 text-lg text-gray-700">Мы создаём понятные и практичные продукты по интерьерному дизайну для людей и команд. Обучаем, сопровождаем и даём инструменты, которые работают в реальной жизни.</p>
+        <div class="mt-6 flex flex-wrap gap-2 text-sm">
+          <span class="px-3 py-1 rounded-full border border-neutral-200 bg-white text-neutral-700">Обучение и практика</span>
+          <span class="px-3 py-1 rounded-full border border-neutral-200 bg-white text-neutral-700">Чек‑листы и шаблоны</span>
+          <span class="px-3 py-1 rounded-full border border-neutral-200 bg-white text-neutral-700">Поддержка в Telegram</span>
+          <span class="px-3 py-1 rounded-full border border-emerald-200 bg-emerald-50 text-emerald-800">Москва, Россия</span>
+        </div>
+      </div>
+      <div class="md:col-span-4">
+        <div class="gradient-border rounded-2xl p-1">
+          <div class="rounded-2xl bg-white p-6 card-soft">
+            <h3 class="font-semibold text-lg">Быстрые контакты</h3>
+            <ul class="mt-3 space-y-2 text-gray-800 text-sm">
+              <li><i class="fa-solid fa-envelope mr-2 text-emerald-600"></i><a href="mailto:info@artbytwins.pro" class="hover:underline">info@artbytwins.pro</a></li>
+              <li><i class="fa-solid fa-phone mr-2 text-emerald-600"></i><a href="tel:+79037985140" class="hover:underline">+7‑903‑798‑51‑40</a></li>
+              <li><i class="fa-solid fa-phone mr-2 text-emerald-600"></i><a href="tel:+79629402346" class="hover:underline">+7‑962‑940‑23‑46</a></li>
+              <li><i class="fa-solid fa-phone mr-2 text-emerald-600"></i><a href="tel:+79629402345" class="hover:underline">+7‑962‑940‑23‑45</a></li>
+              <li><i class="fa-brands fa-telegram mr-2 text-emerald-600"></i><a href="https://t.me/artbytwins" target="_blank" class="hover:underline">Telegram</a></li>
+              <li><i class="fa-solid fa-globe mr-2 text-emerald-600"></i><a href="https://www.artbytwins.pro" target="_blank" class="hover:underline">www.artbytwins.pro</a></li>
+            </ul>
+            <a href="shop.html" class="mt-4 inline-flex items-center px-4 py-2 rounded-lg btn-primary text-white"><i class="fa-solid fa-store mr-2"></i>Перейти в магазин</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main id="main-content" class="px-6 md:px-16 pb-16">
+    <!-- О компании -->
+    <section class="py-10">
+      <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-6 items-start">
+        <div class="md:col-span-2 card-soft p-6">
+          <h2 class="text-2xl md:text-3xl font-semibold">О компании</h2>
+          <p class="mt-3 text-gray-700">ООО «Арт.Бай.Твинс» — организация дополнительного профессионального образования и проектов в области дизайна. Мы объединяем практику, методику и современную подачу, чтобы у вас получался результат: от первого проекта до профессионального роста.</p>
+          <p class="mt-3 text-gray-700">Наши продукты создаются в связке: обучение → инструменты → поддержка. Вы получаете программы, чек‑листы, юридические и организационные шаблоны, а также сопровождение в реальных задачах.</p>
+        </div>
+        <div class="card-soft p-6">
+          <h3 class="text-xl font-semibold">Юридические данные</h3>
+          <dl class="mt-3 text-sm text-gray-800 space-y-2">
+            <div class="flex justify-between"><dt class="text-gray-600">Полное наименование</dt><dd class="font-medium">ООО «Арт.Бай.Твинс»</dd></div>
+            <div class="flex justify-between"><dt class="text-gray-600">Генеральный директор</dt><dd class="font-medium">Эльвира Ханифовна Надысева</dd></div>
+            <div class="flex justify-between"><dt class="text-gray-600">ОГРН</dt><dd class="font-medium">1247700405226</dd></div>
+            <div class="flex justify-between"><dt class="text-gray-600">ИНН</dt><dd class="font-medium">7708437295</dd></div>
+            <div class="flex justify-between"><dt class="text-gray-600">КПП</dt><dd class="font-medium">770801001</dd></div>
+            <div class="flex justify-between"><dt class="text-gray-600">Дата регистрации</dt><dd class="font-medium">31 мая 2024 г.</dd></div>
+            <div class="flex justify-between"><dt class="text-gray-600">Статус МСП</dt><dd class="font-medium">микропредприятие (с 10 июня 2024 г.)</dd></div>
+            <div class="flex justify-between"><dt class="text-gray-600">ОКВЭД</dt><dd class="font-medium">85.42 — дополнительное профессиональное образование</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- Адрес и контакты -->
+    <section class="py-10">
+      <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-6">
+        <div class="card-soft p-6">
+          <h3 class="text-xl font-semibold">Юридический адрес</h3>
+          <p class="mt-2 text-gray-800">107078, город Москва, Красноворотский проезд, д. 3 стр. 1, помещ. 1/м</p>
+          <div class="mt-4 text-sm text-gray-700">
+            <p><i class="fa-solid fa-envelope mr-2 text-emerald-600"></i><a href="mailto:info@artbytwins.pro" class="hover:underline">info@artbytwins.pro</a></p>
+            <p class="mt-1"><i class="fa-solid fa-phone mr-2 text-emerald-600"></i><a href="tel:+79037985140" class="hover:underline">+7‑903‑798‑51‑40</a>, <a href="tel:+79629402346" class="hover:underline">+7‑962‑940‑23‑46</a>, <a href="tel:+79629402345" class="hover:underline">+7‑962‑940‑23‑45</a></p>
+            <p class="mt-1"><i class="fa-solid fa-globe mr-2 text-emerald-600"></i><a href="https://www.artbytwins.pro" target="_blank" class="hover:underline">www.artbytwins.pro</a></p>
+          </div>
+        </div>
+        <div class="card-soft p-0 overflow-hidden">
+          <div class="h-full w-full">
+            <iframe title="Карта" src="https://www.openstreetmap.org/export/embed.html?bbox=37.633%2C55.772%2C37.645%2C55.778&layer=mapnik" style="border:0;width:100%;height:100%;min-height:280px" loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Миссия и принципы -->
+    <section class="py-10">
+      <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-6">
+        <div class="card-soft p-6">
+          <h3 class="text-xl font-semibold">Миссия</h3>
+          <p class="mt-2 text-gray-700">Дать людям инструменты, чтобы создавать функциональные и красивые пространства самостоятельно — с уверенностью в каждом шаге.</p>
+        </div>
+        <div class="card-soft p-6">
+          <h3 class="text-xl font-semibold">Подход</h3>
+          <p class="mt-2 text-gray-700">Практика вместо теории: компактные модули, шаблоны и разборы. Мы экономим ваше время и деньги.</p>
+        </div>
+        <div class="card-soft p-6">
+          <h3 class="text-xl font-semibold">Качество</h3>
+          <p class="mt-2 text-gray-700">Материалы выверены и обновляются. Поддержка — в тарифах с сопровождением через Telegram.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-12">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-2xl md:text-3xl font-semibold">Нужна консультация или счёт на оплату?</h2>
+        <p class="mt-3 text-gray-700">Напишите нам — ответим в рабочее время и подскажем подходящий продукт под ваш запрос.</p>
+        <div class="mt-6 flex flex-wrap justify-center gap-3">
+          <a href="mailto:info@artbytwins.pro" class="inline-flex items-center px-5 py-3 rounded-xl text-white btn-primary shadow-lg"><i class="fa-solid fa-envelope mr-2"></i>Написать на почту</a>
+          <a href="https://t.me/artbytwins" target="_blank" class="inline-flex items-center px-5 py-3 rounded-xl border border-emerald-200 hover:border-emerald-400"><i class="fa-brands fa-telegram mr-2"></i>Написать в Telegram</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="app.js?v=20251011c" defer></script>
+</body>
+</html>
