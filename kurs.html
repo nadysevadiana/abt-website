@@ -100,13 +100,25 @@
           <li>• Поддержка в TG (в тарифах «Расширенный» и «Максимум»)</li>
         </ul>
       </div>
-      <div class="relative rounded-xl overflow-hidden border border-neutral-200">
-        <!-- Видео-превью (можно заменить src на свой) -->
-        <video class="w-full h-full aspect-video" poster="./images/course-poster.jpg" controls playsinline preload="metadata">
+      <div class="relative rounded-xl overflow-hidden border border-neutral-200" style="padding-top:56.25%">
+        <!-- Background video (autoplay muted loop for mobile compatibility) -->
+        <video class="absolute inset-0 w-full h-full object-cover" autoplay muted loop playsinline preload="metadata" poster="./images/course-poster.jpg" aria-hidden="true">
+          <!-- Prefer MP4 for web; MOV as fallback -->
+          <source src="./images/IMG_7732.mp4" type="video/mp4">
           <source src="./images/IMG_7732.mov" type="video/quicktime">
-          Ваш браузер не поддерживает воспроизведение видео. 
-          <a href="./images/IMG_7732.mov">Скачать видео</a>.
         </video>
+        <!-- Subtle dark overlay for text contrast (if any text placed on top later) -->
+        <div class="absolute inset-0" style="background:linear-gradient(0deg, rgba(0,0,0,.25), rgba(0,0,0,.05))"></div>
+
+        <!-- Fallback content for browsers with video disabled -->
+        <noscript>
+          <img src="./images/course-poster.jpg" alt="Превью курса" class="absolute inset-0 w-full h-full object-cover" />
+        </noscript>
+
+        <!-- Optional bottom-left caption / controls placeholder (kept minimal) -->
+        <div class="absolute left-3 bottom-3 text-white text-sm bg-black bg-opacity-40 rounded-md px-2 py-1">
+          Превью курса (видео без звука)
+        </div>
       </div>
     </div>
   </section>
