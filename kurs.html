@@ -106,9 +106,9 @@
         <div class="relative rounded-2xl p-[2px] bg-gradient-to-br from-emerald-500/40 to-blue-500/40">
           <div class="relative rounded-xl overflow-hidden border border-neutral-200 bg-black">
             <!-- Видео-превью в правом окне -->
-            <video id="heroVideo" class="w-full h-full aspect-video object-cover" poster="./images/course-poster.jpg" controls playsinline preload="metadata">
-              <source src="./images/IMG_7732.mov" type="video/quicktime">
+            <video id="heroVideo" class="w-full h-full aspect-video object-cover" poster="./images/course-poster.jpg" controls playsinline webkit-playsinline preload="metadata">
               <source src="./images/IMG_7732.mp4" type="video/mp4">
+              <source src="./images/IMG_7732.mov" type="video/quicktime">
               Ваш браузер не поддерживает воспроизведение видео.
               <a href="./images/IMG_7732.mov">Скачать видео</a>.
             </video>
@@ -519,12 +519,27 @@
       var btn = document.getElementById('heroVideoPlay');
       if(v && btn){
         btn.addEventListener('click', function(){
-          try{ v.muted = false; v.volume = 1; v.play(); }catch(e){}
+          try{
+            v.muted = false;
+            v.removeAttribute('muted');
+            v.volume = 1;
+            var p = v.play();
+            if(p && typeof p.catch === 'function'){ p.catch(function(){}); }
+          }catch(e){}
           btn.style.display = 'none';
           v.setAttribute('controls','');
         });
         v.addEventListener('play', function(){ btn.style.display = 'none'; });
         v.addEventListener('pause', function(){ btn.style.display = ''; });
+        v.addEventListener('click', function(){
+          try{
+            v.muted = false;
+            v.removeAttribute('muted');
+            v.volume = 1;
+            var p = v.play();
+            if(p && typeof p.catch === 'function'){ p.catch(function(){}); }
+          }catch(e){}
+        }, { passive: true });
       }
     })();
   </script>
