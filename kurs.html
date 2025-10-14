@@ -86,24 +86,28 @@
   <!-- Герой -->
   <div id="site-header"></div>
   <noscript><div style="padding:8px;background:#fee2e2;color:#7f1d1d;text-align:center">Для загрузки шапки/футера требуется JavaScript.</div></noscript>
-  <section class="relative overflow-hidden border-b border-neutral-200">
-    <video class="absolute inset-0 w-full h-full object-contain bg-black" autoplay muted loop playsinline preload="metadata" poster="./images/course-poster.jpg" aria-hidden="true">
-      <source src="./images/IMG_7732.mp4" type="video/mp4">
-      <source src="./images/IMG_7732.mov" type="video/quicktime">
-    </video>
-    <div class="absolute inset-0 bg-black bg-opacity-40"></div>
-    <div class="relative mx-auto max-w-7xl px-4 py-20 grid md:grid-cols-2 gap-8 text-white">
+  <section class="bg-gradient-to-br from-neutral-100 to-white border-b border-neutral-200">
+    <div class="mx-auto max-w-7xl px-4 py-14 grid md:grid-cols-2 gap-8">
       <div>
-        <h1 class="text-3xl md:text-5xl font-semibold leading-tight tracking-tight drop-shadow-lg">Стань дизайнером своей квартиры</h1>
-        <p class="mt-4 text-neutral-100 drop-shadow">8 модулей: стиль и планировка, материалы, SketchUp, цвет и освещение, визуализация, правовой блок и бюджетирование. Сделаете проект под свой бюджет и вкус.</p>
+        <h1 class="text-3xl md:text-5xl font-semibold leading-tight tracking-tight">Стань дизайнером своей квартиры</h1>
+        <p class="mt-4 text-neutral-700">8 модулей: стиль и планировка, материалы, SketchUp, цвет и освещение, визуализация, правовой блок и бюджетирование. Сделаете проект под свой бюджет и вкус.</p>
         <div class="mt-6 flex gap-3">
           <a href="#program" class="inline-flex items-center px-4 py-2 rounded-lg font-semibold shadow bg-emerald-600 hover:bg-emerald-500 text-white">Смотреть программу</a>
-          <a href="#pricing" class="inline-flex items-center rounded-lg border border-white text-white px-4 py-2 font-semibold shadow-sm hover:bg-white hover:text-neutral-900 transition">Выбрать тариф</a>
+          <a href="#pricing" class="inline-flex items-center rounded-lg border border-emerald-600 text-emerald-700 px-4 py-2 font-semibold shadow-sm hover:bg-emerald-50">Выбрать тариф</a>
         </div>
-        <ul class="mt-6 text-sm text-neutral-100 space-y-1">
+        <ul class="mt-6 text-sm text-neutral-600 space-y-1">
           <li>• Доступ навсегда • Шаблоны и чек-листы • Сертификат о прохождении</li>
           <li>• Поддержка в TG (в тарифах «Расширенный» и «Максимум»)</li>
         </ul>
+      </div>
+      <div class="relative rounded-xl overflow-hidden border border-neutral-200">
+        <!-- Видео-превью в правом окне -->
+        <video class="w-full h-full aspect-video" poster="./images/course-poster.jpg" controls playsinline preload="metadata">
+          <source src="./images/IMG_7732.mp4" type="video/mp4">
+          <source src="./images/IMG_7732.mov" type="video/quicktime">
+          Ваш браузер не поддерживает воспроизведение видео.
+          <a href="./images/IMG_7732.mov">Скачать видео</a>.
+        </video>
       </div>
     </div>
   </section>
@@ -151,13 +155,7 @@
       <!-- Контент -->
       <div class="space-y-16">
         <!-- Программа -->
-        <section id="program" class="relative scroll-mt-28 overflow-hidden">
-  <video class="absolute inset-0 w-full h-full object-contain bg-black pointer-events-none" autoplay muted loop playsinline preload="metadata" poster="./images/course-poster.jpg" aria-hidden="true">
-    <source src="./images/IMG_7732.mp4" type="video/mp4">
-    <source src="./images/IMG_7732.mov" type="video/quicktime">
-  </video>
-  <div class="absolute inset-0 bg-black bg-opacity-35"></div>
-  <div class="relative">
+        <section id="program" class="scroll-mt-28">
           <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">Программа курса (8 модулей)</h2>
           <p class="mt-2 text-neutral-700">Каждый модуль — видеоуроки, шаблоны, практика; проверка заданий доступна в тарифах «Расширенный» и «Максимум».</p>
           <div class="mt-6 divide-y divide-neutral-200 border border-neutral-200 rounded-xl overflow-hidden">
@@ -243,8 +241,7 @@
           </div>
         </details>
       </div>
-    </div>
-  </section>
+    </section>
 
         <!-- Результаты -->
         <section id="outcomes" class="scroll-mt-28">
