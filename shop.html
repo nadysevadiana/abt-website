@@ -295,7 +295,7 @@
 
       <!-- Общая кнопка -->
       <div class="mt-10 flex justify-center">
-        <a href="#shop-grid" class="btn-primary inline-flex items-center px-6 py-3 rounded-lg font-semibold shadow">
+        <a id="show-all" href="#shop-grid" class="btn-primary inline-flex items-center px-6 py-3 rounded-lg font-semibold shadow">
           <i class="fa-solid fa-store mr-2"></i>Показать всё
         </a>
       </div>
@@ -376,6 +376,38 @@
         'psychology': 'shop/psychology.html',
         'ai-tools': 'shop/ai-tools.html'
       };
+
+      // "Показать всё" — сбрасывает фильтры и закрывает просмотр товара
+      const showAllBtn = document.getElementById('show-all');
+      if (showAllBtn) {
+        showAllBtn.addEventListener('click', function(e){
+          e.preventDefault();
+          // Закрыть карточку товара, если открыта
+          if (!view.classList.contains('hidden')) {
+            closeProduct();
+          }
+          // Показать все карточки
+          document.querySelectorAll('#shop-grid .card').forEach(function(card){
+            card.classList.remove('is-hidden');
+          });
+          // Обновить состояние чипсов (выбрать «Все»)
+          document.querySelectorAll('#shop-filters .chip').forEach(function(btn){
+            btn.classList.remove('is-active');
+            btn.setAttribute('aria-pressed','false');
+          });
+          var allBtn = document.querySelector('#shop-filters .chip[data-filter="*"]');
+          if (allBtn) {
+            allBtn.classList.add('is-active');
+            allBtn.setAttribute('aria-pressed','true');
+          }
+          // Очистить параметры URL и проскроллить к сетке
+          var url = new URL(window.location.href);
+          url.searchParams.delete('cat');
+          url.searchParams.delete('item');
+          history.replaceState(null, '', url.toString());
+          grid.scrollIntoView({behavior:'smooth', block:'start'});
+        });
+      }
 
       function tplId(key){ return 'tpl-' + key; }
       function getTpl(key){ return document.getElementById(tplId(key)); }
