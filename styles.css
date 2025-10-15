@@ -3,9 +3,6 @@
       html {
         scroll-behavior: smooth;
       }
-      .course-card-gradient {
-        /* background removed for Tailwind utility classes */
-      }
       .footer-divider {
         border-color: #3f3f46;
       }
