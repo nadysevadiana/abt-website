@@ -43,8 +43,6 @@
       .carousel-item {
         scroll-snap-align: center;
         flex: 0 0 auto;
-      }
-      .carousel-item {
         transition: transform 0.5s;
       }
       .carousel-item:hover {
