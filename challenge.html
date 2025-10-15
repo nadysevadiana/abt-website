@@ -15,33 +15,6 @@
   <meta property="og:type" content="website">
   <meta property="og:image" content="./images/og-challenge.jpg">
   <meta property="og:locale" content="ru_RU">
-  <style>
-    html{scroll-behavior:smooth}
-    .site-bg{background:
-      radial-gradient(1200px 600px at 10% 0%, rgba(16,185,129,.12), rgba(255,255,255,0) 60%),
-      radial-gradient(900px 500px at 90% 10%, rgba(56,189,248,.12), rgba(255,255,255,0) 60%),
-      radial-gradient(1200px 600px at 50% 100%, rgba(251,191,36,.1), rgba(255,255,255,0) 60%);
-      background-attachment:fixed
-    }
-    @media print{
-      header, footer { display:none !important; }
-      a[href]:after { content:" (" attr(href) ")"; font-size: 10px; }
-      body { color:#000; background:#fff; }
-    }
-    /* ————— UI Enhancements for Challenge page ————— */
-    .chip{display:inline-flex;align-items:center;gap:.5rem;padding:.35rem .65rem;border-radius:999px;font-size:.8rem;font-weight:600;border:1px solid rgba(16,185,129,.25);background:#fff;box-shadow:0 4px 10px rgba(2,6,23,.06)}
-    .chip b{font-weight:700}
-    .gradient-border{position:relative}
-    .gradient-border:before{content:"";position:absolute;inset:-1px;border-radius:1rem;padding:1px;background:linear-gradient(135deg,rgba(16,185,129,.6),rgba(14,165,233,.6));-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
-    .card-soft{background:#fff;border:1px solid rgba(2,6,23,.08);border-radius:1rem;box-shadow:0 10px 24px rgba(2,6,23,.06)}
-    .step{counter-increment: step}
-    .step:before{content: counter(step);display:inline-flex;align-items:center;justify-content:center;width:1.75rem;height:1.75rem;border-radius:999px;background:#10B981;color:#fff;font-weight:700;margin-right:.5rem;box-shadow:0 6px 14px rgba(16,185,129,.3)}
-    .sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:50}
-    .sticky-cta .bar{margin:0 auto;max-width:80rem}
-    .floating-top{position:fixed;right:1rem;bottom:5rem;z-index:40;opacity:0;pointer-events:none;transition:opacity .2s}
-    .floating-top.visible{opacity:1;pointer-events:auto}
-    @media (min-width: 768px){.floating-top{right:1.5rem;bottom:2rem}}
-  </style>
 </head>
 <body class="site-bg text-gray-900 antialiased">
   <div id="site-header"></div>
