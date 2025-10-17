@@ -418,3 +418,55 @@
   .story-caption{ font-size: .95rem }
   .story-bars{ top:10px }
 }
+/* =======================================================
+   TYPOGRAPHY & READING EASE UTILITIES (lightweight)
+   Helps reduce perceived text overload without rewriting copy
+   ======================================================= */
+
+:root{ --measure:65ch; }
+
+/* Constrain long paragraphs to readable line length */
+.prose, .max-w-prose{ max-width: var(--measure); }
+.max-w-2xl{ max-width:42rem; } /* 672px */
+
+/* Looser line-height for dense text blocks */
+.leading-loose{ line-height:1.75; }
+
+/* Modern text wrapping for nicer rag (supported in major browsers) */
+ h1, h2{ text-wrap: balance; }
+ p, li{ text-wrap: pretty; }
+
+/* Default spacing for rich text blocks */
+.prose p{ margin:.5rem 0 .75rem; }
+.prose ul{ margin:.5rem 0 .75rem; padding-left:1.25rem; }
+.prose li{ margin:.25rem 0; }
+
+/* Optional two-column text on large screens (use sparingly) */
+@media (min-width:1024px){
+  .cols-2-lg{ column-count:2; column-gap:2rem; }
+}
+
+/* Clamp utilities (CSS-only), pair with JS clamp for wider support */
+.clamp-3{ display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+.clamp-4{ display:-webkit-box; -webkit-line-clamp:4; -webkit-box-orient:vertical; overflow:hidden; }
+
+/* Subtle lead paragraph under headings */
+.lead{ font-size:1.125rem; color:#334155; }
+
+/* CTA groups: compact, consistent spacing */
+.cta-group{ display:flex; flex-wrap:wrap; gap:.75rem; align-items:center; }
+
+/* Disabled states to avoid jittery hovers when blocked */
+.btn-primary[disabled], .btn-tariff[disabled], .btn-buy[disabled]{
+  opacity:.6; cursor:not-allowed; box-shadow:none; transform:none;
+}
+
+/* A11y helper */
+.visually-hidden{ position:absolute !important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
+
+/* Respect users who prefer less motion */
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important; }
+  .carousel-item:hover, .btn-buy:hover, .btn-tariff:hover{ transform:none; }
+  .site-bg{ background-attachment: scroll; }
+}

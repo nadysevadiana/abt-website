@@ -33,12 +33,78 @@
       .catch(function(err){ console.warn('[partials]', file, err); });
   }
 
+  // ===== Utilities: reduced motion, analytics, clamps, media tweaks =====
+  function prefersReducedMotion(){
+    try{ return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; }catch(e){ return false; }
+  }
+
+  // Simple analytics dispatcher (GA4 dataLayer + Meta Pixel if available)
+  function track(event, data){
+    try{
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push(Object.assign({ event: event }, data || {}));
+    }catch(e){}
+    try{ if(typeof fbq === 'function'){ fbq('trackCustom', event, data || {}); } }catch(e){}
+  }
+
+  // Clamp long text blocks with a reveal toggle: [data-clamp][data-lines]
+  function clampElement(el, lines){
+    lines = lines || parseInt(el.getAttribute('data-lines')||'3', 10) || 3;
+    if(el.__clamped) return;
+    // Measure if clamping is needed
+    var lineHeight = parseFloat(getComputedStyle(el).lineHeight || '20');
+    var maxHeight = Math.round(lines * lineHeight);
+    if(el.scrollHeight <= maxHeight + 4) return; // short enough
+
+    // Apply clamp styles
+    el.style.display = '-webkit-box';
+    el.style.webkitBoxOrient = 'vertical';
+    el.style.overflow = 'hidden';
+    el.style.webkitLineClamp = String(lines);
+
+    // Add toggle button
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'abt-clamp-toggle';
+    btn.textContent = 'Показать ещё';
+    btn.style.cssText = 'margin-top:.5rem;color:#065f46;background:transparent;border:0;font-weight:600;cursor:pointer';
+    btn.addEventListener('click', function(){
+      var expanded = el.getAttribute('data-expanded') === 'true';
+      if(expanded){
+        el.style.webkitLineClamp = String(lines);
+        el.setAttribute('data-expanded', 'false');
+        btn.textContent = 'Показать ещё';
+        track('clamp_collapse', { id: el.id||'', lines: lines });
+      } else {
+        el.style.webkitLineClamp = 'unset';
+        el.setAttribute('data-expanded', 'true');
+        btn.textContent = 'Свернуть';
+        track('clamp_expand', { id: el.id||'', lines: lines });
+      }
+    });
+    el.after(btn);
+    el.__clamped = true;
+  }
+  function initClamps(){
+    try{ document.querySelectorAll('[data-clamp]').forEach(function(el){ clampElement(el); }); }catch(e){}
+  }
+
+  // Media enhancements: lazy-load images by default
+  function enhanceMedia(){
+    try{
+      document.querySelectorAll('img:not([loading])').forEach(function(img){ img.setAttribute('loading','lazy'); });
+      document.querySelectorAll('img:not([decoding])').forEach(function(img){ img.setAttribute('decoding','async'); });
+    }catch(e){}
+  }
+
   // Загружаем шапку/футер/кнопку TG как только DOM готов
   document.addEventListener('DOMContentLoaded', function(){
     loadPart('site-header', withV('header.html'));
     loadPart('site-footer', withV('footer.html'));
     loadPart('site-telegram-btn', withV('btn.html'));
     preconnectOnce('https://artbytwins.getcourse.ru');
+    initClamps();
+    enhanceMedia();
 
     // === Floating quick-contact buttons: mount & UX tweaks ===
     (function initFloatingContacts(){
@@ -103,6 +169,18 @@
       });
       closeMobile();
     }
+  });
+
+  document.addEventListener('keydown', function(e){
+    if(e.key !== 'Tab') return;
+    if(!modalState || !modalState.el || modalState.el.getAttribute('aria-hidden') !== 'false') return;
+    var focusables = modalState.el.querySelectorAll('a[href], button, textarea, input, select, [tabindex]:not([tabindex="-1"])');
+    focusables = Array.prototype.filter.call(focusables, function(node){ return !node.hasAttribute('disabled') && node.offsetParent !== null; });
+    if(!focusables.length) return;
+    var first = focusables[0], last = focusables[focusables.length - 1];
+    var active = document.activeElement;
+    if(e.shiftKey && active === first){ e.preventDefault(); last.focus(); }
+    else if(!e.shiftKey && active === last){ e.preventDefault(); first.focus(); }
   });
 
   // ===== Tabs: переключение по data-tab-target (если встречаются) =====
@@ -192,6 +270,7 @@ function closeMobile(){
     var dlg = document.createElement('div');
     dlg.setAttribute('role','dialog');
     dlg.setAttribute('aria-modal','true');
+    dlg.setAttribute('tabindex','-1');
     dlg.style.cssText = [
       'position:relative','max-width:960px','width:calc(100% - 2rem)','margin:4rem auto','background:#fff','border-radius:12px','box-shadow:0 20px 60px rgba(2,6,23,.35)','overflow:hidden','display:flex','flex-direction:column'
     ].join(';');
@@ -220,15 +299,18 @@ function closeMobile(){
     modalState.el = wrap;
     modalState.body = body;
     modalState.contentHost = body;
+    modalState.dialog = dlg;
 
     return wrap;
   }
 
   function openModal(){
     var el = ensureModal();
+    modalState.prevFocus = document.activeElement;
     el.style.display = 'block';
     document.documentElement.style.overflow = 'hidden';
     el.setAttribute('aria-hidden','false');
+    if(modalState.dialog){ try{ modalState.dialog.focus(); }catch(e){} }
     try{ if(window.__abt_hideContacts) window.__abt_hideContacts(); }catch(e){}
     document.body.style.overscrollBehavior = 'none';
     document.body.style.touchAction = 'none';
@@ -242,6 +324,7 @@ function closeMobile(){
     document.body.style.overscrollBehavior = '';
     document.body.style.touchAction = '';
     try{ if(window.__abt_showContacts) window.__abt_showContacts(); }catch(e){}
+    try{ if(modalState.prevFocus && typeof modalState.prevFocus.focus === 'function'){ modalState.prevFocus.focus(); } }catch(e){}
     // Clear body to avoid duplicating widgets between openings
     if(modalState.body) modalState.body.innerHTML = '';
   }
@@ -276,7 +359,7 @@ function closeMobile(){
     var slides = [];         // current slides of active story
     var slideIdx = 0;        // current slide within story
     var timer = null;
-    var AUTOPLAY_MS = 5000; // 5s per slide
+    var AUTOPLAY_MS = prefersReducedMotion() ? 0 : 5000; // disable autoplay if reduced motion
 
     // Optional overrides for richer multi-slide sequences per story item (by zero-based index)
     var STORY_OVERRIDES = {
@@ -378,6 +461,7 @@ function closeMobile(){
         b.appendChild(s); elBars.appendChild(b);
       }
       var span = elBars.querySelectorAll('.story-bar > span')[active];
+      if(AUTOPLAY_MS === 0){ return; }
       if(span){
         span.style.transition = 'none'; span.style.width='0%';
         requestAnimationFrame(function(){
@@ -410,7 +494,7 @@ function closeMobile(){
       elCap.textContent   = d.caption || '';
       renderBarsForSlides(slideIdx);
       stopTimer();
-      timer = setTimeout(function(){ nextSlide(); }, AUTOPLAY_MS);
+      if(AUTOPLAY_MS > 0){ timer = setTimeout(function(){ nextSlide(); }, AUTOPLAY_MS); }
     }
 
     function nextSlide(){
@@ -548,6 +632,14 @@ function closeMobile(){
     }
     if(!wid) return;
     openWidgetById(wid);
+  });
+
+  // ===== Analytics: delegated click tracking via [data-track] =====
+  document.addEventListener('click', function(e){
+    var t = e.target.closest && e.target.closest('[data-track]');
+    if(!t) return;
+    var name = t.getAttribute('data-track') || 'click';
+    track(name, { href: t.getAttribute('href') || '', id: t.id || '' });
   });
 
   // Экспортируем глобальные функции (если нужно)
