@@ -470,3 +470,11 @@
   .carousel-item:hover, .btn-buy:hover, .btn-tariff:hover{ transform:none; }
   .site-bg{ background-attachment: scroll; }
 }
+/* Clamp toggle tweaks: compact and baseline-aligned */
+.abt-clamp-toggle{
+  display:inline-block;
+  margin-top:.25rem;
+  font-size:.875rem;
+  line-height:1.25;
+  vertical-align:baseline;
+}
