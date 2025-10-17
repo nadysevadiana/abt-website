@@ -90,10 +90,10 @@
     <div class="mx-auto max-w-7xl px-4 py-14 grid md:grid-cols-2 gap-8">
       <div class="order-2 md:order-1">
         <h1 class="text-3xl md:text-5xl font-semibold leading-tight tracking-tight">Стань дизайнером своей квартиры</h1>
-        <p class="mt-4 text-neutral-700">8 модулей и поддержка: стиль, материалы, SketchUp, свет, визуализация, право, бюджет — доведёте проект до результата.</p>
+        <p class="mt-4 text-neutral-700 text-lg md:text-xl">Практический онлайн-курс: вы создадите проект своей квартиры с нуля — от идеи до финального результата. 8 модулей, поддержка, шаблоны и разборы ошибок.</p>
         <div class="mt-6 flex gap-3">
-          <a href="#pricing" class="btn-buy btn-buy--featured">Выбрать тариф</a>
-          <a href="#program" class="inline-flex items-center rounded-lg border border-neutral-300 text-neutral-800 px-4 py-2 font-semibold hover:bg-neutral-100">Смотреть программу</a>
+          <a href="#pricing" class="btn-buy btn-buy--featured" aria-label="Перейти к тарифам">Выбрать тариф</a>
+          <a href="#program" class="inline-flex items-center rounded-lg border border-neutral-300 text-neutral-800 px-4 py-2 font-semibold hover:bg-neutral-100" aria-label="Смотреть программу курса">Смотреть программу</a>
         </div>
         <div class="mt-6 flex flex-wrap gap-2 text-sm">
           <span class="px-3 py-1 rounded-full border border-neutral-200 bg-white text-neutral-700">Доступ навсегда</span>
@@ -280,8 +280,8 @@
         <!-- Кейсы -->
         <section id="cases" class="scroll-mt-28">
           <h2 class="text-2xl md:text-3xl font-semibold tracking-tight text-center">Работы наших учеников</h2>
-          <p class="mt-2 text-neutral-700 text-center text-lg">Реальные проекты студентов — тапните по кружку, чтобы открыть сторис</p>
-          <p class="text-sm text-center"><a href="works.html" class="inline-flex items-center gap-1 text-emerald-700 hover:underline">Смотреть ещё <i class="fa-solid fa-arrow-right text-xs"></i></a></p>
+          <p class="mt-2 text-neutral-700 text-center text-lg">Реальные проекты студентов — нажмите на кружок, чтобы открыть историю.</p>
+          <p class="text-sm text-center"><a href="works.html" class="inline-flex items-center gap-1 text-emerald-700 hover:underline" rel="noopener noreferrer" target="_blank">Смотреть ещё <i class="fa-solid fa-arrow-right text-xs"></i></a></p>
           <div class="full-bleed">
             <div id="studentStories" class="stories">
               <button type="button" class="story-item" data-index="0" data-caption-title="Анна, студентка курса" data-caption="До курса я не знала, с чего начать, а теперь я сделала проект для своей спальни!" data-meta="Современный минимализм · Москва">
@@ -325,7 +325,7 @@
 
         <section id="pricing" class="scroll-mt-28">
           <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">Тарифы</h2>
-          <p class="mt-2 text-neutral-700">Выберите формат под ваши задачи — от самостоятельного прохождения до индивидуального коучинга.</p>
+          <p class="mt-2 text-neutral-700 text-lg">Выберите формат под ваши задачи — самостоятельное прохождение, поддержка или индивидуальный коучинг.</p>
 
           <div class="mt-6 grid md:grid-cols-3 gap-4">
             <!-- Базовый -->
@@ -337,15 +337,15 @@
                 <div class="text-sm text-neutral-500 line-through">49&nbsp;900 ₽</div>
                 <div class="text-3xl font-semibold">29&nbsp;900 ₽</div>
               </div>
-              <p class="mt-2 text-xs text-neutral-500">Доступ сразу после оплаты</p>
+              <p class="mt-2 text-xs text-neutral-500">Доступ сразу после оплаты — курс откроется мгновенно</p>
               <ul class="mt-4 text-sm text-neutral-700 space-y-2">
                 <li>• 8 блоков курса <span class="text-neutral-400">(кроме Правового ведения и Бюджетирования)</span></li>
                 <li>• Видео, шаблоны, чек-листы</li>
                 <li>• Доступ навсегда</li>
                 <li class="text-neutral-400">• Обратная связь и коучинг — нет</li>
               </ul>
-              <a href="#" data-gc-open="true" data-plan="basic" class="mt-auto btn-buy">Выбрать Базовый</a>
-              <p class="mt-2 text-xs text-neutral-500">Рассрочка доступна — напишите нам в Telegram</p>
+              <a href="#" data-gc-open="true" data-plan="basic" class="mt-auto btn-buy" aria-label="Выбрать тариф Базовый">Выбрать Базовый</a>
+              <p class="mt-2 text-xs text-neutral-500">Рассрочка доступна — <a href="https://t.me/" rel="noopener noreferrer" target="_blank" class="underline">напишите нам в Telegram</a></p>
             </div>
 
             <!-- Расширенный (featured) -->
@@ -358,15 +358,15 @@
                 <div class="text-sm text-neutral-500 line-through">84&nbsp;900 ₽</div>
                 <div class="text-3xl font-semibold">59&nbsp;900 ₽</div>
               </div>
-              <p class="mt-2 text-xs text-neutral-500">Доступ сразу после оплаты</p>
+              <p class="mt-2 text-xs text-neutral-500">Доступ сразу после оплаты — курс откроется мгновенно</p>
               <ul class="mt-4 text-sm text-neutral-700 space-y-2">
                 <li>• Весь Базовый + Правовое ведение</li>
                 <li>• Бюджетирование (сметы/поставщики/лайфхаки)</li>
                 <li>• Обратная связь по заданиям</li>
                 <li>• Групповой коучинг (живые разборы)</li>
               </ul>
-              <a href="#" data-gc-open="true" data-plan="extended" class="mt-auto btn-buy btn-buy--featured">Выбрать Расширенный</a>
-              <p class="mt-2 text-xs text-neutral-500">Рассрочка доступна — напишите нам в Telegram</p>
+              <a href="#" data-gc-open="true" data-plan="extended" class="mt-auto btn-buy btn-buy--featured" aria-label="Выбрать тариф Расширенный">Выбрать Расширенный</a>
+              <p class="mt-2 text-xs text-neutral-500">Рассрочка доступна — <a href="https://t.me/" rel="noopener noreferrer" target="_blank" class="underline">напишите нам в Telegram</a></p>
             </div>
 
             <!-- Максимум -->
@@ -378,15 +378,15 @@
               <div class="mt-4">
                 <div class="text-3xl font-semibold">150&nbsp;000 ₽</div>
               </div>
-              <p class="mt-2 text-xs text-neutral-500">Доступ сразу после оплаты</p>
+              <p class="mt-2 text-xs text-neutral-500">Доступ сразу после оплаты — курс откроется мгновенно</p>
               <ul class="mt-4 text-sm text-neutral-700 space-y-2">
                 <li>• Весь «Расширенный»</li>
                 <li>• ИИ‑комбо для дизайнеров</li>
                 <li>• Психология пространства</li>
                 <li>• Индивидуальный коучинг (1‑на‑1)</li>
               </ul>
-              <a href="#" data-gc-open="true" data-plan="max" class="mt-auto btn-buy">Выбрать Максимум</a>
-              <p class="mt-2 text-xs text-neutral-500">Рассрочка доступна — напишите нам в Telegram</p>
+              <a href="#" data-gc-open="true" data-plan="max" class="mt-auto btn-buy" aria-label="Выбрать тариф Максимум">Выбрать Максимум</a>
+              <p class="mt-2 text-xs text-neutral-500">Рассрочка доступна — <a href="https://t.me/" rel="noopener noreferrer" target="_blank" class="underline">напишите нам в Telegram</a></p>
             </div>
           </div>
 
@@ -416,8 +416,8 @@
                 <div class="font-medium">Сколько длится курс и есть ли доступ навсегда?</div>
                 <span class="transition group-open:rotate-180">⌄</span>
               </summary>
-              <div class="px-4 pb-5 text-sm text-neutral-700">
-                Курс проходится в своём темпе. Доступ не ограничен по времени.
+              <div class="px-4 pb-5 text-sm text-neutral-700 md:max-w-prose" data-clamp data-lines="3">
+                Проходите в удобном темпе. Доступ навсегда.
               </div>
             </details>
             <details class="group">
@@ -425,8 +425,8 @@
                 <div class="font-medium">Что входит в проверку заданий?</div>
                 <span class="transition group-open:rotate-180">⌄</span>
               </summary>
-              <div class="px-4 pb-5 text-sm text-neutral-700">
-                Комментарии по каждому модулю: стиль и планировка, материалы, SketchUp, цвет/свет, визуализация, право и бюджет.
+              <div class="px-4 pb-5 text-sm text-neutral-700 md:max-w-prose" data-clamp data-lines="3">
+                Краткие комментарии по каждому модулю.
               </div>
             </details>
             <details class="group">
@@ -434,8 +434,8 @@
                 <div class="font-medium">Можно ли оплатить в рассрочку?</div>
                 <span class="transition group-open:rotate-180">⌄</span>
               </summary>
-              <div class="px-4 pb-5 text-sm text-neutral-700">
-                Да, доступна рассрочка — свяжитесь с нами в Telegram для условий.
+              <div class="px-4 pb-5 text-sm text-neutral-700 md:max-w-prose" data-clamp data-lines="3">
+                Да, напишите нам в Telegram — расскажем условия.
               </div>
             </details>
           </div>
@@ -451,7 +451,7 @@
               <textarea placeholder="Ваш вопрос" class="sm:col-span-2 w-full rounded-md border border-neutral-300 px-3 py-2 h-28 focus:outline-none focus:ring-2 focus:ring-neutral-900"></textarea>
               <button type="submit" class="sm:col-span-2 inline-flex justify-center rounded-md bg-neutral-900 text-white px-4 py-2 hover:opacity-90">Отправить</button>
             </form>
-            <p class="mt-3 text-sm text-neutral-600">Или напишите в <a class="underline" href="https://t.me/">Telegram</a>.</p>
+            <p class="mt-3 text-sm text-neutral-600">Или напишите в <a class="underline" href="https://t.me/" rel="noopener noreferrer" target="_blank">Telegram</a>.</p>
           </div>
         </section>
 
@@ -460,10 +460,11 @@
           <div class="rounded-2xl border border-neutral-200 bg-gradient-to-br from-white to-neutral-100 p-8 text-center">
             <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">Готовы сделать дизайн своей квартиры?</h2>
             <p class="mt-2 text-neutral-700">Начните сегодня — доступ откроется сразу после оплаты.</p>
-            <div class="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
-              <a href="#buy" data-gc-open="true" data-plan="extended" class="btn-buy btn-buy--lg">Выбрать «Расширенный»</a>
-              <a href="#program" class="inline-flex justify-center rounded-md border border-neutral-300 px-5 py-3 hover:bg-neutral-100">Посмотреть программу</a>
+            <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+              <a href="#buy" data-gc-open="true" data-plan="extended" class="btn-buy btn-buy--lg" aria-label="Выбрать тариф Расширенный">Выбрать «Расширенный»</a>
+              <a href="#program" class="inline-flex justify-center rounded-md border border-neutral-300 px-5 py-3 hover:bg-neutral-100" aria-label="Посмотреть программу курса">Посмотреть программу</a>
             </div>
+            <p class="mt-4 text-sm text-neutral-600">Оплачивайте безопасно — платформа GetCourse, SSL‑шифрование, мгновенный доступ после оплаты.</p>
           </div>
         </section>
       </div>
@@ -478,7 +479,7 @@
           <p class="text-sm font-medium">Рекомендуем: «Расширенный»</p>
           <p class="text-xs text-neutral-500"><span class="line-through mr-1">84&nbsp;900 ₽</span><span class="font-semibold">59&nbsp;900 ₽</span></p>
         </div>
-        <a href="#" data-gc-open="true" data-plan="extended" class="inline-flex justify-center rounded-md bg-neutral-900 text-white px-4 py-2">Выбрать</a>
+        <a href="#" data-gc-open="true" data-plan="extended" class="inline-flex justify-center rounded-md bg-neutral-900 text-white px-4 py-2" aria-label="Выбрать тариф Расширенный">Выбрать</a>
       </div>
     </div>
   </div>
