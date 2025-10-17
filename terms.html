@@ -41,6 +41,17 @@
   .pill-emerald{ background-color:#10B981; }
   .pill-sky{ background-color:#0EA5E9; }
   .pill-amber{ background-color:#F59E0B; }
+  .legal-prose :where(h2){font-size:1.125rem;line-height:1.6;margin-top:1.5rem;font-weight:700}
+  .legal-prose :where(h3){font-size:1rem;line-height:1.55;margin-top:1.25rem;font-weight:700}
+  .legal-prose :where(p,ul,ol,table){margin-top:.6rem}
+  .legal-prose a{color:#10B981;text-decoration:underline}
+  .chip-nav{position:sticky;top:68px;z-index:30;background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,0));backdrop-filter:saturate(1.2) blur(6px);padding:.25rem .5rem;border-radius:1rem}
+  .badge-dot{display:inline-flex;align-items:center;gap:.5rem}
+  .badge-dot::before{content:"";width:.5rem;height:.5rem;border-radius:9999px;background:#10B981;box-shadow:0 0 0 3px rgba(16,185,129,.18)}
+  .legal-card{box-shadow:0 20px 60px rgba(2,6,23,.08);}
+  .back-to-top{position:fixed;right:16px;bottom:16px;border:1px solid rgba(2,6,23,.1);background:#0F172A;color:#fff;border-radius:9999px;padding:.6rem .85rem;box-shadow:0 10px 22px rgba(2,6,23,.18);display:none}
+  .back-to-top.show{display:inline-flex}
+  @media print{.chip-nav,.back-to-top{display:none!important}}
   </style>
   <style>
     @media print{
@@ -66,11 +77,23 @@
       <h1 class="text-3xl md:text-4xl font-bold">Политика конфиденциальности</h1>
       <p class="text-sm text-gray-500 mt-2">Редакция от 17.10.2025 · Проект «Art by Twins», Москва</p>
       <p class="mt-4 text-gray-700">Настоящий документ описывает политику конфиденциальности и обработки персональных данных пользователей.</p>
+      <div class="mt-4 chip-nav flex flex-wrap gap-2 text-xs">
+        <a href="#overview" class="inline-flex items-center px-2.5 py-1 rounded-full bg-white border border-emerald-200 text-emerald-700 font-semibold shadow-sm">Обзор</a>
+        <a href="#defs" class="inline-flex items-center px-2.5 py-1 rounded-full bg-white border border-emerald-200 text-emerald-700 font-semibold shadow-sm">Термины</a>
+        <a href="#purposes" class="inline-flex items-center px-2.5 py-1 rounded-full bg-white border border-emerald-200 text-emerald-700 font-semibold shadow-sm">Цели обработки</a>
+        <a href="#rights" class="inline-flex items-center px-2.5 py-1 rounded-full bg-white border border-emerald-200 text-emerald-700 font-semibold shadow-sm">Права субъекта</a>
+        <a href="#requests" class="inline-flex items-center px-2.5 py-1 rounded-full bg-white border border-emerald-200 text-emerald-700 font-semibold shadow-sm">Запросы/удаление</a>
+      </div>
     </div>
   </section>
 
   <main class="px-6 md:px-16 py-12">
-    <div class="max-w-4xl mx-auto bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow">
+    <div class="max-w-4xl mx-auto bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow prose prose-sm legal-prose legal-card">
+      <div id="overview"></div>
+      <div id="defs"></div>
+      <div id="purposes"></div>
+      <div id="rights"></div>
+      <div id="requests"></div>
       <p class="text-gray-700 text-sm leading-relaxed whitespace-pre-line">
 Политика конфиденциальности
 
@@ -148,6 +171,7 @@
 — иное не предусмотрено соглашением между Оператором и субъектом персональных данных.
       </p>
     </div>
+    <button id="toTop" class="back-to-top" aria-label="Наверх">▲</button>
   </main>
 
   <!-- Unified Footer mount -->
@@ -155,5 +179,14 @@
 
   <!-- shared bootstrap (loads header.html/footer.html/btn.html logic) -->
   <script src="app.js?v=20250923h" defer></script>
+  <script>
+    (function(){
+      var btn=document.getElementById('toTop');
+      function t(){ if(!btn) return; (window.scrollY>400?btn.classList.add('show'):btn.classList.remove('show')); }
+      window.addEventListener('scroll',t,{passive:true});
+      window.addEventListener('load',t);
+      if(btn){ btn.addEventListener('click',function(){ window.scrollTo({top:0,behavior:'smooth'}); }); }
+    })();
+  </script>
 </body>
 </html>
