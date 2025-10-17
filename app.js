@@ -46,9 +46,8 @@
       function links(){
         var c = (window.__abt_contacts)||{};
         return {
-          tg: c.tg || 'https://t.me/yourtelegram',
-          wa: c.wa || 'https://wa.me/yourwhatsapp',
-          em: c.em || 'mailto:youremail@example.com'
+          tg: c.tg || 'https://artbytwins.getcourse.ru/lsp/opentelegram',
+          em: c.em || 'mailto:info@artbytwins.pro'
         };
       }
       function mount(){
@@ -60,7 +59,6 @@
         wrap.style.cssText = 'position:fixed;right:24px;bottom:24px;z-index:50;display:flex;flex-direction:column;gap:12px;opacity:1;transform:translateY(0);transition:opacity .22s ease, transform .22s ease';
         wrap.innerHTML = [
           '<a href="', l.tg ,'" target="_blank" rel="noopener" aria-label="Telegram" class="btn-circle btn-telegram"><i class="fa-brands fa-telegram"></i></a>',
-          '<a href="', l.wa ,'" target="_blank" rel="noopener" aria-label="WhatsApp" class="btn-circle btn-whatsapp"><i class="fa-brands fa-whatsapp"></i></a>',
           '<a href="', l.em ,'" aria-label="Email" class="btn-circle btn-email"><i class="fa-solid fa-envelope"></i></a>'
         ].join('');
         host.appendChild(wrap);
