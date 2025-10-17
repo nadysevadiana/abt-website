@@ -311,6 +311,9 @@
 .btn-circle.btn-telegram { background:#0088cc; }
 .btn-circle.btn-whatsapp { background:#25D366; }
 .btn-circle.btn-email { background:#f59e0b; }
+/* Added brand variants for new floating buttons */
+.btn-circle.btn-instagram { background:#E1306C; }
+.btn-circle.btn-vk { background:#0077FF; }
 /* Accessibility & hover polish */
 .btn-circle { cursor:pointer; }
 .btn-circle:focus-visible { outline:none; box-shadow:0 0 0 3px rgba(16,185,129,.25), 0 4px 12px rgba(0,0,0,.15) }
