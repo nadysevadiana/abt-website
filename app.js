@@ -46,8 +46,10 @@
       function links(){
         var c = (window.__abt_contacts)||{};
         return {
-          tg: c.tg || 'https://artbytwins.getcourse.ru/lsp/opentelegram',
-          em: c.em || 'mailto:info@artbytwins.pro'
+          tg: c.tg || 'https://t.me/artbytwins_support_bot?start=abt_site',
+          em: c.em || 'mailto:info@artbytwins.pro',
+          ig: c.ig || 'https://www.instagram.com/art.by.twins/',
+          vk: c.vk || 'https://vk.com/artbytwins'
         };
       }
       function mount(){
@@ -59,6 +61,8 @@
         wrap.style.cssText = 'position:fixed;right:24px;bottom:24px;z-index:50;display:flex;flex-direction:column;gap:12px;opacity:1;transform:translateY(0);transition:opacity .22s ease, transform .22s ease';
         wrap.innerHTML = [
           '<a href="', l.tg ,'" target="_blank" rel="noopener" aria-label="Telegram" class="btn-circle btn-telegram"><i class="fa-brands fa-telegram"></i></a>',
+          '<a href="', l.ig ,'" target="_blank" rel="noopener" aria-label="Instagram" class="btn-circle btn-instagram"><i class="fa-brands fa-instagram"></i></a>',
+          '<a href="', l.vk ,'" target="_blank" rel="noopener" aria-label="VK" class="btn-circle btn-vk"><i class="fa-brands fa-vk"></i></a>',
           '<a href="', l.em ,'" aria-label="Email" class="btn-circle btn-email"><i class="fa-solid fa-envelope"></i></a>'
         ].join('');
         host.appendChild(wrap);
