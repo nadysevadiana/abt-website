@@ -423,7 +423,7 @@
    Helps reduce perceived text overload without rewriting copy
    ======================================================= */
 
-:root{ --measure:80ch; }
+:root{ --measure:96ch; }
 
 /* Constrain long paragraphs to readable line length */
 .prose, .max-w-prose{ max-width: var(--measure); }
