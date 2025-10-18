@@ -432,9 +432,18 @@
 /* Looser line-height for dense text blocks */
 .leading-loose{ line-height:1.75; }
 
-/* Modern text wrapping for nicer rag (supported in major browsers) */
- h1, h2{ text-wrap: balance; }
- p, li{ text-wrap: pretty; }
+/* Progressive enhancement for nicer line breaks (with safe fallbacks) */
+/* Fallback for older engines */
+p, li{ overflow-wrap: break-word; }
+
+/* Use balanced headings when supported */
+@supports (text-wrap: balance){
+  h1, h2{ text-wrap: balance; }
+}
+/* Use prettier paragraph wrapping when supported */
+@supports (text-wrap: pretty){
+  p, li{ text-wrap: pretty; }
+}
 
 /* Default spacing for rich text blocks */
 .prose p{ margin:.5rem 0 .75rem; }
