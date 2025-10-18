@@ -6,25 +6,8 @@
   <title>Политика Cookie — Art by Twins</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
-  <style>
-    html{scroll-behavior:smooth}
-    .site-bg{background:
-      radial-gradient(1200px 600px at 10% 0%, rgba(16,185,129,.12), rgba(255,255,255,0) 60%),
-      radial-gradient(900px 500px at 90% 10%, rgba(56,189,248,.12), rgba(255,255,255,0) 60%),
-      radial-gradient(1200px 600px at 50% 100%, rgba(251,191,36,.1), rgba(255,255,255,0) 60%);
-      background-attachment:fixed
-    }
-    .btn-primary{background:#10B981;color:#fff}
-    .btn-primary:hover{background:#059669}
-  </style>
-  <style>
-    @media print{
-      header, footer { display:none !important; }
-      a[href]:after { content:" (" attr(href) ")"; font-size: 10px; }
-      body { color:#000; background:#fff; }
-    }
-  </style>
 </head>
 <body class="site-bg text-gray-900">
   <div id="site-header"></div>
@@ -81,6 +64,7 @@
         <a href="terms.html" class="inline-flex items-center px-5 py-2 rounded-lg text-sm font-semibold border border-emerald-600 text-emerald-700 hover:bg-emerald-50"><i class="fa-solid fa-scale-balanced mr-2"></i>Пользовательское соглашение</a>
       </div>
     </div>
+    <button id="toTop" class="back-to-top" aria-label="Наверх">▲</button>
   </main>
 
   <div id="site-footer"></div>
@@ -98,6 +82,20 @@
       });
     });
   })();
+</script>
+<script>
+  // Back to top button
+  const toTopBtn = document.getElementById('toTop');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+      toTopBtn.classList.add('show');
+    } else {
+      toTopBtn.classList.remove('show');
+    }
+  });
+  toTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 </script>
 <script src="app.js?v=20251011p" defer></script>
 </body>

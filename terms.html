@@ -3,16 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Публичная оферта — Art by Twins</title>
+  <title>Пользовательское соглашение — Art by Twins</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
-  <style>
-  html { scroll-behavior: smooth; }
-  .btn-primary { background-color: #10B981; color: #ffffff; }
-  .btn-primary:hover { background-color: #059669; }
-  .btn-primary:focus { outline: none; box-shadow: 0 0 0 3px rgba(16,185,129,0.35); }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body class="site-bg text-gray-900">
   <!-- Unified Header mount -->
@@ -24,9 +19,9 @@
       <nav aria-label="Хлебные крошки" class="text-xs text-gray-600 mb-2">
         <a href="index.html" class="hover:underline">Главная</a>
         <span class="mx-1">/</span>
-        <span class="text-gray-500">Публичная оферта</span>
+        <span class="text-gray-500">Пользовательское соглашение</span>
       </nav>
-      <h1 class="text-3xl md:text-4xl font-bold">Публичная оферта</h1>
+      <h1 class="text-3xl md:text-4xl font-bold">Пользовательское соглашение</h1>
       <p class="text-sm text-gray-500 mt-2">Редакция от 17.10.2025 · Проект «Art by Twins», Москва</p>
       <p class="mt-4 text-gray-700">
         Общество с ограниченной ответственностью «АРТ.БАЙ.ТВИНС» (далее — «Оператор»), именуемое в дальнейшем «Исполнитель», предоставляет услуги в соответствии с условиями настоящей публичной оферты.
@@ -35,7 +30,7 @@
   </section>
 
   <main class="px-6 md:px-16 py-12">
-    <div class="max-w-4xl mx-auto bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow">
+    <div class="max-w-4xl mx-auto bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow prose prose-sm legal-prose legal-card">
       <div class="prose max-w-none">
         <h2 id="overview" class="text-xl font-semibold">1. Общие положения</h2>
         <p>1.1. Настоящее Пользовательское соглашение (далее — «Соглашение») является публичной офертой и определяет условия использования материалов и сервисов, размещённых Администратором на сайте в сети Интернет по адресу <a href="https://artbytwins.pro" target="_blank" rel="noopener">https://artbytwins.pro</a> (далее — «Сайт») пользователями посредством Сервиса.</p>
@@ -84,12 +79,39 @@
           <i class="fa-solid fa-cookie-bite mr-2"></i>Политика Cookie
         </a>
       </div>
+      <button id="toTop" class="back-to-top" aria-label="Наверх">▲</button>
     </div>
   </main>
 
   <!-- Unified Footer mount -->
   <div id="site-footer"></div>
 
+  <script>
+    // Dropdown hover (header)
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('.dropdown').forEach(function (dropdown) {
+        dropdown.addEventListener('mouseenter', function () {
+          this.classList.add('open');
+        });
+        dropdown.addEventListener('mouseleave', function () {
+          this.classList.remove('open');
+        });
+      });
+    });
+    // Back to top button
+    window.addEventListener('scroll', function () {
+      const toTop = document.getElementById('toTop');
+      if (toTop) toTop.style.display = window.scrollY > 300 ? 'block' : 'none';
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+      const toTop = document.getElementById('toTop');
+      if (toTop) {
+        toTop.addEventListener('click', function () {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+    });
+  </script>
   <script src="app.js?v=20250923h" defer></script>
 </body>
 </html>
