@@ -9,26 +9,52 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <style>
-    html{scroll-behavior:smooth}
-    .site-bg{
-      background:
-        radial-gradient(1200px 600px at 10% 0%, rgba(16,185,129,.12), rgba(255,255,255,0) 60%),
-        radial-gradient(900px 500px at 90% 10%, rgba(56,189,248,.12), rgba(255,255,255,0) 60%),
-        radial-gradient(1200px 600px at 50% 100%, rgba(251,191,36,.1), rgba(255,255,255,0) 60%);
-      background-attachment:fixed
-    }
-    .btn-primary{background:#10B981;color:#fff}
-    .btn-primary:hover{background:#059669}
-    @media print{
-      header, footer, #site-header, #site-footer { display:none !important; }
-      a[href]:after { content:" (" attr(href) ")"; font-size: 10px; }
-      body { color:#000; background:#fff; }
-    }
-  </style>
-  <style id="scroll-unlock-css">
-    html, body { overflow-y: auto !important; height: auto; -webkit-overflow-scrolling: touch; }
-    body.modal-open, body.gc-modal-open, body.lock-scroll { overflow-y: auto !important; }
-  </style>
+  html {
+    scroll-behavior: smooth;
+  }
+  .footer-divider { border-color: #3f3f46; }
+  .site-bg {
+    background:
+      radial-gradient(1200px 600px at 10% 0%, rgba(16,185,129,0.15), rgba(255,255,255,0) 60%),
+      radial-gradient(900px 500px at 90% 10%, rgba(56,189,248,0.15), rgba(255,255,255,0) 60%),
+      radial-gradient(1200px 600px at 50% 100%, rgba(251,191,36,0.12), rgba(255,255,255,0) 60%);
+    background-attachment: fixed;
+  }
+  .btn-primary { background-color: #10B981; color: #ffffff; }
+  .btn-primary:hover { background-color: #059669; }
+  .btn-primary:focus { outline: none; box-shadow: 0 0 0 3px rgba(16,185,129,0.35); }
+  .carousel { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; gap:2rem; padding-bottom:1.5rem; -webkit-overflow-scrolling:touch; }
+  .carousel::-webkit-scrollbar { display:none; }
+  .carousel-item { scroll-snap-align:center; flex:0 0 auto; transition: transform .5s; }
+  .carousel-item:hover { transform: scale(1.05); }
+  .btn-fixed-ig { background-color:#059669; color:#fff; border:1px solid rgba(0,0,0,0.08); }
+  .btn-fixed-ig:hover { background-color:#047857; }
+  .nav-link{ position:relative; }
+  .nav-link::after{ content:""; position:absolute; left:0; bottom:-6px; width:0; height:2px; background:#10B981; transition: width .3s ease; }
+  .nav-link:hover::after{ width:100%; }
+  .full-bleed{ position:relative; left:50%; right:50%; margin-left:-50vw; margin-right:-50vw; width:100vw; }
+  .carousel-nav-btn{ backdrop-filter:blur(8px); background:rgba(255,255,255,0.9); border:1px solid rgba(16,185,129,0.25); box-shadow:0 10px 20px rgba(2,6,23,0.1); }
+  .carousel-nav-btn:hover{ box-shadow:0 14px 24px rgba(2,6,23,0.16); }
+  .course-card{ min-height:460px; display:flex; flex-direction:column; }
+  .course-card .card-actions{ margin-top:auto; }
+  .pill-badge{ padding:.25rem .6rem; line-height:1; border-radius:9999px; font-size:.75rem; font-weight:700; color:#fff; box-shadow:0 8px 18px rgba(2,6,23,0.12); border:1px solid rgba(255,255,255,0.55); }
+  .triptych-featured{ background:linear-gradient(180deg, rgba(16,185,129,0.06), #fff); border-color:rgba(16,185,129,0.35)!important; box-shadow:0 16px 40px rgba(16,185,129,0.15), 0 6px 20px rgba(2,6,23,0.08); }
+  .triptych-featured:hover{ transform: translateY(-2px); }
+  .pill-emerald{ background-color:#10B981; }
+  .pill-sky{ background-color:#0EA5E9; }
+  .pill-amber{ background-color:#F59E0B; }
+  .legal-prose :where(h2){font-size:1.125rem;line-height:1.6;margin-top:1.5rem;font-weight:700}
+  .legal-prose :where(h3){font-size:1rem;line-height:1.55;margin-top:1.25rem;font-weight:700}
+  .legal-prose :where(p,ul,ol,table){margin-top:.6rem}
+  .legal-prose a{color:#10B981;text-decoration:underline}
+  .chip-nav{position:sticky;top:68px;z-index:30;background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,0));backdrop-filter:saturate(1.2) blur(6px);padding:.25rem .5rem;border-radius:1rem}
+  .badge-dot{display:inline-flex;align-items:center;gap:.5rem}
+  .badge-dot::before{content:"";width:.5rem;height:.5rem;border-radius:9999px;background:#10B981;box-shadow:0 0 0 3px rgba(16,185,129,.18)}
+  .legal-card{box-shadow:0 20px 60px rgba(2,6,23,.08);}
+  .back-to-top{position:fixed;right:16px;bottom:16px;border:1px solid rgba(2,6,23,.1);background:#0F172A;color:#fff;border-radius:9999px;padding:.6rem .85rem;box-shadow:0 10px 22px rgba(2,6,23,.18);display:none}
+  .back-to-top.show{display:inline-flex}
+  @media print{.chip-nav,.back-to-top,#site-header,#site-footer{display:none!important}}
+</style>
 </head>
 <body class="site-bg text-gray-900 selection:bg-neutral-900 selection:text-white">
   <!-- Header (injected) -->
@@ -54,17 +80,6 @@
         <a href="#categories" class="inline-flex items-center px-2.5 py-1 rounded-full bg-white border border-emerald-200 text-emerald-700 font-semibold shadow-sm">Категории</a>
         <a href="#rights" class="inline-flex items-center px-2.5 py-1 rounded-full bg-white border border-emerald-200 text-emerald-700 font-semibold shadow-sm">Права</a>
         <a href="#requests" class="inline-flex items-center px-2.5 py-1 rounded-full bg-white border border-emerald-200 text-emerald-700 font-semibold shadow-sm">Запросы</a>
-      </div>
-      <div class="mt-8 flex flex-wrap gap-3">
-        <a href="offer.html" class="inline-flex items-center px-5 py-2 rounded-lg text-sm font-semibold border border-emerald-600 text-emerald-700 hover:bg-emerald-50">
-          <i class="fa-solid fa-file-contract mr-2"></i>Публичная оферта
-        </a>
-        <a href="terms.html" class="inline-flex items-center px-5 py-2 rounded-lg text-sm font-semibold border border-emerald-600 text-emerald-700 hover:bg-emerald-50">
-          <i class="fa-solid fa-scale-balanced mr-2"></i>Пользовательское соглашение
-        </a>
-        <a href="cookies.html" class="inline-flex items-center px-5 py-2 rounded-lg text-sm font-semibold border border-emerald-600 text-emerald-700 hover:bg-emerald-50">
-          <i class="fa-solid fa-cookie-bite mr-2"></i>Политика Cookie
-        </a>
       </div>
     </div>
   </section>
@@ -110,13 +125,52 @@
       <p>7.2. При выявлении неточностей данные блокируются на период проверки; при подтверждении — уточняются в течение 7 рабочих дней с момента предоставления сведений и блокировка снимается.</p>
       <p>7.3. При выявлении неправомерной обработки данные блокируются до устранения нарушений.</p>
       <p>7.4. При достижении целей обработки или отзыве согласия данные уничтожаются, если иное не предусмотрено договором, законом или иным соглашением с субъектом.</p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="offer.html" class="inline-flex items-center px-5 py-2 rounded-lg text-sm font-semibold border border-emerald-600 text-emerald-700 hover:bg-emerald-50">
+          <i class="fa-solid fa-file-contract mr-2"></i>Публичная оферта
+        </a>
+        <a href="terms.html" class="inline-flex items-center px-5 py-2 rounded-lg text-sm font-semibold border border-emerald-600 text-emerald-700 hover:bg-emerald-50">
+          <i class="fa-solid fa-scale-balanced mr-2"></i>Пользовательское соглашение
+        </a>
+        <a href="cookies.html" class="inline-flex items-center px-5 py-2 rounded-lg text-sm font-semibold border border-emerald-600 text-emerald-700 hover:bg-emerald-50">
+          <i class="fa-solid fa-cookie-bite mr-2"></i>Политика Cookie
+        </a>
+      </div>
     </div>
+    </div>
+    <button id="toTop" class="back-to-top" aria-label="Наверх">▲</button>
   </main>
 
+  <div id="site-telegram-btn"></div>
   <!-- Footer (injected) -->
   <div id="site-footer"></div>
 
   <!-- App JS which injects header/footer/buttons -->
-  <script src="app.js?v=20251011p" defer></script>
+  <script>
+    (function(){
+      var dds = document.querySelectorAll('[data-dd]');
+      dds.forEach(function(dd){
+        var menu = dd.querySelector('[data-menu]');
+        if(!menu) return;
+        dd.addEventListener('mouseenter', function(){
+          menu.classList.remove('invisible','pointer-events-none','opacity-0','scale-95');
+        });
+        dd.addEventListener('mouseleave', function(){
+          menu.classList.add('invisible','pointer-events-none','opacity-0','scale-95');
+        });
+      });
+    })();
+  </script>
+  <script>
+    // Show/hide back-to-top
+    (function(){
+      var btn=document.getElementById('toTop');
+      function t(){ if(!btn) return; (window.scrollY>400?btn.classList.add('show'):btn.classList.remove('show')); }
+      window.addEventListener('scroll',t,{passive:true});
+      window.addEventListener('load',t);
+      if(btn){ btn.addEventListener('click',function(){ window.scrollTo({top:0,behavior:'smooth'}); }); }
+    })();
+  </script>
+  <script src="app.js?v=20251011d" defer></script>
 </body>
 </html>
