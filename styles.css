@@ -450,8 +450,8 @@ p, li{ overflow-wrap: break-word; word-break: normal; hyphens: auto; }
 }
 
 /* Clamp utilities (CSS-only), pair with JS clamp for wider support */
-.clamp-3{ display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
-.clamp-4{ display:-webkit-box; -webkit-line-clamp:4; -webkit-box-orient:vertical; overflow:hidden; }
+.clamp-3{ display:-webkit-box; -webkit-box-orient:vertical; overflow:hidden; -webkit-line-clamp:3; line-clamp:3; }
+.clamp-4{ display:-webkit-box; -webkit-box-orient:vertical; overflow:hidden; -webkit-line-clamp:4; line-clamp:4; }
 
 /* Subtle lead paragraph under headings */
 .lead{ font-size:1.125rem; color:#334155; }
