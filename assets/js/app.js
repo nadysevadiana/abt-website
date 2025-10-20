@@ -97,11 +97,21 @@
     }catch(e){}
   }
 
+  // Resolve correct prefix for partials when page is in a subfolder (e.g., /legal/*)
+  var PARTIALS_PREFIX = (function(){
+    try {
+      var p = location.pathname || '/';
+      // If page is under /legal/ (one level deep), use '../'
+      if (p.indexOf('/legal/') === 0) return '../';
+      // Add more subfolders here if needed in future
+      return '';
+    } catch(e){ return ''; }
+  })();
   // Загружаем шапку/футер/кнопку TG как только DOM готов
   document.addEventListener('DOMContentLoaded', function(){
-    loadPart('header', withV('partials/header.html'));
-    loadPart('footer', withV('partials/footer.html'));
-    loadPart('site-telegram-btn', withV('partials/tg-btn.html'));
+    loadPart('header', withV(PARTIALS_PREFIX + 'partials/header.html'));
+    loadPart('footer', withV(PARTIALS_PREFIX + 'partials/footer.html'));
+    loadPart('site-telegram-btn', withV(PARTIALS_PREFIX + 'partials/tg-btn.html'));
     preconnectOnce('https://artbytwins.getcourse.ru');
     initClamps();
     enhanceMedia();
