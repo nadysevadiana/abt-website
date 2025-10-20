@@ -7,7 +7,7 @@
 
 (function(){
   // Версия для пробития кеша статических partials
-  var VERSION = '20250923h';
+  var VERSION = '20251020';
   function withV(path){ return path + (path.indexOf('?') === -1 ? ('?v=' + VERSION) : ('&v=' + VERSION)); }
   // Preconnect/DNS-hint helper (idempotent)
   function preconnectOnce(href){
@@ -99,9 +99,9 @@
 
   // Загружаем шапку/футер/кнопку TG как только DOM готов
   document.addEventListener('DOMContentLoaded', function(){
-    loadPart('site-header', withV('header.html'));
-    loadPart('site-footer', withV('footer.html'));
-    loadPart('site-telegram-btn', withV('btn.html'));
+    loadPart('site-header', withV('partials/header.html'));
+    loadPart('site-footer', withV('partials/footer.html'));
+    loadPart('site-telegram-btn', withV('partials/tg-btn.html'));
     preconnectOnce('https://artbytwins.getcourse.ru');
     initClamps();
     enhanceMedia();
