@@ -99,8 +99,8 @@
 
   // Загружаем шапку/футер/кнопку TG как только DOM готов
   document.addEventListener('DOMContentLoaded', function(){
-    loadPart('site-header', withV('partials/header.html'));
-    loadPart('site-footer', withV('partials/footer.html'));
+    loadPart('header', withV('partials/header.html'));
+    loadPart('footer', withV('partials/footer.html'));
     loadPart('site-telegram-btn', withV('partials/tg-btn.html'));
     preconnectOnce('https://artbytwins.getcourse.ru');
     initClamps();
