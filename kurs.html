@@ -9,7 +9,7 @@
   <!-- Tailwind CDN -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <link rel="icon" href="./favicon.ico" type="image/x-icon" />
+  <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon" />
   <link rel="preconnect" href="https://artbytwins.getcourse.ru" crossorigin>
   <link rel="dns-prefetch" href="https://artbytwins.getcourse.ru">
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
@@ -20,10 +20,10 @@
   <meta property="og:type" content="website">
   <meta property="og:image" content="./og-image.jpg">
 
-  <link rel="stylesheet" href="styles.css?v=20250923f">
-  <link rel="prefetch" href="header.html" as="fetch" crossorigin>
-  <link rel="prefetch" href="footer.html" as="fetch" crossorigin>
-  <link rel="prefetch" href="btn.html" as="fetch" crossorigin>
+  <link rel="stylesheet" href="assets/css/styles.css?v=20251020">
+  <link rel="prefetch" href="/partials/header.html" as="fetch" crossorigin>
+  <link rel="prefetch" href="/partials/footer.html" as="fetch" crossorigin>
+  <link rel="prefetch" href="/partials/tg-btn.html" as="fetch" crossorigin>
 
 
   <!-- JSON-LD: Course -->
@@ -84,7 +84,7 @@
 
 <body class="site-bg text-gray-900 selection:bg-neutral-900 selection:text-white">
   <!-- Герой -->
-  <div id="site-header"></div>
+  <div id="header"></div>
   <noscript><div style="padding:8px;background:#fee2e2;color:#7f1d1d;text-align:center">Для загрузки шапки/футера требуется JavaScript.</div></noscript>
   <section class="bg-gradient-to-br from-neutral-100 to-white border-b border-neutral-200">
     <div class="mx-auto max-w-7xl px-4 py-14 grid md:grid-cols-2 gap-8">
@@ -106,11 +106,11 @@
         <div class="relative rounded-2xl p-[2px] bg-gradient-to-br from-emerald-500/40 to-blue-500/40">
           <div class="relative rounded-xl overflow-hidden border border-neutral-200 bg-black">
             <!-- Видео-превью в правом окне -->
-            <video id="heroVideo" class="w-full h-full aspect-video object-cover" poster="./images/course-poster.jpg" controls playsinline webkit-playsinline preload="metadata">
-              <source src="./images/IMG_7732.mp4" type="video/mp4">
-              <source src="./images/IMG_7732.mov" type="video/quicktime">
+            <video id="heroVideo" class="w-full h-full aspect-video object-cover" poster="assets/img/course-poster.jpg" controls playsinline webkit-playsinline preload="metadata">
+              <source src="assets/img/IMG_7732.mp4" type="video/mp4">
+              <source src="assets/img/IMG_7732.mov" type="video/quicktime">
               Ваш браузер не поддерживает воспроизведение видео.
-              <a href="./images/IMG_7732.mov">Скачать видео</a>.
+              <a href="assets/img/IMG_7732.mov">Скачать видео</a>.
             </video>
             <!-- Overlay play button -->
             <button type="button" id="heroVideoPlay" class="absolute inset-0 grid place-items-center text-white/95 hover:text-white focus:outline-none">
@@ -285,23 +285,23 @@
           <div class="full-bleed">
             <div id="studentStories" class="stories">
               <button type="button" class="story-item" data-index="0" data-caption-title="Анна, студентка курса" data-caption="До курса я не знала, с чего начать, а теперь я сделала проект для своей спальни!" data-meta="Современный минимализм · Москва">
-                <img src="./images/work_1.png" alt="Анна — Современный минимализм" class="story-bubble"/>
+                <img src="assets/img/work_1.png" alt="Анна — Современный минимализм" class="story-bubble"/>
                 <span class="story-label">Анна</span>
               </button>
               <button type="button" class="story-item" data-index="1" data-caption-title="Виктория, студентка курса" data-caption="Не думала, что смогу сделать классику, а теперь это моя гордость!" data-meta="Современная классика · Москва">
-                <img src="./images/work_2.png" alt="Виктория — Современная классика" class="story-bubble"/>
+                <img src="assets/img/work_2.png" alt="Виктория — Современная классика" class="story-bubble"/>
                 <span class="story-label">Виктория</span>
               </button>
               <button type="button" class="story-item" data-index="2" data-caption-title="Алексей, студент курса" data-caption="Я мечтал о стиле лофт и создал проект квартиры в этом стиле!" data-meta="Лофт · Москва">
-                <img src="./images/work_3.png" alt="Алексей — Лофт" class="story-bubble"/>
+                <img src="assets/img/work_3.png" alt="Алексей — Лофт" class="story-bubble"/>
                 <span class="story-label">Алексей</span>
               </button>
               <button type="button" class="story-item" data-index="3" data-caption-title="Мария, студентка курса" data-caption="Хотела светлое и уютное пространство — получилось скандинавское вдохновение!" data-meta="Скандинавский уют · Москва">
-                <img src="./images/work_4.png" alt="Мария — Скандинавский уют" class="story-bubble"/>
+                <img src="assets/img/work_4.png" alt="Мария — Скандинавский уют" class="story-bubble"/>
                 <span class="story-label">Мария</span>
               </button>
               <button type="button" class="story-item" data-index="4" data-caption-title="Дмитрий, студент курса" data-caption="Хотел яркий и стильный интерьер — теперь гостиная выглядит современно!" data-meta="Яркий современный микс · Москва">
-                <img src="./images/work_5.png" alt="Дмитрий — Яркий современный микс" class="story-bubble"/>
+                <img src="assets/img/work_5.png" alt="Дмитрий — Яркий современный микс" class="story-bubble"/>
                 <span class="story-label">Дмитрий</span>
               </button>
             </div>
@@ -483,7 +483,7 @@
       </div>
     </div>
   </div>
-  <div id="site-footer"></div>
+  <div id="footer"></div>
 
   <div id="site-telegram-btn"></div>
 
@@ -499,7 +499,7 @@
         </div>
         <!-- header (avatar + title) -->
         <div class="story-header">
-          <img id="storyAvatar" class="avatar" src="./images/work_1.png" alt="avatar" />
+          <img id="storyAvatar" class="avatar" src="assets/img/work_1.png" alt="avatar" />
           <div class="meta">
             <div class="t" id="storyTitle">Имя, студент курса</div>
             <div class="m" id="storyMeta">Стиль · Город</div>
@@ -507,7 +507,7 @@
         </div>
         <!-- image/content -->
         <div class="story-media">
-          <img id="storyImage" src="./images/work_1.png" alt="story" />
+          <img id="storyImage" src="assets/img/work_1.png" alt="story" />
         </div>
         <!-- caption at bottom -->
         <div class="story-caption">
@@ -552,6 +552,6 @@
       }
     })();
   </script>
-  <script src="app.js?v=20250923h" defer></script>
+  <script src="assets/js/app.js?v=20251020" defer></script>
 </body>
 </html>

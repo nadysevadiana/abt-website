@@ -5,12 +5,9 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Магазин для дизайнеров | Art by Twins</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="prefetch" href="header.html" as="fetch" crossorigin>
-  <link rel="prefetch" href="footer.html" as="fetch" crossorigin>
-  <link rel="prefetch" href="shop/legal.html" as="fetch" crossorigin>
-  <link rel="prefetch" href="shop/psychology.html" as="fetch" crossorigin>
-  <link rel="prefetch" href="shop/ai-tools.html" as="fetch" crossorigin>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="prefetch" href="partials/header.html" as="fetch" crossorigin>
+  <link rel="prefetch" href="partials/footer.html" as="fetch" crossorigin>
   <!-- Icons (needed for templates with <i class="fa-...">) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
@@ -115,7 +112,7 @@
             <div class="text-3xl font-bold">2 900 ₽</div>
           </div>
           <a href="checkout.html?product=contracts" class="btn-primary inline-flex items-center px-5 py-3 rounded-lg font-semibold shadow"><i class="fa-solid fa-cart-shopping mr-2"></i>Купить комплект</a>
-          <a href="legal.html" class="inline-flex items-center px-4 py-2 rounded-lg border border-emerald-600 text-emerald-700 hover:bg-emerald-50">Подробнее о правовом модуле</a>
+          <a href="legal/offer.html" class="inline-flex items-center px-4 py-2 rounded-lg border border-emerald-600 text-emerald-700 hover:bg-emerald-50">Публичная оферта</a>
         </div>
       </template>
 
@@ -371,11 +368,7 @@
       const view = document.getElementById('product-view');
       const content = document.getElementById('product-content');
       const backBtn = document.getElementById('back-to-shop');
-      const partials = {
-        'legal': 'shop/legal.html',
-        'psychology': 'shop/psychology.html',
-        'ai-tools': 'shop/ai-tools.html'
-      };
+      const partials = {};
 
       // "Показать всё" — сбрасывает фильтры и закрывает просмотр товара
       const showAllBtn = document.getElementById('show-all');
@@ -489,6 +482,6 @@
     })();
   </script>
 
-  <script src="app.js" defer></script>
+  <script src="assets/js/app.js" defer></script>
 </body>
 </html>
