@@ -102,24 +102,38 @@
         </div>
       </div>
       <div class="order-1 md:order-2">
-        <div class="relative rounded-2xl p-[2px] bg-gradient-to-br from-emerald-500/40 to-blue-500/40 mt-4 md:mt-6">
-          <div class="relative rounded-xl overflow-hidden border border-neutral-200 bg-black">
-            <!-- Видео-превью в правом окне -->
-            <video id="heroVideo" class="w-full h-full aspect-video object-cover" style="object-position: center 58%;" poster="assets/img/course-poster.jpg" controls playsinline webkit-playsinline preload="metadata">
-              <source src="assets/img/IMG_7732.mp4" type="video/mp4">
-              <source src="assets/img/IMG_7732.mov" type="video/quicktime">
-              Ваш браузер не поддерживает воспроизведение видео.
-              <a href="assets/img/IMG_7732.mov">Скачать видео</a>.
-            </video>
-            <!-- Overlay play button -->
-            <button type="button" id="heroVideoPlay" class="absolute inset-0 grid place-items-center text-white/95 hover:text-white focus:outline-none">
-              <span class="inline-flex items-center gap-2 rounded-full bg-black/60 backdrop-blur px-4 py-2 border border-white/20 shadow">
-                <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                <span class="text-sm font-medium">Смотреть со звуком</span>
-              </span>
-            </button>
-            <!-- Caption strip -->
-            <div class="absolute left-2 bottom-2 text-[11px] text-white/90 bg-black/50 px-2 py-1 rounded">Превью курса</div>
+        <div class="md:flex md:items-stretch md:gap-4">
+          <!-- Vertical section nav (left of video on desktop) -->
+          <nav aria-label="Навигация по разделам" class="hidden md:flex flex-col items-center gap-2 select-none">
+            <a href="#program" class="group w-10 h-10 grid place-items-center rounded-full border border-neutral-300 bg-white text-sm font-medium text-neutral-700 hover:border-neutral-900 hover:text-neutral-900 shadow-sm" aria-label="К разделу: Программа">1</a>
+            <a href="#outcomes" class="group w-10 h-10 grid place-items-center rounded-full border border-neutral-300 bg-white text-sm font-medium text-neutral-700 hover:border-neutral-900 hover:text-neutral-900 shadow-sm" aria-label="К разделу: Результаты">2</a>
+            <a href="#cases" class="group w-10 h-10 grid place-items-center rounded-full border border-neutral-300 bg-white text-sm font-medium text-neutral-700 hover:border-neutral-900 hover:text-neutral-900 shadow-sm" aria-label="К разделу: Кейсы">3</a>
+            <a href="#pricing" class="group w-10 h-10 grid place-items-center rounded-full border border-neutral-300 bg-white text-sm font-medium text-neutral-700 hover:border-neutral-900 hover:text-neutral-900 shadow-sm" aria-label="К разделу: Тарифы">4</a>
+            <a href="#faq" class="group w-10 h-10 grid place-items-center rounded-full border border-neutral-300 bg-white text-sm font-medium text-neutral-700 hover:border-neutral-900 hover:text-neutral-900 shadow-sm" aria-label="К разделу: FAQ">5</a>
+          </nav>
+
+          <!-- Video card -->
+          <div class="flex-1">
+            <div class="relative rounded-2xl p-[2px] bg-gradient-to-br from-emerald-500/40 to-blue-500/40 mt-4 md:mt-6">
+              <div class="relative rounded-xl overflow-hidden border border-neutral-200 bg-black">
+                <!-- Видео-превью в правом окне -->
+                <video id="heroVideo" class="w-full h-full aspect-video object-cover" style="object-position: center 58%;" poster="assets/img/course-poster.jpg" controls playsinline webkit-playsinline preload="metadata">
+                  <source src="assets/img/IMG_7732.mp4" type="video/mp4">
+                  <source src="assets/img/IMG_7732.mov" type="video/quicktime">
+                  Ваш браузер не поддерживает воспроизведение видео.
+                  <a href="assets/img/IMG_7732.mov">Скачать видео</a>.
+                </video>
+                <!-- Overlay play button -->
+                <button type="button" id="heroVideoPlay" class="absolute inset-0 grid place-items-center text-white/95 hover:text-white focus:outline-none">
+                  <span class="inline-flex items-center gap-2 rounded-full bg-black/60 backdrop-blur px-4 py-2 border border-white/20 shadow">
+                    <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    <span class="text-sm font-medium">Смотреть со звуком</span>
+                  </span>
+                </button>
+                <!-- Caption strip -->
+                <div class="absolute left-2 bottom-2 text-[11px] text-white/90 bg-black/50 px-2 py-1 rounded">Превью курса</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
