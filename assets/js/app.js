@@ -592,8 +592,44 @@ function closeMobile(){
     preconnectOnce('https://artbytwins.getcourse.ru');
     openModal();
     try{ window.dispatchEvent(new CustomEvent('gc-widget-open', { detail: { id: wid } })); }catch(e){}
-    var host = document.createElement('div');
-    host.setAttribute('data-gc-mount','');
+var host = document.createElement('div');
+host.setAttribute('data-gc-mount','');
+host.style.cssText = 'padding:0;min-height:60vh;display:block;';
+if (modalState.body) modalState.body.innerHTML = '';
+modalState.body.appendChild(host);
+try{
+  var iframe = document.createElement('iframe');
+  var scriptUrl = buildGcSrcById(wid);
+  var direct    = 'https://artbytwins.getcourse.ru/pl/lite/widget/widget'
+    + '?' + window.location.search.substring(1)
+    + '&id=' + encodeURIComponent(wid)
+    + '&ref=' + encodeURIComponent(document.referrer)
+    + '&loc=' + encodeURIComponent(document.location.href);
+  iframe.style.width = '100%';
+  iframe.style.height = '80vh';
+  iframe.style.border = '0';
+  // Быстрый путь: грузим скрипт прямо в about:blank через srcdoc
+  iframe.setAttribute('sandbox','allow-scripts allow-same-origin allow-forms allow-popups');
+  iframe.referrerPolicy = 'no-referrer-when-downgrade';
+  iframe.srcdoc = '<!doctype html>\\n'
+    + '<html><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">'
+    + '<style>html,body{height:100%;margin:0}#gcw{min-height:100%}</style>'
+    + '</head><body><div id=\"gcw\"></div>'
+    + '<script src=\"' + scriptUrl.replace(/&/g,'&amp;') + '\"><\\/script>'
+    + '</body></html>';
+  var loaded = false;
+  iframe.addEventListener('load', function(){
+    loaded = true;
+    try{ window.dispatchEvent(new CustomEvent('gc-widget-loaded', { detail: { id: wid } })); }catch(e){}
+  });
+  host.appendChild(iframe);
+  // Фолбэк: если долго — переключаемся на прямой URL
+  setTimeout(function(){
+    try{
+      if (!loaded) { iframe.removeAttribute('srcdoc'); iframe.src = direct; }
+    }catch(e){}
+  }, 2500);
+} catch(e) {}    host.setAttribute('data-gc-mount','');
     host.style.cssText = 'padding:0;min-height:60vh;display:block;';
     if (modalState.body) modalState.body.innerHTML = '';
     modalState.body.appendChild(host);
