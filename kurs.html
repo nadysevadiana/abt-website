@@ -13,6 +13,9 @@
   <link rel="preconnect" href="https://artbytwins.getcourse.ru" crossorigin>
   <link rel="dns-prefetch" href="https://artbytwins.getcourse.ru">
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.getcourse.io" crossorigin>
+  <link rel="dns-prefetch" href="https://cdn.getcourse.io">
+  <link rel="dns-prefetch" href="https://static.getcourse.io">
 
   <!-- OG / соцсети -->
   <meta property="og:title" content="Стань дизайнером квартир — курс АБТ ШКОЛА ДИЗАЙНА">
@@ -609,6 +612,40 @@
         });
       }, { rootMargin: '-30% 0px -60% 0px', threshold: [0.1, 0.5] });
       sectionByEl.forEach(function(a, sec){ io.observe(sec); });
+    })();
+  </script>
+</script>
+  <script>
+    // Warm up GetCourse so the checkout opens faster
+    (function(){
+      var warmed = false;
+      function warm(){
+        if (warmed) return; warmed = true;
+        try {
+          // Create a hidden iframe to establish TLS, cookies and HTTP/2 session
+          var ifr = document.createElement('iframe');
+          ifr.src = 'https://artbytwins.getcourse.ru/';
+          ifr.setAttribute('aria-hidden','true');
+          ifr.tabIndex = -1;
+          ifr.style.cssText = 'position:absolute;width:0;height:0;border:0;clip:rect(0,0,0,0);';
+          document.body.appendChild(ifr);
+          // Remove after a short while
+          setTimeout(function(){ try{ if (ifr.parentNode) ifr.parentNode.removeChild(ifr); }catch(e){} }, 8000);
+        } catch(e) {}
+      }
+      // Warm on first user intent and a small timeout
+      window.addEventListener('pointermove', warm, { once:true, passive:true });
+      window.addEventListener('touchstart', warm, { once:true, passive:true });
+      window.addEventListener('scroll', warm, { once:true, passive:true });
+      setTimeout(warm, 2500);
+      // Also bind to payment buttons
+      try{
+        var gcBtns = document.querySelectorAll('[data-gc-open]');
+        gcBtns.forEach(function(btn){
+          btn.addEventListener('pointerenter', warm, { passive:true });
+          btn.addEventListener('click', warm, { passive:true });
+        });
+      }catch(e){}
     })();
   </script>
   <script src="assets/js/app.js?v=20251020" defer></script>
