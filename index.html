@@ -28,7 +28,7 @@
       <div class="relative">
       <div class="max-w-4xl mx-auto">
         <div class="text-center md:text-left space-y-4 flex-1 bg-white md:bg-opacity-90 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-2xl border border-white">
-          <p class="text-sm uppercase tracking-wide text-emerald-700 font-semibold mb-2">Онлайн-продукт дизайна интерьера</p>
+          <p class="text-sm uppercase tracking-wide text-emerald-700 font-semibold mb-2">Онлайн-школа дизайна интерьера</p>
           <h1 class="text-3xl md:text-5xl font-bold">Art by Twins — дизайн интерьера для себя и профи</h1>
           <div class="flex justify-center md:justify-start">
             <span class="inline-flex items-center px-4 py-1 rounded-full bg-white border border-emerald-300 text-emerald-800 text-sm font-medium uppercase tracking-wide shadow-sm mb-2">
@@ -44,7 +44,7 @@
             <a href="./kurs.html" data-track="cta_course_hero"
                class="inline-flex items-center px-8 py-4 rounded-xl text-lg font-semibold shadow transition hover:shadow-lg btn-primary">
               <i class="fa-solid fa-arrow-right mr-3"></i>
-              Перейти к курсу
+              Дизайнер своей квартиры
             </a>
             <a href="./sketchup.html" data-track="cta_sketchup_hero"
                class="inline-flex items-center px-8 py-4 rounded-xl text-lg font-semibold border border-emerald-600 text-emerald-700 hover:bg-emerald-50 shadow-sm">
@@ -52,8 +52,9 @@
               SketchUp с нуля
             </a>
             <a href="shop.html" data-track="cta_shop_hero"
-               class="inline-flex items-center text-base font-semibold text-emerald-50 md:text-emerald-700 underline md:no-underline md:hover:underline">
-              Digital магазин
+               class="inline-flex items-center px-8 py-4 rounded-xl text-lg font-semibold border border-sky-600 text-sky-700 hover:bg-sky-50 shadow-sm">
+              <i class="fa-solid fa-bag-shopping mr-3"></i>
+              Открыть магазин
             </a>
           </div>
           <!-- Trust micro list under main CTAs -->
@@ -70,9 +71,9 @@
     <section class="bg-gradient-to-br from-emerald-50 via-white to-sky-50 py-16 px-6 md:px-16 text-center" id="choose-path">
       <div class="max-w-6xl mx-auto space-y-8">
         <h2 class="text-3xl md:text-4xl font-bold">Выберите свой путь</h2>
-
-
-        <div class="grid md:grid-cols-3 gap-8 text-left">
+        <p class="text-sm text-slate-600">Сначала выберите курс, магазин — ниже</p>
+        <h3 class="text-2xl font-bold text-left mt-6">Курсы</h3>
+        <div class="grid md:grid-cols-2 gap-8 text-left">
           <!-- Path: Для себя — обновлённый блок -->
           <article class="bg-white rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition border border-gray-200 ring-1 ring-emerald-100 p-8 relative overflow-hidden flex flex-col min-h-64">
             <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200 mb-3" aria-label="Категория: курс">
@@ -102,8 +103,37 @@
               </a>
             </div>
           </article>
+          <!-- Path: SketchUp курс -->
+          <article class="bg-white rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition border border-gray-200 ring-1 ring-amber-100 p-8 relative overflow-hidden flex flex-col min-h-64">
+            <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-200 mb-3" aria-label="Категория: курс">
+              <i class="fa-solid fa-graduation-cap"></i>
+              Курс
+            </span>
+            <div class="absolute -top-10 -right-16 w-60 h-60 bg-amber-100/60 rounded-full blur-3xl pointer-events-none"></div>
+            <h3 class="text-2xl font-bold mb-2 flex items-center gap-2">
+              <i class="fa-solid fa-cube text-amber-600"></i>
+              SketchUp с нуля — проект своей квартиры
+            </h3>
+            <p class="text-gray-700">Полный курс: основы, объём, визуализация в Enscape, тест и бонус по документам.</p>
 
-          <!-- Path: Для дизайнеров — обновлённый блок -->
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-200">SketchUp</span>
+              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-200">Enscape</span>
+              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-200">Плагины</span>
+              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-200">Домашки с проверкой</span>
+              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-200">Удостоверение</span>
+            </div>
+
+            <div class="mt-auto pt-5">
+              <a href="sketchup.html" data-track="cta_path_sketchup" class="inline-flex items-center px-6 py-3 rounded-xl font-semibold shadow btn-primary">
+                <i class="fa-solid fa-arrow-right mr-2"></i> Смотреть курс
+              </a>
+            </div>
+          </article>
+        </div>
+        <h3 class="text-2xl font-bold text-left mt-10">Магазин</h3>
+        <div class="mt-4 max-w-3xl mx-auto">
+          <!-- SHOP_CARD_PLACEHOLDER -->
           <article class="bg-white rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition border border-gray-200 ring-1 ring-sky-100 p-8 relative overflow-hidden flex flex-col min-h-64">
             <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-sky-50 text-sky-800 border border-sky-200 mb-3" aria-label="Категория: магазин">
               <i class="fa-solid fa-bag-shopping"></i>
@@ -129,34 +159,6 @@
             <div class="mt-auto pt-5">
               <a href="shop.html" data-track="cta_path_shop" class="inline-flex items-center px-6 py-3 rounded-xl font-semibold shadow btn-primary">
                 <i class="fa-solid fa-arrow-right mr-2"></i> Открыть магазин
-              </a>
-            </div>
-          </article>
-
-          <!-- Path: SketchUp курс -->
-          <article class="bg-white rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition border border-gray-200 ring-1 ring-amber-100 p-8 relative overflow-hidden flex flex-col min-h-64">
-            <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-200 mb-3" aria-label="Категория: курс">
-              <i class="fa-solid fa-graduation-cap"></i>
-              Курс
-            </span>
-            <div class="absolute -top-10 -right-16 w-60 h-60 bg-amber-100/60 rounded-full blur-3xl pointer-events-none"></div>
-            <h3 class="text-2xl font-bold mb-2 flex items-center gap-2">
-              <i class="fa-solid fa-cube text-amber-600"></i>
-              SketchUp с нуля — проект своей квартиры
-            </h3>
-            <p class="text-gray-700">Полный курс: основы, объём, визуализация в Enscape, тест и бонус по документам.</p>
-
-            <div class="mt-4 flex flex-wrap gap-2">
-              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-200">SketchUp</span>
-              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-200">Enscape</span>
-              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-200">Плагины</span>
-              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-200">Домашки с проверкой</span>
-              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-200">Удостоверение</span>
-            </div>
-
-            <div class="mt-auto pt-5">
-              <a href="sketchup.html" data-track="cta_path_sketchup" class="inline-flex items-center px-6 py-3 rounded-xl font-semibold shadow btn-primary">
-                <i class="fa-solid fa-arrow-right mr-2"></i> Смотреть курс
               </a>
             </div>
           </article>
