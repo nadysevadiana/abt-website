@@ -69,101 +69,69 @@
 
     <!-- Choose Your Path -->
     <section class="bg-gradient-to-br from-emerald-50 via-white to-sky-50 py-16 px-6 md:px-16 text-center" id="choose-path">
-      <div class="max-w-6xl mx-auto space-y-8">
-        <h2 class="text-3xl md:text-4xl font-bold">Выберите свой путь</h2>
-        <p class="text-sm text-slate-600">Сначала выберите курс, магазин — ниже</p>
-        <h3 class="text-2xl font-bold text-left mt-6">Курсы</h3>
-        <div class="grid md:grid-cols-2 gap-8 text-left">
-          <!-- Path: Для себя — обновлённый блок -->
-          <article class="bg-white rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition border border-gray-200 ring-1 ring-emerald-100 p-8 relative overflow-hidden flex flex-col min-h-64">
-            <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200 mb-3" aria-label="Категория: курс">
-              <i class="fa-solid fa-graduation-cap"></i>
-              Курс
-            </span>
-            <div class="absolute -top-12 -right-16 w-56 h-56 bg-emerald-100/60 rounded-full blur-3xl pointer-events-none"></div>
-            <h3 class="text-2xl font-bold mb-2 flex items-center gap-2">
-              <i class="fa-solid fa-house-chimney text-emerald-600"></i>
-              Для себя — «Дизайнер своей квартиры»
-            </h3>
-            <p class="text-gray-700">Пошаговая программа: от идеи до готового проекта квартиры.</p>
+      <div class="relative py-4">
+  <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-amber-200 via-emerald-200 to-sky-200 rounded-full"></div>
+</div>
 
-            <!-- компактные чипы вместо длинных списков -->
-            <div class="mt-4 flex flex-wrap gap-2">
-              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">3ds Max</span>
-              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">SketchUp</span>
-              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">Документы и договоры</span>
-              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">Бюджетирование</span>
-              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">Материалы</span>
-              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">Освещение</span>
-            </div>
+<div class="grid gap-8 text-left lg:grid-cols-12 items-stretch">
+  <!-- Featured: SketchUp курс (larger card) -->
+  <article class="relative bg-gradient-to-br from-amber-50 to-white rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition border border-amber-100 p-8 overflow-hidden flex flex-col min-h-64 lg:col-span-7">
+    <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-800 border border-amber-200 mb-3" aria-label="Категория: курс">
+      <i class="fa-solid fa-graduation-cap"></i>
+      Курс
+    </span>
+    <span class="absolute top-4 right-4 bg-amber-500 text-white text-xs font-semibold px-3 py-1 rounded-full shadow">Хит курса</span>
+    <div class="absolute -top-10 -right-16 w-60 h-60 bg-amber-200/40 rounded-full blur-3xl pointer-events-none"></div>
+    <h3 class="text-2xl md:text-3xl font-bold mb-2 flex items-center gap-2">
+      <i class="fa-solid fa-cube text-amber-600"></i>
+      SketchUp с нуля — проект своей квартиры
+    </h3>
+    <p class="text-gray-700">Полный курс: основы, объём, визуализация в Enscape, тест и бонус по документам.</p>
+    <div class="mt-4 flex flex-wrap gap-2">
+      <span class="px-3 py-1 rounded-full text-xs font-semibold bg-white text-amber-800 border border-amber-200">SketchUp</span>
+      <span class="px-3 py-1 rounded-full text-xs font-semibold bg-white text-amber-800 border border-amber-200">Enscape</span>
+      <span class="px-3 py-1 rounded-full text-xs font-semibold bg-white text-amber-800 border border-amber-200">Плагины</span>
+      <span class="px-3 py-1 rounded-full text-xs font-semibold bg-white text-amber-800 border border-amber-200">Домашки с проверкой</span>
+      <span class="px-3 py-1 rounded-full text-xs font-semibold bg-white text-amber-800 border border-amber-200">Удостоверение</span>
+    </div>
+    <div class="mt-auto pt-6">
+      <a href="sketchup.html" data-track="cta_path_sketchup" class="inline-flex items-center px-6 py-3 rounded-xl font-semibold shadow btn-primary">
+        <i class="fa-solid fa-arrow-right mr-2"></i> Смотреть курс
+      </a>
+    </div>
+  </article>
 
-            <div class="mt-auto pt-5">
-              <a href="./kurs.html" data-track="cta_path_self_packages" class="inline-flex items-center px-6 py-3 rounded-xl font-semibold shadow btn-primary">
-                <i class="fa-solid fa-list-check mr-2"></i> Смотреть курс
-              </a>
-            </div>
-          </article>
-          <!-- Path: SketchUp курс -->
-          <article class="bg-white rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition border border-gray-200 ring-1 ring-amber-100 p-8 relative overflow-hidden flex flex-col min-h-64">
-            <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-200 mb-3" aria-label="Категория: курс">
-              <i class="fa-solid fa-graduation-cap"></i>
-              Курс
-            </span>
-            <div class="absolute -top-10 -right-16 w-60 h-60 bg-amber-100/60 rounded-full blur-3xl pointer-events-none"></div>
-            <h3 class="text-2xl font-bold mb-2 flex items-center gap-2">
-              <i class="fa-solid fa-cube text-amber-600"></i>
-              SketchUp с нуля — проект своей квартиры
-            </h3>
-            <p class="text-gray-700">Полный курс: основы, объём, визуализация в Enscape, тест и бонус по документам.</p>
+  <!-- Secondary: Для себя — «Дизайнер своей квартиры» -->
+  <article class="relative bg-gradient-to-br from-emerald-50 to-white rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition border border-emerald-100 p-8 overflow-hidden flex flex-col min-h-64 lg:col-span-5">
+    <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 border border-emerald-200 mb-3" aria-label="Категория: курс">
+      <i class="fa-solid fa-graduation-cap"></i>
+      Курс
+    </span>
+    <div class="absolute -top-12 -right-16 w-56 h-56 bg-emerald-100/60 rounded-full blur-3xl pointer-events-none"></div>
+    <h3 class="text-2xl font-bold mb-2 flex items-center gap-2">
+      <i class="fa-solid fa-house-chimney text-emerald-600"></i>
+      Для себя — «Дизайнер своей квартиры»
+    </h3>
+    <p class="text-gray-700">Пошаговая программа: от идеи до готового проекта квартиры.</p>
+    <div class="mt-4 flex flex-wrap gap-2">
+      <span class="px-3 py-1 rounded-full text-xs font-semibold bg-white text-emerald-800 border border-emerald-200">3ds Max</span>
+      <span class="px-3 py-1 rounded-full text-xs font-semibold bg-white text-emerald-800 border border-emerald-200">SketchUp</span>
+      <span class="px-3 py-1 rounded-full text-xs font-semibold bg-white text-emerald-800 border border-emerald-200">Документы и договоры</span>
+      <span class="px-3 py-1 rounded-full text-xs font-semibold bg-white text-emerald-800 border border-emerald-200">Бюджетирование</span>
+      <span class="px-3 py-1 rounded-full text-xs font-semibold bg-white text-emerald-800 border border-emerald-200">Материалы</span>
+      <span class="px-3 py-1 rounded-full text-xs font-semibold bg-white text-emerald-800 border border-emerald-200">Освещение</span>
+    </div>
+    <div class="mt-auto pt-6">
+      <a href="./kurs.html" data-track="cta_path_self_packages" class="inline-flex items-center px-6 py-3 rounded-xl font-semibold border border-neutral-300 text-neutral-700 hover:bg-neutral-100">
+        <i class="fa-solid fa-clock mr-2"></i> Подробнее о курсе
+      </a>
+    </div>
+  </article>
+</div>
 
-            <div class="mt-4 flex flex-wrap gap-2">
-              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-200">SketchUp</span>
-              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-200">Enscape</span>
-              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-200">Плагины</span>
-              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-200">Домашки с проверкой</span>
-              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-200">Удостоверение</span>
-            </div>
-
-            <div class="mt-auto pt-5">
-              <a href="sketchup.html" data-track="cta_path_sketchup" class="inline-flex items-center px-6 py-3 rounded-xl font-semibold shadow btn-primary">
-                <i class="fa-solid fa-arrow-right mr-2"></i> Смотреть курс
-              </a>
-            </div>
-          </article>
-        </div>
-        <h3 class="text-2xl font-bold text-left mt-10">Магазин</h3>
-        <div class="mt-4 max-w-3xl mx-auto">
-          <!-- SHOP_CARD_PLACEHOLDER -->
-          <article class="bg-white rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition border border-gray-200 ring-1 ring-sky-100 p-8 relative overflow-hidden flex flex-col min-h-64">
-            <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-sky-50 text-sky-800 border border-sky-200 mb-3" aria-label="Категория: магазин">
-              <i class="fa-solid fa-bag-shopping"></i>
-              Магазин
-            </span>
-            <div class="absolute -bottom-14 -left-16 w-72 h-72 bg-sky-200/50 rounded-full blur-3xl pointer-events-none"></div>
-            <h3 class="text-2xl font-bold mb-2 flex items-center gap-2">
-              <i class="fa-solid fa-store text-sky-600"></i>
-              Для дизайнеров — магазин
-            </h3>
-            <p class="text-gray-700">Инструменты, документы и мини‑тренинги для работы дизайнеров.</p>
-
-            <!-- компактные чипы вместо витрины -->
-            <div class="mt-4 flex flex-wrap gap-2">
-              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-sky-50 text-sky-800 border border-sky-200">3ds Max</span>
-              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-sky-50 text-sky-800 border border-sky-200">SketchUp</span>
-              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-sky-50 text-sky-800 border border-sky-200">Документы</span>
-              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-sky-50 text-sky-800 border border-sky-200">Коучинг</span>
-              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-sky-50 text-sky-800 border border-sky-200">Библиотека моделей</span>
-              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-sky-50 text-sky-800 border border-sky-200">Библиотека материалов</span>
-            </div>
-
-            <div class="mt-auto pt-5">
-              <a href="shop.html" data-track="cta_path_shop" class="inline-flex items-center px-6 py-3 rounded-xl font-semibold shadow btn-primary">
-                <i class="fa-solid fa-arrow-right mr-2"></i> Открыть магазин
-              </a>
-            </div>
-          </article>
-        </div>
-      </div>
+<div class="relative py-4">
+  <div class="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-emerald-200 via-sky-200 to-amber-200 rounded-full"></div>
+</div>
     </section>
 
     <!-- About -->
