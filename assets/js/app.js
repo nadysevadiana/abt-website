@@ -591,6 +591,7 @@ function closeMobile(){
     if(!wid) return;
     preconnectOnce('https://artbytwins.getcourse.ru');
     openModal();
+    try{ window.dispatchEvent(new CustomEvent('gc-widget-open', { detail: { id: wid } })); }catch(e){}
     var host = document.createElement('div');
     host.setAttribute('data-gc-mount','');
     host.style.cssText = 'padding:0;min-height:60vh;display:block;';
@@ -607,13 +608,24 @@ function closeMobile(){
       iframe.style.width = '100%';
       iframe.style.height = '80vh';
       iframe.style.border = '0';
+      iframe.addEventListener('load', function(){
+        try{ window.dispatchEvent(new CustomEvent('gc-widget-loaded', { detail: { id: wid } })); }catch(e){}
+      });
       host.appendChild(iframe);
+      // Fallback: if not loaded fast enough, retry with script endpoint
+      try{
+        setTimeout(function(){
+          if (!iframe || !iframe.contentWindow) {
+            iframe.src = buildGcSrcById(wid);
+          }
+        }, 3500);
+      }catch(e){}
     } catch(e) {}
   }
 
   // Delegated click for plan buttons coming from kurs.html
   document.addEventListener('click', function(e){
-    var t = e.target.closest && e.target.closest('[data-gc-open][data-plan], [data-plan]');
+    var t = e.target.closest && e.target.closest('[data-plan]');
     if(!t) return;
     var plan = t.getAttribute('data-plan');
     if(!plan || !PLAN_IDS[plan]) return;
@@ -633,6 +645,7 @@ function closeMobile(){
   document.addEventListener('click', function(e){
     var t = e.target.closest && e.target.closest('[data-gc-id], [data-gc-src]');
     if(!t) return;
+    if (t.hasAttribute('data-plan')) return; // avoid double-handling when data-plan is present
     e.preventDefault();
     var wid = t.getAttribute('data-gc-id');
     if(!wid){
