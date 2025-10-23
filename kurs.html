@@ -114,6 +114,18 @@
     /* Make sure generic tailwind resets don't override visibility */
     a.btn-buy{ visibility:visible!important; }
   </style>
+  <style id="gc-skeleton-css">
+    #gc-skeleton{position:fixed; inset:0; z-index:1000; display:flex; align-items:center; justify-content:center; background:rgba(15,23,42,.45); backdrop-filter:blur(6px);} 
+    #gc-skeleton[hidden]{display:none}
+    #gc-skeleton .box{min-width:280px; max-width:92vw; border-radius:16px; border:1px solid rgba(255,255,255,.25); background:linear-gradient(180deg, rgba(255,255,255,.98), rgba(248,250,252,.98)); box-shadow:0 30px 70px rgba(2,6,23,.25); padding:20px; text-align:center}
+    #gc-skeleton .row{display:flex; align-items:center; gap:10px; justify-content:center}
+    #gc-skeleton .dot{width:10px; height:10px; border-radius:50%; background:#0f172a; opacity:.25; animation:gc-pulse 1s infinite ease-in-out}
+    #gc-skeleton .dot:nth-child(2){animation-delay:.15s}
+    #gc-skeleton .dot:nth-child(3){animation-delay:.3s}
+    @keyframes gc-pulse{0%,100%{opacity:.25; transform:translateY(0)}50%{opacity:1; transform:translateY(-4px)}}
+    #gc-skeleton .t{margin-top:10px; color:#111827; font-weight:600}
+    #gc-skeleton .s{margin-top:4px; color:#6b7280; font-size:12px}
+  </style>
 </head>
 
 <body class="site-bg text-gray-900 selection:bg-neutral-900 selection:text-white">
@@ -614,7 +626,31 @@
       sectionByEl.forEach(function(a, sec){ io.observe(sec); });
     })();
   </script>
-</script>
+  <!-- Step 1: Remove this stray closing script tag -->
+  <div id="gc-skeleton" hidden aria-live="polite" aria-label="Открываем окно оплаты">
+    <div class="box" role="dialog" aria-modal="true">
+      <div class="row" aria-hidden="true"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+      <div class="t">Открываем оплату…</div>
+      <div class="s">Это займёт несколько секунд</div>
+    </div>
+  </div>
+  <script>
+    (function(){
+      var sk = document.getElementById('gc-skeleton');
+      if(!sk) return;
+      function show(){ try{ sk.hidden = false; }catch(e){} }
+      function hide(){ try{ sk.hidden = true; }catch(e){} }
+      document.addEventListener('mousedown', function(e){ var t = e.target.closest('[data-gc-open]'); if (t) show(); }, { passive:true });
+      document.addEventListener('touchstart', function(e){ var t = e.target.closest('[data-gc-open]'); if (t) show(); }, { passive:true });
+      document.addEventListener('click', function(e){ var t = e.target.closest('[data-gc-open]'); if (t) show(); }, { passive:true });
+      window.addEventListener('message', function(ev){
+        try{ var u = new URL(ev.origin); if (/getcourse\.ru$/.test(u.hostname) || /getcourse\.io$/.test(u.hostname)) hide(); }catch(e){}
+      });
+      window.addEventListener('focus', function(){ setTimeout(hide, 300); });
+      document.addEventListener('visibilitychange', function(){ if (!document.hidden) setTimeout(hide, 600); });
+      setInterval(function(){ if (!document.hidden) hide(); }, 8000);
+    })();
+  </script>
   <script>
     // Warm up GetCourse so the checkout opens faster
     (function(){
