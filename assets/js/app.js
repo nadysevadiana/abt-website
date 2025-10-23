@@ -7,7 +7,7 @@
 
 (function(){
   // Версия для пробития кеша статических partials
-  var VERSION = '20251020';
+  var VERSION = '20251023h';
   function withV(path){ return path + (path.indexOf('?') === -1 ? ('?v=' + VERSION) : ('&v=' + VERSION)); }
   // Preconnect/DNS-hint helper (idempotent)
   function preconnectOnce(href){
@@ -591,72 +591,44 @@ function closeMobile(){
     if(!wid) return;
     preconnectOnce('https://artbytwins.getcourse.ru');
     openModal();
-    try{ window.dispatchEvent(new CustomEvent('gc-widget-open', { detail: { id: wid } })); }catch(e){}
-var host = document.createElement('div');
-host.setAttribute('data-gc-mount','');
-host.style.cssText = 'padding:0;min-height:60vh;display:block;';
-if (modalState.body) modalState.body.innerHTML = '';
-modalState.body.appendChild(host);
-try{
-  var iframe = document.createElement('iframe');
-  var scriptUrl = buildGcSrcById(wid);
-  var direct    = 'https://artbytwins.getcourse.ru/pl/lite/widget/widget'
-    + '?' + window.location.search.substring(1)
-    + '&id=' + encodeURIComponent(wid)
-    + '&ref=' + encodeURIComponent(document.referrer)
-    + '&loc=' + encodeURIComponent(document.location.href);
-  iframe.style.width = '100%';
-  iframe.style.height = '80vh';
-  iframe.style.border = '0';
-  // Быстрый путь: грузим скрипт прямо в about:blank через srcdoc
-  iframe.setAttribute('sandbox','allow-scripts allow-same-origin allow-forms allow-popups');
-  iframe.referrerPolicy = 'no-referrer-when-downgrade';
-  iframe.srcdoc = '<!doctype html>\\n'
-    + '<html><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">'
-    + '<style>html,body{height:100%;margin:0}#gcw{min-height:100%}</style>'
-    + '</head><body><div id=\"gcw\"></div>'
-    + '<script src=\"' + scriptUrl.replace(/&/g,'&amp;') + '\"><\\/script>'
-    + '</body></html>';
-  var loaded = false;
-  iframe.addEventListener('load', function(){
-    loaded = true;
-    try{ window.dispatchEvent(new CustomEvent('gc-widget-loaded', { detail: { id: wid } })); }catch(e){}
-  });
-  host.appendChild(iframe);
-  // Фолбэк: если долго — переключаемся на прямой URL
-  setTimeout(function(){
-    try{
-      if (!loaded) { iframe.removeAttribute('srcdoc'); iframe.src = direct; }
-    }catch(e){}
-  }, 2500);
-} catch(e) {}    host.setAttribute('data-gc-mount','');
+    // mount host once
+    var host = document.createElement('div');
+    host.setAttribute('data-gc-mount','');
     host.style.cssText = 'padding:0;min-height:60vh;display:block;';
     if (modalState.body) modalState.body.innerHTML = '';
     modalState.body.appendChild(host);
+
+    // show lightweight loader while iframe starts
+    host.innerHTML = '<div style="padding:24px;text-align:center;font-weight:600;">Загрузка формы оплаты…</div>';
+
+    // primary: direct widget URL (works inside iframe without extra scripts)
+    var iframe = document.createElement('iframe');
+    var direct = 'https://artbytwins.getcourse.ru/pl/lite/widget/widget'
+      + '?' + window.location.search.substring(1)
+      + '&id=' + encodeURIComponent(wid)
+      + '&ref=' + encodeURIComponent(document.referrer || '')
+      + '&loc=' + encodeURIComponent(document.location.href);
+    iframe.src = direct;
+    iframe.style.width = '100%';
+    iframe.style.height = '80vh';
+    iframe.style.border = '0';
+    iframe.referrerPolicy = 'no-referrer-when-downgrade';
+    iframe.addEventListener('load', function(){
+      host.querySelector('div') && (host.querySelector('div').style.display = 'none');
+      try{ window.dispatchEvent(new CustomEvent('gc-widget-loaded', { detail: { id: wid } })); }catch(e){}
+    });
+    host.appendChild(iframe);
+
+    // fallback: if not loaded fast enough (network/CSP), retry with script endpoint inside the iframe document
     try{
-      var iframe = document.createElement('iframe');
-      var direct = 'https://artbytwins.getcourse.ru/pl/lite/widget/widget'
-        + '?' + window.location.search.substring(1)
-        + '&id=' + encodeURIComponent(wid)
-        + '&ref=' + encodeURIComponent(document.referrer)
-        + '&loc=' + encodeURIComponent(document.location.href);
-      iframe.src = direct;
-      iframe.style.width = '100%';
-      iframe.style.height = '80vh';
-      iframe.style.border = '0';
-      iframe.addEventListener('load', function(){
-        try{ window.dispatchEvent(new CustomEvent('gc-widget-loaded', { detail: { id: wid } })); }catch(e){}
-      });
-      host.appendChild(iframe);
-      // Fallback: if not loaded fast enough, retry with script endpoint
-      try{
-        setTimeout(function(){
-          if (!iframe || !iframe.contentWindow) {
-            iframe.src = buildGcSrcById(wid);
-          }
-        }, 3500);
-      }catch(e){}
-    } catch(e) {}
+      setTimeout(function(){
+        try{
+          // if contentWindow exists and some content rendered, keep; else switch to script endpoint
+          var ok = !!(iframe.contentWindow && iframe.contentDocument && iframe.contentDocument.body && iframe.contentDocument.body.childElementCount > 0);
+          if(!ok){ iframe.src = 'https://artbytwins.getcourse.ru/pl/lite/widget/script?id=' + encodeURIComponent(wid); }
+        }catch(e){ iframe.src = 'https://artbytwins.getcourse.ru/pl/lite/widget/script?id=' + encodeURIComponent(wid); }
+      }, 3500);
+    }catch(e){}
   }
 
   // Delegated click for plan buttons coming from kurs.html
