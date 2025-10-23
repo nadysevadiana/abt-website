@@ -27,10 +27,6 @@
   <link rel="prefetch" href="/partials/header.html" as="fetch" crossorigin>
   <link rel="prefetch" href="/partials/footer.html" as="fetch" crossorigin>
   <link rel="prefetch" href="/partials/tg-btn.html" as="fetch" crossorigin>
-  <!-- Prefetch GetCourse widget scripts for faster first open -->
-  <link rel="prefetch" href="https://artbytwins.getcourse.ru/pl/lite/widget/script?id=1487237" as="script" crossorigin>
-  <link rel="prefetch" href="https://artbytwins.getcourse.ru/pl/lite/widget/script?id=1487247" as="script" crossorigin>
-  <link rel="prefetch" href="https://artbytwins.getcourse.ru/pl/lite/widget/script?id=1487966" as="script" crossorigin>
 
 
   <!-- JSON-LD: Course -->
@@ -183,7 +179,9 @@
                 <!-- Видео-превью в правом окне -->
                 <video id="heroVideo" class="w-full h-full aspect-video object-cover" style="object-position: center 62%;" poster="assets/img/course-poster.jpg" controls playsinline webkit-playsinline preload="metadata">
                   <source src="assets/img/IMG_7732.mp4" type="video/mp4">
+                  <source src="assets/img/IMG_7732.mov" type="video/quicktime">
                   Ваш браузер не поддерживает воспроизведение видео.
+                  <a href="assets/img/IMG_7732.mov">Скачать видео</a>.
                 </video>
                 <!-- Overlay play button -->
                 <button type="button" id="heroVideoPlay" class="absolute inset-0 text-white focus:outline-none">
@@ -628,6 +626,7 @@
       sectionByEl.forEach(function(a, sec){ io.observe(sec); });
     })();
   </script>
+  <!-- Step 1: Remove this stray closing script tag -->
   <div id="gc-skeleton" hidden aria-live="polite" aria-label="Открываем окно оплаты">
     <div class="box" role="dialog" aria-modal="true">
       <div class="row" aria-hidden="true"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
