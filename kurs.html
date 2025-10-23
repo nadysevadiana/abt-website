@@ -640,15 +640,16 @@
       if(!sk) return;
       function show(){ try{ sk.hidden = false; }catch(e){} }
       function hide(){ try{ sk.hidden = true; }catch(e){} }
-      document.addEventListener('mousedown', function(e){ var t = e.target.closest('[data-gc-open]'); if (t) show(); }, { passive:true });
-      document.addEventListener('touchstart', function(e){ var t = e.target.closest('[data-gc-open]'); if (t) show(); }, { passive:true });
-      document.addEventListener('click', function(e){ var t = e.target.closest('[data-gc-open]'); if (t) show(); }, { passive:true });
+      document.addEventListener('click', function(e){
+        var t = e.target.closest('[data-gc-open]');
+        if (t) { setTimeout(show, 0); }
+      }, { passive:true });
       window.addEventListener('message', function(ev){
         try{ var u = new URL(ev.origin); if (/getcourse\.ru$/.test(u.hostname) || /getcourse\.io$/.test(u.hostname)) hide(); }catch(e){}
       });
       window.addEventListener('focus', function(){ setTimeout(hide, 300); });
       document.addEventListener('visibilitychange', function(){ if (!document.hidden) setTimeout(hide, 600); });
-      setInterval(function(){ if (!document.hidden) hide(); }, 8000);
+      setInterval(function(){ if (!document.hidden) hide(); }, 4000);
     })();
   </script>
   <script>
