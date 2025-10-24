@@ -126,56 +126,107 @@
         <section id="program" class="scroll-mt-28">
           <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">Программа (4 модуля + бонус)</h2>
           <p class="mt-2 text-neutral-700">Основы → Объём → Визуализация → Итоговое тестирование. Бонус: Право и старт в профессии.</p>
-          <div class="mt-6 divide-y divide-neutral-200 border border-neutral-200 rounded-xl overflow-hidden">
-            <details class="group" open>
-              <summary class="flex cursor-pointer items-center justify-between gap-4 px-4 py-4 marker:content-none">
-                <div class="font-medium">Модуль 1 — Основы работы в SketchUp</div>
-                <span class="transition group-open:rotate-180">⌄</span>
-              </summary>
-              <div class="px-4 pb-5 text-sm text-neutral-700 space-y-2">
-                <p>Знакомство с интерфейсом и основными инструментами. Установка плагинов, настройка рабочего пространства.</p>
-                <p>Работа с материалами. Первые шаги: простые объекты. Построение 2D-плана квартиры.</p>
-              </div>
-            </details>
-            <details class="group">
-              <summary class="flex cursor-pointer items-center justify-between gap-4 px-4 py-4 marker:content-none">
-                <div class="font-medium">Модуль 2 — Объёмное моделирование</div>
-                <span class="transition group-open:rotate-180">⌄</span>
-              </summary>
-              <div class="px-4 pb-5 text-sm text-neutral-700 space-y-2">
-                <p>Создание объёмной модели квартиры. Подключение и использование плагинов. Работа со слоями.</p>
-                <p>Проектирование интерьера и концепция. Разрезы и анимация для презентации.</p>
-              </div>
-            </details>
-            <details class="group">
-              <summary class="flex cursor-pointer items-center justify-between gap-4 px-4 py-4 marker:content-none">
-                <div class="font-medium">Модуль 3 — Визуализация в Enscape</div>
-                <span class="transition group-open:rotate-180">⌄</span>
-              </summary>
-              <div class="px-4 pb-5 text-sm text-neutral-700 space-y-2">
-                <p>Настройка материалов и света. Финальный рендер проекта в Enscape и ИИ.</p>
-              </div>
-            </details>
-            <details class="group">
-              <summary class="flex cursor-pointer items-center justify-between gap-4 px-4 py-4 marker:content-none">
-                <div class="font-medium">Модуль 4 — Итоговое тестирование</div>
-                <span class="transition group-open:rotate-180">⌄</span>
-              </summary>
-              <div class="px-4 pb-5 text-sm text-neutral-700">
-                Финальная проверка знаний и навыков.
-              </div>
-            </details>
-            <details class="group">
-              <summary class="flex cursor-pointer items-center justify-between gap-4 px-4 py-4 marker:content-none">
-                <div class="font-medium">Бонус — Право и старт в профессии</div>
-                <span class="transition group-open:rotate-180">⌄</span>
-              </summary>
-              <div class="px-4 pb-5 text-sm text-neutral-700 space-y-2">
-                <p>Как открыть ИП и самозанятость. Подводные камни в договорах.</p>
-                <p>Каталог 3D-моделей + доступ в Telegram-канал, методички и чек-листы.</p>
-              </div>
-            </details>
-          </div>
+
+          <!-- Modern card grid for modules -->
+          <ol class="mt-6 grid lg:grid-cols-2 gap-4">
+            <!-- Модуль 1 -->
+            <li class="group">
+              <details class="rounded-2xl border border-neutral-200 bg-white/80 backdrop-blur-sm p-0 transition shadow-sm hover:shadow-md hover:border-neutral-300 open:shadow-md open:border-neutral-300">
+                <summary class="flex items-start gap-4 px-5 py-4 cursor-pointer list-none marker:content-none">
+                  <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-neutral-200 bg-neutral-50 font-semibold">01</span>
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-center justify-between gap-4">
+                      <h3 class="font-medium truncate">Модуль 1 — Основы работы в SketchUp</h3>
+                      <svg class="h-5 w-5 text-neutral-500 transition group-open:rotate-180" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 011.08 1.04l-4.25 4.25a.75.75 0 01-1.06 0L5.21 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+                    </div>
+                    <p class="mt-1 text-sm text-neutral-500">Интерфейс, инструменты, плагины, 2D‑план.</p>
+                  </div>
+                </summary>
+                <div class="px-5 pb-5 text-sm text-neutral-700 space-y-2">
+                  <p>Знакомство с интерфейсом и основными инструментами. Установка плагинов, настройка рабочего пространства.</p>
+                  <p>Работа с материалами. Первые шаги: простые объекты. Построение 2D-плана квартиры.</p>
+                </div>
+              </details>
+            </li>
+
+            <!-- Модуль 2 -->
+            <li class="group">
+              <details class="rounded-2xl border border-neutral-200 bg-white/80 backdrop-blur-sm p-0 transition shadow-sm hover:shadow-md hover:border-neutral-300 open:shadow-md open:border-neutral-300">
+                <summary class="flex items-start gap-4 px-5 py-4 cursor-pointer list-none marker:content-none">
+                  <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-neutral-200 bg-neutral-50 font-semibold">02</span>
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-center justify-between gap-4">
+                      <h3 class="font-medium truncate">Модуль 2 — Объёмное моделирование</h3>
+                      <svg class="h-5 w-5 text-neutral-500 transition group-open:rotate-180" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 011.08 1.04l-4.25 4.25a.75.75 0 01-1.06 0L5.21 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+                    </div>
+                    <p class="mt-1 text-sm text-neutral-500">Объём, плагины, слои, разрезы и анимация.</p>
+                  </div>
+                </summary>
+                <div class="px-5 pb-5 text-sm text-neutral-700 space-y-2">
+                  <p>Создание объёмной модели квартиры. Подключение и использование плагинов. Работа со слоями.</p>
+                  <p>Проектирование интерьера и концепция. Разрезы и анимация для презентации.</p>
+                </div>
+              </details>
+            </li>
+
+            <!-- Модуль 3 -->
+            <li class="group">
+              <details class="rounded-2xl border border-neutral-200 bg-white/80 backdrop-blur-sm p-0 transition shadow-sm hover:shadow-md hover:border-neutral-300 open:shadow-md open:border-neutral-300">
+                <summary class="flex items-start gap-4 px-5 py-4 cursor-pointer list-none marker:content-none">
+                  <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-neutral-200 bg-neutral-50 font-semibold">03</span>
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-center justify-between gap-4">
+                      <h3 class="font-medium truncate">Модуль 3 — Визуализация в Enscape</h3>
+                      <svg class="h-5 w-5 text-neutral-500 transition group-open:rotate-180" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 011.08 1.04l-4.25 4.25a.75.75 0 01-1.06 0L5.21 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+                    </div>
+                    <p class="mt-1 text-sm text-neutral-500">Материалы, свет, финальный рендер.</p>
+                  </div>
+                </summary>
+                <div class="px-5 pb-5 text-sm text-neutral-700 space-y-2">
+                  <p>Настройка материалов и света. Финальный рендер проекта в Enscape и ИИ.</p>
+                </div>
+              </details>
+            </li>
+
+            <!-- Модуль 4 -->
+            <li class="group">
+              <details class="rounded-2xl border border-neutral-200 bg-white/80 backdrop-blur-sm p-0 transition shadow-sm hover:shadow-md hover:border-neutral-300 open:shadow-md open:border-neutral-300">
+                <summary class="flex items-start gap-4 px-5 py-4 cursor-pointer list-none marker:content-none">
+                  <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-neutral-200 bg-neutral-50 font-semibold">04</span>
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-center justify-between gap-4">
+                      <h3 class="font-medium truncate">Модуль 4 — Итоговое тестирование</h3>
+                      <svg class="h-5 w-5 text-neutral-500 transition group-open:rotate-180" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 011.08 1.04l-4.25 4.25a.75.75 0 01-1.06 0L5.21 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+                    </div>
+                    <p class="mt-1 text-sm text-neutral-500">Проверка знаний и навыков.</p>
+                  </div>
+                </summary>
+                <div class="px-5 pb-5 text-sm text-neutral-700">
+                  Финальная проверка знаний и навыков.
+                </div>
+              </details>
+            </li>
+
+            <!-- Бонус -->
+            <li class="group lg:col-span-2">
+              <details class="rounded-2xl border border-emerald-200 bg-emerald-50/70 p-0 transition shadow-sm hover:shadow-md open:shadow-md">
+                <summary class="flex items-start gap-4 px-5 py-4 cursor-pointer list-none marker:content-none">
+                  <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-emerald-200 bg-white font-semibold text-emerald-700">BON</span>
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-center justify-between gap-4">
+                      <h3 class="font-medium truncate">Бонус — Право и старт в профессии</h3>
+                      <svg class="h-5 w-5 text-emerald-700 transition group-open:rotate-180" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 011.08 1.04l-4.25 4.25a.75.75 0 01-1.06 0L5.21 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+                    </div>
+                    <p class="mt-1 text-sm text-neutral-600">ИП/самозанятость, договоры, библиотека 3D и чек‑листы.</p>
+                  </div>
+                </summary>
+                <div class="px-5 pb-5 text-sm text-neutral-700 space-y-2">
+                  <p>Как открыть ИП и самозанятость. Подводные камни в договорах.</p>
+                  <p>Каталог 3D-моделей + доступ в Telegram-канал, методички и чек-листы.</p>
+                </div>
+              </details>
+            </li>
+          </ol>
         </section>
 
         <!-- Преподаватель -->
