@@ -56,6 +56,11 @@
     .btn-buy--lg{ padding:.9rem 1.25rem; font-size:1rem; border-radius:.9rem; }
     a.btn-buy{ visibility:visible!important; }
   </style>
+  <style id="details-marker-hide">
+    /* Hide default summary marker across browsers so no left arrow appears */
+    summary::-webkit-details-marker{display:none}
+    details>summary::marker{content:""}
+  </style>
 </head>
 
 <body class="site-bg text-gray-900 selection:bg-neutral-900 selection:text-white">
@@ -133,7 +138,7 @@
             <li class="group">
               <details class="rounded-2xl border border-amber-200/80 bg-amber-50/70 backdrop-blur-sm p-0 transition shadow-sm hover:shadow-md hover:bg-amber-50 open:shadow-md open:border-amber-300">
                 <summary class="flex items-start gap-4 px-5 py-4 cursor-pointer list-none marker:content-none">
-                  <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-amber-200 bg-amber-100 font-semibold text-amber-800">01</span>
+                  <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-amber-300 bg-gradient-to-br from-amber-100 to-amber-200 font-semibold text-amber-900 ring-1 ring-amber-200">01</span>
                   <div class="flex-1 min-w-0">
                     <div class="flex items-center justify-between gap-4">
                       <h3 class="font-medium truncate">Модуль 1 — Основы работы в SketchUp</h3>
@@ -153,7 +158,7 @@
             <li class="group">
               <details class="rounded-2xl border border-amber-200/80 bg-amber-50/70 backdrop-blur-sm p-0 transition shadow-sm hover:shadow-md hover:bg-amber-50 open:shadow-md open:border-amber-300">
                 <summary class="flex items-start gap-4 px-5 py-4 cursor-pointer list-none marker:content-none">
-                  <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-amber-200 bg-amber-100 font-semibold text-amber-800">02</span>
+                  <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-amber-300 bg-gradient-to-br from-amber-100 to-amber-200 font-semibold text-amber-900 ring-1 ring-amber-200">02</span>
                   <div class="flex-1 min-w-0">
                     <div class="flex items-center justify-between gap-4">
                       <h3 class="font-medium truncate">Модуль 2 — Объёмное моделирование</h3>
@@ -173,7 +178,7 @@
             <li class="group">
               <details class="rounded-2xl border border-amber-200/80 bg-amber-50/70 backdrop-blur-sm p-0 transition shadow-sm hover:shadow-md hover:bg-amber-50 open:shadow-md open:border-amber-300">
                 <summary class="flex items-start gap-4 px-5 py-4 cursor-pointer list-none marker:content-none">
-                  <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-amber-200 bg-amber-100 font-semibold text-amber-800">03</span>
+                  <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-amber-300 bg-gradient-to-br from-amber-100 to-amber-200 font-semibold text-amber-900 ring-1 ring-amber-200">03</span>
                   <div class="flex-1 min-w-0">
                     <div class="flex items-center justify-between gap-4">
                       <h3 class="font-medium truncate">Модуль 3 — Визуализация в Enscape</h3>
@@ -192,7 +197,7 @@
             <li class="group">
               <details class="rounded-2xl border border-amber-200/80 bg-amber-50/70 backdrop-blur-sm p-0 transition shadow-sm hover:shadow-md hover:bg-amber-50 open:shadow-md open:border-amber-300">
                 <summary class="flex items-start gap-4 px-5 py-4 cursor-pointer list-none marker:content-none">
-                  <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-amber-200 bg-amber-100 font-semibold text-amber-800">04</span>
+                  <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-amber-300 bg-gradient-to-br from-amber-100 to-amber-200 font-semibold text-amber-900 ring-1 ring-amber-200">04</span>
                   <div class="flex-1 min-w-0">
                     <div class="flex items-center justify-between gap-4">
                       <h3 class="font-medium truncate">Модуль 4 — Итоговое тестирование</h3>
