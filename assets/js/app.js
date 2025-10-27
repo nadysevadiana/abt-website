@@ -7,7 +7,7 @@
 
 (function(){
   // Версия для пробития кеша статических partials
-  var VERSION = '20251023h';
+  var VERSION = '20251028a';
   function withV(path){ return path + (path.indexOf('?') === -1 ? ('?v=' + VERSION) : ('&v=' + VERSION)); }
   // Preconnect/DNS-hint helper (idempotent)
   function preconnectOnce(href){
@@ -635,6 +635,8 @@ function closeMobile(){
   document.addEventListener('click', function(e){
     var t = e.target.closest && e.target.closest('[data-plan]');
     if(!t) return;
+    // If native GC modal is requested, do nothing here
+    if (t.hasAttribute('data-gc-open')) return;
     var plan = t.getAttribute('data-plan');
     if(!plan || !PLAN_IDS[plan]) return;
     e.preventDefault();
@@ -653,6 +655,8 @@ function closeMobile(){
   document.addEventListener('click', function(e){
     var t = e.target.closest && e.target.closest('[data-gc-id], [data-gc-src]');
     if(!t) return;
+    // If native GC modal is requested, let it handle the click
+    if (t.hasAttribute('data-gc-open')) return;
     if (t.hasAttribute('data-plan')) return; // avoid double-handling when data-plan is present
     e.preventDefault();
     var wid = t.getAttribute('data-gc-id');
