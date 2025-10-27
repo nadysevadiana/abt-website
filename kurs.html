@@ -634,6 +634,32 @@
       <div class="s">Это займёт несколько секунд</div>
     </div>
   </div>
+  <script>
+    // Minimal cleanup: remove accidentally rendered internal GetCourse widget code shown as text
+    (function(){
+      function zap(){
+        try{
+          var nodes = document.querySelectorAll('pre, code, div, section, article');
+          nodes.forEach(function(el){
+            var txt = el.innerText || '';
+            if (!txt) return;
+            if (/gcEmbedOnMessage|pl\/lite\/widget\/widget|currentScript\.src|b73adea3f4bc63ba9c20549a467cb5c6a5281198/.test(txt)){
+              // Remove only the minimal container that displays this raw code
+              el.parentNode && el.parentNode.removeChild(el);
+            }
+          });
+        }catch(e){}
+      }
+      if (document.readyState === 'loading'){
+        document.addEventListener('DOMContentLoaded', zap);
+      } else {
+        zap();
+      }
+      // Late render retries
+      setTimeout(zap, 900);
+      setTimeout(zap, 2200);
+    })();
+  </script>
   <script src="assets/js/app.js?v=20251028a" defer></script>
 </body>
 </html>
