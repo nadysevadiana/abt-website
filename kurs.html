@@ -635,44 +635,96 @@
     </div>
   </div>
   <script>
-    // Robust cleanup: remove any visible block or inline script that accidentally contains GetCourse widget internals
+    // Robust cleanup + diagnostics: remove any visible block or inline script that accidentally contains GetCourse widget internals
     (function(){
       var MARKER = /gcEmbedOnMessage|pl\/lite\/widget\/widget|currentScript\.src|b73adea3f4bc63ba9c20549a467cb5c6a5281198/;
-      function isRogue(el){
+
+      function logRemoval(el){
+        try{
+          var origin = el.closest && el.closest('[data-part]');
+          var src = origin ? origin.getAttribute('data-part') : '(inline/unknown)';
+          // Keep log short to avoid flooding
+          var preview = (el.outerHTML || el.textContent || '').slice(0, 140).replace(/\n/g,' ');
+          console.warn('[GC rogue snippet] removed from', src, '→', preview);
+        }catch(e){}
+      }
+
+      function isRogueElement(el){
         try{
           if (!el) return false;
-          // Skip our own scripts by src
+          // Skip our own external scripts by src
           if (el.tagName === 'SCRIPT' && el.hasAttribute('src')) return false;
-          var txt = (el.innerText || '').trim();
+          var txt = (el.innerText || el.textContent || '').trim();
           if (!txt) return false;
-          if (txt.length < 120) return false; // heuristic: real code chunk is long
+          if (txt.length < 80) return false; // heuristic: real code chunk is long-ish
           return MARKER.test(txt);
         }catch(e){ return false; }
       }
+
       function purge(root){
         try{
           var nodes = root.querySelectorAll('pre, code, div, section, article, p, script');
-          nodes.forEach(function(el){ if (isRogue(el) && el.parentNode) el.parentNode.removeChild(el); });
+          nodes.forEach(function(el){
+            if (isRogueElement(el) && el.parentNode){ logRemoval(el); el.parentNode.removeChild(el); }
+          });
         }catch(e){}
       }
-      function initial(){ purge(document); }
-      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initial); else initial();
+
+      // Extra: scan raw TEXT NODES (e.g., if code was injected directly under body)
+      function purgeTextNodes(root){
+        try{
+          var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
+          var removeList = [];
+          while (walker.nextNode()){
+            var n = walker.currentNode;
+            var txt = (n.nodeValue || '').trim();
+            if (txt && txt.length > 80 && MARKER.test(txt)){
+              removeList.push(n);
+            }
+          }
+          removeList.forEach(function(n){
+            var host = n.parentNode;
+            if (!host) return;
+            logRemoval(host);
+            // Remove the minimal container if safe; else clear text
+            if (host.parentNode && host.children && host.children.length === 0){
+              host.parentNode.removeChild(host);
+            } else {
+              n.nodeValue = '';
+            }
+          });
+        }catch(e){}
+      }
+
+      function sweep(){ purge(document); purgeTextNodes(document.body || document); }
+
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', sweep); else sweep();
+
       // Observe future insertions (partials, late renders)
       try{
         var mo = new MutationObserver(function(muts){
           muts.forEach(function(m){
             m.addedNodes && m.addedNodes.forEach(function(n){
               if (n.nodeType === 1){ // ELEMENT_NODE
-                if (isRogue(n) && n.parentNode) { n.parentNode.removeChild(n); return; }
+                if (isRogueElement(n) && n.parentNode) { logRemoval(n); n.parentNode.removeChild(n); return; }
                 purge(n);
+                purgeTextNodes(n);
+              } else if (n.nodeType === 3){ // TEXT_NODE
+                var txt = (n.nodeValue || '').trim();
+                if (txt && txt.length > 80 && MARKER.test(txt)){
+                  var host = n.parentNode; if (!host) return;
+                  logRemoval(host);
+                  if (host.parentNode && host.children && host.children.length === 0){ host.parentNode.removeChild(host); }
+                  else { n.nodeValue=''; }
+                }
               }
             });
           });
         });
         mo.observe(document.documentElement, { childList:true, subtree:true });
-        // Run a couple delayed sweeps as well
-        setTimeout(initial, 900);
-        setTimeout(initial, 2200);
+        // Run delayed sweeps as well
+        setTimeout(sweep, 900);
+        setTimeout(sweep, 2200);
       }catch(e){}
     })();
   </script>
