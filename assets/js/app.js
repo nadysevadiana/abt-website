@@ -20,10 +20,15 @@
     }catch(e){}
   }
   // Подключение HTML-вставок (partials)
-  function inject(id, html){
+  function inject(id, html, file){
     var el = document.getElementById(id);
     if(!el) return;
-    el.innerHTML = html;
+    // Wrap injected content so we can see its origin in DevTools
+    var wrap = document.createElement('div');
+    wrap.setAttribute('data-part', file || 'inline');
+    wrap.innerHTML = html;
+    el.innerHTML = '';
+    el.appendChild(wrap);
   }
   function loadPart(id, file){
     // Skip fetching if target host element is not present on this page
@@ -31,7 +36,7 @@
     var url = new URL(file, window.location.href).toString();
     fetch(url, { credentials: 'same-origin' })
       .then(function(res){ if(!res.ok) throw new Error('HTTP '+res.status); return res.text(); })
-      .then(function(html){ inject(id, html); })
+      .then(function(html){ inject(id, html, file); })
       .catch(function(err){ console.warn('[partials]', file, err); });
   }
 
@@ -691,6 +696,44 @@ function closeMobile(){
     var name = t.getAttribute('data-track') || 'click';
     track(name, { href: t.getAttribute('href') || '', id: t.id || '' });
   });
+
+  // Defensive cleanup for rogue GetCourse widget code (diagnostics: log origin)
+  (function cleanupRogueGCWidgetCopies(){
+    function scanAndRemove(){
+      var markers = [
+        'gcEmbedOnMessage',
+        'b73adea3f4bc63ba9c20549a467cb5c6a5281198',
+        'pl/lite/widget/widget',
+        'var domain = ( (getLocation( currentScript.src )).hostname )'
+      ];
+      try {
+        var candidates = Array.prototype.slice.call(document.querySelectorAll('pre, code, p, div, section, article'));
+        candidates.forEach(function(el){
+          var txt = el.innerText || '';
+          if (!txt) return;
+          for (var i=0; i<markers.length; i++){
+            if (txt.indexOf(markers[i]) !== -1){
+              // Find origin marker
+              var origin = el.closest('[data-part]');
+              var originSrc = origin ? origin.getAttribute('data-part') : '(inline or unknown)';
+              // Log once to the console so we can trace it in DevTools
+              try { console.warn('[GC rogue snippet] removed from', originSrc, el); } catch(e) {}
+              // Remove the minimal container that displays the code
+              el.parentNode && el.parentNode.removeChild(el);
+              break;
+            }
+          }
+        });
+      } catch(e) {}
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', scanAndRemove);
+    } else {
+      scanAndRemove();
+    }
+    setTimeout(scanAndRemove, 1200);
+    setTimeout(scanAndRemove, 2500);
+  })();
 
   // Экспортируем глобальные функции (если нужно)
   window.__abt = {
