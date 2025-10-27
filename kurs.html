@@ -26,7 +26,6 @@
   <link rel="stylesheet" href="assets/css/styles.css?v=20251020">
   <link rel="prefetch" href="/partials/header.html" as="fetch" crossorigin>
   <link rel="prefetch" href="/partials/footer.html" as="fetch" crossorigin>
-  <link rel="prefetch" href="/partials/tg-btn.html" as="fetch" crossorigin>
 
 
   <!-- JSON-LD: Course -->
@@ -385,7 +384,7 @@
                 <li>• Доступ навсегда</li>
                 <li class="text-neutral-400">• Обратная связь и коучинг — нет</li>
               </ul>
-              <a href="#" data-plan="basic" data-id="1487237" onclick="return (window.GCW && GCW.open ? GCW.open(this) : false)" class="mt-auto btn-buy" aria-label="Выбрать тариф Базовый">Выбрать Базовый</a>
+              <a href="#" data-plan="basic" class="mt-auto btn-buy" aria-label="Выбрать тариф Базовый">Выбрать Базовый</a>
               <p class="mt-2 text-xs text-neutral-500">Рассрочка доступна — <a href="https://t.me/" rel="noopener noreferrer" target="_blank" class="underline">напишите нам в Telegram</a></p>
             </div>
 
@@ -406,7 +405,7 @@
                 <li>• Обратная связь по заданиям</li>
                 <li>• Групповой коучинг (живые разборы)</li>
               </ul>
-              <a href="#" data-plan="extended" data-id="1487247" onclick="return (window.GCW && GCW.open ? GCW.open(this) : false)" class="mt-auto btn-buy btn-buy--featured" aria-label="Выбрать тариф Расширенный">Выбрать Расширенный</a>
+              <a href="#" data-plan="extended" class="mt-auto btn-buy btn-buy--featured" aria-label="Выбрать тариф Расширенный">Выбрать Расширенный</a>
               <p class="mt-2 text-xs text-neutral-500">Рассрочка доступна — <a href="https://t.me/" rel="noopener noreferrer" target="_blank" class="underline">напишите нам в Telegram</a></p>
             </div>
 
@@ -426,7 +425,7 @@
                 <li>• Психология пространства</li>
                 <li>• Индивидуальный коучинг (1‑на‑1)</li>
               </ul>
-              <a href="#" data-plan="max" data-id="1487966" onclick="return (window.GCW && GCW.open ? GCW.open(this) : false)" class="mt-auto btn-buy" aria-label="Выбрать тариф Максимум">Выбрать Максимум</a>
+              <a href="#" data-plan="max" class="mt-auto btn-buy" aria-label="Выбрать тариф Максимум">Выбрать Максимум</a>
               <p class="mt-2 text-xs text-neutral-500">Рассрочка доступна — <a href="https://t.me/" rel="noopener noreferrer" target="_blank" class="underline">напишите нам в Telegram</a></p>
             </div>
           </div>
@@ -490,7 +489,7 @@
             <h2 class="text-2xl md:text-3xl font-semibold tracking-tight">Готовы сделать дизайн своей квартиры?</h2>
             <p class="mt-2 text-neutral-700">Начните сегодня — доступ откроется сразу после оплаты.</p>
             <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="#" data-plan="extended" data-id="1487247" onclick="return (window.GCW && GCW.open ? GCW.open(this) : false)" class="btn-buy btn-buy--lg" aria-label="Выбрать тариф Расширенный">Выбрать «Расширенный»</a>
+              <a href="#" data-plan="extended" class="btn-buy btn-buy--lg" aria-label="Выбрать тариф Расширенный">Выбрать «Расширенный»</a>
               <a href="#program" class="inline-flex justify-center rounded-md border border-neutral-300 px-5 py-3 hover:bg-neutral-100" aria-label="Посмотреть программу курса">Посмотреть программу</a>
             </div>
             <p class="mt-4 text-sm text-neutral-600">Оплачивайте безопасно — платформа GetCourse, SSL‑шифрование, мгновенный доступ после оплаты.</p>
@@ -508,13 +507,13 @@
           <p class="text-sm font-medium">Рекомендуем: «Расширенный»</p>
           <p class="text-xs text-neutral-500"><span class="line-through mr-1">84&nbsp;900 ₽</span><span class="font-semibold">59&nbsp;900 ₽</span></p>
         </div>
-        <a href="#" data-plan="extended" data-id="1487247" onclick="return (window.GCW && GCW.open ? GCW.open(this) : false)" class="inline-flex justify-center rounded-md bg-neutral-900 text-white px-4 py-2" aria-label="Выбрать тариф Расширенный">Выбрать</a>
+        <a href="#" data-plan="extended" class="inline-flex justify-center rounded-md bg-neutral-900 text-white px-4 py-2" aria-label="Выбрать тариф Расширенный">Выбрать</a>
       </div>
     </div>
   </div>
   <div id="footer"></div>
 
-  <div id="site-telegram-btn"></div>
+  <!-- <div id="site-telegram-btn"></div> -->
 
   <!-- === STORY VIEWER MODAL (edge‑to‑edge, no white box) === -->
   <div id="storyModal" class="modal" data-storyviewer hidden aria-hidden="true" role="dialog" aria-label="Страница сторис">
@@ -635,115 +634,6 @@
       <div class="s">Это займёт несколько секунд</div>
     </div>
   </div>
-  <script>
-    (function(){
-      var sk = document.getElementById('gc-skeleton');
-      if(!sk) return;
-      function show(){ try{ sk.hidden = false; }catch(e){} }
-      function hide(){ try{ sk.hidden = true; }catch(e){} }
-      document.addEventListener('click', function(e){
-        var t = e.target.closest('[data-gc-open]');
-        if (t) { setTimeout(show, 0); }
-      }, { passive:true });
-      window.addEventListener('message', function(ev){
-        try{ var u = new URL(ev.origin); if (/getcourse\.ru$/.test(u.hostname) || /getcourse\.io$/.test(u.hostname)) hide(); }catch(e){}
-      });
-      window.addEventListener('focus', function(){ setTimeout(hide, 300); });
-      document.addEventListener('visibilitychange', function(){ if (!document.hidden) setTimeout(hide, 600); });
-      setInterval(function(){ if (!document.hidden) hide(); }, 4000);
-    })();
-  </script>
-  <script>
-    // Warm up GetCourse so the checkout opens faster
-    (function(){
-      var warmed = false;
-      function warm(){
-        if (warmed) return; warmed = true;
-        try {
-          // Create a hidden iframe to establish TLS, cookies and HTTP/2 session
-          var ifr = document.createElement('iframe');
-          ifr.src = 'https://artbytwins.getcourse.ru/';
-          ifr.setAttribute('aria-hidden','true');
-          ifr.tabIndex = -1;
-          ifr.style.cssText = 'position:absolute;width:0;height:0;border:0;clip:rect(0,0,0,0);';
-          document.body.appendChild(ifr);
-          // Remove after a short while
-          setTimeout(function(){ try{ if (ifr.parentNode) ifr.parentNode.removeChild(ifr); }catch(e){} }, 8000);
-        } catch(e) {}
-      }
-      // Warm on first user intent and a small timeout
-      window.addEventListener('pointermove', warm, { once:true, passive:true });
-      window.addEventListener('touchstart', warm, { once:true, passive:true });
-      window.addEventListener('scroll', warm, { once:true, passive:true });
-      setTimeout(warm, 2500);
-      // Also bind to payment buttons
-      try{
-        var gcBtns = document.querySelectorAll('[data-gc-open]');
-        gcBtns.forEach(function(btn){
-          btn.addEventListener('pointerenter', warm, { passive:true });
-          btn.addEventListener('click', warm, { passive:true });
-        });
-      }catch(e){}
-    })();
-  </script>
-  <!-- GetCourse Modal Core (все тарифы) -->
-  <script async src="https://artbytwins.getcourse.ru/pl/lite/widget/script?id=1487237"></script>
-  <script async src="https://artbytwins.getcourse.ru/pl/lite/widget/script?id=1487247"></script>
-  <script async src="https://artbytwins.getcourse.ru/pl/lite/widget/script?id=1487966"></script>
-  <script>
-    (function(){
-      function wire(){
-        try{
-          var btns = document.querySelectorAll('a[data-id]');
-          btns.forEach(function(b){
-            if (b.__gcBound) return; b.__gcBound = true;
-            b.addEventListener('click', function(ev){
-              if (window.GCW && typeof GCW.open === 'function') {
-                return GCW.open(this);
-              }
-              // Show skeleton while the library finishes loading, and prevent default navigation
-              ev.preventDefault();
-              var sk = document.getElementById('gc-skeleton');
-              if (sk) sk.hidden = false;
-              setTimeout(function(){ if (sk) sk.hidden = true; }, 4000);
-              return false;
-            });
-          });
-        }catch(e){}
-      }
-      // Try now, on DOMContentLoaded, and after widget script likely initializes
-      wire();
-      document.addEventListener('DOMContentLoaded', wire);
-      setTimeout(wire, 1200);
-      setTimeout(wire, 2500);
-    })();
-  </script>
-  <!-- Универсальный инициализатор GetCourse -->
-  <script>
-    window.addEventListener('load', function() {
-      try {
-        if (window.GCWidgetInit) return; // уже загружено
-        var s = document.createElement('script');
-        s.src = 'https://artbytwins.getcourse.ru/pl/lite/widget/script.js';
-        s.async = true;
-        s.onload = function() {
-          if (typeof window.initGCWidgets === 'function') {
-            window.initGCWidgets(); // активируем модалки
-            console.log('✅ GetCourse модалки инициализированы');
-          } else {
-            console.warn('⚠️ initGCWidgets не найден, проверяем повторно...');
-            setTimeout(function(){
-              if (typeof window.initGCWidgets === 'function') {
-                window.initGCWidgets();
-                console.log('✅ GetCourse модалки инициализированы (повтор)');
-              }
-            }, 1500);
-          }
-        };
-        document.body.appendChild(s);
-      } catch(e) { console.error('GC init error', e); }
-    });
-  </script>
   <script src="assets/js/app.js?v=20251028a" defer></script>
 </body>
 </html>

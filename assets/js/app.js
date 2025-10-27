@@ -697,43 +697,6 @@ function closeMobile(){
     track(name, { href: t.getAttribute('href') || '', id: t.id || '' });
   });
 
-  // Defensive cleanup for rogue GetCourse widget code (diagnostics: log origin)
-  (function cleanupRogueGCWidgetCopies(){
-    function scanAndRemove(){
-      var markers = [
-        'gcEmbedOnMessage',
-        'b73adea3f4bc63ba9c20549a467cb5c6a5281198',
-        'pl/lite/widget/widget',
-        'var domain = ( (getLocation( currentScript.src )).hostname )'
-      ];
-      try {
-        var candidates = Array.prototype.slice.call(document.querySelectorAll('pre, code, p, div, section, article'));
-        candidates.forEach(function(el){
-          var txt = el.innerText || '';
-          if (!txt) return;
-          for (var i=0; i<markers.length; i++){
-            if (txt.indexOf(markers[i]) !== -1){
-              // Find origin marker
-              var origin = el.closest('[data-part]');
-              var originSrc = origin ? origin.getAttribute('data-part') : '(inline or unknown)';
-              // Log once to the console so we can trace it in DevTools
-              try { console.warn('[GC rogue snippet] removed from', originSrc, el); } catch(e) {}
-              // Remove the minimal container that displays the code
-              el.parentNode && el.parentNode.removeChild(el);
-              break;
-            }
-          }
-        });
-      } catch(e) {}
-    }
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', scanAndRemove);
-    } else {
-      scanAndRemove();
-    }
-    setTimeout(scanAndRemove, 1200);
-    setTimeout(scanAndRemove, 2500);
-  })();
 
   // Экспортируем глобальные функции (если нужно)
   window.__abt = {
