@@ -634,7 +634,7 @@
       <div class="s">Это займёт несколько секунд</div>
     </div>
   </div>
-  <script>
+  <script data-gc-cleaner>
     // Robust cleanup + diagnostics: remove any visible block or inline script that accidentally contains GetCourse widget internals
     (function(){
       var MARKER = /gcEmbedOnMessage|pl\/lite\/widget\/widget|currentScript\.src|b73adea3f4bc63ba9c20549a467cb5c6a5281198/;
@@ -651,6 +651,9 @@
 
       function isRogueElement(el){
         try{
+          // Never touch our own cleaner
+          if (el.hasAttribute && el.hasAttribute('data-gc-cleaner')) return false;
+          if (el.closest && el.closest('[data-gc-cleaner]')) return false;
           if (!el) return false;
           // Skip our own external scripts by src
           if (el.tagName === 'SCRIPT' && el.hasAttribute('src')) return false;
@@ -663,7 +666,7 @@
 
       function purge(root){
         try{
-          var nodes = root.querySelectorAll('pre, code, div, section, article, p, script');
+          var nodes = root.querySelectorAll('pre, code, div, section, article, p, script:not([data-gc-cleaner])');
           nodes.forEach(function(el){
             if (isRogueElement(el) && el.parentNode){ logRemoval(el); el.parentNode.removeChild(el); }
           });
@@ -705,6 +708,8 @@
         var mo = new MutationObserver(function(muts){
           muts.forEach(function(m){
             m.addedNodes && m.addedNodes.forEach(function(n){
+              // Skip our cleaner and its subtree
+              if (n.nodeType === 1 && ((n.hasAttribute && n.hasAttribute('data-gc-cleaner')) || (n.closest && n.closest('[data-gc-cleaner]')))) return;
               if (n.nodeType === 1){ // ELEMENT_NODE
                 if (isRogueElement(n) && n.parentNode) { logRemoval(n); n.parentNode.removeChild(n); return; }
                 purge(n);
