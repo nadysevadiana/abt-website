@@ -690,6 +690,18 @@
   <script async src="https://artbytwins.getcourse.ru/pl/lite/widget/script?id=1487237"></script>
   <script async src="https://artbytwins.getcourse.ru/pl/lite/widget/script?id=1487247"></script>
   <script async src="https://artbytwins.getcourse.ru/pl/lite/widget/script?id=1487966"></script>
+  <!-- Универсальный инициализатор GetCourse -->
+  <script>
+    window.addEventListener('load', function() {
+      try {
+        if (window.GCWidgetInit) return; // уже загружено
+        var s = document.createElement('script');
+        s.src = 'https://artbytwins.getcourse.ru/pl/lite/widget/script.js';
+        s.async = true;
+        document.body.appendChild(s);
+      } catch(e) { console.error('GC init error', e); }
+    });
+  </script>
   <script src="assets/js/app.js?v=20251028a" defer></script>
 </body>
 </html>
