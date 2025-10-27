@@ -26,6 +26,8 @@
     el.innerHTML = html;
   }
   function loadPart(id, file){
+    // Skip fetching if target host element is not present on this page
+    if (!document.getElementById(id)) return;
     var url = new URL(file, window.location.href).toString();
     fetch(url, { credentials: 'same-origin' })
       .then(function(res){ if(!res.ok) throw new Error('HTTP '+res.status); return res.text(); })
@@ -89,11 +91,21 @@
     try{ document.querySelectorAll('[data-clamp]').forEach(function(el){ clampElement(el); }); }catch(e){}
   }
 
-  // Media enhancements: lazy-load images by default
+  // Media enhancements: lazy-load images by default, robust fallback for broken images
   function enhanceMedia(){
     try{
       document.querySelectorAll('img:not([loading])').forEach(function(img){ img.setAttribute('loading','lazy'); });
       document.querySelectorAll('img:not([decoding])').forEach(function(img){ img.setAttribute('decoding','async'); });
+      // Hide or swap broken images to avoid ugly broken icons
+      document.querySelectorAll('img').forEach(function(img){
+        if (img.__abtErrBound) return; img.__abtErrBound = true;
+        img.addEventListener('error', function(){
+          var fb = img.getAttribute('data-fallback');
+          if (fb && img.src !== fb) { img.src = fb; return; }
+          // No fallback provided — hide the element gracefully
+          img.style.display = 'none';
+        });
+      });
     }catch(e){}
   }
 
@@ -635,8 +647,11 @@ function closeMobile(){
   document.addEventListener('click', function(e){
     var t = e.target.closest && e.target.closest('[data-plan]');
     if(!t) return;
-    // If native GC modal is requested, do nothing here
-    if (t.hasAttribute('data-gc-open')) return;
+    // Respect native GC widget usage: if explicit native flags/patterns exist, skip our handler
+    if (t.hasAttribute('data-gc-open')) return;          // legacy flag to force native
+    if (t.hasAttribute('data-id')) return;               // new scheme: GCW.open(this) with data-id
+    if (t.getAttribute('onclick') && /GCW\.open\(/.test(t.getAttribute('onclick'))) return; // inline handler points to native
+
     var plan = t.getAttribute('data-plan');
     if(!plan || !PLAN_IDS[plan]) return;
     e.preventDefault();
