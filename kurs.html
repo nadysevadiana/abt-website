@@ -635,29 +635,45 @@
     </div>
   </div>
   <script>
-    // Minimal cleanup: remove accidentally rendered internal GetCourse widget code shown as text
+    // Robust cleanup: remove any visible block or inline script that accidentally contains GetCourse widget internals
     (function(){
-      function zap(){
+      var MARKER = /gcEmbedOnMessage|pl\/lite\/widget\/widget|currentScript\.src|b73adea3f4bc63ba9c20549a467cb5c6a5281198/;
+      function isRogue(el){
         try{
-          var nodes = document.querySelectorAll('pre, code, div, section, article');
-          nodes.forEach(function(el){
-            var txt = el.innerText || '';
-            if (!txt) return;
-            if (/gcEmbedOnMessage|pl\/lite\/widget\/widget|currentScript\.src|b73adea3f4bc63ba9c20549a467cb5c6a5281198/.test(txt)){
-              // Remove only the minimal container that displays this raw code
-              el.parentNode && el.parentNode.removeChild(el);
-            }
-          });
+          if (!el) return false;
+          // Skip our own scripts by src
+          if (el.tagName === 'SCRIPT' && el.hasAttribute('src')) return false;
+          var txt = (el.innerText || '').trim();
+          if (!txt) return false;
+          if (txt.length < 120) return false; // heuristic: real code chunk is long
+          return MARKER.test(txt);
+        }catch(e){ return false; }
+      }
+      function purge(root){
+        try{
+          var nodes = root.querySelectorAll('pre, code, div, section, article, p, script');
+          nodes.forEach(function(el){ if (isRogue(el) && el.parentNode) el.parentNode.removeChild(el); });
         }catch(e){}
       }
-      if (document.readyState === 'loading'){
-        document.addEventListener('DOMContentLoaded', zap);
-      } else {
-        zap();
-      }
-      // Late render retries
-      setTimeout(zap, 900);
-      setTimeout(zap, 2200);
+      function initial(){ purge(document); }
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initial); else initial();
+      // Observe future insertions (partials, late renders)
+      try{
+        var mo = new MutationObserver(function(muts){
+          muts.forEach(function(m){
+            m.addedNodes && m.addedNodes.forEach(function(n){
+              if (n.nodeType === 1){ // ELEMENT_NODE
+                if (isRogue(n) && n.parentNode) { n.parentNode.removeChild(n); return; }
+                purge(n);
+              }
+            });
+          });
+        });
+        mo.observe(document.documentElement, { childList:true, subtree:true });
+        // Run a couple delayed sweeps as well
+        setTimeout(initial, 900);
+        setTimeout(initial, 2200);
+      }catch(e){}
     })();
   </script>
   <script src="assets/js/app.js?v=20251028a" defer></script>
