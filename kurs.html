@@ -698,6 +698,20 @@
         var s = document.createElement('script');
         s.src = 'https://artbytwins.getcourse.ru/pl/lite/widget/script.js';
         s.async = true;
+        s.onload = function() {
+          if (typeof window.initGCWidgets === 'function') {
+            window.initGCWidgets(); // активируем модалки
+            console.log('✅ GetCourse модалки инициализированы');
+          } else {
+            console.warn('⚠️ initGCWidgets не найден, проверяем повторно...');
+            setTimeout(function(){
+              if (typeof window.initGCWidgets === 'function') {
+                window.initGCWidgets();
+                console.log('✅ GetCourse модалки инициализированы (повтор)');
+              }
+            }, 1500);
+          }
+        };
         document.body.appendChild(s);
       } catch(e) { console.error('GC init error', e); }
     });
