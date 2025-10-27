@@ -630,21 +630,17 @@ function closeMobile(){
     iframe.style.height = '80vh';
     iframe.style.border = '0';
     iframe.referrerPolicy = 'no-referrer-when-downgrade';
+    var loaded = false;
     iframe.addEventListener('load', function(){
-      host.querySelector('div') && (host.querySelector('div').style.display = 'none');
+      loaded = true;
+      var ld = host.querySelector('div'); if (ld) ld.style.display = 'none';
       try{ window.dispatchEvent(new CustomEvent('gc-widget-loaded', { detail: { id: wid } })); }catch(e){}
     });
     host.appendChild(iframe);
 
-    // fallback: if not loaded fast enough (network/CSP), retry with script endpoint inside the iframe document
+    // Fallback: if the iframe didn't fire load fast enough, try the script endpoint
     try{
-      setTimeout(function(){
-        try{
-          // if contentWindow exists and some content rendered, keep; else switch to script endpoint
-          var ok = !!(iframe.contentWindow && iframe.contentDocument && iframe.contentDocument.body && iframe.contentDocument.body.childElementCount > 0);
-          if(!ok){ iframe.src = 'https://artbytwins.getcourse.ru/pl/lite/widget/script?id=' + encodeURIComponent(wid); }
-        }catch(e){ iframe.src = 'https://artbytwins.getcourse.ru/pl/lite/widget/script?id=' + encodeURIComponent(wid); }
-      }, 3500);
+      setTimeout(function(){ if (!loaded) { iframe.src = 'https://artbytwins.getcourse.ru/pl/lite/widget/script?id=' + encodeURIComponent(wid); } }, 3500);
     }catch(e){}
   }
 
