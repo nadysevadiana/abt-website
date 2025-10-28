@@ -457,5 +457,21 @@
     </div>
   </div>
   <script src="assets/js/app.js?v=20251028a" defer></script>
+  <script>
+    (function(){
+      var HOST = 'https://artbytwins.getcourse.ru';
+      function initGC(){
+        try { if (typeof window._gcw === 'function') { window._gcw('init', { host: HOST }); } } catch(e){}
+      }
+      // Если loader уже присутствует – просто инициализируем
+      if (typeof window._gcw === 'function') { initGC(); return; }
+      // Иначе подгружаем официальный лоадер и инициализируем
+      var s = document.createElement('script');
+      s.src = 'https://static.getcourse.io/loader.js';
+      s.async = true;
+      s.onload = initGC;
+      document.head.appendChild(s);
+    })();
+  </script>
 </body>
 </html>
