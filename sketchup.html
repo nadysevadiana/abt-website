@@ -76,6 +76,14 @@
     #gc-skeleton .t{margin-top:10px; color:#111827; font-weight:600}
     #gc-skeleton .s{margin-top:4px; color:#6b7280; font-size:12px}
   </style>
+  <style id="gc-modal-css">
+    #gc-modal{position:fixed; inset:0; z-index:1001; display:none; align-items:center; justify-content:center; background:rgba(15,23,42,.6); backdrop-filter:blur(4px)}
+    #gc-modal[aria-hidden="false"]{display:flex}
+    #gc-modal .inner{position:relative; width:min(900px,92vw); height:min(85vh,800px); border-radius:16px; overflow:hidden; background:#fff; border:1px solid rgba(0,0,0,.08); box-shadow:0 30px 80px rgba(2,6,23,.35)}
+    #gc-modal iframe{width:100%; height:100%; border:0}
+    #gc-modal .close{position:absolute; top:10px; right:10px; width:36px; height:36px; border:0; border-radius:999px; background:rgba(0,0,0,.55); color:#fff; font-weight:700; cursor:pointer}
+    body.gc-modal-open{overflow:hidden}
+  </style>
 </head>
 
 <body class="site-bg text-gray-900 selection:bg-neutral-900 selection:text-white">
@@ -456,6 +464,52 @@
       <div class="s">Это займёт несколько секунд</div>
     </div>
   </div>
+  <div id="gc-modal" aria-hidden="true" role="dialog" aria-label="Окно оплаты GetCourse">
+    <div class="inner">
+      <iframe id="gc-frame" src="" title="Оплата GetCourse"></iframe>
+    </div>
+    <button class="close" type="button" aria-label="Закрыть">✕</button>
+  </div>
+  <script>
+    (function(){
+      var HOST = 'https://artbytwins.getcourse.ru';
+      var PLAN_IDS = (window.__abt && window.__abt.PLAN_IDS) || { basic: 1487237, extended: 1487247, max: 1487966 };
+      var modal = document.getElementById('gc-modal');
+      var frame = document.getElementById('gc-frame');
+      var skeleton = document.getElementById('gc-skeleton');
+
+      function openById(id){
+        if(!id) return;
+        try{ if(skeleton) skeleton.hidden = false; }catch(e){}
+        try{ frame.src = HOST + '/pl/lite/widget/widget?id=' + encodeURIComponent(id); }catch(e){}
+        modal.setAttribute('aria-hidden','false');
+        document.body.classList.add('gc-modal-open');
+        frame.addEventListener('load', function(){ try{ if(skeleton) skeleton.hidden = true; }catch(e){} }, { once:true });
+      }
+      function closeModal(){
+        modal.setAttribute('aria-hidden','true');
+        document.body.classList.remove('gc-modal-open');
+        try{ frame.src = 'about:blank'; }catch(e){}
+      }
+
+      modal.addEventListener('click', function(e){
+        if (e.target === modal || (e.target.classList && e.target.classList.contains('close'))) closeModal();
+      });
+      window.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeModal(); });
+
+      document.addEventListener('click', function(e){
+        var btn = e.target.closest('[data-gc-open],[data-plan]');
+        if(!btn) return;
+        e.preventDefault();
+        var id = (btn.getAttribute('data-gc-id')||'').trim();
+        if(!id){
+          var plan = (btn.getAttribute('data-plan')||'').trim();
+          if (plan && PLAN_IDS[plan]) id = PLAN_IDS[plan];
+        }
+        if(id) openById(id);
+      }, { passive:false });
+    })();
+  </script>
   <script src="assets/js/app.js?v=20251028a" defer></script>
   <script>
     (function(){
