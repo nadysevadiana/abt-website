@@ -1,4 +1,11 @@
 [hidden]{ display:none !important; }
+/* === Global stacking context fixes (2025-10-29) === */
+/* Keep header and mobile drawer above page content; keep floating buttons clickable */
+header{ position:relative; z-index:50 }
+#mobile-menu{ z-index:70 }
+.floating-contacts, .btn-fixed-ig, .btn-circle.btn-fixed, #site-telegram-btn .btn-circle{ z-index:60 }
+/* Ensure any hidden modal is really gone */
+.modal[hidden]{ display:none !important }
 /* Global styles for Art by Twins. This is a plain CSS file (no <style> tags). */
       html {
         scroll-behavior: smooth;
@@ -359,65 +366,6 @@
   .story-tap-left, .story-tap-right{ position:absolute; top:0; bottom:0; width:50%; z-index:3; }
   .story-tap-left{ left:0 } .story-tap-right{ right:0 }
 
-/* === STORY VIEWER: full-screen modal overrides to remove white dialog === */
-/* Use on the modal root: <div class="modal is-open" data-storyviewer> ... */
-.modal[data-storyviewer]{
-  position:fixed; inset:0; z-index:70;
-  display:grid; place-items:center;
-  background:rgba(0,0,0,.92); /* dark backdrop, no white screen */
-  padding: max(16px, env(safe-area-inset-top)) 12px max(20px, env(safe-area-inset-bottom));
-}
-/* Make inner box transparent and edge-to-edge around the story */
-.modal[data-storyviewer] .modal-box{
-  background:transparent !important;
-  box-shadow:none !important;
-  border:0 !important;
-  padding:0 !important;
-  width:min(92vw, 560px) !important;
-  max-width:unset !important;
-  overflow:visible !important;
-}
-/* Optional close button in the corner */
-.modal[data-storyviewer] .modal-close{
-  position:absolute; top:12px; right:12px; z-index:5;
-  width:40px; height:40px; border-radius:9999px;
-  display:inline-flex; align-items:center; justify-content:center;
-  background:rgba(255,255,255,.12); color:#fff; border:1px solid rgba(255,255,255,.25);
-  backdrop-filter: blur(6px);
-}
-.modal[data-storyviewer] .modal-close:hover{ background:rgba(255,255,255,.18) }
-
-/* Center the existing .story-view nicely within the dark overlay */
-.modal[data-storyviewer] .story-view{ margin:0 auto; }
-
-/* Strengthen caption readability */
-.story-caption{ 
-  background:linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.72));
-  padding-bottom: max(14px, env(safe-area-inset-bottom));
-  text-shadow:0 1px 2px rgba(0,0,0,.6);
-}
-.story-caption .t{ font-weight:800; letter-spacing:.2px }
-
-/* Progress bars: animate when .is-active is applied to .story-bar > span */
-.story-bar{ background:rgba(255,255,255,.28) }
-.story-bar > span{ transition: width var(--story-dur, 5s) linear }
-.story-bar.is-complete > span{ width:100% }
-.story-bar.is-active > span{ width:100% }
-
-/* Tap zones get proper cursor on desktop */
-.story-tap-left, .story-tap-right{ cursor:pointer }
-
-/* Desktop: keep viewer tall but never overflow screen */
-@media (min-width: 1024px){
-  .modal[data-storyviewer]{ padding-top: 24px; padding-bottom: 24px; }
-  .modal[data-storyviewer] .story-view{ max-height: calc(100vh - 64px); }
-}
-
-/* Mobile tweaks: slightly larger caption and safer bars spacing */
-@media (max-width: 420px){
-  .story-caption{ font-size: .95rem }
-  .story-bars{ top:10px }
-}
 /* =======================================================
    TYPOGRAPHY & READING EASE UTILITIES (lightweight)
    Helps reduce perceived text overload without rewriting copy
