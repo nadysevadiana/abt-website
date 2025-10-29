@@ -107,7 +107,9 @@
         <button class="sv-prev btn-circle" id="sv-prev" aria-label="Назад"><i class="fa-solid fa-chevron-left"></i></button>
         <figure class="sv-frame">
           <img id="sv-image" src="" alt="" />
-          <figcaption id="sv-caption" class="mt-2 text-center text-sm text-gray-500"></figcaption>
+          <figcaption id="sv-caption" class="sr-only"></figcaption>
+          <div class="sv-cap sv-cap-top" id="sv-cap-top" aria-live="polite"></div>
+          <div class="sv-cap sv-cap-bottom" id="sv-cap-bottom" aria-live="polite"></div>
         </figure>
         <button class="sv-next btn-circle" id="sv-next" aria-label="Вперёд"><i class="fa-solid fa-chevron-right"></i></button>
         <div class="sv-progress" id="sv-progress"></div>
@@ -226,6 +228,13 @@
     const getStyleBySlug = (slug) => styles.find(s=>s.slug===slug);
     const clamp = (n,min,max)=>Math.max(min,Math.min(max,n));
     const cleanTitle = (t)=> (t||'').replace(/^\d+\s*[—–]\s*/, '');
+    function shortDesc(txt){
+      const t = (txt||'').trim();
+      if(!t) return '';
+      const first = t.split(/(?<=\.)\s/)[0];
+      const s = first.length > 140 ? first.slice(0,137) + '…' : first;
+      return s;
+    }
 
     // ===== Render chips =====
     const chips = document.getElementById('style-chips');
@@ -359,11 +368,13 @@
     const imgEl = document.getElementById('sv-image');
     const capEl = document.getElementById('sv-caption');
     const progress = document.getElementById('sv-progress');
+    const capTop = document.getElementById('sv-cap-top');
+    const capBottom = document.getElementById('sv-cap-bottom');
     const btnPrev = document.getElementById('sv-prev');
     const btnNext = document.getElementById('sv-next');
     const btnClose = document.getElementById('sv-close');
 
-    let current = { title: '', images: [], index: 0 };
+    let current = { title: '', desc: '', images: [], index: 0 };
     let timer = null; let openerEl = null;
     const AUTOPLAY_MS = 4600;
     const PREFERS_REDUCED_MOTION = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -377,7 +388,7 @@
 
     function openViewer(style, startIndex=0, opener){
       openerEl = opener || document.activeElement;
-      current.title = style.title; current.images = style.images; current.index = clamp(startIndex, 0, current.images.length-1);
+      current.title = style.title; current.desc = style.desc || ''; current.images = style.images; current.index = clamp(startIndex, 0, current.images.length-1);
       viewer.hidden = false; document.body.classList.add('modal-open');
       // update URL for deep link
       const url = new URL(location.href); url.searchParams.set('open', style.slug); url.searchParams.set('idx', String(current.index)); history.replaceState(null,'',url);
@@ -395,6 +406,8 @@
       imgEl.classList.remove('is-ready');
       imgEl.onload = () => { imgEl.classList.add('is-ready'); };
       imgEl.src = src; imgEl.alt = `${current.title} — ${current.index+1}/${current.images.length}`;
+      if (capTop) capTop.textContent = cleanTitle(current.title);
+      if (capBottom) capBottom.textContent = shortDesc(current.desc);
       capEl.textContent = `${current.title} — ${current.index+1} из ${current.images.length}`;
       if (!capEl.hasAttribute('aria-live')) capEl.setAttribute('aria-live','polite');
       drawProgress(); preloadAround(current.index);

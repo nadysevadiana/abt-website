@@ -998,3 +998,25 @@ html, body { overflow-x: hidden; }
   /* Disable hover overlays in stories mode */
   .style-section .style-grid .sg-item .sg-overlay{ display:none !important }
 }
+
+/* === Story Viewer captions (IG-like top/bottom overlays) — v20251029c === */
+.sv-cap{ position:absolute; left:12px; right:12px; z-index:2; color:#fff; line-height:1.25; text-wrap:balance; }
+.sv-cap-top{ top:12px; font-weight:700; font-size:clamp(14px, 2.8vw, 18px); text-shadow:0 2px 10px rgba(0,0,0,.45); }
+.sv-cap-bottom{ bottom:12px; font-weight:500; font-size:clamp(13px, 2.4vw, 16px); text-shadow:0 2px 10px rgba(0,0,0,.55); }
+
+/* Subtle gradient pads for readability */
+.sv-cap-top::before, .sv-cap-bottom::before{
+  content:""; position:absolute; left:-12px; right:-12px; height:64px; z-index:-1;
+}
+.sv-cap-top::before{ top:-12px; background:linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,0)); }
+.sv-cap-bottom::before{ bottom:-12px; background:linear-gradient(0deg, rgba(0,0,0,.55), rgba(0,0,0,0)); }
+
+/* Respect safe areas on iOS */
+@supports(padding:max(0px)){
+  .sv-cap-top{ padding-top:max(0px, env(safe-area-inset-top)); }
+  .sv-cap-bottom{ padding-bottom:max(0px, env(safe-area-inset-bottom)); }
+}
+
+@media (max-width:640px){
+  .sv-cap{ left:10px; right:10px; }
+}
