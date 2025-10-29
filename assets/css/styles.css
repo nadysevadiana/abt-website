@@ -1020,3 +1020,30 @@ html, body { overflow-x: hidden; }
 @media (max-width:640px){
   .sv-cap{ left:10px; right:10px; }
 }
+
+/* === Hero CTA polish (2025-10-29) === */
+.no-scrollbar{ -ms-overflow-style:none; scrollbar-width:none }
+.no-scrollbar::-webkit-scrollbar{ display:none }
+
+.cta-group{ --cta-radius:14px; --cta-shadow:0 10px 30px rgba(2,6,23,.10); --cta-border:rgba(2,6,23,.06) }
+.cta-group > a.cta-btn{
+  display:inline-flex; align-items:center; gap:.6rem;
+  min-height:52px; padding:.9rem 1.25rem; border-radius:var(--cta-radius);
+  background:rgba(255,255,255,.72); backdrop-filter:saturate(1.1) blur(6px);
+  border:1px solid var(--cta-border); box-shadow:var(--cta-shadow);
+  transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.cta-group > a.cta-btn:hover{ background:#fff; transform:translateY(-1px); box-shadow:0 14px 36px rgba(2,6,23,.16) }
+.cta-group > a.cta-btn i{ opacity:.9 }
+
+.cta-group > a.is-primary{ background:#10b981; color:#fff; border-color:#10b981 }
+.cta-group > a.is-primary:hover{ box-shadow:0 16px 40px rgba(16,185,129,.35) }
+.cta-group > a.is-emerald{ color:#065f46; border-color:#a7f3d0; background:linear-gradient(0deg, rgba(236,253,245,.75), rgba(255,255,255,.7)) }
+.cta-group > a.is-sky{ color:#075985; border-color:#bae6fd; background:linear-gradient(0deg, rgba(240,249,255,.75), rgba(255,255,255,.7)) }
+
+.cta-badge{
+  margin-left:.5rem; display:inline-flex; align-items:center;
+  padding:.15rem .5rem; font-size:10px; border-radius:999px;
+  border:1px solid rgba(16,185,129,.35);
+  background:rgba(236,253,245,.8); color:#065f46;
+}
