@@ -10,7 +10,7 @@
     <meta property="og:title" content="АБТ ШКОЛА ДИЗАЙНА — Дизайн интерьера для себя и для профессионалов" />
     <meta property="og:description" content="Продукт, который помогает стать дизайнером своей квартиры" />
     <meta property="og:image" content="./og-image.jpg" />
-    <link rel="stylesheet" href="assets/css/styles.css?v=20251020">
+    <link rel="stylesheet" href="assets/css/styles.css?v=20251029c">
     <meta name="description" content="АБТ ШКОЛА ДИЗАЙНА — онлайн‑продукт по дизайну интерьера: уроки, модули, 3D‑программы, право и коучинг для себя и для профессионалов." />
     <link rel="prefetch" href="/partials/header.html" as="fetch" crossorigin>
     <link rel="prefetch" href="/partials/footer.html" as="fetch" crossorigin>
@@ -218,29 +218,41 @@
           </a>
         </div>
         <div class="full-bleed">
-          <!-- Stories strip (Instagram-like) -->
-          <div id="studentStories" class="stories">
-            <button type="button" class="story-item" data-index="0" data-caption-title="Анна, студентка курса" data-caption="До курса я не знала, с чего начать, а теперь я сделала проект для своей спальни!" data-meta="Современный минимализм · Москва">
-              <img src="assets/img/work_1.png" alt="Анна — Современный минимализм" class="story-bubble"/>
-              <span class="story-label">Анна</span>
-            </button>
-            <button type="button" class="story-item" data-index="1" data-caption-title="Виктория, студентка курса" data-caption="Не думала, что смогу сделать классику, а теперь это моя гордость!" data-meta="Современная классика · Москва">
-              <img src="assets/img/work_2.png" alt="Виктория — Современная классика" class="story-bubble"/>
-              <span class="story-label">Виктория</span>
-            </button>
-            <button type="button" class="story-item" data-index="2" data-caption-title="Алексей, студент курса" data-caption="Я мечтал о стиле лофт и создал проект квартиры в этом стиле!" data-meta="Лофт · Москва">
-              <img src="assets/img/work_3.png" alt="Алексей — Лофт" class="story-bubble"/>
-              <span class="story-label">Алексей</span>
-            </button>
-            <button type="button" class="story-item" data-index="3" data-caption-title="Мария, студентка курса" data-caption="Хотела светлое и уютное пространство — получилось скандинавское вдохновение!" data-meta="Скандинавский уют · Москва">
-              <img src="assets/img/work_4.png" alt="Мария — Скандинавский уют" class="story-bubble"/>
-              <span class="story-label">Мария</span>
-            </button>
-            <button type="button" class="story-item" data-index="4" data-caption-title="Дмитрий, студент курса" data-caption="Хотел яркий и стильный интерьер — теперь гостиная выглядит современно!" data-meta="Яркий современный микс · Москва">
-              <img src="assets/img/work_5.png" alt="Дмитрий — Яркий современный микс" class="story-bubble"/>
-              <span class="story-label">Дмитрий</span>
-            </button>
-          </div>
+          <section class="stories-panel stories-panel--center" aria-label="Быстрый просмотр стилей">
+            <div class="stories-head">
+              <div class="stories-hint" aria-hidden="true">Пролистайте →</div>
+            </div>
+            <div class="stories-strip" role="list">
+              <a class="story" href="works.html?open=minimalism" aria-label="Минимализм">
+                <span class="story-thumb">
+                  <img src="assets/img/works/1/011.png" alt="Минимализм" loading="lazy" decoding="async"
+                       sizes="(max-width: 480px) 30vw, (max-width: 640px) 25vw, 72px">
+                </span>
+                <span class="story-label">Минимализм</span>
+              </a>
+              <a class="story" href="works.html?open=classic" aria-label="Классический стиль">
+                <span class="story-thumb">
+                  <img src="assets/img/works/2/021.png" alt="Классический стиль" loading="lazy" decoding="async"
+                       sizes="(max-width: 480px) 30vw, (max-width: 640px) 25vw, 72px">
+                </span>
+                <span class="story-label">Классический стиль</span>
+              </a>
+              <a class="story" href="works.html?open=japandi" aria-label="Джапанди">
+                <span class="story-thumb">
+                  <img src="assets/img/works/3/031.png" alt="Джапанди" loading="lazy" decoding="async"
+                       sizes="(max-width: 480px) 30vw, (max-width: 640px) 25vw, 72px">
+                </span>
+                <span class="story-label">Джапанди</span>
+              </a>
+              <a class="story" href="works.html?open=eclectic" aria-label="Современная эклектика">
+                <span class="story-thumb">
+                  <img src="assets/img/works/4/041.png" alt="Современная эклектика" loading="lazy" decoding="async"
+                       sizes="(max-width: 480px) 30vw, (max-width: 640px) 25vw, 72px">
+                </span>
+                <span class="story-label">Современная эклектика</span>
+              </a>
+            </div>
+          </section>
         </div>
       </div>
     </section>
@@ -382,40 +394,6 @@
     <div id="footer"></div>
     <div id="site-telegram-btn"></div>
 
-    <!-- === STORY VIEWER MODAL (edge‑to‑edge, no white box) === -->
-    <div id="storyModal" class="modal" data-storyviewer hidden aria-hidden="true" role="dialog" aria-label="Страница сторис">
-      <div class="modal-box">
-        <div class="story-view" id="storyView">
-          <!-- progress bars -->
-          <div class="story-bars" id="storyBars">
-            <div class="story-bar"><span></span></div>
-            <div class="story-bar"><span></span></div>
-            <div class="story-bar"><span></span></div>
-          </div>
-          <!-- header (avatar + title) -->
-          <div class="story-header">
-            <img id="storyAvatar" class="avatar" src="assets/img/work_1.png" alt="avatar" />
-            <div class="meta">
-              <div class="t" id="storyTitle">Имя, студент курса</div>
-              <div class="m" id="storyMeta">Стиль · Город</div>
-            </div>
-          </div>
-          <!-- image/content -->
-          <div class="story-media">
-            <img id="storyImage" src="assets/img/work_1.png" alt="story" />
-          </div>
-          <!-- caption at bottom -->
-          <div class="story-caption">
-            <div class="t" id="storyCaptionTitle">Заголовок</div>
-            <div class="d" id="storyCaption">Текст истории / отзыв</div>
-          </div>
-          <!-- tap zones -->
-          <div class="story-tap-left" id="tapPrev" aria-label="Предыдущая сторис"></div>
-          <div class="story-tap-right" id="tapNext" aria-label="Следующая сторис"></div>
-        </div>
-      </div>
-      <button class="modal-close" id="storyClose" aria-label="Закрыть">✕</button>
-    </div>
     
     <script src="assets/js/app.js?v=20251029b" defer></script>
   </body>

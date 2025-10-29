@@ -925,3 +925,19 @@ p, li{ overflow-wrap: break-word; word-break: normal; hyphens: auto; }
   white-space:normal !important;
   text-overflow:unset !important;
 }
+.stories-panel--center { text-align: center; }
+.stories-panel--center .stories-head { justify-content: center; }
+.stories-panel--center .stories-title { margin: 0 auto; }
+.stories-panel--center .stories-strip {
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 980px; /* premium width on desktop */
+}
+.stories-panel--center .story { align-items: center; }
+.stories-panel--center .story-label { text-align: center; }
+
+/* Subtle hover polish */
+.stories-panel--center .story { transition: transform .18s ease, box-shadow .18s ease; }
+.stories-panel--center .story:hover { transform: translateY(-2px); }
+.stories-panel--center .story-thumb img { transition: transform .25s ease; }
+.stories-panel--center .story:hover .story-thumb img { transform: scale(1.03); }
