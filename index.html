@@ -486,20 +486,41 @@
   }
   function next(){
     if (current.index < current.images.length - 1){ current.index += 1; showCurrent(); return; }
-    const list = styles; const si = list.findIndex(s => s.slug === current.slug);
-    const nextStyle = list[(si + 1) % list.length];
+    const list = styles;
+    const si = list.findIndex(s => s.slug === current.slug);
+    const isLastStyle = si === list.length - 1;
+    if (isLastStyle){ closeViewer(); return; }
+    const nextStyle = list[si + 1];
     openViewer(nextStyle, 0);
   }
   function prev(){
     if (current.index > 0){ current.index -= 1; showCurrent(); return; }
-    const list = styles; const si = list.findIndex(s => s.slug === current.slug);
-    const prevStyle = list[(si - 1 + list.length) % list.length];
+    const list = styles;
+    const si = list.findIndex(s => s.slug === current.slug);
+    const isFirstStyle = si === 0;
+    if (isFirstStyle){ closeViewer(); return; }
+    const prevStyle = list[si - 1];
     const lastIdx = (prevStyle.images || []).length - 1;
     openViewer(prevStyle, Math.max(0, lastIdx));
   }
   function startAutoplay(){ stopAutoplay(); if (PREFERS_REDUCED_MOTION) return; timer = setInterval(next, AUTOPLAY_MS); }
   function stopAutoplay(){ if (timer) { clearInterval(timer); timer = null; } }
   function drawProgress(){ if (!progress) return; const total = current.images.length; progress.innerHTML = ''; for (let i = 0; i < total; i++) { const bar = document.createElement('span'); bar.className = 'sv-bar' + (i <= current.index ? ' is-active' : ''); progress.appendChild(bar); } }
+
+  // focus trap + клавиши управления
+  viewer.addEventListener('keydown', (e)=>{
+    if (viewer.hidden) return;
+    if (e.key === 'Tab'){
+      const focusables = viewer.querySelectorAll('button, [href], [tabindex]:not([tabindex="-1"])');
+      const list = Array.from(focusables).filter(el=>!el.hasAttribute('disabled'));
+      const first = list[0]; const last = list[list.length-1];
+      if (e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+    }
+    if (e.key==='Escape') { e.preventDefault(); closeViewer(); }
+    if (e.key==='ArrowRight') { stopAutoplay(); next(); }
+    if (e.key==='ArrowLeft')  { stopAutoplay(); prev(); }
+  });
 
   document.getElementById('sv-backdrop').addEventListener('click', closeViewer);
   btnNext.addEventListener('click', () => { stopAutoplay(); next(); });

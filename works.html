@@ -429,10 +429,17 @@ current.index  = clamp(startIndex, 0, current.images.length - 1);
         showCurrent();
         return;
       }
-      // иначе — следующий стиль, с первой картинкой
+      // иначе — список видимых стилей
       const list = getVisibleStyles();
       const si = list.findIndex(s => s.slug === current.slug);
-      const nextStyle = list[(si + 1) % list.length];
+      const isLastStyle = si === list.length - 1;
+      if (isLastStyle){
+        // на последнем кадре последнего стиля → закрыть просмотр
+        closeViewer();
+        return;
+      }
+      // перейти к следующему стилю, с первого кадра
+      const nextStyle = list[si + 1];
       openViewer(nextStyle, 0);
     }
     function prev(){
@@ -442,10 +449,17 @@ current.index  = clamp(startIndex, 0, current.images.length - 1);
         showCurrent();
         return;
       }
-      // иначе — предыдущий стиль, с последней картинкой
+      // иначе — список видимых стилей
       const list = getVisibleStyles();
       const si = list.findIndex(s => s.slug === current.slug);
-      const prevStyle = list[(si - 1 + list.length) % list.length];
+      const isFirstStyle = si === 0;
+      if (isFirstStyle){
+        // на первом кадре первого стиля → закрыть просмотр
+        closeViewer();
+        return;
+      }
+      // перейти к предыдущему стилю и показать последний кадр
+      const prevStyle = list[si - 1];
       const lastIdx = (prevStyle.images || []).length - 1;
       openViewer(prevStyle, Math.max(0, lastIdx));
     }
