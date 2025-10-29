@@ -363,6 +363,12 @@
       });
     }
 
+    function getVisibleStyles(){
+      if (state.filter === ALL) return styles;
+      const st = getStyleBySlug(state.filter);
+      return st ? [st] : styles;
+    }
+
     // ===== Viewer with focus trap =====
     const viewer = document.getElementById('story-viewer');
     const imgEl = document.getElementById('sv-image');
@@ -374,7 +380,7 @@
     const btnNext = document.getElementById('sv-next');
     const btnClose = document.getElementById('sv-close');
 
-    let current = { title: '', desc: '', images: [], index: 0 };
+    let current = { slug: '', title: '', desc: '', images: [], index: 0 };
     let timer = null; let openerEl = null;
     const AUTOPLAY_MS = 4600;
     const PREFERS_REDUCED_MOTION = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -388,7 +394,11 @@
 
     function openViewer(style, startIndex=0, opener){
       openerEl = opener || document.activeElement;
-      current.title = style.title; current.desc = style.desc || ''; current.images = style.images; current.index = clamp(startIndex, 0, current.images.length-1);
+      current.slug  = style.slug || current.slug;
+current.title = style.title;
+current.desc  = style.desc || '';
+current.images = style.images;
+current.index  = clamp(startIndex, 0, current.images.length - 1);
       viewer.hidden = false; document.body.classList.add('modal-open');
       // update URL for deep link
       const url = new URL(location.href); url.searchParams.set('open', style.slug); url.searchParams.set('idx', String(current.index)); history.replaceState(null,'',url);
@@ -412,8 +422,33 @@
       if (!capEl.hasAttribute('aria-live')) capEl.setAttribute('aria-live','polite');
       drawProgress(); preloadAround(current.index);
     }
-    function next(){ current.index = (current.index + 1) % current.images.length; showCurrent(); }
-    function prev(){ current.index = (current.index - 1 + current.images.length) % current.images.length; showCurrent(); }
+    function next(){
+      // если есть следующий кадр в текущем стиле
+      if (current.index < current.images.length - 1){
+        current.index += 1;
+        showCurrent();
+        return;
+      }
+      // иначе — следующий стиль, с первой картинкой
+      const list = getVisibleStyles();
+      const si = list.findIndex(s => s.slug === current.slug);
+      const nextStyle = list[(si + 1) % list.length];
+      openViewer(nextStyle, 0);
+    }
+    function prev(){
+      // если есть предыдущий кадр в текущем стиле
+      if (current.index > 0){
+        current.index -= 1;
+        showCurrent();
+        return;
+      }
+      // иначе — предыдущий стиль, с последней картинкой
+      const list = getVisibleStyles();
+      const si = list.findIndex(s => s.slug === current.slug);
+      const prevStyle = list[(si - 1 + list.length) % list.length];
+      const lastIdx = (prevStyle.images || []).length - 1;
+      openViewer(prevStyle, Math.max(0, lastIdx));
+    }
     function startAutoplay(){ stopAutoplay(); if (PREFERS_REDUCED_MOTION) return; timer = setInterval(next, AUTOPLAY_MS); }
     function stopAutoplay(){ if (timer) { clearInterval(timer); timer = null; } }
     function drawProgress(){ if (!progress) return; const total = current.images.length; progress.innerHTML = ''; for (let i = 0; i < total; i++) { const bar = document.createElement('span'); bar.className = 'sv-bar' + (i <= current.index ? ' is-active' : ''); progress.appendChild(bar); } }
