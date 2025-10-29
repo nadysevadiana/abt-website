@@ -13,8 +13,11 @@
   </button>
   <nav class="space-x-6 text-sm font-medium hidden md:flex items-center" aria-label="Главное меню">
     <div class="relative group js-courses">
-      <button class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300 flex items-center gap-1 js-courses-btn" aria-haspopup="true" aria-expanded="false">
-        Курсы <i class="fa-solid fa-chevron-down text-xs mt-[2px]"></i>
+      <button class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300 flex items-center gap-2 px-2 py-1 rounded-md js-courses-btn" aria-haspopup="true" aria-expanded="false">
+        <span class="flex items-center gap-1">
+          <span>Курсы</span>
+          <i class="fa-solid fa-chevron-down text-xs mt-[2px]"></i>
+        </span>
       </button>
       <div class="absolute left-0 top-full mt-2 hidden group-hover:block focus-within:block bg-white border border-emerald-100 shadow-lg rounded-lg w-56 z-50 js-courses-menu" role="menu">
         <a href="kurs.html" class="block px-4 py-2 hover:bg-emerald-50">Стань дизайнером квартир</a>
