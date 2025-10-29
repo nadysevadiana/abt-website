@@ -12,11 +12,11 @@
     <i class="fa-solid fa-bars"></i>
   </button>
   <nav class="space-x-6 text-sm font-medium hidden md:flex items-center" aria-label="Главное меню">
-    <div class="relative group">
-      <button class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300 flex items-center gap-1">
+    <div class="relative group js-courses">
+      <button class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300 flex items-center gap-1 js-courses-btn" aria-haspopup="true" aria-expanded="false">
         Курсы <i class="fa-solid fa-chevron-down text-xs mt-[2px]"></i>
       </button>
-      <div class="absolute left-0 top-full mt-2 hidden group-hover:block bg-white border border-emerald-100 shadow-lg rounded-lg w-56 z-50">
+      <div class="absolute left-0 top-full mt-2 hidden group-hover:block bg-white border border-emerald-100 shadow-lg rounded-lg w-56 z-50 js-courses-menu" role="menu">
         <a href="kurs.html" class="block px-4 py-2 hover:bg-emerald-50">Стань дизайнером квартир</a>
         <a href="sketchup.html" class="block px-4 py-2 hover:bg-emerald-50">SketchUp с нуля</a>
       </div>
@@ -57,3 +57,30 @@
 </header>
 
 <!-- NOTE: No inline scripts here. CTA text is controlled in app.js (VERSION cache-busted). -->
+<script>
+// === Header: dropdown by click (desktop + touch) ===
+document.addEventListener('DOMContentLoaded', () => {
+  const wrap = document.querySelector('header .js-courses');
+  const btn  = document.querySelector('header .js-courses-btn');
+  const menu = document.querySelector('header .js-courses-menu');
+  if (!wrap || !btn || !menu) return;
+
+  const closeMenu = () => { menu.classList.add('hidden'); btn.setAttribute('aria-expanded', 'false'); };
+  const openMenu  = () => { menu.classList.remove('hidden'); btn.setAttribute('aria-expanded', 'true'); };
+
+  btn.addEventListener('click', (e) => {
+    e.preventDefault(); e.stopPropagation();
+    if (menu.classList.contains('hidden')) { openMenu(); } else { closeMenu(); }
+  });
+
+  // Close when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!wrap.contains(e.target)) closeMenu();
+  });
+
+  // Close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenu();
+  });
+});
+</script>
