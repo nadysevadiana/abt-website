@@ -103,7 +103,10 @@
     <!-- Лёгкий просмотрщик (story viewer) -->
     <div class="modal" data-storyviewer id="story-viewer" hidden>
       <div class="story-viewer" role="dialog" aria-modal="true" aria-label="Просмотр работ">
-        <button class="sv-close btn-circle" id="sv-close" aria-label="Закрыть"><i class="fa-solid fa-xmark"></i></button>
+        <button class="sv-close btn-circle" id="sv-close" aria-label="Закрыть" style="z-index:60">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+          <span class="sr-only">Закрыть</span>
+        </button>
         <button class="sv-prev btn-circle" id="sv-prev" aria-label="Назад"><i class="fa-solid fa-chevron-left"></i></button>
         <figure class="sv-frame">
           <img id="sv-image" src="" alt="" />
@@ -332,7 +335,7 @@
           <div class="style-body">
             <div class="style-cover"><img src="${s.cover}" alt="${s.title}" loading="lazy" decoding="async" sizes="(max-width: 900px) 100vw, 340px" onload="this.classList.add('is-loaded')"></div>
             <div class="style-grid">
-              ${s.images.map(src=>`<figure class=\"sg-item\"><img src=\"${src}\" alt=\"${s.title}\" loading=\"lazy\" decoding=\"async\" sizes=\"(max-width: 640px) 100vw, (max-width: 1100px) 50vw, 33vw\" onload=\"this.classList.add('is-loaded')\"><div class=\"sg-overlay\"><i class=\"fa-solid fa-magnifying-glass\"></i></div></figure>`).join('')}
+              ${s.images.map(src=>`<figure class="sg-item"><a href="${src}" class="sg-link"><img src="${src}" alt="${s.title}" loading="lazy" decoding="async" sizes="(max-width: 640px) 100vw, (max-width: 1100px) 50vw, 33vw" onload="this.classList.add('is-loaded')"><div class="sg-overlay"><i class="fa-solid fa-magnifying-glass"></i></div></a></figure>`).join('')}
             </div>
           </div>
         `;
@@ -347,10 +350,16 @@
         });
       });
 
-      sections.querySelectorAll('.style-grid img').forEach(img=>{
-        img.addEventListener('click', ()=>{
-          const slug = img.closest('.style-section').dataset.slug; const st = getStyleBySlug(slug);
-          if (!st) return; const idx = st.images.findIndex(u=>u===img.getAttribute('src'));
+      // Open viewer from big grid images (with close cross)
+      sections.querySelectorAll('.style-grid a.sg-link').forEach(a => {
+        a.addEventListener('click', (e) => {
+          e.preventDefault();
+          const section = a.closest('.style-section');
+          const slug = section?.dataset?.slug;
+          const st = getStyleBySlug(slug);
+          if (!st) return;
+          const src = a.querySelector('img')?.getAttribute('src') || a.getAttribute('href');
+          const idx = st.images.findIndex(u => u === src);
           openViewer(st, Math.max(0, idx));
         });
       });
