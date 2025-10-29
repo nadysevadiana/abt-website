@@ -544,17 +544,27 @@ p, li{ overflow-wrap: break-word; word-break: normal; hyphens: auto; }
 .story-viewer .sv-bar{flex:1;height:3px;background:rgba(255,255,255,.35);border-radius:2px;overflow:hidden}
 .story-viewer .sv-bar.is-active{background:rgba(255,255,255,.9)}
 
-/* ✅ Story Viewer — центрируем и «contain», больше не фуллскрин */
-.modal[data-storyviewer]{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.7);z-index:1000}
-.modal[data-storyviewer][hidden]{display:none}
-.story-viewer{position:relative;width:min(920px,94vw);max-height:90vh;border-radius:16px;overflow:hidden;background:#000;padding:0}
-.story-viewer .sv-frame{display:flex;align-items:center;justify-content:center;background:#000;min-height:60vh}
-.story-viewer img{max-width:100%;max-height:80vh;width:auto;height:auto;object-fit:contain;background:#000}
-.sv-close,.sv-prev,.sv-next{position:absolute;top:50%;transform:translateY(-50%)}
-.sv-close{top:.75rem;right:.75rem;transform:none}
-.sv-prev{left:.5rem}
-.sv-next{right:.5rem}
-.sv-backdrop{position:absolute;inset:0}
+/* === Story Viewer — full-viewport layout & mobile polish (v20251029c) === */
+html, body { overflow-x: hidden; }
+
+.modal[data-storyviewer]{ position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,.72); z-index:1000 }
+.modal[data-storyviewer][hidden]{ display:none }
+.story-viewer{ position:fixed; inset:0; display:flex; align-items:center; justify-content:center; width:100vw; height:100vh; border-radius:0; overflow:hidden; background:#000; padding:0; z-index:1001 }
+.story-viewer .sv-frame{ position:relative; display:flex; align-items:center; justify-content:center; width:100%; height:100%; background:#000 }
+.story-viewer img{ max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; background:#000 }
+.sv-close,.sv-prev,.sv-next{ position:absolute; top:50%; transform:translateY(-50%) }
+.sv-close{ top:12px; right:12px; transform:none }
+.sv-prev{ left:12px }
+.sv-next{ right:12px }
+.sv-backdrop{ position:fixed; inset:0 }
+
+/* Mobile: блокируем скролл страницы, минимизируем отступы и прячем подписи как в Instagram */
+@media (max-width:640px){
+  body.modal-open{ overflow:hidden !important; }
+  .story-viewer{ padding:0 }
+  /* Если есть подпись у сторис — убираем на мобилке */
+  #sv-caption{ display:none !important; }
+}
 
 /* === Luxe CTA button (fix for "Смотреть серию") === */
  .btn-luxe{
