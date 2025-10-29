@@ -19,7 +19,7 @@
           <i class="fa-solid fa-chevron-down text-xs mt-[2px] pointer-events-auto" data-courses-toggle></i>
         </span>
       </button>
-      <div class="absolute left-0 top-full mt-2 hidden group-hover:block focus-within:block bg-white border border-emerald-100 shadow-lg rounded-lg w-56 z-50 js-courses-menu" role="menu">
+      <div class="absolute left-0 top-full mt-2 hidden bg-white border border-emerald-100 shadow-lg rounded-lg w-56 z-50 js-courses-menu" role="menu">
         <a href="kurs.html" class="block px-4 py-2 hover:bg-emerald-50">Стань дизайнером квартир</a>
         <a href="sketchup.html" class="block px-4 py-2 hover:bg-emerald-50">SketchUp с нуля</a>
       </div>
@@ -58,34 +58,43 @@
     </div>
   </div>
 <script>
-const courseBtn = document.querySelector('.js-courses-btn');
-const courseMenu = document.querySelector('.js-courses-menu');
-let holdOpen = false;
+const container = document.querySelector('.js-courses');
+const courseBtn = container?.querySelector('.js-courses-btn');
+const courseMenu = container?.querySelector('.js-courses-menu');
+let isHolding = false;
+let insideMenu = false;
 
-function toggleCourses(open) {
-  if (open) {
-    courseMenu.classList.remove('hidden');
-  } else {
-    courseMenu.classList.add('hidden');
-  }
-}
+function openMenu(){ courseMenu?.classList.remove('hidden'); courseBtn?.setAttribute('aria-expanded','true'); }
+function closeMenu(){ if(isHolding || insideMenu) return; courseMenu?.classList.add('hidden'); courseBtn?.setAttribute('aria-expanded','false'); }
 
-courseBtn?.addEventListener('mousedown', e => {
-  holdOpen = true;
-  toggleCourses(true);
+// Open on hover
+container?.addEventListener('mouseenter', openMenu);
+container?.addEventListener('mouseleave', () => { insideMenu = false; isHolding = false; closeMenu(); });
+
+// Open on press (and keep open while holding)
+courseBtn?.addEventListener('pointerdown', (e) => {
+  isHolding = true; openMenu();
 });
 
-courseBtn?.addEventListener('mouseup', e => {
-  holdOpen = false;
-  setTimeout(() => toggleCourses(false), 150);
+// Track holding state globally; close on release only if outside menu/button
+window.addEventListener('pointerup', (e) => {
+  isHolding = false;
+  const path = e.composedPath ? e.composedPath() : [];
+  const overContainer = path.includes(container);
+  if(!overContainer && !insideMenu) closeMenu();
 });
 
-courseBtn?.addEventListener('mouseenter', () => toggleCourses(true));
-courseBtn?.addEventListener('mouseleave', () => {
-  if (!holdOpen) toggleCourses(false);
+// Keep open while pointer is over the menu
+courseMenu?.addEventListener('pointerenter', () => { insideMenu = true; openMenu(); });
+courseMenu?.addEventListener('pointerleave', () => { insideMenu = false; closeMenu(); });
+
+// Toggle on click as well (for keyboard / touch)
+courseBtn?.addEventListener('click', (e)=>{
+  const isHidden = courseMenu?.classList.contains('hidden');
+  if(isHidden){ openMenu(); } else { courseMenu?.classList.add('hidden'); courseBtn?.setAttribute('aria-expanded','false'); }
 });
 
-courseMenu?.addEventListener('mouseenter', () => toggleCourses(true));
-courseMenu?.addEventListener('mouseleave', () => toggleCourses(false));
+// Escape closes
+window.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ isHolding=false; insideMenu=false; closeMenu(); }});
 </script>
 </header>
