@@ -78,6 +78,9 @@
         </div>
       </section>
 
+    <!-- === Home: Сторис по стилям (как на works) === -->
+    <section class="stories-panel mb-12" id="home-stories" aria-label="Стили — быстрый просмотр"></section>
+
     <!-- Choose Your Path -->
     <section class="bg-gradient-to-br from-emerald-50 via-white to-sky-50 py-12 px-6 md:px-16 text-center" id="choose-path">
       <div class="max-w-6xl mx-auto space-y-6">
@@ -396,5 +399,150 @@
 
     
     <script src="assets/js/app.js?v=20251029b" defer></script>
+  <script>
+(function(){
+  // Если viewer ещё не вставлен на страницу — создаём (точно как в works.html)
+  if (!document.getElementById('story-viewer')){
+    const tpl = document.createElement('template');
+    tpl.innerHTML = `
+      <div class="modal" data-storyviewer id="story-viewer" hidden>
+        <div class="story-viewer" role="dialog" aria-modal="true" aria-label="Просмотр работ">
+          <button class="sv-close btn-circle" id="sv-close" aria-label="Закрыть"><i class="fa-solid fa-xmark"></i></button>
+          <button class="sv-prev btn-circle" id="sv-prev" aria-label="Назад"><i class="fa-solid fa-chevron-left"></i></button>
+          <figure class="sv-frame">
+            <img id="sv-image" src="" alt="" />
+            <figcaption id="sv-caption" class="sr-only"></figcaption>
+            <div class="sv-cap sv-cap-top" id="sv-cap-top" aria-live="polite"></div>
+            <div class="sv-cap sv-cap-bottom" id="sv-cap-bottom" aria-live="polite"></div>
+          </figure>
+          <button class="sv-next btn-circle" id="sv-next" aria-label="Вперёд"><i class="fa-solid fa-chevron-right"></i></button>
+          <div class="sv-progress" id="sv-progress"></div>
+        </div>
+        <div class="sv-backdrop" id="sv-backdrop"></div>
+      </div>`;
+    document.body.appendChild(tpl.content);
+  }
+
+  // Данные (синхронны с works.html; потом можно вынести в /assets/data/styles.json)
+  const styles = [
+    { slug:'minimalism', title:'01 — Минимализм', desc:'Простота и функциональность. Корни — японская эстетика и модернизм XX века: чистые плоскости, свет, натуральные фактуры. Белый/серый/тёплое дерево, скрытые системы хранения и максимум воздуха.', cover:'assets/img/works/1/011.png', images:['assets/img/works/1/011.png','assets/img/works/1/012.png','assets/img/works/1/013.png','assets/img/works/1/014.png','assets/img/works/1/015.png'] },
+    { slug:'classic',    title:'02 — Классический стиль', desc:'Элегантность и симметрия, отсылки к роскоши XVII–XVIII веков: лепнина, карнизы, паркет «ёлка», камень и латунь. Благородные палитры, парные композиции и эталонные пропорции — в современном прочтении.', cover:'assets/img/works/2/021.png', images:['assets/img/works/2/021.png','assets/img/works/2/022.png','assets/img/works/2/023.png','assets/img/works/2/024.png'] },
+    { slug:'japandi',    title:'03 — Джапанди', desc:'Фьюжн Японии и Скандинавии: минимализм, природа, уют. Низкая мебель, лен, дерево и камень, рассеянный тёплый свет. Зародился в 2010-х, тренд 2025 года — про «тихую роскошь» дома.', cover:'assets/img/works/3/031.png', images:['assets/img/works/3/031.png','assets/img/works/3/032.png','assets/img/works/3/033.png','assets/img/works/3/034.png','assets/img/works/3/035.png','assets/img/works/3/036.png','assets/img/works/3/037.png'] },
+    { slug:'eclectic',   title:'04 — Современная эклектика', desc:'Смешение стилей и эпох: осознанный хаос под контролем. Контрасты форм и фактур, 2–3 акцентных жеста и повторение цвета/материала как связующая нить. Индивидуальность и коллекционный подход.', cover:'assets/img/works/4/041.png', images:['assets/img/works/4/041.png','assets/img/works/4/042.png','assets/img/works/4/043.png','assets/img/works/4/044.png'] }
+  ];
+
+  // Helpers
+  const cleanTitle = (t)=> (t||'').replace(/^\d+\s*[—–]\s*/, '');
+  function shortDesc(txt){
+    const t = (txt||'').trim();
+    if(!t) return '';
+    const first = t.split(/(?<=\.)\s/)[0];
+    return first.length > 140 ? first.slice(0,137) + '…' : first;
+  }
+  const clamp = (n,min,max)=>Math.max(min,Math.min(max,n));
+
+  // Рендер кружков
+  const panel = document.getElementById('home-stories');
+  if(panel){
+    panel.innerHTML = `
+      <div class="stories-head">
+        <h2 class="stories-title">Стили</h2>
+        <p class="stories-sub">быстрый просмотр</p>
+        <div class="stories-hint" aria-hidden="true">Пролистайте →</div>
+      </div>
+      <div class="stories-strip" role="list"></div>
+    `;
+    const strip = panel.querySelector('.stories-strip');
+    styles.forEach(s => {
+      const btn = document.createElement('button');
+      btn.className = 'story'; btn.type='button'; btn.setAttribute('aria-label', s.title);
+      btn.innerHTML = `
+        <span class="story-thumb">
+          <img src="${s.cover}" alt="${cleanTitle(s.title)}" loading="lazy" decoding="async"
+               sizes="(max-width: 480px) 30vw, (max-width: 640px) 25vw, 72px"
+               onload="this.classList.add('is-loaded')">
+        </span>
+        <span class="story-label" title="${cleanTitle(s.title)}">
+          ${cleanTitle(s.title).replace(/\s*—\s*/g, '<br>')}
+        </span>`;
+      btn.addEventListener('click', () => openViewer(s));
+      strip.appendChild(btn);
+    });
+    const hint = panel.querySelector('.stories-hint');
+    const hideHint = () => hint && hint.classList.add('is-hidden');
+    strip.addEventListener('scroll', hideHint, { passive:true });
+    if (strip.scrollWidth <= strip.clientWidth) hideHint();
+  }
+
+  // Viewer logic (как в works)
+  const viewer = document.getElementById('story-viewer');
+  const imgEl = document.getElementById('sv-image');
+  const capEl = document.getElementById('sv-caption');
+  const capTop = document.getElementById('sv-cap-top');
+  const capBottom = document.getElementById('sv-cap-bottom');
+  const progress = document.getElementById('sv-progress');
+  const btnPrev = document.getElementById('sv-prev');
+  const btnNext = document.getElementById('sv-next');
+  const btnClose = document.getElementById('sv-close');
+
+  let current = { slug:'', title:'', desc:'', images:[], index:0 };
+  let timer = null; let openerEl = null;
+  const AUTOPLAY_MS = 4600;
+  const PREFERS_REDUCED_MOTION = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function preloadAround(idx){
+    if(!current.images.length) return;
+    const prev = new Image(); const next = new Image();
+    prev.decoding='async'; next.decoding='async';
+    prev.src = current.images[(idx - 1 + current.images.length) % current.images.length];
+    next.src = current.images[(idx + 1) % current.images.length];
+  }
+  function openViewer(style, startIndex=0, opener){
+    openerEl = opener || document.activeElement;
+    current.slug  = style.slug || current.slug;
+    current.title = style.title;
+    current.desc  = style.desc || '';
+    current.images= style.images || [];
+    current.index = clamp(startIndex, 0, Math.max(0, current.images.length - 1));
+    viewer.hidden = false; document.body.classList.add('modal-open');
+    showCurrent(); startAutoplay();
+    btnClose.focus();
+  }
+  function closeViewer(){ stopAutoplay(); viewer.hidden = true; document.body.classList.remove('modal-open'); if(openerEl && openerEl.focus) openerEl.focus(); }
+  function showCurrent(){
+    const src = current.images[current.index];
+    imgEl.classList.remove('is-ready');
+    imgEl.onload = () => { imgEl.classList.add('is-ready'); };
+    imgEl.src = src; imgEl.alt = `${current.title} — ${current.index+1}/${current.images.length}`;
+    if (capTop) capTop.textContent = cleanTitle(current.title);
+    if (capBottom) capBottom.textContent = shortDesc(current.desc);
+    capEl.textContent = `${current.title} — ${current.index+1} из ${current.images.length}`;
+    if (!capEl.hasAttribute('aria-live')) capEl.setAttribute('aria-live','polite');
+    drawProgress(); preloadAround(current.index);
+  }
+  function next(){
+    if (current.index < current.images.length - 1){ current.index += 1; showCurrent(); return; }
+    const list = styles; const si = list.findIndex(s => s.slug === current.slug);
+    const nextStyle = list[(si + 1) % list.length];
+    openViewer(nextStyle, 0);
+  }
+  function prev(){
+    if (current.index > 0){ current.index -= 1; showCurrent(); return; }
+    const list = styles; const si = list.findIndex(s => s.slug === current.slug);
+    const prevStyle = list[(si - 1 + list.length) % list.length];
+    const lastIdx = (prevStyle.images || []).length - 1;
+    openViewer(prevStyle, Math.max(0, lastIdx));
+  }
+  function startAutoplay(){ stopAutoplay(); if (PREFERS_REDUCED_MOTION) return; timer = setInterval(next, AUTOPLAY_MS); }
+  function stopAutoplay(){ if (timer) { clearInterval(timer); timer = null; } }
+  function drawProgress(){ if (!progress) return; const total = current.images.length; progress.innerHTML = ''; for (let i = 0; i < total; i++) { const bar = document.createElement('span'); bar.className = 'sv-bar' + (i <= current.index ? ' is-active' : ''); progress.appendChild(bar); } }
+
+  document.getElementById('sv-backdrop').addEventListener('click', closeViewer);
+  btnNext.addEventListener('click', () => { stopAutoplay(); next(); });
+  btnPrev.addEventListener('click', () => { stopAutoplay(); prev(); });
+  btnClose.addEventListener('click', closeViewer);
+  document.addEventListener('visibilitychange', () => { if (viewer.hidden) return; if (document.hidden) { stopAutoplay(); } else { startAutoplay(); } });
+})();
+</script>
   </body>
 </html>
