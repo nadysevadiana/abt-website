@@ -1,3 +1,8 @@
+/* Art by Twins — Global Styles
+   Version: 20251029c
+   Date: 2025-10-29
+   Notes: Unified stories layout used on main, course, and works pages
+*/
 [hidden]{ display:none !important; }
 /* === Global stacking context fixes (2025-10-29) === */
 /* Keep header and mobile drawer above page content; keep floating buttons clickable */
@@ -941,3 +946,45 @@ p, li{ overflow-wrap: break-word; word-break: normal; hyphens: auto; }
 .stories-panel--center .story:hover { transform: translateY(-2px); }
 .stories-panel--center .story-thumb img { transition: transform .25s ease; }
 .stories-panel--center .story:hover .story-thumb img { transform: scale(1.03); }
+
+/* === Mobile: turn image grids into IG-like stories (global) — v20251029c === */
+@media (max-width:640px){
+  /* Any style grid becomes a horizontal stories strip */
+  .style-section .style-grid,
+  .stories-mobile,
+  .course-stories-grid{
+    display:flex !important;
+    gap:12px;
+    overflow-x:auto;
+    padding:2px 2px 10px;
+    -webkit-overflow-scrolling:touch;
+    scroll-snap-type:x mandatory;
+  }
+  .style-section .style-grid::-webkit-scrollbar,
+  .stories-mobile::-webkit-scrollbar,
+  .course-stories-grid::-webkit-scrollbar{ display:none }
+  .style-section .style-grid{ scrollbar-width:none; }
+
+  /* Each tile becomes a circular bubble */
+  .style-section .style-grid .sg-item,
+  .stories-mobile > *,
+  .course-stories-grid > *{
+    flex:0 0 auto;
+    width:96px;
+    scroll-snap-align:start;
+    border-radius:12px; /* outer safety radius */
+    background:transparent;
+    border:0;
+    box-shadow:none;
+  }
+  .style-section .style-grid .sg-item img,
+  .stories-mobile > * img,
+  .course-stories-grid > * img{
+    width:96px; height:96px; display:block;
+    object-fit:cover; aspect-ratio:1/1;
+    border-radius:9999px; /* circle */
+    position:static; inset:auto; transform:none; filter:none; opacity:1;
+  }
+  /* Disable hover overlays in stories mode */
+  .style-section .style-grid .sg-item .sg-overlay{ display:none !important }
+}
