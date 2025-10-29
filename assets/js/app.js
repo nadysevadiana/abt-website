@@ -703,3 +703,23 @@ function closeMobile(){
     }
   };
 })();
+
+// === Dropdown toggle for header "Курсы" ===
+document.addEventListener('DOMContentLoaded', () => {
+  const courseBtn = document.querySelector('header .group > button');
+  const courseMenu = document.querySelector('header .group > div');
+
+  if (courseBtn && courseMenu) {
+    courseBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      courseMenu.classList.toggle('hidden');
+    });
+
+    // Закрываем при клике вне меню
+    document.addEventListener('click', (e) => {
+      if (!courseBtn.contains(e.target) && !courseMenu.contains(e.target)) {
+        courseMenu.classList.add('hidden');
+      }
+    });
+  }
+});
