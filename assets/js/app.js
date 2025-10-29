@@ -704,41 +704,43 @@ function closeMobile(){
   };
 })();
 
-// === Header: Courses dropdown (hover + click + keyboard) ===
+// === Header: Courses dropdown (hover + click + keyboard) — supports dynamic partial load ===
 (function(){
-  try {
+  function bindCoursesDropdown(){
     var root = document.querySelector('.js-courses');
     var btn  = document.querySelector('.js-courses-btn');
     var menu = document.querySelector('.js-courses-menu');
-    if(!root || !btn || !menu) return;
+    if(!root || !btn || !menu) return false;
+    if(root.dataset.dropdownBound === '1') return true; // prevent duplicate bindings
 
-    function open(){
-      menu.classList.remove('hidden');
-      btn.setAttribute('aria-expanded','true');
-    }
-    function close(){
-      menu.classList.add('hidden');
-      btn.setAttribute('aria-expanded','false');
-    }
-    function toggle(){
-      if(menu.classList.contains('hidden')) open(); else close();
-    }
+    function open(){ menu.classList.remove('hidden'); btn.setAttribute('aria-expanded','true'); }
+    function close(){ menu.classList.add('hidden'); btn.setAttribute('aria-expanded','false'); }
+    function toggle(){ menu.classList.contains('hidden') ? open() : close(); }
 
-    // Click to toggle (desktop + touch)
     btn.addEventListener('click', function(e){ e.preventDefault(); toggle(); });
-
-    // Close on outside click
     document.addEventListener('click', function(e){ if(!root.contains(e.target)) close(); });
-
-    // Keyboard: open with Enter/Space, close with Escape
     btn.addEventListener('keydown', function(e){
       if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); open(); }
       if(e.key === 'Escape'){ close(); btn.blur(); }
     });
     menu.addEventListener('keydown', function(e){ if(e.key === 'Escape'){ close(); btn.focus(); } });
-
-    // Keep open while hovering over the root group
     root.addEventListener('mouseenter', open);
     root.addEventListener('mouseleave', close);
-  } catch(err){ /* no-op */ }
+
+    root.dataset.dropdownBound = '1';
+    return true;
+  }
+
+  // Try immediately (for pages с уже встроенным header)
+  bindCoursesDropdown();
+
+  // Публичный хук для ручного вызова после загрузки partials
+  window.__abt = window.__abt || {};
+  window.__abt.initCoursesDropdown = bindCoursesDropdown;
+
+  // Автопривязка, если header подгружается позже
+  try {
+    var mo = new MutationObserver(function(){ bindCoursesDropdown(); });
+    mo.observe(document.documentElement, { childList: true, subtree: true });
+  } catch(e) { /* no-op */ }
 })();
