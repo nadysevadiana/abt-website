@@ -7,7 +7,7 @@
 
 (function(){
   // Версия для пробития кеша статических partials
-  var VERSION = '20251028a';
+  var VERSION = '20251029b';
   function withV(path){ return path + (path.indexOf('?') === -1 ? ('?v=' + VERSION) : ('&v=' + VERSION)); }
   // Preconnect/DNS-hint helper (idempotent)
   function preconnectOnce(href){
@@ -704,22 +704,41 @@ function closeMobile(){
   };
 })();
 
-// === Dropdown toggle for header "Курсы" ===
-document.addEventListener('DOMContentLoaded', () => {
-  const courseBtn = document.querySelector('header .group > button');
-  const courseMenu = document.querySelector('header .group > div');
+// === Header: Courses dropdown (hover + click + keyboard) ===
+(function(){
+  try {
+    var root = document.querySelector('.js-courses');
+    var btn  = document.querySelector('.js-courses-btn');
+    var menu = document.querySelector('.js-courses-menu');
+    if(!root || !btn || !menu) return;
 
-  if (courseBtn && courseMenu) {
-    courseBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      courseMenu.classList.toggle('hidden');
-    });
+    function open(){
+      menu.classList.remove('hidden');
+      btn.setAttribute('aria-expanded','true');
+    }
+    function close(){
+      menu.classList.add('hidden');
+      btn.setAttribute('aria-expanded','false');
+    }
+    function toggle(){
+      if(menu.classList.contains('hidden')) open(); else close();
+    }
 
-    // Закрываем при клике вне меню
-    document.addEventListener('click', (e) => {
-      if (!courseBtn.contains(e.target) && !courseMenu.contains(e.target)) {
-        courseMenu.classList.add('hidden');
-      }
+    // Click to toggle (desktop + touch)
+    btn.addEventListener('click', function(e){ e.preventDefault(); toggle(); });
+
+    // Close on outside click
+    document.addEventListener('click', function(e){ if(!root.contains(e.target)) close(); });
+
+    // Keyboard: open with Enter/Space, close with Escape
+    btn.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); open(); }
+      if(e.key === 'Escape'){ close(); btn.blur(); }
     });
-  }
-});
+    menu.addEventListener('keydown', function(e){ if(e.key === 'Escape'){ close(); btn.focus(); } });
+
+    // Keep open while hovering over the root group
+    root.addEventListener('mouseenter', open);
+    root.addEventListener('mouseleave', close);
+  } catch(err){ /* no-op */ }
+})();
