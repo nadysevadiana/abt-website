@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="ru" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Портфолио — Работы и стили | АБТ ШКОЛА ДИЗАЙНА</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <meta name="description" content="Портфолио школы: минимализм, классический стиль, джапанди, современная эклектика и другие. Страница будет пополняться новыми стилями и проектами." />
+  <link rel="prefetch" href="/partials/header.html" as="fetch" crossorigin>
+  <link rel="prefetch" href="/partials/footer.html" as="fetch" crossorigin>
+  <link rel="prefetch" href="/partials/tg-btn.html" as="fetch" crossorigin>
+
+  <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="assets/css/styles.css?v=20251029a">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkfN5Y6Z1Jj4K3s1H8x3F3S0W6C6WbJ+7lN0+YxZ2C2l3lW7v9E6H0Tkg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <meta property="og:title" content="Портфолио — Работы и стили | АБТ ШКОЛА ДИЗАЙНА" />
+  <meta property="og:description" content="Минимализм, классика, джапанди, эклектика — реальные проекты и визуализации. Обновляется регулярно." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/img/work_1.png" />
+  <link rel="canonical" href="https://artbytwins.pro/works.html" />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#0f172a" />
+  <!-- Preload LCP candidate images (first cover of each section) -->
+  <link rel="preload" as="image" href="assets/img/works/1/011.png" imagesrcset="assets/img/works/1/011.png" />
+  <link rel="preload" as="image" href="assets/img/works/2/021.png" imagesrcset="assets/img/works/2/021.png" />
+  <link rel="preload" as="image" href="assets/img/works/3/031.png" imagesrcset="assets/img/works/3/031.png" />
+  <link rel="preload" as="image" href="assets/img/works/4/041.png" imagesrcset="assets/img/works/4/041.png" />
+
+  <!-- JSON-LD: Collection of styles as an ItemList on a CollectionPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Портфолио — Работы и стили | АБТ ШКОЛА ДИЗАЙНА",
+    "description": "Минимализм, классика, джапанди, эклектика — реальные проекты и визуализации.",
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": [
+        {"@type": "ListItem","position": 1,"item": {"@type":"CreativeWork","name":"Минимализм","image":"https://artbytwins.pro/assets/img/works/1/011.png"}},
+        {"@type": "ListItem","position": 2,"item": {"@type":"CreativeWork","name":"Классический стиль","image":"https://artbytwins.pro/assets/img/works/2/021.png"}},
+        {"@type": "ListItem","position": 3,"item": {"@type":"CreativeWork","name":"Джапанди","image":"https://artbytwins.pro/assets/img/works/3/031.png"}},
+        {"@type": "ListItem","position": 4,"item": {"@type":"CreativeWork","name":"Современная эклектика","image":"https://artbytwins.pro/assets/img/works/4/041.png"}}
+      ]
+    }
+  }
+  </script>
+</head>
+<body class="site-bg text-gray-900">
+  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:bg-white focus:text-gray-900 focus:px-3 focus:py-2 focus:rounded-md focus:shadow-lg">Перейти к контенту</a>
+  <!-- Header (как на index) -->
+  <div id="header"></div>
+
+  <main id="main" class="container mx-auto px-4 py-10">
+    <!-- HERO -->
+    <section class="portfolio-hero panel-glass mb-10">
+      <div class="ph-grid">
+        <div class="ph-text">
+          <span class="ph-badge">Портфолио</span>
+          <h1 class="ph-title">Работы и стили</h1>
+          <p class="ph-sub">Реальные проекты и визуализации: минимализм, классика, джапанди, современная эклектика и новые направления. Страница регулярно пополняется.</p>
+
+          <ul class="ph-meta" aria-label="Краткая статистика">
+            <li><i class="fa-solid fa-layer-group" aria-hidden="true"></i> <span id="hero-styles-count">4</span> стилей</li>
+            <li><i class="fa-solid fa-images" aria-hidden="true"></i> <span id="hero-images-count">0</span> изображений</li>
+          </ul>
+
+          <div class="ph-actions">
+            <a href="#style-stories" class="btn-primary btn-luxe"><span class="btn-label">Смотреть стили</span><span class="btn-ico" aria-hidden="true"><i class="fa-solid fa-arrow-right-long"></i></span></a>
+            <a href="#style-sections" class="btn-outline btn-luxe--inline"><span class="btn-label">Перейти к работам</span></a>
+          </div>
+        </div>
+
+        <aside class="ph-media" aria-hidden="true">
+          <figure class="ph-shot ph-shot-a"><img src="assets/img/works/1/011.png" alt="Минимализм" loading="eager" decoding="async"></figure>
+          <figure class="ph-shot ph-shot-b"><img src="assets/img/works/3/031.png" alt="Джапанди" loading="eager" decoding="async"></figure>
+          <figure class="ph-shot ph-shot-c"><img src="assets/img/works/2/021.png" alt="Классика" loading="eager" decoding="async"></figure>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Фильтры по стилям -->
+    <section class="mb-8 flex flex-wrap gap-3" id="style-chips" aria-label="Фильтр по стилям"></section>
+    <p id="sr-filter-status" class="sr-only" aria-live="polite"></p>
+
+    <!-- Сторис-обложки -->
+    <section class="stories-panel mb-8" id="style-stories" aria-label="Быстрый просмотр"></section>
+
+    <!-- Секции со стилями -->
+    <section id="style-sections" class="space-y-16"></section>
+
+    <!-- Фолбэк-грид (если JS отключён) -->
+    <noscript>
+      <section class="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4">
+        <a href="assets/img/works/1/011.png" class="card" title="Минимализм"><img src="assets/img/works/1/011.png" alt="Минимализм" loading="lazy"></a>
+        <a href="assets/img/works/2/021.png" class="card" title="Классический стиль"><img src="assets/img/works/2/021.png" alt="Классический стиль" loading="lazy"></a>
+        <a href="assets/img/works/3/031.png" class="card" title="Джапанди"><img src="assets/img/works/3/031.png" alt="Джапанди" loading="lazy"></a>
+        <a href="assets/img/works/4/041.png" class="card" title="Современная эклектика"><img src="assets/img/works/4/041.png" alt="Современная эклектика" loading="lazy"></a>
+        <a href="assets/img/works/5/051.jpg" class="card" title="Стиль 05"><img src="assets/img/works/5/051.jpg" alt="Стиль 05" loading="lazy"></a>
+      </section>
+    </noscript>
+
+    <!-- Лёгкий просмотрщик (story viewer) -->
+    <div class="modal" data-storyviewer id="story-viewer" hidden>
+      <div class="story-viewer" role="dialog" aria-modal="true" aria-label="Просмотр работ">
+        <button class="sv-close btn-circle" id="sv-close" aria-label="Закрыть"><i class="fa-solid fa-xmark"></i></button>
+        <button class="sv-prev btn-circle" id="sv-prev" aria-label="Назад"><i class="fa-solid fa-chevron-left"></i></button>
+        <figure class="sv-frame">
+          <img id="sv-image" src="" alt="" />
+          <figcaption id="sv-caption" class="mt-2 text-center text-sm text-gray-500"></figcaption>
+        </figure>
+        <button class="sv-next btn-circle" id="sv-next" aria-label="Вперёд"><i class="fa-solid fa-chevron-right"></i></button>
+        <div class="sv-progress" id="sv-progress"></div>
+      </div>
+      <div class="sv-backdrop" id="sv-backdrop"></div>
+    </div>
+
+    <!-- Данные по стилям (удобно пополнять) -->
+    <script id="style-data" type="application/json">
+    {
+      "styles": [
+        {
+          "id": 1,
+          "slug": "minimalism",
+          "title": "01 — Минимализм",
+          "desc": "Простота и функциональность. Корни — японская эстетика и модернизм XX века: чистые плоскости, свет, натуральные фактуры. Белый/серый/тёплое дерево, скрытые системы хранения и максимум воздуха.",
+          "traits": ["чистые линии","функциональность","скрытые системы"],
+          "palette": ["#FFFFFF","#E5E7EB","#D6D3D1","#8B5E34"],
+          "cover": "assets/img/works/1/011.png",
+          "images": [
+            "assets/img/works/1/011.png",
+            "assets/img/works/1/012.png",
+            "assets/img/works/1/013.png",
+            "assets/img/works/1/014.png",
+            "assets/img/works/1/015.png"
+          ]
+        },
+        {
+          "id": 2,
+          "slug": "classic",
+          "title": "02 — Классический стиль",
+          "desc": "Элегантность и симметрия, отсылки к роскоши XVII–XVIII веков: лепнина, карнизы, паркет «ёлка», камень и латунь. Благородные палитры, парные композиции и эталонные пропорции — в современном прочтении.",
+          "traits": ["симметрия","лепнина","благородные материалы"],
+          "palette": ["#F8FAFC","#E2E8F0","#D6D3D1","#C0A16B"],
+          "cover": "assets/img/works/2/021.png",
+          "images": [
+            "assets/img/works/2/021.png",
+            "assets/img/works/2/022.png",
+            "assets/img/works/2/023.png",
+            "assets/img/works/2/024.png"
+          ]
+        },
+        {
+          "id": 3,
+          "slug": "japandi",
+          "title": "03 — Джапанди",
+          "desc": "Фьюжн Японии и Скандинавии: минимализм, природа, уют. Низкая мебель, лен, дерево и камень, рассеянный тёплый свет. Зародился в 2010‑х, тренд 2025 года — про «тихую роскошь» дома.",
+          "traits": ["натуральность","низкая мебель","тихий свет"],
+          "palette": ["#FAFAF9","#E7E5E4","#D6D3D1","#7C6A55"],
+          "cover": "assets/img/works/3/031.png",
+          "images": [
+            "assets/img/works/3/031.png",
+            "assets/img/works/3/032.png",
+            "assets/img/works/3/033.png",
+            "assets/img/works/3/034.png",
+            "assets/img/works/3/035.png",
+            "assets/img/works/3/036.png",
+            "assets/img/works/3/037.png"
+          ]
+        },
+        {
+          "id": 4,
+          "slug": "eclectic",
+          "title": "04 — Современная эклектика",
+          "desc": "Смешение стилей и эпох: осознанный хаос под контролем. Контрасты форм и фактур, 2–3 акцентных жеста и повторение цвета/материала как связующая нить. Индивидуальность и коллекционный подход.",
+          "traits": ["контрасты","коллекционность","индивидуальность"],
+          "palette": ["#F4F4F5","#E4E4E7","#D4D4D8","#111827"],
+          "cover": "assets/img/works/4/041.png",
+          "images": [
+            "assets/img/works/4/041.png",
+            "assets/img/works/4/042.png",
+            "assets/img/works/4/043.png",
+            "assets/img/works/4/044.png"
+          ]
+        },
+        {
+          "id": 5,
+          "slug": "style-05",
+          "title": "05 — Без названия (в разработке)",
+          "desc": "Новый стиль в процессе — скоро покажем.",
+          "cover": "assets/img/works/5/051.jpg",
+          "images": [
+            "assets/img/works/5/051.jpg",
+            "assets/img/works/5/052.jpg"
+          ]
+        }
+      ]
+    }
+    </script>
+  </main>
+
+  <!-- Footer (как на index) -->
+  <div id="footer"></div>
+  <div id="site-telegram-btn"></div>
+
+  <script src="assets/js/app.js?v=20251020" defer></script>
+  <script>
+  (function(){
+    // ===== Data =====
+    const dataEl = document.getElementById('style-data');
+    let styles = [];
+    try { styles = JSON.parse(dataEl.textContent).styles || []; } catch (e) { styles = []; }
+
+    // ===== Helpers =====
+    // Update hero counters based on data
+    function updateHeroCounters(){
+      const sc = document.getElementById('hero-styles-count');
+      const ic = document.getElementById('hero-images-count');
+      if (!Array.isArray(styles)) return;
+      const stylesCount = styles.length;
+      const imagesCount = styles.reduce((sum,s)=>sum + (Array.isArray(s.images)?s.images.length:0), 0);
+      if (sc) sc.textContent = String(stylesCount);
+      if (ic) ic.textContent = String(imagesCount);
+    }
+    const qs = new URLSearchParams(location.search);
+    const getStyleBySlug = (slug) => styles.find(s=>s.slug===slug);
+    const clamp = (n,min,max)=>Math.max(min,Math.min(max,n));
+    const cleanTitle = (t)=> (t||'').replace(/^\d+\s*[—–]\s*/, '');
+
+    // ===== Render chips =====
+    const chips = document.getElementById('style-chips');
+    const statusLive = document.getElementById('sr-filter-status');
+    const ALL = 'all';
+    const state = { filter: qs.get('style') || ALL };
+
+    function announce(msg){ if(statusLive){ statusLive.textContent = msg; } }
+
+    function renderChips(){
+      chips.innerHTML = '';
+      const makeChip = (slug, label) => {
+        const b = document.createElement('button');
+        b.type = 'button'; b.className = 'style-chip pill-solid'; b.dataset.slug = slug; b.textContent = label;
+        if ((state.filter === ALL && slug===ALL) || state.filter === slug) b.classList.add('is-active');
+        b.addEventListener('click',()=>{ setFilter(slug); });
+        return b;
+      };
+      chips.appendChild(makeChip(ALL, 'Все стили'));
+      styles.forEach(s=> chips.appendChild(makeChip(s.slug, cleanTitle(s.title))) );
+    }
+
+    function setFilter(slug){
+      state.filter = slug;
+      const url = new URL(location.href); if(slug===ALL){ url.searchParams.delete('style'); } else { url.searchParams.set('style', slug); }
+      history.replaceState(null, '', url);
+      applyFilter();
+      const human = slug===ALL ? 'все стили' : getStyleBySlug(slug)?.title || slug;
+      announce(`Показаны: ${human}`);
+      // move focus to first visible section for better UX
+      const first = [...sections.querySelectorAll('.style-section')].find(el=>el.style.display!=="none");
+      if(first){ first.querySelector('.style-title')?.focus?.(); }
+    }
+
+    // ===== Render stories =====
+    function renderStories(){
+      const panel = document.getElementById('style-stories');
+      panel.innerHTML = `
+        <div class="stories-head">
+          <h2 class="stories-title">Стили</h2>
+          <p class="stories-sub">быстрый просмотр</p>
+          <div class="stories-hint" aria-hidden="true">Пролистайте →</div>
+        </div>
+        <div class="stories-strip" role="list"></div>
+      `;
+      const strip = panel.querySelector('.stories-strip');
+      styles.forEach(s => {
+        const btn = document.createElement('button');
+        btn.className = 'story'; btn.type='button'; btn.setAttribute('aria-label', s.title);
+        btn.innerHTML = `
+          <span class="story-thumb">
+            <img src="${s.cover}" alt="${s.title.replace(/^\d+\s*[—–]\s*/, '')}" loading="lazy" decoding="async"
+                 sizes="(max-width: 480px) 30vw, (max-width: 640px) 25vw, 72px"
+                 onload="this.classList.add('is-loaded')">
+          </span>
+          <span class="story-label" title="${s.title.replace(/^\d+\s*[—–]\s*/, '')}">
+            ${s.title.replace(/^\d+\s*[—–]\s*/, '').replace(/\s*—\s*/g, '<br>')}
+          </span>
+        `;
+        btn.addEventListener('click', () => openViewer(s));
+        strip.appendChild(btn);
+      });
+      const hint = panel.querySelector('.stories-hint');
+      const hideHint = () => hint && hint.classList.add('is-hidden');
+      strip.addEventListener('scroll', hideHint, { passive:true });
+      if (strip.scrollWidth <= strip.clientWidth) hideHint();
+    }
+
+    // ===== Sections =====
+    const sections = document.getElementById('style-sections');
+    function renderSections(){
+      sections.innerHTML = '';
+      styles.forEach(s => {
+        const el = document.createElement('article');
+        el.className = 'style-section panel-glass'; el.dataset.slug = s.slug; el.setAttribute('tabindex','-1');
+        el.innerHTML = `
+          <header class="style-header">
+            <div class="sh-badge">
+              <span class="pill-outline">${cleanTitle(s.title)}</span>
+            </div>
+            <h2 class="style-title" tabindex="-1">${cleanTitle(s.title)}</h2>
+            <p class="style-desc">${s.desc || ''}</p>
+            <div class="style-meta">
+              <ul class="traits" aria-label="Характерные признаки стиля">
+                ${(s.traits||[]).map(t=>`<li class=\"trait\">${t}</li>`).join('')}
+              </ul>
+              <div class="swatches" aria-label="Палитра">
+                ${(s.palette||[]).map(hex=>`<span class=\"swatch\" style=\"--sw:${hex}\" title=\"${hex}\" aria-hidden=\"true\"></span>`).join('')}
+              </div>
+            </div>
+            <div class="style-actions">
+              <a href="#" class="btn-primary btn-luxe btn-luxe--ghost btn-luxe--inline btn-view" data-open="${s.slug}"><span class="btn-label">Смотреть серию</span><span class="btn-ico" aria-hidden="true"><i class="fa-solid fa-arrow-right-long"></i></span></a>
+            </div>
+          </header>
+          <div class="style-body">
+            <div class="style-cover"><img src="${s.cover}" alt="${s.title}" loading="lazy" decoding="async" sizes="(max-width: 900px) 100vw, 340px" onload="this.classList.add('is-loaded')"></div>
+            <div class="style-grid">
+              ${s.images.map(src=>`<figure class=\"sg-item\"><img src=\"${src}\" alt=\"${s.title}\" loading=\"lazy\" decoding=\"async\" sizes=\"(max-width: 640px) 100vw, (max-width: 1100px) 50vw, 33vw\" onload=\"this.classList.add('is-loaded')\"><div class=\"sg-overlay\"><i class=\"fa-solid fa-magnifying-glass\"></i></div></figure>`).join('')}
+            </div>
+          </div>
+        `;
+        sections.appendChild(el);
+      });
+
+      sections.querySelectorAll('.btn-view').forEach(btn=>{
+        btn.addEventListener('click', (e)=>{
+          e.preventDefault();
+          const slug = btn.dataset.open; const st = getStyleBySlug(slug);
+          if (st) openViewer(st);
+        });
+      });
+
+      sections.querySelectorAll('.style-grid img').forEach(img=>{
+        img.addEventListener('click', ()=>{
+          const slug = img.closest('.style-section').dataset.slug; const st = getStyleBySlug(slug);
+          if (!st) return; const idx = st.images.findIndex(u=>u===img.getAttribute('src'));
+          openViewer(st, Math.max(0, idx));
+        });
+      });
+    }
+
+    function applyFilter(){
+      const showAll = state.filter === ALL;
+      sections.querySelectorAll('.style-section').forEach(el=>{
+        el.style.display = (showAll || el.dataset.slug === state.filter) ? '' : 'none';
+      });
+    }
+
+    // ===== Viewer with focus trap =====
+    const viewer = document.getElementById('story-viewer');
+    const imgEl = document.getElementById('sv-image');
+    const capEl = document.getElementById('sv-caption');
+    const progress = document.getElementById('sv-progress');
+    const btnPrev = document.getElementById('sv-prev');
+    const btnNext = document.getElementById('sv-next');
+    const btnClose = document.getElementById('sv-close');
+
+    let current = { title: '', images: [], index: 0 };
+    let timer = null; let openerEl = null;
+    const AUTOPLAY_MS = 4600;
+    const PREFERS_REDUCED_MOTION = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function preloadAround(idx){
+      const prev = new Image(); const next = new Image();
+      prev.decoding = 'async'; next.decoding = 'async';
+      prev.src = current.images[(idx - 1 + current.images.length) % current.images.length];
+      next.src = current.images[(idx + 1) % current.images.length];
+    }
+
+    function openViewer(style, startIndex=0, opener){
+      openerEl = opener || document.activeElement;
+      current.title = style.title; current.images = style.images; current.index = clamp(startIndex, 0, current.images.length-1);
+      viewer.hidden = false; document.body.classList.add('modal-open');
+      // update URL for deep link
+      const url = new URL(location.href); url.searchParams.set('open', style.slug); url.searchParams.set('idx', String(current.index)); history.replaceState(null,'',url);
+      showCurrent(); startAutoplay();
+      // focus trap start
+      btnClose.focus();
+    }
+    function closeViewer(){
+      stopAutoplay(); viewer.hidden = true; document.body.classList.remove('modal-open');
+      const url = new URL(location.href); url.searchParams.delete('open'); url.searchParams.delete('idx'); history.replaceState(null,'',url);
+      if(openerEl && openerEl.focus) openerEl.focus();
+    }
+    function showCurrent(){
+      const src = current.images[current.index];
+      imgEl.classList.remove('is-ready');
+      imgEl.onload = () => { imgEl.classList.add('is-ready'); };
+      imgEl.src = src; imgEl.alt = `${current.title} — ${current.index+1}/${current.images.length}`;
+      capEl.textContent = `${current.title} — ${current.index+1} из ${current.images.length}`;
+      if (!capEl.hasAttribute('aria-live')) capEl.setAttribute('aria-live','polite');
+      drawProgress(); preloadAround(current.index);
+    }
+    function next(){ current.index = (current.index + 1) % current.images.length; showCurrent(); }
+    function prev(){ current.index = (current.index - 1 + current.images.length) % current.images.length; showCurrent(); }
+    function startAutoplay(){ stopAutoplay(); if (PREFERS_REDUCED_MOTION) return; timer = setInterval(next, AUTOPLAY_MS); }
+    function stopAutoplay(){ if (timer) { clearInterval(timer); timer = null; } }
+    function drawProgress(){ if (!progress) return; const total = current.images.length; progress.innerHTML = ''; for (let i = 0; i < total; i++) { const bar = document.createElement('span'); bar.className = 'sv-bar' + (i <= current.index ? ' is-active' : ''); progress.appendChild(bar); } }
+
+    // focus trap cycling
+    viewer.addEventListener('keydown', (e)=>{
+      if (viewer.hidden) return;
+      if (e.key === 'Tab'){
+        const focusables = viewer.querySelectorAll('button, [href], [tabindex]:not([tabindex="-1"])');
+        const list = Array.from(focusables).filter(el=>!el.hasAttribute('disabled'));
+        const first = list[0]; const last = list[list.length-1];
+        if (e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+      }
+      if (e.key==='Escape') { e.preventDefault(); closeViewer(); }
+      if (e.key==='ArrowRight') { stopAutoplay(); next(); }
+      if (e.key==='ArrowLeft')  { stopAutoplay(); prev(); }
+    });
+
+    document.getElementById('sv-backdrop').addEventListener('click', closeViewer);
+    btnNext.addEventListener('click', () => { stopAutoplay(); next(); });
+    btnPrev.addEventListener('click', () => { stopAutoplay(); prev(); });
+    btnClose.addEventListener('click', closeViewer);
+
+    // Pause autoplay when tab visibility changes
+    document.addEventListener('visibilitychange', () => { if (viewer.hidden) return; if (document.hidden) { stopAutoplay(); } else { startAutoplay(); } });
+
+    // Deep link: apply filter + open specific image from URL (?style=... & open=... & idx=...)
+    function applyDeepLink(){
+      const openSlug = qs.get('open');
+      const idx = Number(qs.get('idx') || '0');
+      if (openSlug){ const st = getStyleBySlug(openSlug); if(st){ openViewer(st, isNaN(idx)?0:clamp(idx,0,st.images.length-1)); } }
+    }
+
+    // ===== Init =====
+    renderChips();
+    renderStories();
+    renderSections();
+    updateHeroCounters();
+    applyFilter();
+    applyDeepLink();
+  })();
+  </script>
+</body>
+</html>
+

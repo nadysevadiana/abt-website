@@ -12,9 +12,18 @@
     <i class="fa-solid fa-bars"></i>
   </button>
   <nav class="space-x-6 text-sm font-medium hidden md:flex items-center" aria-label="Главное меню">
-    <a href="kurs.html" class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300" data-trigger>Курс</a>
+    <div class="relative group">
+      <button class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300 flex items-center gap-1">
+        Курсы <i class="fa-solid fa-chevron-down text-xs mt-[2px]"></i>
+      </button>
+      <div class="absolute left-0 top-full mt-2 hidden group-hover:block bg-white border border-emerald-100 shadow-lg rounded-lg w-56 z-50">
+        <a href="kurs.html" class="block px-4 py-2 hover:bg-emerald-50">Стань дизайнером квартир</a>
+        <a href="sketchup.html" class="block px-4 py-2 hover:bg-emerald-50">SketchUp с нуля</a>
+      </div>
+    </div>
     <a href="shop.html" class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300" data-trigger>Digital магазин</a>
     <a href="challenge.html" class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300">Челлендж</a>
+    <a href="works.html" class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300">Портфолио</a>
     <a href="about.html" class="nav-link text-slate-700 hover:text-emerald-600 transition duration-300">О нас</a>
     <a id="cta-desktop" href="index.html#choose-path" class="inline-flex items-center px-4 py-2 rounded-full text-white btn-primary shadow-sm"><i class="fa-solid fa-arrow-right mr-2"></i><span class="cta-text">На главную</span></a>
   </nav>
@@ -32,9 +41,14 @@
       </div>
 
       <nav class="p-4 text-sm space-y-1" aria-label="Главное меню">
-        <a href="kurs.html" class="block px-3 py-2 rounded-lg hover:bg-emerald-50">Курс</a>
+        <div class="px-3 py-2">
+          <span class="block font-semibold text-slate-800 mb-1">Курсы</span>
+          <a href="kurs.html" class="block px-3 py-2 rounded-lg hover:bg-emerald-50">Стань дизайнером квартир</a>
+          <a href="sketchup.html" class="block px-3 py-2 rounded-lg hover:bg-emerald-50">SketchUp с нуля</a>
+        </div>
         <a href="shop.html" class="block px-3 py-2 rounded-lg hover:bg-emerald-50">Digital магазин</a>
         <a href="challenge.html" class="block px-3 py-2 rounded-lg hover:bg-emerald-50">Челлендж</a>
+        <a href="works.html" class="block px-3 py-2 rounded-lg hover:bg-emerald-50">Портфолио</a>
         <a href="about.html" class="block px-3 py-2 rounded-lg hover:bg-emerald-50">О нас</a>
         <a id="cta-mobile" href="index.html#choose-path" class="mt-2 inline-flex items-center px-4 py-2 rounded-xl text-white btn-primary w-full justify-center"><i class="fa-solid fa-arrow-right mr-2"></i><span class="cta-text">На главную</span></a>
       </nav>
