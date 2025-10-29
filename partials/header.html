@@ -55,32 +55,3 @@
     </div>
   </div>
 </header>
-
-<!-- NOTE: No inline scripts here. CTA text is controlled in app.js (VERSION cache-busted). -->
-<script>
-// === Header: dropdown by click (desktop + touch) ===
-document.addEventListener('DOMContentLoaded', () => {
-  const wrap = document.querySelector('header .js-courses');
-  const btn  = document.querySelector('header .js-courses-btn');
-  const menu = document.querySelector('header .js-courses-menu');
-  if (!wrap || !btn || !menu) return;
-
-  const closeMenu = () => { menu.classList.add('hidden'); btn.setAttribute('aria-expanded', 'false'); };
-  const openMenu  = () => { menu.classList.remove('hidden'); btn.setAttribute('aria-expanded', 'true'); };
-
-  btn.addEventListener('click', (e) => {
-    e.preventDefault(); e.stopPropagation();
-    if (menu.classList.contains('hidden')) { openMenu(); } else { closeMenu(); }
-  });
-
-  // Close when clicking outside
-  document.addEventListener('click', (e) => {
-    if (!wrap.contains(e.target)) closeMenu();
-  });
-
-  // Close on Escape
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeMenu();
-  });
-});
-</script>
